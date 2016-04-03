@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
-
 {% block body %}
-    {{ names.name }}
+<div>
+    {% block names %}
+    {% endblock %}
+</div>
 {% endblock %}
