@@ -21,149 +21,147 @@ class __TwigTemplate_207954367e82833cd4b4073ae6d4d00e4065c86b45f5272270312d065df
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_2eb86cf3052a2ea026ab6e78011dce75cd180f1e1c86dea2b59c3b8937aafb0c = $this->env->getExtension("native_profiler");
-        $__internal_2eb86cf3052a2ea026ab6e78011dce75cd180f1e1c86dea2b59c3b8937aafb0c->enter($__internal_2eb86cf3052a2ea026ab6e78011dce75cd180f1e1c86dea2b59c3b8937aafb0c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "default/index.html.twig"));
+        $__internal_323c5c33f5facaaaf40a2dcc1f04591f5d3d0bcb8dec93ad7de2ed7297cdf2e1 = $this->env->getExtension("native_profiler");
+        $__internal_323c5c33f5facaaaf40a2dcc1f04591f5d3d0bcb8dec93ad7de2ed7297cdf2e1->enter($__internal_323c5c33f5facaaaf40a2dcc1f04591f5d3d0bcb8dec93ad7de2ed7297cdf2e1_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "default/index.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_2eb86cf3052a2ea026ab6e78011dce75cd180f1e1c86dea2b59c3b8937aafb0c->leave($__internal_2eb86cf3052a2ea026ab6e78011dce75cd180f1e1c86dea2b59c3b8937aafb0c_prof);
+        $__internal_323c5c33f5facaaaf40a2dcc1f04591f5d3d0bcb8dec93ad7de2ed7297cdf2e1->leave($__internal_323c5c33f5facaaaf40a2dcc1f04591f5d3d0bcb8dec93ad7de2ed7297cdf2e1_prof);
 
     }
 
-    // line 4
+    // line 2
     public function block_body($context, array $blocks = array())
     {
-        $__internal_6e28526c9038a433458281db3988fbab994a04262698594315a8609604031c98 = $this->env->getExtension("native_profiler");
-        $__internal_6e28526c9038a433458281db3988fbab994a04262698594315a8609604031c98->enter($__internal_6e28526c9038a433458281db3988fbab994a04262698594315a8609604031c98_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_a010c5780ede5e365011ba178197547890b1f8854dd3b831af6e184bbc5041d2 = $this->env->getExtension("native_profiler");
+        $__internal_a010c5780ede5e365011ba178197547890b1f8854dd3b831af6e184bbc5041d2->enter($__internal_a010c5780ede5e365011ba178197547890b1f8854dd3b831af6e184bbc5041d2_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
-        // line 5
+        // line 3
         echo "    <div id=\"background\">
-        <div id=\"Background\">
-            <img src=\"";
-        // line 7
+        <div id=\"Background\"><img src=\"";
+        // line 4
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/Background.png"), "html", null, true);
-        echo "\" width=\"75%\">
-        </div>
+        echo "\"></div>
         <div id=\"Layer1\"><img src=\" ";
-        // line 9
+        // line 5
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/Layer1.png"), "html", null, true);
-        echo "\" width=\"75%\"></div>
+        echo "\"></div>
         <div id=\"ABOUTPROJECT\"><img src=\" ";
-        // line 10
+        // line 6
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/ABOUTPROJECT.png"), "html", null, true);
-        echo "\" width=\"75%\"></div>
+        echo "\"></div>
         <div id=\"YourmadheartgoesCrus\"><img src=\"";
-        // line 11
+        // line 7
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/YourmadheartgoesCrus.png"), "html", null, true);
         echo "\"></div>
         <div id=\"Whenyouareseventeeny\"><img src=\"";
-        // line 12
+        // line 8
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/Whenyouareseventeeny.png"), "html", null, true);
         echo "\"></div>
         <div id=\"Layer3\"><img src=\"";
-        // line 13
+        // line 9
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/Layer3.png"), "html", null, true);
         echo "\"></div>
         <div id=\"e2\"><img src=\"";
-        // line 14
+        // line 10
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/e2.png"), "html", null, true);
-        echo "\" width=\"75%\"></div>
+        echo "\"></div>
         <div id=\"e1\"><img src=\"";
-        // line 15
+        // line 11
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/e1.png"), "html", null, true);
         echo "\"></div>
         <div id=\"m1\"><img src=\"";
-        // line 16
+        // line 12
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/m1.png"), "html", null, true);
         echo "\"></div>
         <div id=\"m2\"><img src=\"";
-        // line 17
+        // line 13
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/m2.png"), "html", null, true);
         echo "\"></div>
         <div id=\"Shape4\"><img src=\"";
-        // line 18
+        // line 14
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/Shape4.png"), "html", null, true);
         echo "\"></div>
         <div id=\"Shape5\"><img src=\"";
-        // line 19
+        // line 15
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/Shape5.png"), "html", null, true);
         echo "\"></div>
         <div id=\"Shape6\"><img src=\"";
-        // line 20
+        // line 16
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/Shape6.png"), "html", null, true);
         echo "\"></div>
         <div id=\"Shape7\"><img src=\"";
-        // line 21
+        // line 17
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/Shape7.png"), "html", null, true);
         echo "\"></div>
         <div id=\"l2\"><img src=\"";
-        // line 22
+        // line 18
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/l2.png"), "html", null, true);
         echo "\"></div>
         <div id=\"l1\"><img src=\"";
-        // line 23
+        // line 19
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/l1.png"), "html", null, true);
         echo "\"></div>
         <div id=\"twi\"><img src=\"";
-        // line 24
+        // line 20
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/twi.png"), "html", null, true);
         echo "\"></div>
         <div id=\"fb\"><img src=\"";
-        // line 25
+        // line 21
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/fb.png"), "html", null, true);
         echo "\"></div>
         <div id=\"vk\"><img src=\"";
-        // line 26
+        // line 22
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/vk.png"), "html", null, true);
         echo "\"></div>
         <div id=\"Eleonorakorobova\"><img src=\"";
-        // line 27
+        // line 23
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/Eleonorakorobova.png"), "html", null, true);
         echo "\"></div>
         <div id=\"THETEAM\"><img src=\"";
-        // line 28
+        // line 24
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/THETEAM.png"), "html", null, true);
         echo "\"></div>
         <div id=\"Layer0copy\"><img src=\"";
-        // line 29
+        // line 25
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/Layer0copy.png"), "html", null, true);
         echo "\"></div>
         <div id=\"Shape3\"><img src=\"";
-        // line 30
+        // line 26
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/Shape3.png"), "html", null, true);
         echo "\"></div>
         <div id=\"Shape3copy\"><img src=\"";
-        // line 31
+        // line 27
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/Shape3copy.png"), "html", null, true);
         echo "\"></div>
         <div id=\"login\"><img src=\"";
-        // line 32
+        // line 28
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/login.png"), "html", null, true);
         echo "\"></div>
         <div id=\"Contactus\"><img src=\"";
-        // line 33
+        // line 29
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/Contactus.png"), "html", null, true);
         echo "\"></div>
         <div id=\"MG\"><img src=\"";
-        // line 34
+        // line 30
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/MG.png"), "html", null, true);
         echo "\"></div>
         <div id=\"Benedignosciturbenec\"><img src=\"";
-        // line 35
+        // line 31
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/Benedignosciturbenec.png"), "html", null, true);
         echo "\"></div>
         <div id=\"Shape2\"><img src=\"";
-        // line 36
+        // line 32
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/Shape2.png"), "html", null, true);
         echo "\"></div>
         <div id=\"MEDICALGUIDE\"><img src=\"";
-        // line 37
+        // line 33
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("images/MEDICALGUIDE.png"), "html", null, true);
         echo "\"></div>
     </div>
 ";
         
-        $__internal_6e28526c9038a433458281db3988fbab994a04262698594315a8609604031c98->leave($__internal_6e28526c9038a433458281db3988fbab994a04262698594315a8609604031c98_prof);
+        $__internal_a010c5780ede5e365011ba178197547890b1f8854dd3b831af6e184bbc5041d2->leave($__internal_a010c5780ede5e365011ba178197547890b1f8854dd3b831af6e184bbc5041d2_prof);
 
     }
 
@@ -179,23 +177,19 @@ class __TwigTemplate_207954367e82833cd4b4073ae6d4d00e4065c86b45f5272270312d065df
 
     public function getDebugInfo()
     {
-        return array (  161 => 37,  157 => 36,  153 => 35,  149 => 34,  145 => 33,  141 => 32,  137 => 31,  133 => 30,  129 => 29,  125 => 28,  121 => 27,  117 => 26,  113 => 25,  109 => 24,  105 => 23,  101 => 22,  97 => 21,  93 => 20,  89 => 19,  85 => 18,  81 => 17,  77 => 16,  73 => 15,  69 => 14,  65 => 13,  61 => 12,  57 => 11,  53 => 10,  49 => 9,  44 => 7,  40 => 5,  34 => 4,  11 => 1,);
+        return array (  159 => 33,  155 => 32,  151 => 31,  147 => 30,  143 => 29,  139 => 28,  135 => 27,  131 => 26,  127 => 25,  123 => 24,  119 => 23,  115 => 22,  111 => 21,  107 => 20,  103 => 19,  99 => 18,  95 => 17,  91 => 16,  87 => 15,  83 => 14,  79 => 13,  75 => 12,  71 => 11,  67 => 10,  63 => 9,  59 => 8,  55 => 7,  51 => 6,  47 => 5,  43 => 4,  40 => 3,  34 => 2,  11 => 1,);
     }
 }
 /* {% extends 'base.html.twig' %}*/
-/* */
-/* */
 /* {% block body %}*/
 /*     <div id="background">*/
-/*         <div id="Background">*/
-/*             <img src="{{ asset('images/Background.png') }}" width="75%">*/
-/*         </div>*/
-/*         <div id="Layer1"><img src=" {{ asset('images/Layer1.png') }}" width="75%"></div>*/
-/*         <div id="ABOUTPROJECT"><img src=" {{ asset('images/ABOUTPROJECT.png') }}" width="75%"></div>*/
+/*         <div id="Background"><img src="{{ asset('images/Background.png') }}"></div>*/
+/*         <div id="Layer1"><img src=" {{ asset('images/Layer1.png') }}"></div>*/
+/*         <div id="ABOUTPROJECT"><img src=" {{ asset('images/ABOUTPROJECT.png') }}"></div>*/
 /*         <div id="YourmadheartgoesCrus"><img src="{{ asset('images/YourmadheartgoesCrus.png') }}"></div>*/
 /*         <div id="Whenyouareseventeeny"><img src="{{ asset('images/Whenyouareseventeeny.png') }}"></div>*/
 /*         <div id="Layer3"><img src="{{ asset('images/Layer3.png') }}"></div>*/
-/*         <div id="e2"><img src="{{ asset('images/e2.png') }}" width="75%"></div>*/
+/*         <div id="e2"><img src="{{ asset('images/e2.png') }}"></div>*/
 /*         <div id="e1"><img src="{{ asset('images/e1.png') }}"></div>*/
 /*         <div id="m1"><img src="{{ asset('images/m1.png') }}"></div>*/
 /*         <div id="m2"><img src="{{ asset('images/m2.png') }}"></div>*/
