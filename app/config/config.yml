@@ -41,13 +41,16 @@ twig:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   pdo_mysql
-        host:     "%database_host%"
-        port:     "%database_port%"
-        dbname:   "%database_name%"
-        user:     "%database_user%"
-        password: "%database_password%"
-        charset:  UTF8
+        default_connection:   default
+        connections:
+            default:
+                driver:   pdo_mysql
+                host:     127.0.0.1
+                port:     3306
+                dbname:   medicine
+                user:     root
+                password: "12345"
+                charset:  UTF8
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
         #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
@@ -62,10 +65,10 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
+    transport: smtp
+    host:      127.0.0.1
+    username:  null
+    password:  null
     spool:     { type: memory }
 
 # app/config/config.yml
