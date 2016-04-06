@@ -12,11 +12,16 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+        $names = array("name" => "Marina, Olexandra, Eleonora");
+        return $this->render('default/index.html.twig', array("names" => $names));
     }
     /**
      * @Route("/auth")
      */
-    public function indexAction()
+
+    public function authAction()
     {
+        $names = array("name" => "Marina, Olexandra, Eleonora");
+        return $this->render('default/auth.html.twig', array("names" => $names));
     }
 }
