@@ -1,5 +1,0 @@
-_assetic:
-    resource: .
-    type: assetic
-_app:
-    resource: 'D:\Elya\КПИ\6 семестр\TSPP\mg\app/config/routing_dev.yml'
