@@ -27,12 +27,6 @@
 !bin/symfony_requirements
 /vendor/
 
-# Assets and user uploads
-/web/uploads/
-
-# Assets managed by Bower
-/web/assets/vendor/
-
 # PHPUnit
 /app/phpunit.xml
 /phpunit.xml
