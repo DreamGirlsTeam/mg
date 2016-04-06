@@ -3,17 +3,6 @@
 	padding: 0;
  }
  
-
-
- #Background 
-{ 
-	 left: 0px; 
-	 top: 0px; 
-	 position: absolute; 
-	 width: 1300px;
-	 height: 4000px;
-	 z-index:1;
-} 
  #background 
 { 
 	 left: 0px; 
@@ -26,6 +15,16 @@
 	 overflow: hidden;
 	 z-index:0;
 	} 
+
+ #Background 
+{ 
+	 left: 0px; 
+	 top: 0px; 
+	 position: absolute; 
+	 width: 1300px;
+	 height: 4000px;
+	 z-index:1;
+} 
 
  #Layer1 
 { 
