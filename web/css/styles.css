@@ -11,12 +11,12 @@
 	 margin-left: auto; 
 	 margin-right: auto; 
 	 width: 1300px;
-	 height: 4000px; 
+	 height: 3274px; 
 	 overflow: hidden;
 	 z-index:0;
 	} 
 
- #Background 
+ #Layer0 
 { 
 	 left: 0px; 
 	 top: 0px; 
@@ -26,292 +26,382 @@
 	 z-index:1;
 } 
 
- #Layer1 
+ #Layer6 
 { 
-	 left: 0px; 
-	 top: 1077px; 
+	 left: -3px; 
+	 top: 2416px; 
 	 position: absolute; 
-	 width: 1319px;
-	 height: 1165px;
+	 width: 1301px;
+	 height: 858px;
 	 z-index:2;
 } 
 
- #ABOUTPROJECT 
+ #Layer5 
 { 
-	 left: 330px; 
-	 top: 1321px; 
+	 left: 493px; 
+	 top: 3204px; 
 	 position: absolute; 
-	 width: 658px;
-	 height: 54px;
+	 width: 308px;
+	 height: 42px;
 	 z-index:3;
+} 
+
+ #Shape8 
+{ 
+	 left: 45px; 
+	 top: 3191px; 
+	 position: absolute; 
+	 width: 1203px;
+	 height: 4px;
+	 z-index:4;
+} 
+
+ #MEDICALGUIDEC2016 
+{ 
+	 left: 507px; 
+	 top: 3214px; 
+	 position: absolute; 
+	 width: 281px;
+	 height: 22px;
+	 z-index:5;
+} 
+
+ #layer_6 
+{ 
+	 left: 582px; 
+	 top: 2745px; 
+	 position: absolute; 
+	 width: 159px;
+	 height: 36px;
+	 z-index:6;
+} 
+
+ #Layer1 
+{ 
+	 left: 6px; 
+	 top: 876px; 
+	 position: absolute; 
+	 width: 1319px;
+	 height: 1165px;
+	 z-index:7;
+} 
+
+ #layer_8 
+{ 
+	 left: 489px; 
+	 top: 1098px; 
+	 position: absolute; 
+	 width: 307px;
+	 height: 35px;
+	 z-index:8;
 } 
 
  #YourmadheartgoesCrus 
 { 
 	 left: 684px; 
-	 top: 1446px; 
+	 top: 1196px; 
 	 position: absolute; 
 	 width: 494px;
 	 height: 406px;
-	 z-index:4;
+	 z-index:9;
 } 
 
  #Whenyouareseventeeny 
 { 
-	 left: 175px; 
-	 top: 1446px; 
+	 left: 168px; 
+	 top: 1196px; 
 	 position: absolute; 
 	 width: 465px;
 	 height: 406px;
-	 z-index:5;
+	 z-index:10;
 } 
 
  #Layer3 
 { 
 	 left: 0px; 
-	 top: 1895px; 
+	 top: 1691px; 
 	 position: absolute; 
 	 width: 1300px;
 	 height: 1080px;
-	 z-index:6;
+	 z-index:11;
 } 
 
  #e2 
 { 
-	 left: 476px; 
-	 top: 2301px; 
+	 left: 495px; 
+	 top: 2038px; 
 	 position: absolute; 
-	 width: 353px;
-	 height: 354px;
-	 z-index:7;
+	 width: 306px;
+	 height: 306px;
+	 z-index:12;
 } 
 
  #e1 
 { 
-	 left: 567px; 
-	 top: 2256px; 
+	 left: 574px; 
+	 top: 2000px; 
 	 position: absolute; 
-	 width: 196px;
-	 height: 398px;
-	 z-index:8;
+	 width: 170px;
+	 height: 343px;
+	 z-index:13;
 } 
 
  #m1 
 { 
-	 left: 90px; 
-	 top: 2318px; 
+	 left: 112px; 
+	 top: 2036px; 
 	 position: absolute; 
-	 width: 328px;
-	 height: 328px;
-	 z-index:9;
+	 width: 310px;
+	 height: 307px;
+	 z-index:14;
 } 
 
  #m2 
 { 
-	 left: 177px; 
-	 top: 2292px; 
+	 left: 194px; 
+	 top: 2012px; 
 	 position: absolute; 
-	 width: 182px;
-	 height: 354px;
-	 z-index:10;
-} 
-
- #Shape4 
-{ 
-	 left: 439px; 
-	 top: 2456px; 
-	 position: absolute; 
-	 width: 24px;
-	 height: 24px;
-	 z-index:11;
-} 
-
- #Shape5 
-{ 
-	 left: 439px; 
-	 top: 2479px; 
-	 position: absolute; 
-	 width: 23px;
-	 height: 25px;
-	 z-index:12;
-} 
-
- #Shape6 
-{ 
-	 left: 847px; 
-	 top: 2458px; 
-	 position: absolute; 
-	 width: 23px;
-	 height: 23px;
-	 z-index:13;
-} 
-
- #Shape7 
-{ 
-	 left: 848px; 
-	 top: 2478px; 
-	 position: absolute; 
-	 width: 22px;
-	 height: 25px;
-	 z-index:14;
-} 
-
- #l2 
-{ 
-	 left: 900px; 
-	 top: 2322px; 
-	 position: absolute; 
-	 width: 328px;
-	 height: 320px;
+	 width: 172px;
+	 height: 331px;
 	 z-index:15;
 } 
 
- #l1 
+ #l4 
 { 
-	 left: 973px; 
-	 top: 2290px; 
+	 left: 873px; 
+	 top: 2041px; 
 	 position: absolute; 
-	 width: 213px;
-	 height: 351px;
+	 width: 311px;
+	 height: 301px;
 	 z-index:16;
+} 
+
+ #l3 
+{ 
+	 left: 922px; 
+	 top: 2011px; 
+	 position: absolute; 
+	 width: 231px;
+	 height: 331px;
+	 z-index:17;
 } 
 
  #twi 
 { 
-	 left: 636px; 
-	 top: 2723px; 
+	 left: 635px; 
+	 top: 2410px; 
 	 position: absolute; 
 	 width: 29px;
 	 height: 22px;
-	 z-index:17;
+	 z-index:18;
 } 
 
  #fb 
 { 
-	 left: 594px; 
-	 top: 2723px; 
-	 position: absolute; 
-	 width: 26px;
-	 height: 26px;
-	 z-index:18;
-} 
-
- #vk 
-{ 
-	 left: 679px; 
-	 top: 2723px; 
+	 left: 593px; 
+	 top: 2410px; 
 	 position: absolute; 
 	 width: 26px;
 	 height: 26px;
 	 z-index:19;
 } 
 
- #Eleonorakorobova 
+ #vk 
 { 
-	 left: 594px; 
-	 top: 2673px; 
+	 left: 678px; 
+	 top: 2410px; 
 	 position: absolute; 
-	 width: 114px;
-	 height: 36px;
+	 width: 26px;
+	 height: 26px;
 	 z-index:20;
 } 
 
- #THETEAM 
+ #twicopy 
 { 
-	 left: 439px; 
-	 top: 2186px; 
+	 left: 250px; 
+	 top: 2409px; 
 	 position: absolute; 
-	 width: 411px;
-	 height: 53px;
+	 width: 29px;
+	 height: 22px;
 	 z-index:21;
+} 
+
+ #fbcopy 
+{ 
+	 left: 208px; 
+	 top: 2409px; 
+	 position: absolute; 
+	 width: 26px;
+	 height: 26px;
+	 z-index:22;
+} 
+
+ #vkcopy 
+{ 
+	 left: 293px; 
+	 top: 2409px; 
+	 position: absolute; 
+	 width: 26px;
+	 height: 26px;
+	 z-index:23;
+} 
+
+ #twicopy2 
+{ 
+	 left: 1013px; 
+	 top: 2409px; 
+	 position: absolute; 
+	 width: 29px;
+	 height: 22px;
+	 z-index:24;
+} 
+
+ #fbcopy2 
+{ 
+	 left: 971px; 
+	 top: 2409px; 
+	 position: absolute; 
+	 width: 26px;
+	 height: 26px;
+	 z-index:25;
+} 
+
+ #vkcopy2 
+{ 
+	 left: 1056px; 
+	 top: 2409px; 
+	 position: absolute; 
+	 width: 26px;
+	 height: 26px;
+	 z-index:26;
+} 
+
+ #layer_27 
+{ 
+	 left: 603px; 
+	 top: 2362px; 
+	 position: absolute; 
+	 width: 95px;
+	 height: 35px;
+	 z-index:27;
+} 
+
+ #layer_28 
+{ 
+	 left: 208px; 
+	 top: 2362px; 
+	 position: absolute; 
+	 width: 121px;
+	 height: 38px;
+	 z-index:28;
+} 
+
+ #layer_29 
+{ 
+	 left: 970px; 
+	 top: 2362px; 
+	 position: absolute; 
+	 width: 117px;
+	 height: 35px;
+	 z-index:29;
+} 
+
+ #layer_30 
+{ 
+	 left: 519px; 
+	 top: 1922px; 
+	 position: absolute; 
+	 width: 253px;
+	 height: 45px;
+	 z-index:30;
 } 
 
  #Layer0copy 
 { 
 	 left: 0px; 
-	 top: 0px; 
+	 top: -199px; 
 	 position: absolute; 
 	 width: 1300px;
 	 height: 1252px;
-	 z-index:22;
+	 z-index:31;
 } 
 
  #Shape3 
 { 
-	 left: 107px; 
-	 top: 135px; 
+	 left: 153px; 
+	 top: 77px; 
 	 position: absolute; 
-	 width: 378px;
-	 height: 3px;
-	 z-index:23;
+	 width: 379px;
+	 height: 4px;
+	 z-index:32;
 } 
 
  #Shape3copy 
 { 
-	 left: 805px; 
-	 top: 134px; 
+	 left: 761px; 
+	 top: 78px; 
 	 position: absolute; 
-	 width: 378px;
-	 height: 3px;
-	 z-index:24;
+	 width: 379px;
+	 height: 4px;
+	 z-index:33;
 } 
 
- #login 
+ #layer_34 
 { 
-	 left: 257px; 
-	 top: 97px; 
+	 left: 283px; 
+	 top: 39px; 
 	 position: absolute; 
-	 width: 87px;
-	 height: 19px;
-	 z-index:25;
+	 width: 127px;
+	 height: 39px;
+	 z-index:55;
 } 
 
- #Contactus 
+ #layer_35 
 { 
-	 left: 903px; 
-	 top: 97px; 
+	 left: 831px; 
+	 top: 55px; 
 	 position: absolute; 
-	 width: 172px;
-	 height: 19px;
-	 z-index:26;
+	 width: 241px;
+	 height: 18px;
+	 z-index:35;
 } 
 
  #MG 
 { 
-	 left: 539px; 
+	 left: 592px; 
 	 top: 24px; 
 	 position: absolute; 
-	 width: 216px;
-	 height: 225px;
-	 z-index:27;
+	 width: 111px;
+	 height: 111px;
+	 z-index:36;
 } 
 
  #Benedignosciturbenec 
 { 
-	 left: 480px; 
-	 top: 293px; 
+	 left: 534px; 
+	 top: 176px; 
 	 position: absolute; 
-	 width: 345px;
-	 height: 46px;
-	 z-index:28;
+	 width: 230px;
+	 height: 31px;
+	 z-index:37;
 } 
 
  #Shape2 
 { 
 	 left: 585px; 
-	 top: 371px; 
+	 top: 238px; 
 	 position: absolute; 
-	 width: 124px;
-	 height: 3px;
-	 z-index:29;
+	 width: 125px;
+	 height: 4px;
+	 z-index:38;
 } 
 
  #MEDICALGUIDE 
 { 
-	 left: 344px; 
-	 top: 427px; 
+	 left: 424px; 
+	 top: 285px; 
 	 position: absolute; 
-	 width: 642px;
-	 height: 54px;
-	 z-index:30;
+	 width: 429px;
+	 height: 37px;
+	 z-index:39;
 } 
