@@ -6,6 +6,7 @@
     ],
     "hash": "032703c7b03b36cf03c2f3a81cceae32",
     "content-hash": "c175412d99569d34f6cacf80845a731a",
+>>>>>>> 6fc85d10fd0900a801846fd1b710594e8f594df5
     "packages": [
         {
             "name": "doctrine/annotations",
