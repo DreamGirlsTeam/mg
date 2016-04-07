@@ -31,16 +31,16 @@ class ConfPerson
     /**
      * @var string
      *
-     * @ORM\Column(name="firstName", type="string", length=50)
+     * @ORM\Column(name="first_name", type="string", length=50)
      */
-    private $firstName;
+    private $first_name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lastName", type="string", length=60)
+     * @ORM\Column(name="last_name", type="string", length=60)
      */
-    private $lastName;
+    private $last_name;
 
     /**
      * @var string
@@ -52,9 +52,9 @@ class ConfPerson
     /**
      * @var int
      *
-     * @ORM\Column(name="phoneNumber", type="integer")
+     * @ORM\Column(name="phone_number", type="string", length=20)
      */
-    private $phoneNumber;
+    private $phone_number;
 
 
     /**
@@ -92,27 +92,27 @@ class ConfPerson
     }
 
     /**
-     * Set firstName
+     * Set FirstName
      *
-     * @param string $firstName
+     * @param string $first_name
      *
      * @return ConfPerson
      */
-    public function setFirstName($firstName)
+    public function setFirstName($first_name)
     {
-        $this->firstName = $firstName;
+        $this->first_name = $first_name;
 
         return $this;
     }
 
     /**
-     * Get firstName
+     * Get FirstName
      *
      * @return string
      */
     public function getFirstName()
     {
-        return $this->firstName;
+        return $this->first_name;
     }
 
     /**
@@ -122,9 +122,9 @@ class ConfPerson
      *
      * @return ConfPerson
      */
-    public function setLastName($lastName)
+    public function setLastName($last_name)
     {
-        $this->lastName = $lastName;
+        $this->last_name = $last_name;
 
         return $this;
     }
@@ -136,7 +136,7 @@ class ConfPerson
      */
     public function getLastName()
     {
-        return $this->lastName;
+        return $this->last_name;
     }
 
     /**
@@ -166,13 +166,13 @@ class ConfPerson
     /**
      * Set phoneNumber
      *
-     * @param integer $phoneNumber
+     * @param integer $phone_number
      *
      * @return ConfPerson
      */
-    public function setPhoneNumber($phoneNumber)
+    public function setPhoneNumber($phone_number)
     {
-        $this->phoneNumber = $phoneNumber;
+        $this->phone_number = $phone_number;
 
         return $this;
     }
@@ -184,7 +184,7 @@ class ConfPerson
      */
     public function getPhoneNumber()
     {
-        return $this->phoneNumber;
+        return $this->phone_number;
     }
 }
 
