@@ -3,12 +3,17 @@
 namespace GuideBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Auth
  *
  * @ORM\Table(name="auth")
  * @ORM\Entity(repositoryClass="GuideBundle\Repository\AuthRepository")
+ * @UniqueEntity(fields="username", message="Wrong username")
+ * @UniqueEntity(fields="password", message="Wrong password")
  */
 class Auth
 {
@@ -34,6 +39,31 @@ class Auth
      * @ORM\Column(name="username", type="string", length=60, unique=true)
      */
     private $username;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=100, unique=false)
+     */
+    private $password;
+
+    /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
 
 
     /**
