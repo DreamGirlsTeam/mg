@@ -4,7 +4,12 @@ namespace GuideBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use GuideBundle\Entity\Auth;
+use GuideBundle\Entity\Actors;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class SecurityController extends Controller
 {
@@ -13,22 +18,73 @@ class SecurityController extends Controller
      */
     public function loginAction(Request $request)
     {
-        $authenticationUtils = $this->get('security.authentication_utils');
+        $user = new Auth();
+        //$form = $this->createForm(AuthType::class, $user);
+        $form = $this->createFormBuilder($user)
+            ->add('username', TextType::class)
+            ->add('password', PasswordType::class)
+            ->add('Log in', SubmitType::class, array('label' => 'Log in'))
+            ->getForm();
 
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
+        $form->handleRequest($request);
+        $form->getErrors();
+        if ($form->isSubmitted()) {
+            $user = $this
+                ->getDoctrine()
+                ->getRepository("GuideBundle:Auth")
+                ->findOneBy(
+                    array(
+                        "username" => $user->getUsername(),
+                        "password" => $user->getPassword())
+                );
+            if ($user) {
+                $role = $this
+                    ->getDoctrine()
+                    ->getRepository("GuideBundle:Actors")
+                    ->findOneBy(
+                        array(
+                            "id" => $user->getId()
+                        )
+                    );
+                $userInfo = $this
+                    ->getDoctrine()
+                    ->getRepository("GuideBundle:RegInfo")
+                    ->findOneBy(
+                        array(
+                            "actorId" => $user->getId()
+                        )
+                    );
+                $session = $request->getSession();
+                //$session->remove('user');
 
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
+                $session->set('user', array(
+                    'role' => $role->getRole(),
+                    'username' => $user->getUsername(),
+                    'first_name' => $userInfo->getFirstName(),
+                    'last_name' => $userInfo->getLastName(),
+                    'patronymic' => $userInfo->getPatronymic()
+                ));
+                var_dump($session->get('user'));
+            }
+        }
 
-        return $this->render(
-            'default/auth.html.twig',
-            array(
-                // last username entered by the user
-                'last_username' => $lastUsername,
-                'error'         => $error,
-            )
-        );
+
+
+        /*if ($form->isValid()) {
+            $user = $this->getDoctrine()
+                ->getRepository('GuideBundle:Auth')
+                ->findOneBy(
+                    array(
+                        'username' => $loginForm->getUsername(),
+                        'password' => $loginForm->getPassword()
+                    )
+                );
+        }
+
+        if ($user) echo "loh";*/
+        return $this->render('auth/auth.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 
 }

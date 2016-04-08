@@ -17,8 +17,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $names = array("name" => "Marina, Olexandra, Eleonora");
-        return $this->render('default/index.html.twig', array("names" => $names));
+        return $this->render('default/index.html.twig');
     }
 
     public function authAction(Request $request)

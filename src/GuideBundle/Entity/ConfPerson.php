@@ -31,16 +31,16 @@ class ConfPerson
     /**
      * @var string
      *
-     * @ORM\Column(name="firstName", type="string", length=50)
+     * @ORM\Column(name="first_name", type="string", length=50)
      */
-    private $firstName;
+    private $first_name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lastName", type="string", length=60)
+     * @ORM\Column(name="last_name", type="string", length=60)
      */
-    private $lastName;
+    private $last_name;
 
     /**
      * @var string
@@ -98,9 +98,9 @@ class ConfPerson
      *
      * @return ConfPerson
      */
-    public function setFirstName($firstName)
+    public function setFirstName($first_name)
     {
-        $this->firstName = $firstName;
+        $this->first_name = $first_name;
 
         return $this;
     }
@@ -112,7 +112,7 @@ class ConfPerson
      */
     public function getFirstName()
     {
-        return $this->firstName;
+        return $this->first_name;
     }
 
     /**
@@ -122,9 +122,9 @@ class ConfPerson
      *
      * @return ConfPerson
      */
-    public function setLastName($lastName)
+    public function setLastName($last_name)
     {
-        $this->lastName = $lastName;
+        $this->last_name = $last_name;
 
         return $this;
     }
@@ -136,7 +136,7 @@ class ConfPerson
      */
     public function getLastName()
     {
-        return $this->lastName;
+        return $this->last_name;
     }
 
     /**
