@@ -31,16 +31,16 @@ class MedicalStaff
     /**
      * @var string
      *
-     * @ORM\Column(name="firstName", type="string", length=50)
+     * @ORM\Column(name="first_name", type="string", length=50)
      */
-    private $firstName;
+    private $first_name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lastName", type="string", length=60)
+     * @ORM\Column(name="last_name", type="string", length=60)
      */
-    private $lastName;
+    private $last_name;
 
     /**
      * @var string
@@ -52,9 +52,9 @@ class MedicalStaff
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateOfBirth", type="date")
+     * @ORM\Column(name="date_of_birth", type="date")
      */
-    private $dateOfBirth;
+    private $date_of_birth;
 
     /**
      * @var string
@@ -66,9 +66,9 @@ class MedicalStaff
     /**
      * @var int
      *
-     * @ORM\Column(name="phoneNumber", type="integer", nullable=true)
+     * @ORM\Column(name="phone_number", type="string", length=20, nullable=true)
      */
-    private $phoneNumber;
+    private $phone_number;
 
 
     /**
@@ -106,51 +106,51 @@ class MedicalStaff
     }
 
     /**
-     * Set firstName
+     * Set first_name
      *
-     * @param string $firstName
+     * @param string $first_name
      *
      * @return MedicalStaff
      */
-    public function setFirstName($firstName)
+    public function setFirstName($first_name)
     {
-        $this->firstName = $firstName;
+        $this->first_name = $first_name;
 
         return $this;
     }
 
     /**
-     * Get firstName
+     * Get first_name
      *
      * @return string
      */
     public function getFirstName()
     {
-        return $this->firstName;
+        return $this->first_name;
     }
 
     /**
-     * Set lastName
+     * Set last_name
      *
-     * @param string $lastName
+     * @param string $last_name
      *
      * @return MedicalStaff
      */
-    public function setLastName($lastName)
+    public function setLastName($last_name)
     {
-        $this->lastName = $lastName;
+        $this->last_name = $last_name;
 
         return $this;
     }
 
     /**
-     * Get lastName
+     * Get last_name
      *
      * @return string
      */
     public function getLastName()
     {
-        return $this->lastName;
+        return $this->last_name;
     }
 
     /**
@@ -178,27 +178,27 @@ class MedicalStaff
     }
 
     /**
-     * Set dateOfBirth
+     * Set date_of_birth
      *
-     * @param \DateTime $dateOfBirth
+     * @param \DateTime $date_of_birth
      *
      * @return MedicalStaff
      */
-    public function setDateOfBirth($dateOfBirth)
+    public function setDateOfBirth($date_of_birth)
     {
-        $this->dateOfBirth = $dateOfBirth;
+        $this->date_of_birth = $date_of_birth;
 
         return $this;
     }
 
     /**
-     * Get dateOfBirth
+     * Get date_of_birth
      *
      * @return \DateTime
      */
     public function getDateOfBirth()
     {
-        return $this->dateOfBirth;
+        return $this->date_of_birth;
     }
 
     /**
@@ -226,27 +226,27 @@ class MedicalStaff
     }
 
     /**
-     * Set phoneNumber
+     * Set phone_number
      *
-     * @param integer $phoneNumber
+     * @param integer $phone_number
      *
      * @return MedicalStaff
      */
-    public function setPhoneNumber($phoneNumber)
+    public function setPhoneNumber($phone_number)
     {
-        $this->phoneNumber = $phoneNumber;
+        $this->phone_number = $phone_number;
 
         return $this;
     }
 
     /**
-     * Get phoneNumber
+     * Get phone_number
      *
      * @return int
      */
     public function getPhoneNumber()
     {
-        return $this->phoneNumber;
+        return $this->phone_number;
     }
 }
 

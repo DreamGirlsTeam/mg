@@ -52,9 +52,9 @@ class ConfPerson
     /**
      * @var int
      *
-     * @ORM\Column(name="phoneNumber", type="integer")
+     * @ORM\Column(name="phone_number", type="string", length=20)
      */
-    private $phoneNumber;
+    private $phone_number;
 
 
     /**
@@ -92,9 +92,9 @@ class ConfPerson
     }
 
     /**
-     * Set firstName
+     * Set FirstName
      *
-     * @param string $firstName
+     * @param string $first_name
      *
      * @return ConfPerson
      */
@@ -106,7 +106,7 @@ class ConfPerson
     }
 
     /**
-     * Get firstName
+     * Get FirstName
      *
      * @return string
      */
@@ -166,13 +166,13 @@ class ConfPerson
     /**
      * Set phoneNumber
      *
-     * @param integer $phoneNumber
+     * @param integer $phone_number
      *
      * @return ConfPerson
      */
-    public function setPhoneNumber($phoneNumber)
+    public function setPhoneNumber($phone_number)
     {
-        $this->phoneNumber = $phoneNumber;
+        $this->phone_number = $phone_number;
 
         return $this;
     }
@@ -184,7 +184,7 @@ class ConfPerson
      */
     public function getPhoneNumber()
     {
-        return $this->phoneNumber;
+        return $this->phone_number;
     }
 }
 

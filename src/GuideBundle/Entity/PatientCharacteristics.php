@@ -35,6 +35,13 @@ class PatientCharacteristics
      */
     private $allergy;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="chronic_diseases", type="string", length=60, nullable=true)
+     */
+    
+    private $chronic_diseases;
 
     /**
      * Get id
@@ -42,8 +49,6 @@ class PatientCharacteristics
      * @return int
      */
 
-    private $chronicDiseases;
-    
     public function getId()
     {
         return $this->id;
@@ -95,6 +100,30 @@ class PatientCharacteristics
     public function getAllergy()
     {
         return $this->allergy;
+    }
+
+    /**
+     * Set chronic_diseases
+     *
+     * @param string $chronic_diseases
+     *
+     * @return PatientCharacteristics
+     */
+    public function setChronicDieseases($chronic_diseases)
+    {
+        $this->chronic_diseases = $chronic_diseases;
+
+        return $this;
+    }
+
+    /**
+     * Get chronic_diseases
+     *
+     * @return string
+     */
+    public function getChronicDieseases()
+    {
+        return $this->chronic_diseases;
     }
 }
 
