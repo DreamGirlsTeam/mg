@@ -27,7 +27,7 @@ class SecurityController extends Controller
             ->getForm();
 
         $form->handleRequest($request);
-        $form->getErrors();
+
         if ($form->isSubmitted()) {
             $user = $this
                 ->getDoctrine()
@@ -91,4 +91,5 @@ class SecurityController extends Controller
         ));
     }
 
+    
 }
