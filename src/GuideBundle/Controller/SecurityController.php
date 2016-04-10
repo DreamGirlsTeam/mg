@@ -70,6 +70,7 @@ class SecurityController extends Controller
                 $session = $request->getSession();
                 $session->remove('user');
 
+                if ($role != 1)
                 $session->set('user', array(
                     'role' => $role->getRole(),
                     'username' => $user->getUsername(),
@@ -77,6 +78,11 @@ class SecurityController extends Controller
                      'last_name' => $userInfo->getLastName(),
                     'patronymic' => $userInfo->getPatronymic()
                 ));
+                else {
+                    $session->set('user', array(
+                        'role' => 1
+                    ));
+                }
             }
         }
 
