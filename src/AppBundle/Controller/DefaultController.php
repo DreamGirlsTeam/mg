@@ -1,20 +1,34 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace GuideBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
+class SecurityController extends Controller
 {
     /**
-     * 
+     * @Route("/auth", name="auth")
      */
-    public function indexAction(Request $request)
+    public function loginAction(Request $request)
     {
-        // replace this example code with whatever you need
-        $names = array("name" => "Marina, Olexandra, Eleonora");
-        return $this->render('default/index.html.twig', array("names" => $names));
+        $authenticationUtils = $this->get('security.authentication_utils');
+
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render(
+            'default/auth.html.twig',
+            array(
+                // last username entered by the user
+                'last_username' => $lastUsername,
+                'error'         => $error,
+            )
+        );
     }
+
 }
