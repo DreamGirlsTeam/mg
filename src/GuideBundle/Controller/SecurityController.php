@@ -64,6 +64,11 @@ class SecurityController extends Controller
                     'last_name' => $userInfo->getLastName(),
                     'patronymic' => $userInfo->getPatronymic()
                 ));
+                //var_dump($session('role'));
+                /*switch ($session('role'))
+                {
+
+                }*/
             }
         }
 
