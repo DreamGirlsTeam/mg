@@ -68,7 +68,14 @@ class SecurityController extends Controller
 
 
                 $session = $request->getSession();
-                if ($role != 1)
+                $session->remove('user');
+                $session->clear();
+
+                if ($role->getRole() == 1) {
+                    $session->set('user', array(
+                        'role' => $role->getRole()
+                    ));
+                } else {
                     $session->set('user', array(
                         'role' => $role->getRole(),
                         'username' => $user->getUsername(),
@@ -76,24 +83,20 @@ class SecurityController extends Controller
                         'last_name' => $userInfo->getLastName(),
                         'patronymic' => $userInfo->getPatronymic()
                     ));
-                else {
-                    $session->set('user', array(
-                        'role' => 1
-                    ));
                 }
-                
-                switch ($role) {
-                    case '1':
-                        return $this->redirectToRoute('admin/cab');
-                    case '2':
-                        return $this->redirectToRoute('doc/cab');
-                    case '3':
-                        return $this->redirectToRoute('lab/cab');
-                    case '4':
-                        return $this->redirectToRoute('reception/cab');
-                    case '5':
-                        return $this->redirectToRoute('pat/cab');
-                }
+                var_dump($session->get('user'));
+//                switch ($role) {
+//                    case '1':
+//                        return $this->redirectToRoute('admin/cab');
+//                    case '2':
+//                        return $this->redirectToRoute('doc/cab');
+//                    case '3':
+//                        return $this->redirectToRoute('lab/cab');
+//                    case '4':
+//                        return $this->redirectToRoute('reception/cab');
+//                    case '5':
+//                        return $this->redirectToRoute('pat/cab');
+//                }
 
             }
             
@@ -112,6 +115,7 @@ class SecurityController extends Controller
         }
 
         if ($user) echo "loh";*/
+
         return $this->render('auth/auth.html.twig', array(
             'form' => $form->createView(),
         ));
