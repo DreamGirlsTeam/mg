@@ -18,6 +18,7 @@ class SecurityController extends Controller
      */
     public function loginAction(Request $request)
     {
+        $error = '';
         $user = new Auth();
         //$form = $this->createForm(AuthType::class, $user);
         $form = $this->createFormBuilder($user)
@@ -98,6 +99,8 @@ class SecurityController extends Controller
 //                        return $this->redirectToRoute('pat/cab');
 //                }
 
+            } else {
+                $error = "* ERROR";
             }
             
         }
@@ -117,7 +120,7 @@ class SecurityController extends Controller
         if ($user) echo "loh";*/
 
         return $this->render('auth/auth.html.twig', array(
-            'form' => $form->createView(),
+            'form' => $form->createView(), 'error' => $error
         ));
     }
 
