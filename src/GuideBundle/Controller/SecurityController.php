@@ -18,13 +18,12 @@ class SecurityController extends Controller
      */
     public function loginAction(Request $request)
     {
-        $error = '';
         $user = new Auth();
         //$form = $this->createForm(AuthType::class, $user);
         $form = $this->createFormBuilder($user)
             ->add('username', TextType::class)
             ->add('password', PasswordType::class)
-            ->add('Log in', SubmitType::class, array('label' => 'Увійти'))
+            ->add('Log in', SubmitType::class, array('label' => '�����'))
             ->getForm();
 
         $form->handleRequest($request);
@@ -70,22 +69,37 @@ class SecurityController extends Controller
 
                 $session = $request->getSession();
                 $session->remove('user');
-                if ($role->getRole() !== 1)
-                $session->set('user', array(
-                    'role' => $role->getRole(),
-                    'username' => $user->getUsername(),
-                    'first_name' => $userInfo->getFirstName(),
-                     'last_name' => $userInfo->getLastName(),
-                    'patronymic' => $userInfo->getPatronymic()
-                ));
-                else {
+                $session->clear();
+
+                if ($role->getRole() == 1) {
                     $session->set('user', array(
-                        'role' => 1
+                        'role' => $role->getRole()
+                    ));
+                } else {
+                    $session->set('user', array(
+                        'role' => $role->getRole(),
+                        'username' => $user->getUsername(),
+                        'first_name' => $userInfo->getFirstName(),
+                        'last_name' => $userInfo->getLastName(),
+                        'patronymic' => $userInfo->getPatronymic()
                     ));
                 }
-            } else {
-                $error = "* ERROR";
+                var_dump($session->get('user'));
+//                switch ($role) {
+//                    case '1':
+//                        return $this->redirectToRoute('admin/cab');
+//                    case '2':
+//                        return $this->redirectToRoute('doc/cab');
+//                    case '3':
+//                        return $this->redirectToRoute('lab/cab');
+//                    case '4':
+//                        return $this->redirectToRoute('reception/cab');
+//                    case '5':
+//                        return $this->redirectToRoute('pat/cab');
+//                }
+
             }
+            
         }
 
 
@@ -101,8 +115,9 @@ class SecurityController extends Controller
         }
 
         if ($user) echo "loh";*/
+
         return $this->render('auth/auth.html.twig', array(
-            'form' => $form->createView(), 'error' => $error
+            'form' => $form->createView(),
         ));
     }
 
