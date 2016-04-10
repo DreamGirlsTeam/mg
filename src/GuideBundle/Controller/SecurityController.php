@@ -18,12 +18,13 @@ class SecurityController extends Controller
      */
     public function loginAction(Request $request)
     {
+        $error = '';
         $user = new Auth();
         //$form = $this->createForm(AuthType::class, $user);
         $form = $this->createFormBuilder($user)
             ->add('username', TextType::class)
             ->add('password', PasswordType::class)
-            ->add('Log in', SubmitType::class, array('label' => 'Óâ³éòè'))
+            ->add('Log in', SubmitType::class, array('label' => 'Ð£Ð²Ñ–Ð¹Ñ‚Ð¸'))
             ->getForm();
 
         $form->handleRequest($request);
@@ -69,8 +70,7 @@ class SecurityController extends Controller
 
                 $session = $request->getSession();
                 $session->remove('user');
-
-                if ($role != 1)
+                if ($role->getRole() !== 1)
                 $session->set('user', array(
                     'role' => $role->getRole(),
                     'username' => $user->getUsername(),
@@ -83,6 +83,8 @@ class SecurityController extends Controller
                         'role' => 1
                     ));
                 }
+            } else {
+                $error = "* ERROR";
             }
         }
 
@@ -100,7 +102,7 @@ class SecurityController extends Controller
 
         if ($user) echo "loh";*/
         return $this->render('auth/auth.html.twig', array(
-            'form' => $form->createView(),
+            'form' => $form->createView(), 'error' => $error
         ));
     }
 
