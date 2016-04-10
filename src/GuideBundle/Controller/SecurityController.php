@@ -68,15 +68,20 @@ class SecurityController extends Controller
 
 
                 $session = $request->getSession();
-                $session->remove('user');
-
-                $session->set('user', array(
-                    'role' => $role->getRole(),
-                    'username' => $user->getUsername(),
-                    'first_name' => $userInfo->getFirstName(),
-                     'last_name' => $userInfo->getLastName(),
-                    'patronymic' => $userInfo->getPatronymic()
-                ));
+                if ($role != 1)
+                    $session->set('user', array(
+                        'role' => $role->getRole(),
+                        'username' => $user->getUsername(),
+                        'first_name' => $userInfo->getFirstName(),
+                        'last_name' => $userInfo->getLastName(),
+                        'patronymic' => $userInfo->getPatronymic()
+                    ));
+                else {
+                    $session->set('user', array(
+                        'role' => 1
+                    ));
+                }
+                
                 switch ($role) {
                     case '1':
                         return $this->redirectToRoute('admin/cab');
