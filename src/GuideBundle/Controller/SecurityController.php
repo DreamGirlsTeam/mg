@@ -23,7 +23,7 @@ class SecurityController extends Controller
         $form = $this->createFormBuilder($user)
             ->add('username', TextType::class)
             ->add('password', PasswordType::class)
-            ->add('Log in', SubmitType::class, array('label' => 'Log in'))
+            ->add('Log in', SubmitType::class, array('label' => 'Óâ³éòè'))
             ->getForm();
 
         $form->handleRequest($request);
@@ -46,22 +46,35 @@ class SecurityController extends Controller
                             "id" => $user->getId()
                         )
                     );
-                $userInfo = $this
-                    ->getDoctrine()
-                    ->getRepository("GuideBundle:RegInfo")
-                    ->findOneBy(
-                        array(
-                            "actorId" => $user->getId()
-                        )
-                    );
+                if ($role === 5) {
+                    $userInfo = $this
+                        ->getDoctrine()
+                        ->getRepository("GuideBundle:RegInfo")
+                        ->findOneBy(
+                            array(
+                                "actorId" => $user->getId()
+                            )
+                        );
+                } else {
+                    $userInfo = $this
+                        ->getDoctrine()
+                        ->getRepository("GuideBundle:MedicalStaff")
+                        ->findOneBy(
+                            array(
+                                "actorId" => $user->getId()
+                            )
+                        );
+                }
+
+
                 $session = $request->getSession();
-                //$session->remove('user');
+                $session->remove('user');
 
                 $session->set('user', array(
                     'role' => $role->getRole(),
                     'username' => $user->getUsername(),
                     'first_name' => $userInfo->getFirstName(),
-                    'last_name' => $userInfo->getLastName(),
+                     'last_name' => $userInfo->getLastName(),
                     'patronymic' => $userInfo->getPatronymic()
                 ));
 
@@ -81,7 +94,6 @@ class SecurityController extends Controller
         }
 
 
-
         /*if ($form->isValid()) {
             $user = $this->getDoctrine()
                 ->getRepository('GuideBundle:Auth')
@@ -99,5 +111,5 @@ class SecurityController extends Controller
         ));
     }
 
-    
+
 }
