@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DoctorController extends Controller
 {
-
     /**
      * @Route("doctor", name="doctor")
      */
