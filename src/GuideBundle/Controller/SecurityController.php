@@ -4,17 +4,22 @@ namespace GuideBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\RouteCollection;
+
 use GuideBundle\Entity\Auth;
 use GuideBundle\Entity\Actors;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use GuideBundle\Controller\AdminController;
 
 class SecurityController extends Controller
 {
     /**
-     * @Route("/auth", name="auth")
+     * @Route("auth", name="auth")
+     * @IgnoreAnnotation("Route")
      */
     public function loginAction(Request $request)
     {
@@ -24,7 +29,7 @@ class SecurityController extends Controller
         $form = $this->createFormBuilder($user)
             ->add('username', TextType::class)
             ->add('password', PasswordType::class)
-            ->add('Log in', SubmitType::class, array('label' => '�����'))
+            ->add('Log in', SubmitType::class, array('label' => 'Log in'))
             ->getForm();
 
         $form->handleRequest($request);
@@ -85,19 +90,18 @@ class SecurityController extends Controller
                         'patronymic' => $userInfo->getPatronymic()
                     ));
                 }
-                var_dump($session->get('user'));
-//                switch ($role) {
-//                    case '1':
-//                        return $this->redirectToRoute('admin/cab');
-//                    case '2':
-//                        return $this->redirectToRoute('doc/cab');
+                switch ($role->getRole()) {
+                    case '1':
+                        return $this->redirectToRoute('admin');
+                    case '2':
+
 //                    case '3':
 //                        return $this->redirectToRoute('lab/cab');
 //                    case '4':
 //                        return $this->redirectToRoute('reception/cab');
 //                    case '5':
 //                        return $this->redirectToRoute('pat/cab');
-//                }
+                }
 
             } else {
                 $error = "* ERROR";
