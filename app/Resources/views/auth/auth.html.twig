@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/auth.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/validationEngine.jquery.css') }}"/>
+{% endblock %}
+{% block body %}
+    <div class="auth_form">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ error }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('bundles/framework/js/jQuery/jquery-1.12.3.min.js') }}"></script>
+    <script src="{{ asset('bundles/framework/js/jQuery/jquery.ValidationEngine.js') }}"></script>
+    <script src="{{ asset('bundles/framework/js/jQuery/jquery.ValidationEngine-en.js') }}"></script>
+    <script src="{{ asset('bundles/framework/js/script.js') }}"></script>
+
+{% endblock %}

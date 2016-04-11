@@ -1,0 +1,8 @@
+# Actors table filling with 1 person from 1 role
+INSERT INTO actors (role) VALUES (1), (2), (3), (4), (5);
+
+#Inserting authorization data
+INSERT INTO auth (actorId, username, password) VALUES (1, "admin", "admin"), (2, "doc_1", "doc_1"), (3, "lab_1", "lab_1"), (4, "rec_1", "rec_1"), (5, "pat_1", "pat_1");
+
+#Inserting personal data
+INSERT INTO reg_info VALUES (null, 5, "Олена", "Стрілецька", "Степанівна", '1994-01-02', '+380981726692', 'AA123456', 'Київ');
