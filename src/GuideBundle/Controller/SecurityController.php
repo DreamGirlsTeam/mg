@@ -94,7 +94,7 @@ class SecurityController extends Controller
                     case '1':
                         return $this->redirectToRoute('admin');
                     case '2':
-
+                        return $this->redirectToRoute('doctor');
 //                    case '3':
 //                        return $this->redirectToRoute('lab/cab');
 //                    case '4':

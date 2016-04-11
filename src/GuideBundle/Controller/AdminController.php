@@ -16,6 +16,6 @@ class AdminController extends Controller
      */
     public function adminAction(Request $request)
     {
-        return new Response('Hello world!');
+        return new Response('Hello admin!');
     }
 }
