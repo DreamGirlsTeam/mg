@@ -84,19 +84,19 @@ class SecurityController extends Controller
                         'patronymic' => $userInfo->getPatronymic()
                     ));
                 }
-                var_dump($session->get('user'));
-//                switch ($role) {
-//                    case '1':
-//                        return $this->redirectToRoute('admin/cab');
-//                    case '2':
-//                        return $this->redirectToRoute('doc/cab');
-//                    case '3':
-//                        return $this->redirectToRoute('lab/cab');
-//                    case '4':
-//                        return $this->redirectToRoute('reception/cab');
-//                    case '5':
-//                        return $this->redirectToRoute('pat/cab');
-//                }
+                
+                switch ($role->getRole()) {
+                    case '1':
+                        return $this->redirect('admin');
+                    case '2':
+                        return $this->redirect('doctor');
+                    case '3':
+                        return $this->redirectToRoute('lab');
+                    case '4':
+                        return $this->redirectToRoute('reception');
+                    case '5':
+                        return $this->redirectToRoute('pat');
+                }
 
             }
             

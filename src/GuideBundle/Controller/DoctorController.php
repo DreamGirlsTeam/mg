@@ -7,9 +7,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class DoctorController extends Controller
 {
+    /**
+     * @Route("/doctor", name="doctor")
+     */
 
-    public function DoctorCabinet()
+    public function doctorAction()
     {
-
+        echo "Hello!";
     }
 }

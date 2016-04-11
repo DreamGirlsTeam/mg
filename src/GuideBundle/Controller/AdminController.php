@@ -9,9 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 class AdminController extends Controller
 {
     /**
-     * @Route("/admin/cab", name="admin")
+     * @Route("/admin/cabinet", name="admin")
      */
-    public function adminCabinet()
+    public function adminAction($request)
     {
         echo "loh";
     }
