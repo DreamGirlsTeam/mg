@@ -102,6 +102,7 @@ class SecurityController extends Controller
                         return $this->redirect('reception');
                     case '5':
                         return $this->redirect('patient');
+
                 }
 
             } else {
