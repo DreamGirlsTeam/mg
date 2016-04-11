@@ -11,7 +11,7 @@ use GuideBundle\Controller\SecurityController;
 class DoctorController extends Controller
 {
     /**
-     * @Route("/doctor, name="doctor")
+     * @Route("doctor", name="doctor")
      */
     public function doctorAction(Request $request)
     {
