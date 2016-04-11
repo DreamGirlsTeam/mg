@@ -4,6 +4,6 @@ app:
     prefix: /
 admin:
     path: /admin
-    defaults: {_controller: GuideBundle:Admin:admin}
+    defaults: {_controller: GuideBundle:MedicalStaff:index}
 
 
