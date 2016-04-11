@@ -4,15 +4,17 @@ namespace GuideBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use GuideBundle\Controller\SecurityController;
 
 class DoctorController extends Controller
 {
     /**
-     * @Route("/doctor", name="doctor")
+     * @Route("/doctor, name="doctor")
      */
-
-    public function doctorAction()
+    public function doctorAction(Request $request)
     {
-        echo "Hello!";
+        return new Response('Hello doc!');
     }
 }
