@@ -10,6 +10,7 @@
 # Cache, session files and logs (Symfony3)
 /var/cache/*
 /var/logs/*
+/var\logs/*
 /var/sessions/*
 !var/cache/.gitkeep
 !var/logs/.gitkeep
@@ -35,4 +36,5 @@
 /build/
 
 # Composer PHAR
+/dev/null
 /composer.phar
