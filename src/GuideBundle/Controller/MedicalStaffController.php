@@ -20,7 +20,7 @@ class MedicalStaffController extends Controller
      * @Route("/admin", name="admin_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $medicalStaffs = $em->getRepository('GuideBundle:MedicalStaff')->findAll();

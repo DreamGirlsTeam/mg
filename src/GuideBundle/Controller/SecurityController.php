@@ -15,7 +15,6 @@ class SecurityController extends Controller
 {
     /**
      * @Route("auth", name="auth")
-     * @IgnoreAnnotation("Route")
      */
     public function loginAction(Request $request)
     {
@@ -83,8 +82,7 @@ class SecurityController extends Controller
                 }
                 switch ($role->getRole()) {
                     case '1':
-                        var_dump($session->get('user'));
-                        //return $this->redirect('admin');
+                        return $this->redirect('admin');
                     case '2':
                         return $this->redirect('doctor');
                     case '3':
