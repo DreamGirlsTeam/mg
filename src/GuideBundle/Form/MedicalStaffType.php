@@ -128,4 +128,8 @@ class MedicalStaffController extends Controller
     }
     private function generateLogin() {
     }
+
+    private function generateLogout() {
+        
+    }
 }

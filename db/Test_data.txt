@@ -6,11 +6,11 @@ INSERT INTO conf_person (actorID, first_name, last_name, patronymic, phone_numbe
 
 SELECT * FROM conf_person;
 
-INSERT INTO medical_staff (actorID, first_name, last_name, date_of_birth, specialization, phone_number) VALUES (2, 'Dmytro', 'Skvoznyak', '1966-07-14', 'Neurosurgeon', '380673223232');
+INSERT INTO medical_staff (actorID, first_name, last_name, date_of_birth, specialization, phone_number, email) VALUES (2, 'Dmytro', 'Skvoznyak', '1966-07-14', 'Neurosurgeon', '380673223232', 'dmytro.skvoznyak@gmail.com');
 
-INSERT INTO medical_staff (actorID, first_name, last_name, patronymic, date_of_birth, specialization, phone_number) VALUES (3, 'Pavel', 'Melnik', 'Vadimovych', '1978-03-24', 'laborant', '380995202020');
+INSERT INTO medical_staff (actorID, first_name, last_name, patronymic, date_of_birth, specialization, phone_number, email) VALUES (3, 'Pavel', 'Melnik', 'Vadimovych', '1978-03-24', 'laborant', '380995202020', 'pavel.melnik@ukr.net');
 
-INSERT INTO medical_staff (actorID, first_name, last_name, patronymic, date_of_birth, specialization, phone_number) VALUES (4, 'Elvira', 'Sytenok', 'Borisovna', '1991-12-02', 'nurse', '380956006227');
+INSERT INTO medical_staff (actorID, first_name, last_name, patronymic, date_of_birth, specialization, phone_number, email) VALUES (4, 'Elvira', 'Sytenok', 'Borisovna', '1991-12-02', 'nurse', '380956006227', 'elvir.sytenok@mail.com');
 
 SELECT * FROM medical_staff;
 

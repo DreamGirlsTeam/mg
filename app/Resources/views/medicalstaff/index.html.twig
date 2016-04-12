@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <h1>MedicalStaff list</h1>
-
+    <a href="{{ path('logout') }}">Logout</a>
 
     <div class="container-fluid">
         <div class="row">
@@ -13,7 +13,6 @@
                     <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Actorid</th>
                         <th>First_name</th>
                         <th>Last_name</th>
                         <th>Patronymic</th>
@@ -28,7 +27,6 @@
                         <tr>
                             <td><a href="{{ path('admin_show', { 'id': medicalStaff.id }) }}">{{ medicalStaff.id }}</a>
                             </td>
-                            <td>{{ medicalStaff.actorId }}</td>
                             <td>{{ medicalStaff.firstname }}</td>
                             <td>{{ medicalStaff.lastname }}</td>
                             <td>{{ medicalStaff.patronymic }}</td>

@@ -9,4 +9,7 @@ auth:
     path: /auth
     defaults: {_controller: GuideBundle:Security:login}
 
+logout:
+       pattern:   /logout
+
 

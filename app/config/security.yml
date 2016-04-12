@@ -15,6 +15,12 @@ security:
 
         main:
             anonymous: ~
+
+        secured_area:
+             # ...
+             logout:
+             path:   /logout
+             target: /
 #            form_login:
 #              login_path: auth
 #              check_path: auth
