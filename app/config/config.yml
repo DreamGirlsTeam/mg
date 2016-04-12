@@ -71,10 +71,6 @@ swiftmailer:
     password:  null
     spool:     { type: memory }
 
-braincrafted_bootstrap:
-    auto_configure:
-        assetic: false
-
 assetic:
     assets:
         bootstrap_css:
