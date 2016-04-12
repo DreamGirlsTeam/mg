@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
+    {% include 'BraincraftedBootstrapBundle::flash.html.twig' %}
+
     <h1>MedicalStaff creation</h1>
 
     {{ form_start(form) }}

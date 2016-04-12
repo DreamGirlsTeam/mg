@@ -9,8 +9,23 @@
     },
     "autoload-dev": {
         "psr-4": { "Tests\\": "tests/" }
-    },
+    },"repositories": [
+    {
+        "type": "package",
+        "package": {
+            "name": "jquery/jquery",
+            "version": "1.11.1",
+            "dist": {
+                "url": "http://code.jquery.com/jquery-1.11.1.js",
+                "type": "file"
+            }
+        }
+    }
+],
     "require": {
+        "braincrafted/bootstrap-bundle": "^2.2",
+        "twbs/bootstrap": "^3.3",
+        "jquery/jquery":  "^1.11",
         "php": ">=5.5.9",
         "symfony/symfony": "3.0.*",
         "doctrine/orm": "^2.5",
@@ -24,24 +39,8 @@
         "symfony/assetic-bundle": "^2.8",
         "symfony/finder": "^3.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "twitter/bootstrap": "^3.3",
-        "braincrafted/bootstrap-bundle": "^2.2",
-        "twbs/bootstrap": "^3.3",
-        "jquery/jquery":  "^1.11"
+        "twitter/bootstrap": "^3.3"
     },
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "jquery/jquery",
-                "version": "1.11.1",
-                "dist": {
-                    "url": "https://code.jquery.com/jquery-1.11.1.js",
-                    "type": "file"
-                }
-            }
-        }
-    ],
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0",
