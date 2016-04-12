@@ -4,10 +4,14 @@
     {% include 'BraincraftedBootstrapBundle::flash.html.twig' %}
     <h1>MedicalStaff creation</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+    <div class="container">
+        <div class="col-md-4">
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+            {{ form_widget(form, {'attr': {'novalidate': 'novalidate'}}) }}
+            <input type="submit" value="Create"/>
+            {{ form_end(form) }}
+        </div>
+    </div>
 
     <ul>
         <li>

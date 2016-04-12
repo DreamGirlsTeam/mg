@@ -8,11 +8,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use GuideBundle\Entity\MedicalStaff;
 use GuideBundle\Form\MedicalStaffType;
+use GuideBundle\Entity\Actors;
 
 /**
  * MedicalStaff controller.
  *
- * @Route("/admin")
+ *
  */
 class MedicalStaffController extends Controller
 {
@@ -42,17 +43,22 @@ class MedicalStaffController extends Controller
     public function newAction(Request $request)
     {
         $medicalStaff = new MedicalStaff();
+        $actor = new Actors();
         $form = $this->createForm('GuideBundle\Form\MedicalStaffType', $medicalStaff);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $actor->setRole(2);
             $em = $this->getDoctrine()->getManager();
+            $em->persist($actor);
+            $em->flush();
+            $medicalStaff->setActorId($actor->getId());
             $em->persist($medicalStaff);
             $em->flush();
+            $this->generateLogin();
 
             $flash = $this->get('braincrafted_bootstrap.flash');
-            $flash->success('This is an success flash message.');
-            //return $this->redirect('admin_show');
+            $flash->success('Succesfully registered.');
         }
 
         return $this->render('medicalstaff/new.html.twig', array(
@@ -138,5 +144,9 @@ class MedicalStaffController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    private function generateLogin() {
+
     }
 }
