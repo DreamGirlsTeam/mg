@@ -1,0 +1,8 @@
+25d408,127.0.0.1,GET,http://localhost:8000/auth,1460109879,cba685,200
+cba685,127.0.0.1,GET,http://localhost:8000/auth,1460109879,,500
+c5169e,127.0.0.1,GET,http://localhost:8000/bundles/framework/css/structure.css,1460109881,df23d2,200
+df23d2,127.0.0.1,GET,http://localhost:8000/bundles/framework/css/structure.css,1460109881,,500
+3c4dd9,127.0.0.1,GET,http://localhost:8000/bundles/framework/css/body.css,1460109882,e42365,200
+e42365,127.0.0.1,GET,http://localhost:8000/bundles/framework/css/body.css,1460109882,,500
+546ce5,127.0.0.1,GET,http://localhost:8000/bundles/framework/css/exception.css,1460109883,24f794,200
+24f794,127.0.0.1,GET,http://localhost:8000/bundles/framework/css/exception.css,1460109883,,500

@@ -11,7 +11,7 @@ use GuideBundle\Controller\SecurityController;
 class AdminController extends Controller
 {
     /**
-     * @Route("/admin", name="admin")
+     * ("admin", name="admin")
      */
     public function adminAction(Request $request)
 
