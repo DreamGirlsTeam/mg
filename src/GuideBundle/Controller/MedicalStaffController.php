@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use GuideBundle\Entity\MedicalStaff;
 use GuideBundle\Form\MedicalStaffType;
 use GuideBundle\Entity\Actors;
+use GuideBundle\Entity\Auth;
 
 /**
  * MedicalStaff controller.
@@ -55,7 +56,7 @@ class MedicalStaffController extends Controller
             $medicalStaff->setActorId($actor->getId());
             $em->persist($medicalStaff);
             $em->flush();
-            $this->generateLogin();
+            $this->generateLogin($medicalStaff->getActorId(),$medicalStaff->getEmail());
 
             $flash = $this->get('braincrafted_bootstrap.flash');
             $flash->success('Succesfully registered.');
@@ -146,7 +147,7 @@ class MedicalStaffController extends Controller
         ;
     }
 
-    private function generateLogin() {
-
+    private function generateLogin($id, $email) {
+        $user = new Auth();
     }
 }

@@ -73,7 +73,7 @@ class MedicalStaff
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=60, nullable=false)
+     * @ORM\Column(name="email", type="string", length=60, nullable=false, unique=true)
      */
     private $email;
 
