@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+<<<<<<< HEAD
+
+=======
+>>>>>>> bd272d0003e5310d4909a26dd413d6c0e9b69b11
+{% block body %}
+    <h1>MedicalStaff list</h1>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="alert alert-success">
+                    <h4><a href="{{ path('admin_new') }}"><p class="bg-success text-center">Create a new entry</p></a></h4>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Actorid</th>
+                        <th>First_name</th>
+                        <th>Last_name</th>
+                        <th>Patronymic</th>
+                        <th>Date_of_birth</th>
+                        <th>Specialization</th>
+                        <th>Phone_number</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for medicalStaff in medicalStaffs %}
+                        <tr>
+                            <td><a href="{{ path('admin_show', { 'id': medicalStaff.id }) }}">{{ medicalStaff.id }}</a>
+                            </td>
+                            <td>{{ medicalStaff.actorId }}</td>
+                            <td>{{ medicalStaff.firstname }}</td>
+                            <td>{{ medicalStaff.lastname }}</td>
+                            <td>{{ medicalStaff.patronymic }}</td>
+                            <td>{% if medicalStaff.dateofbirth %}{{ medicalStaff.dateofbirth|date('Y-m-d') }}{% endif %}</td>
+                            <td>{{ medicalStaff.specialization }}</td>
+                            <td>{{ medicalStaff.phonenumber }}</td>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <a href="{{ path('admin_show', { 'id': medicalStaff.id }) }}">show</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('admin_edit', { 'id': medicalStaff.id }) }}">edit</a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
