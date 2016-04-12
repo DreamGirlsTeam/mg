@@ -96,12 +96,12 @@ class SecurityController extends Controller
                         return $this->redirectToRoute('admin_index');
                     case '2':
                         return $this->redirect('doctor');
-//                    case '3':
-//                        return $this->redirect('laborant');
-//                    case '4':
-//                        return $this->redirect('reception');
-//                    case '5':
-//                        return $this->redirect('patient');
+                    case '3':
+                        return $this->redirect('laborant');
+                    case '4':
+                        return $this->redirect('reception');
+                    case '5':
+                        return $this->redirect('patient');
 
                 }
 
