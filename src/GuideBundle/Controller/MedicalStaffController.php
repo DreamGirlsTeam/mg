@@ -19,7 +19,7 @@ class MedicalStaffController extends Controller
     /**
      * Lists all MedicalStaff entities.
      *
-     * @Route("admin", name="admin_index")
+     * @Route("/admin", name="admin_index")
      * @Method("GET")
      */
     public function indexAction()
@@ -50,7 +50,9 @@ class MedicalStaffController extends Controller
             $em->persist($medicalStaff);
             $em->flush();
 
-            return $this->redirectToRoute('admin_show', array('id' => $medicalStaff->getId()));
+            $flash = $this->get('braincrafted_bootstrap.flash');
+            $flash->success('This is an success flash message.');
+            //return $this->redirect('admin_show');
         }
 
         return $this->render('medicalstaff/new.html.twig', array(

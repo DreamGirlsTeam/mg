@@ -19,7 +19,7 @@ class MedicalStaffType extends AbstractType
             ->add('first_name')
             ->add('last_name')
             ->add('patronymic')
-            ->add('date_of_birth', 'date')
+            ->add('date_of_birth')
             ->add('specialization')
             ->add('phone_number')
         ;
