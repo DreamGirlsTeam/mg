@@ -15,6 +15,7 @@ class SecurityController extends Controller
 {
     /**
      * @Route("auth", name="auth")
+     * @IgnoreAnnotation("Route")
      */
     public function loginAction(Request $request)
     {

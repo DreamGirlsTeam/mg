@@ -1,32 +1,30 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <h1>MedicalStaff list</h1>
-    <a href="{{ path('logout') }}">Logout</a>
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+    <div class="text-right">
+        <a href="{{ path('logout') }}" class="btn btn-default">Вихід</a>
+    </div>
+    <div class="col-md-8 col-md-offset-2">
+        <h1>Медичний Персонал</h1>
+        <div class="container-fluid">
+            <div class="row">
                 <div class="alert alert-success">
-                    <h4><a href="{{ path('admin_new') }}"><p class="bg-success text-center">Create a new entry</p></a></h4>
+                        <h4><a href="{{ path('admin_new') }}"><p class="bg-success text-center">Створити новий запис</p></a></h4>
                 </div>
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>First_name</th>
-                        <th>Last_name</th>
-                        <th>Patronymic</th>
-                        <th>Date_of_birth</th>
-                        <th>Specialization</th>
-                        <th>Phone_number</th>
-                        <th>Actions</th>
+                        <th>Ім'я</th>
+                        <th>Прізвище</th>
+                        <th>По-батькові</th>
+                        <th>Дата народження</th>
+                        <th>Посада</th>
+                        <th>Номер телефону</th>
+                        <th>Дії</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for medicalStaff in medicalStaffs %}
                         <tr>
-                            <td><a href="{{ path('admin_show', { 'id': medicalStaff.id }) }}">{{ medicalStaff.id }}</a>
-                            </td>
                             <td>{{ medicalStaff.firstname }}</td>
                             <td>{{ medicalStaff.lastname }}</td>
                             <td>{{ medicalStaff.patronymic }}</td>
@@ -36,10 +34,10 @@
                             <td>
                                 <ul>
                                     <li>
-                                        <a href="{{ path('admin_show', { 'id': medicalStaff.id }) }}">show</a>
+                                        <a href="{{ path('admin_show', { 'id': medicalStaff.id }) }}">відкрити</a>
                                     </li>
                                     <li>
-                                        <a href="{{ path('admin_edit', { 'id': medicalStaff.id }) }}">edit</a>
+                                        <a href="{{ path('admin_edit', { 'id': medicalStaff.id }) }}">редагувати</a>
                                     </li>
                                 </ul>
                             </td>

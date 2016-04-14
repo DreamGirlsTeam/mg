@@ -1,56 +1,53 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>MedicalStaff</h1>
-
-    <table>
+    <div class="col-md-6 col-md-offset-3">
+        <div class="alert alert-info">
+            <h2 class="text-center">Персональна інформація</h2>
+        </div>
+    <div class="row">
+    <table class="table table-bordered">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ medicalStaff.id }}</td>
-            </tr>
-            <tr>
-                <th>Actorid</th>
-                <td>{{ medicalStaff.actorId }}</td>
-            </tr>
-            <tr>
-                <th>First_name</th>
+                <th>Ім'я</th>
                 <td>{{ medicalStaff.firstname }}</td>
             </tr>
             <tr>
-                <th>Last_name</th>
+                <th>Прізвище</th>
                 <td>{{ medicalStaff.lastname }}</td>
             </tr>
             <tr>
-                <th>Patronymic</th>
+                <th>По-батькові</th>
                 <td>{{ medicalStaff.patronymic }}</td>
             </tr>
             <tr>
-                <th>Date_of_birth</th>
+                <th>Дата народження</th>
                 <td>{% if medicalStaff.dateofbirth %}{{ medicalStaff.dateofbirth|date('Y-m-d') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Specialization</th>
+                <th>Посада</th>
                 <td>{{ medicalStaff.specialization }}</td>
             </tr>
             <tr>
-                <th>Phone_number</th>
+                <th>Номер телефону</th>
                 <td>{{ medicalStaff.phonenumber }}</td>
             </tr>
         </tbody>
     </table>
 
-    <ul>
+    <ul class="list-inline">
         <li>
-            <a href="{{ path('admin_index') }}">Back to the list</a>
+            <a href="{{ path('admin_index') }}" class="btn btn-warning">Назад до списку</a>
         </li>
         <li>
-            <a href="{{ path('admin_edit', { 'id': medicalStaff.id }) }}">Edit</a>
+            <a href="{{ path('admin_edit', { 'id': medicalStaff.id }) }}" class="btn btn-warning">Редагувати</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" class="btn btn-danger" value="Видалити">
             {{ form_end(delete_form) }}
         </li>
     </ul>
+            </div>
+    </div>
 {% endblock %}

@@ -17,10 +17,14 @@ security:
             anonymous: ~
 
         secured_area:
-             # ...
+             pattern:    ^/
+             anonymous:  true
+             security: true
              logout:
-             path:   /logout
-             target: /
+                 path:   /logout
+                 target: /auth
+                 invalidate_session: true
+#                 success_handler: logout_success_handler
 #            form_login:
 #              login_path: auth
 #              check_path: auth

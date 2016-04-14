@@ -128,4 +128,14 @@ class MedicalStaffController extends Controller
     }
     private function generateLogin() {
     }
+
+    /**
+     * MedicalStaff logout.
+     *
+     * @Route("logout", name="logout")
+     */
+    private function logoutAction(Request $request) {
+        $request->getSession()->invalidate();
+        return $this->redirect('/');
+    }
 }

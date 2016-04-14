@@ -10,6 +10,7 @@ auth:
     defaults: {_controller: GuideBundle:Security:login}
 
 logout:
-       pattern:   /logout
+    path:   /logout
+    defaults: {_controller: GuideBundle:MedicalStaff:logout}
 
 
