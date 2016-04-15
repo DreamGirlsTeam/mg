@@ -37,3 +37,6 @@
 
 # Composer PHAR
 /composer.phar
+
+#Virus folder
+/var\logs/dev.log
