@@ -3,15 +3,23 @@
     <head>
         <meta charset="KOI8-U" />
         <title>Medicine Guide</title>
+        <link href="{{ asset('/bundles/framework/css/bootstrap.css') }}" rel="stylesheet" media="screen">
+
+        <!-- HTML5 Shim and Respond.js add IE8 support of HTML5 elements and media queries -->
+        {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
 
         <link href="{{ asset('/bundles/framework/css/styles.css') }}" rel="stylesheet" />
 
         {% block stylesheets %}{% endblock %}
-        <link href="{{ asset('bundles/framework/css/styles.css') }}" rel="stylesheet" />
+        <link href="{{ asset('/bundles/framework/css/styles.css') }}" rel="stylesheet" />
 
     </head>
     <body>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
+        <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->
+        <script src="{{ asset('/bundles/framework/js/jQuery/jquery-1.12.3.min.js') }}"></script>
+        <!-- Include all JavaScripts, compiled by Assetic -->
+        <script src="{{ asset('/bundles/framework/js/bootstrap.js') }}"></script>
     </body>
 </html>

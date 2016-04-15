@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>MedicalStaff</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ medicalStaff.id }}</td>
+            </tr>
+            <tr>
+                <th>Actorid</th>
+                <td>{{ medicalStaff.actorId }}</td>
+            </tr>
+            <tr>
+                <th>First_name</th>
+                <td>{{ medicalStaff.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Last_name</th>
+                <td>{{ medicalStaff.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Patronymic</th>
+                <td>{{ medicalStaff.patronymic }}</td>
+            </tr>
+            <tr>
+                <th>Date_of_birth</th>
+                <td>{% if medicalStaff.dateofbirth %}{{ medicalStaff.dateofbirth|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Specialization</th>
+                <td>{{ medicalStaff.specialization }}</td>
+            </tr>
+            <tr>
+                <th>Phone_number</th>
+                <td>{{ medicalStaff.phonenumber }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_edit', { 'id': medicalStaff.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

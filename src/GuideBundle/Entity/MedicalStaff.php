@@ -45,7 +45,7 @@ class MedicalStaff
     /**
      * @var string
      *
-     * @ORM\Column(name="patronymic", type="string", length=60)
+     * @ORM\Column(name="patronymic", type="string", length=60, nullable=true)
      */
     private $patronymic;
 
@@ -69,6 +69,31 @@ class MedicalStaff
      * @ORM\Column(name="phone_number", type="string", length=20, nullable=true)
      */
     private $phone_number;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=60, nullable=false)
+     */
+    private $email;
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
 
 
     /**

@@ -36,7 +36,9 @@
 /build/
 
 # Composer PHAR
+/dev/null
 /composer.phar
 
 #Virus folder
 /var\logs/dev.log
+/var/logs/dev.log
