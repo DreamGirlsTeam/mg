@@ -1,21 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
+
     {% include 'BraincraftedBootstrapBundle::flash.html.twig' %}
-    <h1>MedicalStaff creation</h1>
+
+
+    <h1>Додавання медичного персоналу</h1>
 
     <div class="container">
         <div class="col-md-4">
             {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
             {{ form_widget(form, {'attr': {'novalidate': 'novalidate'}}) }}
-            <input type="submit" value="Create"/>
+            <input type="submit" value="Створити" class="btn btn-success"/>
             {{ form_end(form) }}
         </div>
     </div>
 
     <ul>
         <li>
-            <a href="{{ path('admin_index') }}">Back to the list</a>
+            <a href="{{ path('admin_index') }}" class="btn btn-danger">Назад до списку</a>
         </li>
     </ul>
 {% endblock %}
