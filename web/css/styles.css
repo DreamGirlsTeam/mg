@@ -314,4 +314,9 @@
 	 width: 266px;
 	 height: 32px;
 	 z-index:30;
-} 
+}
+
+ .top-buffer
+ {
+	 margin-top:20px;
+ }

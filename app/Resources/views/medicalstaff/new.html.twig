@@ -5,8 +5,10 @@
 
     {% include 'BraincraftedBootstrapBundle::flash.html.twig' %}
 
-
-    <h1>Додавання медичного персоналу</h1>
+<div class="col-md-6 col-md-offset-3">
+    <div class="alert alert-info">
+        <h2 class="text-center">Додавання медичного персоналу</h2>
+    </div>
 
     <div class="container">
         <div class="col-md-4">
@@ -14,13 +16,14 @@
             {{ form_widget(form, {'attr': {'novalidate': 'novalidate'}}) }}
             <input type="submit" value="Створити" class="btn btn-success"/>
             {{ form_end(form) }}
+            <div class="col-md-4">
+                <ul class="list-inline">
+                    <li class="row top-buffer">
+                        <a href="{{ path('admin_index') }}" class="btn btn-danger">Назад до списку</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <ul class="list-inline">
-            <li>
-                <a href="{{ path('admin_index') }}" class="btn btn-danger">Назад до списку</a>
-            </li>
-        </ul>
-    <div>
+</div>
 {% endblock %}

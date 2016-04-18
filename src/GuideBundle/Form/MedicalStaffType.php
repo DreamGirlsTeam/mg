@@ -22,7 +22,7 @@ class MedicalStaffType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('first_name', TextType::class, array('label' => 'Им\'я'))
+            ->add('first_name', TextType::class, array('label' => 'Ім\'я'))
             ->add('last_name', TextType::class, array('label' => 'Прізвище'))
             ->add('patronymic', TextType::class, array('label' => 'По-батькові'))
             ->add('date_of_birth', BirthdayType::class, array('label' => 'Дата народження'))
