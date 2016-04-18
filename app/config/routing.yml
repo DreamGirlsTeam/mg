@@ -1,11 +1,19 @@
 app:
     resource: "@GuideBundle/Controller/"
     type:     annotation
-    prefix: /
 #admin:
 #    path: /admin
 #    defaults: {_controller: GuideBundle:MedicalStaff:index}
 auth:
     path: /auth
     defaults: {_controller: GuideBundle:Security:login}
+
+auth:
+    path: /auth
+    defaults: {_controller: GuideBundle:Security:login}
+
+logout:
+    path:   /logout
+    defaults: {_controller: GuideBundle:MedicalStaff:logout}
+
 

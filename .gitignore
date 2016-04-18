@@ -39,5 +39,6 @@
 # Composer PHAR
 /dev/null
 /composer.phar
-/var/logs/dev.log
-/var/logs
+
+#Virus folder
+/var\logs/dev.log
