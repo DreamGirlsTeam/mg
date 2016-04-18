@@ -1,21 +1,25 @@
 <?php
+
 namespace GuideBundle\Controller;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Routing\RouteCollection;
+
 use GuideBundle\Entity\Auth;
 use GuideBundle\Entity\Actors;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use GuideBundle\Entity\MedicalStaff;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use GuideBundle\Controller\AdminController;
+
 class SecurityController extends Controller
 {
     /**
-     * @Route("auth", name="auth")
-     * @IgnoreAnnotation("Route")
+     * @Route("/auth", name="auth")
      */
     public function loginAction(Request $request)
     {
@@ -27,7 +31,9 @@ class SecurityController extends Controller
             ->add('password', PasswordType::class)
             ->add('Log in', SubmitType::class, array('label' => 'Log in'))
             ->getForm();
+
         $form->handleRequest($request);
+
         if ($form->isSubmitted()) {
             $user = $this
                 ->getDoctrine()
@@ -65,9 +71,12 @@ class SecurityController extends Controller
                             )
                         );
                 }
+
+
                 $session = $request->getSession();
                 $session->remove('user');
                 $session->clear();
+
                 if ($role->getRole() == 1) {
                     $session->set('user', array(
                         'role' => $role->getRole()
@@ -81,6 +90,7 @@ class SecurityController extends Controller
                         'patronymic' => $userInfo->getPatronymic()
                     ));
                 }
+
                 switch ($role->getRole()) {
                     case '1':
                         return $this->redirect('admin');
@@ -92,25 +102,20 @@ class SecurityController extends Controller
                         return $this->redirect('reception');
                     case '5':
                         return $this->redirect('patient');
+
                 }
+
             } else {
                 $error = "* ERROR";
             }
 
         }
-        /*if ($form->isValid()) {
-            $user = $this->getDoctrine()
-                ->getRepository('GuideBundle:Auth')
-                ->findOneBy(
-                    array(
-                        'username' => $loginForm->getUsername(),
-                        'password' => $loginForm->getPassword()
-                    )
-                );
-        }
-        if ($user) echo "loh";*/
+
+
         return $this->render('auth/auth.html.twig', array(
             'form' => $form->createView(), 'error' => $error
         ));
     }
+
+
 }

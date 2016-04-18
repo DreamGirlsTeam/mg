@@ -9,23 +9,24 @@
     },
     "autoload-dev": {
         "psr-4": { "Tests\\": "tests/" }
-    },"repositories": [
-    {
-        "type": "package",
-        "package": {
-            "name": "jquery/jquery",
-            "version": "1.11.1",
-            "dist": {
-                "url": "https://code.jquery.com/jquery-1.11.1.js",
-                "type": "file"
-            }
-        }
-    }
-],
+    },
+//        "repositories": [
+//    {
+//        "type": "package",
+//        "package": {
+//            "name": "jquery/jquery",
+//            "version": "1.11.1",
+//            "dist": {
+//                "url": "http://code.jquery.com/jquery-1.11.1.js",
+//                "type": "file"
+//            }
+//        }
+//    }
+//],
     "require": {
         "braincrafted/bootstrap-bundle": "^2.2",
         "twbs/bootstrap": "^3.3",
-        "jquery/jquery":  "^1.11",
+        "jquery/jquery":  "^1.13",
         "php": ">=5.5.9",
         "symfony/symfony": "3.0.*",
         "doctrine/orm": "^2.5",

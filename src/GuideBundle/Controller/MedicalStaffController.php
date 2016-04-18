@@ -7,8 +7,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use GuideBundle\Entity\MedicalStaff;
 use GuideBundle\Form\MedicalStaffType;
 use GuideBundle\Entity\Actors;
+use GuideBundle\Entity\Auth;
+
 /**
- * MedicalStaff controller.
  *
  *
  */
@@ -48,7 +49,7 @@ class MedicalStaffController extends Controller
             $medicalStaff->setActorId($actor->getId());
             $em->persist($medicalStaff);
             $em->flush();
-            $this->generateLogin();
+            $this->generateLogin($medicalStaff->getActorId(),$medicalStaff->getEmail());
             $flash = $this->get('braincrafted_bootstrap.flash');
             $flash->success('Succesfully registered.');
         }
@@ -126,16 +127,53 @@ class MedicalStaffController extends Controller
             ->getForm()
             ;
     }
-    private function generateLogin() {
+    private function generateLogin($id, $email) {
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $user = new Auth();
+        $passwordLength = rand(8, 15);
+        $user->setUsername(explode('@', $email)[0]);
+        $user->setPassword(md5($this->random_password($passwordLength)));
+        $user->setActorId($id);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Hello Email')
+            ->setFrom('medicalguidesystem@gmail.com')
+            ->setTo($email)
+            ->setBody(
+                'You was registered in MedicalGuide system as doctor. Username: '.$user->getUsername().' Password: '. $user->getPassword()
+            )
+            /*
+             * If you also want to include a plaintext version of the message
+            ->addPart(
+                $this->renderView(
+                    'Emails/registration.txt.twig',
+                    array('name' => $name)
+                ),
+                'text/plain'
+            )
+            */
+        ;
+        $this->get('mailer')->send($message);
+        return $user;
     }
 
-//    /**
-//     * MedicalStaff logout.
-//     *
-//     * @Route("logout", name="logout")
-//     */
-//    private function logoutAction(Request $request) {
-//        $request->getSession()->invalidate();
-//        return $this->redirect('/');
-//    }
+
+    private function random_password($length) {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@%^*()_-";
+        $password = substr( str_shuffle( $chars ), 0, $length );
+        return $password;
+    }
+
+    /**
+     * MedicalStaff logout.
+     *
+     * @Route("logout", name="logout")
+     */
+    private function logoutAction(Request $request)
+    {
+        $request->getSession()->invalidate();
+        return $this->redirect('/');
+    }
 }

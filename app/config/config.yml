@@ -64,12 +64,6 @@ doctrine:
         auto_mapping: true
 
 # Swiftmailer Configuration
-swiftmailer:
-    transport: smtp
-    host:      127.0.0.1
-    username:  null
-    password:  null
-    spool:     { type: memory }
 
 assetic:
     assets:

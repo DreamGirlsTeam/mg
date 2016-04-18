@@ -32,6 +32,19 @@ monolog:
         #chromephp:
         #    type:   chromephp
         #    level:  info
+swiftmailer:
+#    transport: gmail
+#    host:      smtp.gmail.com
+#    port:      465
+#    encryption: ssl
+#    auth_mode: login
+#    username:  medicalguidesystem@gmail.com
+#    password:  meangirls
 
-#swiftmailer:
-#    delivery_address: me@example.com
+    transport:
+    host: smtp.sendgrid.net
+    port: 587
+    encryption: ~
+    username: medicalguide
+    password: meangirls3
+

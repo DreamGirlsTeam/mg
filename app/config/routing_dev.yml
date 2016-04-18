@@ -16,6 +16,3 @@ _errors:
 
 _main:
     resource: routing.yml
-admin:
-    path: /admin
-    defaults: {_controller: GuideBundle:MedicalStaff:index}

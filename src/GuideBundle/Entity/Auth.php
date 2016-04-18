@@ -12,8 +12,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @ORM\Table(name="auth")
  * @ORM\Entity(repositoryClass="GuideBundle\Repository\AuthRepository")
- * @UniqueEntity(fields="username", message="Wrong username")
- * @UniqueEntity(fields="password", message="Wrong password")
  */
 class Auth
 {
@@ -43,7 +41,7 @@ class Auth
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=100, unique=false)
+     * @ORM\Column(name="password", type="string", length=32, unique=false)
      */
     private $password;
 
