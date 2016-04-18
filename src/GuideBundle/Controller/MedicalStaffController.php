@@ -17,7 +17,7 @@ class MedicalStaffController extends Controller
     /**
      * Lists all MedicalStaff entities.
      *
-     * @Route("/admin", name="admin_index")
+     * @Route("admin", name="admin_index")
      * @Method("GET")
      */
     public function indexAction(Request $request)

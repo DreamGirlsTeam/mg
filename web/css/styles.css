@@ -1,317 +1,320 @@
- body {
-	margin: 0;
-	padding: 0;
- }
- 
- #background 
-{ 
-	 left: 0px; 
-	 top: 0px; 
-	 position: relative; 
-	 margin-left: auto; 
-	 margin-right: auto; 
-	 width: 1300px;
-	 height: 3274px; 
-	 overflow: hidden;
-	 z-index:0;
-	} 
 
- #background 
-{ 
-	 left: 0px; 
-	 top: 0px; 
-	 position: absolute; 
-	 width: 1300px;
-	 height: 4000px;
-	 z-index:1;
-} 
+body {
+    margin: 0;
+    padding: 0;
+}
+#background
+{
+    left: 0px;
+    top: 0px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1300px;
+    height: 3274px;
+    overflow: hidden;
+    z-index:0;
+}
 
- #footerbk 
-{ 
-	 left: -3px; 
-	 top: 2416px; 
-	 position: absolute; 
-	 width: 1301px;
-	 height: 858px;
-	 z-index:2;
-} 
+#background
+{
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    width: 1300px;
+    height: 4000px;
+    z-index:1;
+}
+#head{
+    margin-left: -250px;
+}
 
- #Shape8 
-{ 
-	 left: 45px; 
-	 top: 3191px; 
-	 position: absolute; 
-	 width: 1203px;
-	 height: 4px;
-	 z-index:3;
-} 
+#footerbk
+{
+    left: -3px;
+    top: 2416px;
+    position: absolute;
+    width: 1301px;
+    height: 858px;
+    z-index:2;
+}
 
- #copyright 
-{ 
-	 left: 493px; 
-	 top: 3204px; 
-	 position: absolute; 
-	 width: 308px;
-	 height: 42px;
-	 z-index:4;
-} 
+#Shape8
+{
+    left: 45px;
+    top: 3191px;
+    position: absolute;
+    width: 1203px;
+    height: 4px;
+    z-index:3;
+}
 
- #up 
-{ 
-	 left: 582px; 
-	 top: 2745px; 
-	 position: absolute; 
-	 width: 159px;
-	 height: 36px;
-	 z-index:5;
-} 
+#copyright
+{
+    left: 493px;
+    top: 3204px;
+    position: absolute;
+    width: 308px;
+    height: 42px;
+    z-index:4;
+}
 
- #aboutbk 
-{ 
-	 left: 6px; 
-	 top: 876px; 
-	 position: absolute; 
-	 width: 1319px;
-	 height: 1165px;
-	 z-index:6;
-} 
+#up
+{
+    left: 582px;
+    top: 2745px;
+    position: absolute;
+    width: 159px;
+    height: 36px;
+    z-index:5;
+}
 
- #about 
-{ 
-	 left: 489px; 
-	 top: 1098px; 
-	 position: absolute; 
-	 width: 307px;
-	 height: 35px;
-	 z-index:7;
-} 
+#aboutbk
+{
+    left: 6px;
+    top: 876px;
+    position: absolute;
+    width: 1319px;
+    height: 1165px;
+    z-index:6;
+}
 
- #YourmadheartgoesCrus 
-{ 
-	 left: 684px; 
-	 top: 1196px; 
-	 position: absolute; 
-	 width: 494px;
-	 height: 406px;
-	 z-index:8;
-} 
+#about
+{
+    left: 489px;
+    top: 1098px;
+    position: absolute;
+    width: 307px;
+    height: 35px;
+    z-index:7;
+}
 
- #Whenyouareseventeeny 
-{ 
-	 left: 168px; 
-	 top: 1196px; 
-	 position: absolute; 
-	 width: 465px;
-	 height: 406px;
-	 z-index:9;
-} 
+#YourmadheartgoesCrus
+{
+    left: 684px;
+    top: 1196px;
+    position: absolute;
+    width: 494px;
+    height: 406px;
+    z-index:8;
+}
 
- #teambk 
-{ 
-	 left: 0px; 
-	 top: 1691px; 
-	 position: absolute; 
-	 width: 1300px;
-	 height: 1080px;
-	 z-index:10;
-} 
+#Whenyouareseventeeny
+{
+    left: 168px;
+    top: 1196px;
+    position: absolute;
+    width: 465px;
+    height: 406px;
+    z-index:9;
+}
 
- #e1 
-{ 
-	 left: 495px; 
-	 top: 2000px; 
-	 position: absolute; 
-	 width: 306px;
-	 height: 344px;
-	 z-index:11;
-} 
+#teambk
+{
+    left: 0px;
+    top: 1691px;
+    position: absolute;
+    width: 1300px;
+    height: 1080px;
+    z-index:10;
+}
 
- #m2 
-{ 
-	 left: 112px; 
-	 top: 2012px; 
-	 position: absolute; 
-	 width: 310px;
-	 height: 331px;
-	 z-index:12;
-} 
+#e1
+{
+    left: 495px;
+    top: 2000px;
+    position: absolute;
+    width: 306px;
+    height: 344px;
+    z-index:11;
+}
 
- #l3 
-{ 
-	 left: 873px; 
-	 top: 2011px; 
-	 position: absolute; 
-	 width: 311px;
-	 height: 331px;
-	 z-index:13;
-} 
+#m2
+{
+    left: 112px;
+    top: 2012px;
+    position: absolute;
+    width: 310px;
+    height: 331px;
+    z-index:12;
+}
 
- #etwi 
-{ 
-	 left: 635px; 
-	 top: 2410px; 
-	 position: absolute; 
-	 width: 29px;
-	 height: 22px;
-	 z-index:14;
-} 
+#l3
+{
+    left: 873px;
+    top: 2011px;
+    position: absolute;
+    width: 311px;
+    height: 331px;
+    z-index:13;
+}
 
- #efb 
-{ 
-	 left: 593px; 
-	 top: 2410px; 
-	 position: absolute; 
-	 width: 26px;
-	 height: 26px;
-	 z-index:15;
-} 
+#etwi
+{
+    left: 635px;
+    top: 2410px;
+    position: absolute;
+    width: 29px;
+    height: 22px;
+    z-index:14;
+}
 
- #evk 
-{ 
-	 left: 678px; 
-	 top: 2410px; 
-	 position: absolute; 
-	 width: 26px;
-	 height: 26px;
-	 z-index:16;
-} 
+#efb
+{
+    left: 593px;
+    top: 2410px;
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    z-index:15;
+}
 
- #mtwi 
-{ 
-	 left: 250px; 
-	 top: 2409px; 
-	 position: absolute; 
-	 width: 29px;
-	 height: 22px;
-	 z-index:17;
-} 
+#evk
+{
+    left: 678px;
+    top: 2410px;
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    z-index:16;
+}
 
- #mfb 
-{ 
-	 left: 208px; 
-	 top: 2409px; 
-	 position: absolute; 
-	 width: 26px;
-	 height: 26px;
-	 z-index:18;
-} 
+#mtwi
+{
+    left: 250px;
+    top: 2409px;
+    position: absolute;
+    width: 29px;
+    height: 22px;
+    z-index:17;
+}
 
- #mvk 
-{ 
-	 left: 293px; 
-	 top: 2409px; 
-	 position: absolute; 
-	 width: 26px;
-	 height: 26px;
-	 z-index:19;
-} 
+#mfb
+{
+    left: 208px;
+    top: 2409px;
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    z-index:18;
+}
 
- #ltwi 
-{ 
-	 left: 1013px; 
-	 top: 2409px; 
-	 position: absolute; 
-	 width: 29px;
-	 height: 22px;
-	 z-index:20;
-} 
+#mvk
+{
+    left: 293px;
+    top: 2409px;
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    z-index:19;
+}
 
- #lfb 
-{ 
-	 left: 971px; 
-	 top: 2409px; 
-	 position: absolute; 
-	 width: 26px;
-	 height: 26px;
-	 z-index:21;
-} 
+#ltwi
+{
+    left: 1013px;
+    top: 2409px;
+    position: absolute;
+    width: 29px;
+    height: 22px;
+    z-index:20;
+}
 
- #lvk 
-{ 
-	 left: 1056px; 
-	 top: 2409px; 
-	 position: absolute; 
-	 width: 26px;
-	 height: 26px;
-	 z-index:22;
-} 
+#lfb
+{
+    left: 971px;
+    top: 2409px;
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    z-index:21;
+}
 
- #elya 
-{ 
-	 left: 603px; 
-	 top: 2362px; 
-	 position: absolute; 
-	 width: 95px;
-	 height: 35px;
-	 z-index:23;
-} 
+#lvk
+{
+    left: 1056px;
+    top: 2409px;
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    z-index:22;
+}
 
- #mary 
-{ 
-	 left: 208px; 
-	 top: 2362px; 
-	 position: absolute; 
-	 width: 121px;
-	 height: 38px;
-	 z-index:24;
-} 
+#elya
+{
+    left: 603px;
+    top: 2362px;
+    position: absolute;
+    width: 95px;
+    height: 35px;
+    z-index:23;
+}
 
- #lesya 
-{ 
-	 left: 970px; 
-	 top: 2362px; 
-	 position: absolute; 
-	 width: 117px;
-	 height: 35px;
-	 z-index:25;
-} 
+#mary
+{
+    left: 208px;
+    top: 2362px;
+    position: absolute;
+    width: 121px;
+    height: 38px;
+    z-index:24;
+}
 
- #theteam 
-{ 
-	 left: 519px; 
-	 top: 1922px; 
-	 position: absolute; 
-	 width: 253px;
-	 height: 45px;
-	 z-index:26;
-} 
+#lesya
+{
+    left: 970px;
+    top: 2362px;
+    position: absolute;
+    width: 117px;
+    height: 35px;
+    z-index:25;
+}
 
- #mainmenu 
-{ 
-	 left: -1px; 
-	 top: 0px; 
-	 position: absolute; 
-	 width: 1300px;
-	 height: 384px;
-	 z-index:27;
-} 
+#theteam
+{
+    left: 519px;
+    top: 1922px;
+    position: absolute;
+    width: 253px;
+    height: 45px;
+    z-index:26;
+}
 
- #head 
-{ 
-	 left: -1px; 
-	 top: 357px; 
-	 position: absolute; 
-	 width: 1300px;
-	 height: 694px;
-	 z-index:28;
-} 
+#mainmenu
+{
+    left: -1px;
+    top: 0px;
+    position: absolute;
+    width: 1300px;
+    height: 384px;
+    z-index:27;
+}
 
- #login 
-{ 
-	 left: 253px; 
-	 top: 63px; 
-	 position: absolute; 
-	 width: 127px;
-	 height: 39px;
-	 z-index:29;
-} 
+#head
+{
+    left: -1px;
+    top: 357px;
+    position: absolute;
+    width: 1300px;
+    height: 694px;
+    z-index:28;
+}
 
- #connect 
-{ 
-	 left: 848px; 
-	 top: 72px; 
-	 position: absolute; 
-	 width: 266px;
-	 height: 32px;
-	 z-index:30;
-} 
+#login
+{
+    left: 253px;
+    top: 63px;
+    position: absolute;
+    width: 127px;
+    height: 39px;
+    z-index:29;
+}
+
+#connect
+{
+    left: 848px;
+    top: 72px;
+    position: absolute;
+    width: 266px;
+    height: 32px;
+    z-index:30;
+}
