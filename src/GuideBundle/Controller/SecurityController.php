@@ -11,6 +11,7 @@ use GuideBundle\Entity\Actors;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use GuideBundle\Entity\MedicalStaff;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use GuideBundle\Controller\AdminController;
@@ -18,8 +19,7 @@ use GuideBundle\Controller\AdminController;
 class SecurityController extends Controller
 {
     /**
-     * @Route("auth", name="auth")
-     * @IgnoreAnnotation("Route")
+     * @Route("/auth", name="auth")
      */
     public function loginAction(Request $request)
     {
@@ -108,22 +108,9 @@ class SecurityController extends Controller
             } else {
                 $error = "* ERROR";
             }
-            
+
         }
 
-
-        /*if ($form->isValid()) {
-            $user = $this->getDoctrine()
-                ->getRepository('GuideBundle:Auth')
-                ->findOneBy(
-                    array(
-                        'username' => $loginForm->getUsername(),
-                        'password' => $loginForm->getPassword()
-                    )
-                );
-        }
-
-        if ($user) echo "loh";*/
 
         return $this->render('auth/auth.html.twig', array(
             'form' => $form->createView(), 'error' => $error

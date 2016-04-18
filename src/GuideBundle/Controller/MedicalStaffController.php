@@ -12,7 +12,6 @@ use GuideBundle\Entity\Actors;
 use GuideBundle\Entity\Auth;
 
 /**
- * MedicalStaff controller.
  *
  *
  */
@@ -148,6 +147,40 @@ class MedicalStaffController extends Controller
     }
 
     private function generateLogin($id, $email) {
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
         $user = new Auth();
+        $passwordLength = rand(8, 15);
+        $user->setUsername(explode('@', $email)[0]);
+        $user->setPassword(md5($this->random_password($passwordLength)));
+        $user->setActorId($id);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Hello Email')
+            ->setFrom('medicalguidesystem@gmail.com')
+            ->setTo($email)
+            ->setBody(
+                'You was registered in MedicalGuide system as doctor. Username: '.$user->getUsername().' Password: '. $user->getPassword()
+            )
+            /*
+             * If you also want to include a plaintext version of the message
+            ->addPart(
+                $this->renderView(
+                    'Emails/registration.txt.twig',
+                    array('name' => $name)
+                ),
+                'text/plain'
+            )
+            */
+        ;
+        $this->get('mailer')->send($message);
+        return $user;
+    }
+
+    private function random_password($length) {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@%^*()_-";
+        $password = substr( str_shuffle( $chars ), 0, $length );
+        return $password;
     }
 }
