@@ -2,8 +2,10 @@ app:
     resource: "@GuideBundle/Controller/"
     type:     annotation
     prefix: /
-admin:
-    path: /admin
-    defaults: {_controller: GuideBundle:MedicalStaff:index}
-
+#admin:
+#    path: /admin
+#    defaults: {_controller: GuideBundle:MedicalStaff:index}
+auth:
+    path: /auth
+    defaults: {_controller: GuideBundle:Security:login}
 
