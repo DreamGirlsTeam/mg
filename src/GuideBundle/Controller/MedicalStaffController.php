@@ -158,11 +158,22 @@ class MedicalStaffController extends Controller
         $this->get('mailer')->send($message);
         return $user;
     }
-    }
+
 
     private function random_password($length) {
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@%^*()_-";
         $password = substr( str_shuffle( $chars ), 0, $length );
         return $password;
+    }
+
+    /**
+     * MedicalStaff logout.
+     *
+     * @Route("logout", name="logout")
+     */
+    private function logoutAction(Request $request)
+    {
+        $request->getSession()->invalidate();
+        return $this->redirect('/');
     }
 }
