@@ -74,12 +74,12 @@ swiftmailer:
 assetic:
     assets:
         bootstrap_css:
-            inputs:
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/less/bootstrap.less
-                - %kernel.root_dir%/../vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/less/form.less
-            filters:
-                - less
-                - cssrewrite
+#            inputs:
+#                - %kernel.root_dir%/../vendor/twbs/bootstrap/less/bootstrap.less
+#                - %kernel.root_dir%/../vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/less/form.less
+#            filters:
+#                - less
+#                - cssrewrite
             output: css/bootstrap.css
         bootstrap_js:
             inputs:
@@ -106,7 +106,7 @@ braincrafted_bootstrap:
     output_dir:
     assets_dir: %kernel.root_dir%/../vendor/twbs/bootstrap
     jquery_path: %kernel.root_dir%/../vendor/jquery/jquery/jquery-1.10.2.js
-    less_filter: less # "less", "lessphp", "sass" or "none"
+#    less_filter: less # "less", "lessphp", "sass" or "none"
     fonts_dir: %kernel.root_dir%/../web/fonts
     auto_configure:
         assetic: true
@@ -136,5 +136,3 @@ assetic:
             node_paths: [/usr/local/lib/node_modules]
             apply_to: ".less$"
         cssrewrite: ~
-braincrafted_bootstrap:
-    less_filter: less

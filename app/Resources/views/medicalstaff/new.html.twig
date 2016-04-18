@@ -16,10 +16,11 @@
             {{ form_end(form) }}
         </div>
     </div>
-
-    <ul>
-        <li>
-            <a href="{{ path('admin_index') }}" class="btn btn-danger">Назад до списку</a>
-        </li>
-    </ul>
+    <div class="col-md-4">
+        <ul class="list-inline">
+            <li>
+                <a href="{{ path('admin_index') }}" class="btn btn-danger">Назад до списку</a>
+            </li>
+        </ul>
+    <div>
 {% endblock %}
