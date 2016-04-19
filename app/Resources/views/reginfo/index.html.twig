@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>RegInfo list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Actorid</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Patronymic</th>
+                <th>Birthday</th>
+                <th>Phone</th>
+                <th>Passport</th>
+                <th>City</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for regInfo in regInfos %}
+            <tr>
+                <td><a href="{{ path('reception_show', { 'id': regInfo.id }) }}">{{ regInfo.id }}</a></td>
+                <td>{{ regInfo.actorId }}</td>
+                <td>{{ regInfo.firstName }}</td>
+                <td>{{ regInfo.lastName }}</td>
+                <td>{{ regInfo.patronymic }}</td>
+                <td>{% if regInfo.birthday %}{{ regInfo.birthday|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ regInfo.phone }}</td>
+                <td>{{ regInfo.passport }}</td>
+                <td>{{ regInfo.city }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('reception_show', { 'id': regInfo.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('reception_edit', { 'id': regInfo.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('reception_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

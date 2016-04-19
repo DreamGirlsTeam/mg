@@ -3,6 +3,7 @@
 namespace GuideBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+//use GuideBundle\Entity\Illnesses;
 
 /**
  * Symptoms
@@ -22,6 +23,14 @@ class Symptoms
     private $id;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Illnesses", inversedBy="symptoms")
+     * @ORM\JoinTable(name="sym_to_ill",
+     *       joinColumns={@ORM\JoinColumn(name="ill_id", referencedColumnName="id")},
+     *       inverseJoinColumns={@ORM\JoinColumn(name="sym_id", referencedColumnName="id")})
+     */
+   // private $illnesses;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=30, unique=true)
@@ -29,6 +38,9 @@ class Symptoms
     private $name;
 
 
+//    public function __construct() {
+//        $this->illnesses = new \Doctrine\Common\Collections\ArrayCollection();
+//    }
     /**
      * Get id
      *

@@ -29,23 +29,36 @@ class Visits
     private $date;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="docId", type="integer")
+     * @ORM\ManyToMany(targetEntity="Illnesses", inversedBy="visits")
+     * @ORM\JoinTable(name="visit_to_ill",
+     *       joinColumns={@ORM\JoinColumn(name="ill_id", referencedColumnName="id")},
+     *       inverseJoinColumns={@ORM\JoinColumn(name="visit_id", referencedColumnName="id")})
+     */
+     private $illnesses;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Medicines", inversedBy="visits")
+     * @ORM\JoinTable(name="visit_to_medic",
+     *       joinColumns={@ORM\JoinColumn(name="medic_id", referencedColumnName="id")},
+     *       inverseJoinColumns={@ORM\JoinColumn(name="visit_id", referencedColumnName="id")})
+     */
+    private $medicines;
+
+    /**
+     * @ORM\OneToOne(targetEntity="MedicalStaff")
+     * @ORM\JoinColumn(name="docId", referencedColumnName="actorId")
      */
     private $docId;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="patId", type="integer")
+     * @ORM\OneToOne(targetEntity="RegInfo")
+     * @ORM\JoinColumn(name="patId", referencedColumnName="actorId")
      */
     private $patId;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="type", type="integer")
+     * @ORM\OneToOne(targetEntity="VisitTypes")
+     * @ORM\JoinColumn(name="type", referencedColumnName="name")
      */
     private $type;
 

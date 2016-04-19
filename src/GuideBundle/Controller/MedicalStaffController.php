@@ -18,7 +18,7 @@ class MedicalStaffController extends Controller
     /**
      * Lists all MedicalStaff entities.
      *
-     * @Route("/admin", name="admin_index")
+     * @Route("admin", name="admin_index")
      * @Method("GET")
      */
     public function indexAction(Request $request)
@@ -61,10 +61,10 @@ class MedicalStaffController extends Controller
     /**
      * Finds and displays a MedicalStaff entity.
      *
-     * @Route("/{id}", name="admin_show")
+     * @Route("/{id}/show", name="admin_show")
      * @Method("GET")
      */
-    public function showAction(MedicalStaff $medicalStaff)
+    public function showAction(MedicalStaff $medicalStaff) //MedicalStaff $medicalStaff
     {
         $deleteForm = $this->createDeleteForm($medicalStaff);
         return $this->render('medicalstaff/show.html.twig', array(
@@ -171,7 +171,7 @@ class MedicalStaffController extends Controller
      *
      * @Route("logout", name="logout")
      */
-    private function logoutAction(Request $request)
+    public function logoutAction(Request $request)
     {
         $request->getSession()->invalidate();
         return $this->redirect('/');

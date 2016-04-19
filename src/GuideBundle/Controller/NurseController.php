@@ -9,9 +9,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class NurseController extends Controller
 {
-//    /**
-//     * @Route("/reception, name="reception")
-//     */
+    /**
+     * @Route("reception", name="reception")
+     */
     public function receptionAction(Request $request)
     {
         return new Response('Hello girl without education!'); //hhehehehehe TODO delete

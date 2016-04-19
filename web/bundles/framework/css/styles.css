@@ -1,318 +1,295 @@
-body {
-    margin: 0;
-    padding: 0;
+
+
+#header{
+    margin-top: 383px;
 }
 
-#background
+#footerbk
 {
-    left: 0px;
-    top: 0px;
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    width: 1300px;
-    height: 4000px;
-    overflow: hidden;
-    z-index:0;
-}
-
-#Background
-{
-    left: 0px;
-    top: 0px;
+    left: -3px;
+    top: 1916px;
     position: absolute;
-    width: 1300px;
-    height: 4000px;
-    z-index:1;
-}
-
-#Layer1
-{
-    left: 0px;
-    top: 1077px;
-    position: absolute;
-    width: 1319px;
-    height: 1165px;
+    width: 1301px;
+    height: 858px;
     z-index:2;
 }
 
-#ABOUTPROJECT
+#Shape8
 {
-    left: 330px;
-    top: 1321px;
+    left: 45px;
+    top: 3191px;
     position: absolute;
-    width: 658px;
-    height: 54px;
+    width: 1203px;
+    height: 4px;
     z-index:3;
+}
+
+#copyright
+{
+    left: 493px;
+    top: 2674px;
+    position: absolute;
+    width: 308px;
+    height: 42px;
+    z-index:4;
+}
+
+#up
+{
+    left: 582px;
+    top: 2245px;
+    position: absolute;
+    width: 159px;
+    height: 36px;
+    z-index:5;
+}
+
+#aboutbk
+{
+    top: 397px;
+    position: absolute;
+    width: 1319px;
+    height: 1165px;
+    z-index:0;
+}
+
+#about
+{
+    left: 489px;
+    top: 600px;
+    position: absolute;
+    width: 307px;
+    height: 35px;
+    z-index:7;
 }
 
 #YourmadheartgoesCrus
 {
     left: 684px;
-    top: 1446px;
+    top: 696px;
     position: absolute;
     width: 494px;
     height: 406px;
-    z-index:4;
+    z-index:8;
 }
 
 #Whenyouareseventeeny
 {
-    left: 175px;
-    top: 1446px;
+    left: 168px;
+    top: 696px;
     position: absolute;
     width: 465px;
     height: 406px;
-    z-index:5;
+    z-index:9;
 }
 
-#Layer3
+#teambk
 {
     left: 0px;
-    top: 1895px;
+    top: 1191px;
     position: absolute;
     width: 1300px;
     height: 1080px;
-    z-index:6;
-}
-
-#e2
-{
-    left: 476px;
-    top: 2301px;
-    position: absolute;
-    width: 353px;
-    height: 354px;
-    z-index:7;
+    z-index:10;
 }
 
 #e1
 {
-    left: 567px;
-    top: 2256px;
+    left: 495px;
+    top: 1550px;
     position: absolute;
-    width: 196px;
-    height: 398px;
-    z-index:8;
-}
-
-#m1
-{
-    left: 90px;
-    top: 2318px;
-    position: absolute;
-    width: 328px;
-    height: 328px;
-    z-index:9;
+    width: 306px;
+    height: 344px;
+    z-index:11;
 }
 
 #m2
 {
-    left: 177px;
-    top: 2292px;
+    left: 112px;
+    top: 1540px;
     position: absolute;
-    width: 182px;
-    height: 354px;
-    z-index:10;
-}
-
-#Shape4
-{
-    left: 439px;
-    top: 2456px;
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    z-index:11;
-}
-
-#Shape5
-{
-    left: 439px;
-    top: 2479px;
-    position: absolute;
-    width: 23px;
-    height: 25px;
+    width: 310px;
+    height: 331px;
     z-index:12;
 }
 
-#Shape6
+#l3
 {
-    left: 847px;
-    top: 2458px;
+    left: 873px;
+    top: 1545px;
     position: absolute;
-    width: 23px;
-    height: 23px;
+    width: 311px;
+    height: 331px;
     z-index:13;
 }
 
-#Shape7
+#etwi
 {
-    left: 848px;
-    top: 2478px;
+    left: 635px;
+    top: 1950px;
     position: absolute;
-    width: 22px;
-    height: 25px;
+    width: 29px;
+    height: 22px;
     z-index:14;
 }
 
-#l2
+#efb
 {
-    left: 900px;
-    top: 2322px;
+    left: 593px;
+    top: 1950px;
     position: absolute;
-    width: 328px;
-    height: 320px;
+    width: 26px;
+    height: 26px;
     z-index:15;
 }
 
-#l1
+#evk
 {
-    left: 973px;
-    top: 2290px;
+    left: 678px;
+    top: 1950px;
     position: absolute;
-    width: 213px;
-    height: 351px;
+    width: 26px;
+    height: 26px;
     z-index:16;
 }
 
-#twi
+#mtwi
 {
-    left: 636px;
-    top: 2723px;
+    left: 250px;
+    top: 1959px;
     position: absolute;
     width: 29px;
     height: 22px;
     z-index:17;
 }
 
-#fb
+#mfb
 {
-    left: 594px;
-    top: 2723px;
+    left: 208px;
+    top: 1959px;
     position: absolute;
     width: 26px;
     height: 26px;
     z-index:18;
 }
 
-#vk
+#mvk
 {
-    left: 679px;
-    top: 2723px;
+    left: 293px;
+    top: 1959px;
     position: absolute;
     width: 26px;
     height: 26px;
     z-index:19;
 }
 
-#Eleonorakorobova
+#ltwi
 {
-    left: 594px;
-    top: 2673px;
+    left: 1013px;
+    top: 1959px;
     position: absolute;
-    width: 114px;
-    height: 36px;
+    width: 29px;
+    height: 22px;
     z-index:20;
 }
 
-#THETEAM
+#lfb
 {
-    left: 439px;
-    top: 2186px;
+    left: 971px;
+    top: 1959px;
     position: absolute;
-    width: 411px;
-    height: 53px;
+    width: 26px;
+    height: 26px;
     z-index:21;
 }
 
-#Layer0copy
+#lvk
 {
-    left: 0px;
-    top: 0px;
+    left: 1056px;
+    top: 1959px;
     position: absolute;
-    width: 1300px;
-    height: 1252px;
+    width: 26px;
+    height: 26px;
     z-index:22;
 }
 
-#Shape3
+#elya
 {
-    left: 107px;
-    top: 135px;
+    left: 603px;
+    top: 1900px;
     position: absolute;
-    width: 378px;
-    height: 3px;
+    width: 95px;
+    height: 35px;
     z-index:23;
 }
 
-#Shape3copy
+#mary
 {
-    left: 805px;
-    top: 134px;
+    left: 208px;
+    top: 1900px;
     position: absolute;
-    width: 378px;
-    height: 3px;
+    width: 121px;
+    height: 38px;
     z-index:24;
+}
+
+#lesya
+{
+    left: 970px;
+    top: 1890px;
+    position: absolute;
+    width: 117px;
+    height: 35px;
+    z-index:25;
+}
+
+#theteam
+{
+    left: 519px;
+    top: 1450px;
+    position: absolute;
+    width: 253px;
+    height: 45px;
+    z-index:26;
+}
+
+#mainmenu
+{
+    left: -1px;
+    top: 0px;
+    position: absolute;
+    width: 1300px;
+    height: 384px;
+    z-index:27;
+}
+
+#head
+{
+    left: -1px;
+    top: 357px;
+    position: absolute;
+    width: 1300px;
+    height: 694px;
+    z-index:28;
 }
 
 #login
 {
-    left: 257px;
-    top: 97px;
+    left: 253px;
+    top: 63px;
     position: absolute;
-    width: 87px;
-    height: 19px;
-    z-index:25;
-}
-
-#Contactus
-{
-    left: 903px;
-    top: 97px;
-    position: absolute;
-    width: 172px;
-    height: 19px;
-    z-index:26;
-}
-
-#MG
-{
-    left: 539px;
-    top: 24px;
-    position: absolute;
-    width: 216px;
-    height: 225px;
-    z-index:27;
-}
-
-#Benedignosciturbenec
-{
-    left: 480px;
-    top: 293px;
-    position: absolute;
-    width: 345px;
-    height: 46px;
-    z-index:28;
-}
-
-#Shape2
-{
-    left: 585px;
-    top: 371px;
-    position: absolute;
-    width: 124px;
-    height: 3px;
+    width: 127px;
+    height: 39px;
     z-index:29;
 }
 
-#MEDICALGUIDE
+#connect
 {
-    left: 344px;
-    top: 427px;
+    left: 848px;
+    top: 72px;
     position: absolute;
-    width: 642px;
-    height: 54px;
+    width: 266px;
+    height: 32px;
     z-index:30;
 }
 
@@ -331,7 +308,3 @@ body {
     background-color: #DBFFD9;
 }
 
-.field-color-yellow
-{
-    background-color: #FFFFD9;
-}
