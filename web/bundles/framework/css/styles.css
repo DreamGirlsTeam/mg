@@ -308,3 +308,16 @@
     background-color: #DBFFD9;
 }
 
+.logout-button
+{
+    float: right;
+    margin-right: 5%;
+    margin-top: -60px;
+}
+
+.logo-position
+{
+    float: left;
+    margin-left: 1%;
+    margin-top: -35px;
+}
