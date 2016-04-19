@@ -49,28 +49,18 @@ class SecurityController extends Controller
                     ->getRepository("GuideBundle:Actors")
                     ->findOneBy(
                         array(
-                            "id" => $user->getId()
+                            "id" => $user->getActorId()
                         )
                     );
-                if ($role === 5) {
-                    $userInfo = $this
-                        ->getDoctrine()
-                        ->getRepository("GuideBundle:RegInfo")
-                        ->findOneBy(
-                            array(
-                                "actorId" => $user->getId()
-                            )
-                        );
-                } else {
                     $userInfo = $this
                         ->getDoctrine()
                         ->getRepository("GuideBundle:MedicalStaff")
                         ->findOneBy(
                             array(
-                                "actorId" => $user->getId()
+                                "actorId" => $user->getActorId()
                             )
                         );
-                }
+
 
 
                 $session = $request->getSession();
