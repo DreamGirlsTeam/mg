@@ -19,7 +19,7 @@ use GuideBundle\Controller\AdminController;
 class SecurityController extends Controller
 {
     /**
-     * @Route("/auth", name="auth")
+     * @Route("auth", name="auth")
      */
     public function loginAction(Request $request)
     {

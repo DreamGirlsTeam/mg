@@ -29,9 +29,8 @@ class AnalysRes
     private $date;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="patId", type="integer")
+     * @ORM\OneToOne(targetEntity="RegInfo")
+     * @ORM\JoinColumn(name="patId", referencedColumnName="actorId")
      */
     private $patId;
 
@@ -43,9 +42,8 @@ class AnalysRes
     private $filename;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="name", type="integer")
+     * @ORM\OneToOne(targetEntity="Analysis")
+     * @ORM\JoinColumn(name="name", referencedColumnName="name")
      */
     private $name;
 

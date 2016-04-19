@@ -3,29 +3,6 @@ body {
     padding: 0;
 }
 
-#background
-{
-    left: 0px;
-    top: 0px;
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    width: 1300px;
-    height: 4000px;
-    overflow: hidden;
-    z-index:0;
-}
-
-#Background
-{
-    left: 0px;
-    top: 0px;
-    position: absolute;
-    width: 1300px;
-    height: 4000px;
-    z-index:1;
-}
-
 #Layer1
 {
     left: 0px;
@@ -36,9 +13,9 @@ body {
     z-index:2;
 }
 
-#ABOUTPROJECT
+#about
 {
-    left: 330px;
+    left: 930px;
     top: 1321px;
     position: absolute;
     width: 658px;

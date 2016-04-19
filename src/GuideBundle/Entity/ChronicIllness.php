@@ -28,6 +28,14 @@ class ChronicIllness
      */
     private $name;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Medicines", inversedBy="ChronicIllness")
+     * @ORM\JoinTable(name="ChIll_to_medic",
+     *       joinColumns={@ORM\JoinColumn(name="ChIll_id", referencedColumnName="id")},
+     *       inverseJoinColumns={@ORM\JoinColumn(name="medic_id", referencedColumnName="id")})
+     */
+    private $medicines;
+
 
     /**
      * Get id

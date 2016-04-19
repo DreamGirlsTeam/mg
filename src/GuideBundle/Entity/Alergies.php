@@ -28,6 +28,14 @@ class Alergies
      */
     private $name;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Medicines", inversedBy="alergies")
+     * @ORM\JoinTable(name="allergy_to_medic",
+     *       joinColumns={@ORM\JoinColumn(name="medic_id", referencedColumnName="id")},
+     *       inverseJoinColumns={@ORM\JoinColumn(name="allergy_id", referencedColumnName="id")})
+     */
+    private $medicines;
+
 
     /**
      * Get id
