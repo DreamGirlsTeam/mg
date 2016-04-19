@@ -320,3 +320,18 @@ body {
 {
     margin-top:20px;
 }
+
+.field-color-blue
+{
+    background-color: #E6FEFF;
+}
+
+.field-color-green
+{
+    background-color: #DBFFD9;
+}
+
+.field-color-yellow
+{
+    background-color: #FFFFD9;
+}

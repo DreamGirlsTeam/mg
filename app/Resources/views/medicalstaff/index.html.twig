@@ -24,7 +24,12 @@
                     </thead>
                     <tbody>
                     {% for medicalStaff in medicalStaffs %}
-                        <tr>
+                        {% if medicalStaff.actorId == 3 %}
+                            <tr class="field-color-blue">
+                        {% endif %}
+                        {% if medicalStaff.actorId == 4 %}
+                            <tr class="field-color-green">
+                        {% endif %}
                             <td>{{ medicalStaff.firstname }}</td>
                             <td>{{ medicalStaff.lastname }}</td>
                             <td>{{ medicalStaff.patronymic }}</td>
