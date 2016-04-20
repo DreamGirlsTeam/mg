@@ -2,9 +2,10 @@
 <html>
     <head>
         <meta charset="KOI8-U" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Medicine Guide</title>
         <link href="{{ asset('/bundles/framework/css/bootstrap.css') }}" rel="stylesheet" media="screen">
-
+        <link rel="stylesheet" href="{{ asset('bundles/framework/css/validationEngine.jquery.css') }}"/>
         <link href="{{ asset('/bundles/framework/css/styles.css') }}" rel="stylesheet" />
 
         {% block stylesheets %}{% endblock %}
@@ -12,10 +13,16 @@
     </head>
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-        <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->
-        <script src="{{ asset('/bundles/framework/js/jQuery/jquery-1.12.3.min.js') }}"></script>
+        {#<!-- jQuery (necessary for Bootstraps JavaScript plugins) -->#}
+        {#<script src="{{ asset('/bundles/framework/js/jQuery/jquery-1.12.3.min.js') }}"></script>#}
         <!-- Include all JavaScripts, compiled by Assetic -->
-        <script src="{{ asset('/bundles/framework/js/bootstrap.js') }}"></script>
+
     </body>
+    {% block javascripts %}
+        <script src="{{ asset('bundles/framework/js/jQuery/jquery-1.12.3.min.js') }}"></script>
+        <script src="{{ asset('bundles/framework/js/bootstrap.js') }}"></script>
+        <script src="{{ asset('bundles/framework/js/jQuery/jquery.ValidationEngine.js') }}"></script>
+        <script src="{{ asset('bundles/framework/js/jQuery/jquery.ValidationEngine-en.js') }}"></script>
+        <script src="{{ asset('bundles/framework/js/script.js') }}"></script>
+    {% endblock %}
 </html>

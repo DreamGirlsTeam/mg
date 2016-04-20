@@ -1,20 +1,10 @@
-.auth_form {
-    position: absolute;
-    padding: 6%;
-    margin-left: 35%;
-    margin-top: 10%;
-    max-width: 700px;
-    border: 1px dotted #4b99ad;
-    border-radius: 2%;
-}
+
 form {
-    max-width: 400px;
+    min-width: 100%;
     font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
 label {
-    margin-top:30px;
-    padding:10px;
     display:block;
     font-weight: bold;
 }
@@ -38,16 +28,14 @@ input:focus {
     border: 1px solid #88D5E9;
 }
 
-button{
-    background: #4B99AD;
-    margin-top:30px;
-    padding: 8px 15px 8px 15px;
-    border: none;
-    color: #fff;
-}
 button:hover, .form-style-1 input[type=button]:hover{
     background: #4691A4;
     box-shadow:none;
     -moz-box-shadow:none;
     -webkit-box-shadow:none;
+}
+
+.icons {
+   margin-left: 83%;
+    position: inherit;
 }
