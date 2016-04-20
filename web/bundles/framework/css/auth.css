@@ -1,12 +1,4 @@
-.auth_form {
-    position: absolute;
-    padding: 4%;
-    margin-left: 35%;
-    margin-top: 10%;
-    max-width: 700px;
-    border: 1px #e4e4e4 solid;
-    border-radius: 1%;
-}
+
 form {
     max-width: 400px;
     font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
@@ -14,7 +6,6 @@ form {
 
 label {
     margin-top:30px;
-    padding:10px;
     display:block;
     font-weight: bold;
 }
@@ -50,4 +41,8 @@ button:hover, .form-style-1 input[type=button]:hover{
     box-shadow:none;
     -moz-box-shadow:none;
     -webkit-box-shadow:none;
+}
+
+.icons {
+   margin-left: 83%;
 }

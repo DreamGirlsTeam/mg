@@ -1,22 +1,30 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/auth.css') }}"/>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     {#<link rel="stylesheet" href="{{ asset('bundles/framework/css/validationEngine.jquery.css') }}"/>#}
 {% endblock %}
 {% block body %}
-    <div class="auth_form">
-        {{ form_start(form, {'attr' : {'novalidate' : 'true'}}) }}
-        {{ form_widget(form) }}
-        {{ error }}
-        {{ form_end(form) }}
+    {% form_theme form 'bootstrap_3_layout.html.twig' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                <div class="icons"><i class="fa fa-user-md fa-4x"></i></div>
+                <hr/>
+                {{ form_start(form, {'attr' : {'novalidate' : 'true'}}) }}
+                {{ form_widget(form) }}
+                {{ error }}
+                {{ form_end(form) }}
+            </div>
+        </div>
     </div>
     {% block javascripts %}
         {{ parent() }}
-    {#<script src="{{ asset('bundles/framework/js/jQuery/jquery-1.12.3.min.js') }}"></script>#}
-    {#<script src="{{ asset('bundles/framework/js/jQuery/jquery.ValidationEngine.js') }}"></script>#}
-    {#<script src="{{ asset('bundles/framework/js/jQuery/jquery.ValidationEngine-en.js') }}"></script>#}
-    {#<script src="{{ asset('bundles/framework/js/script.js') }}"></script>#}
+        {#<script src="{{ asset('bundles/framework/js/jQuery/jquery-1.12.3.min.js') }}"></script>#}
+        {#<script src="{{ asset('bundles/framework/js/jQuery/jquery.ValidationEngine.js') }}"></script>#}
+        {#<script src="{{ asset('bundles/framework/js/jQuery/jquery.ValidationEngine-en.js') }}"></script>#}
+        {#<script src="{{ asset('bundles/framework/js/script.js') }}"></script>#}
 
-{% endblock %}
+    {% endblock %}
 
 {% endblock %}
