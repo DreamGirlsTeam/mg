@@ -1,10 +1,15 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <div class="text-right">
-        <a href="{{ path('logout') }}" class="btn btn-default">Вихід</a>
+    <div class="page-header">
+        <div class="logo-position">
+            <img src="{{ asset('images/logo.png') }}"/>
+        </div>
+        <h1 class="text-center">Медичний Персонал</h1>
+        <div class="logout-button">
+            <a href="{{ path('logout') }}" class="btn btn-default btn-lg">Вихід</a>
+        </div>
     </div>
     <div class="col-md-8 col-md-offset-2">
-        <h1>Медичний Персонал</h1>
         <div class="container-fluid">
             <div class="row">
                 <div class="alert alert-success">
@@ -24,7 +29,12 @@
                     </thead>
                     <tbody>
                     {% for medicalStaff in medicalStaffs %}
-                        <tr>
+                        {% if medicalStaff.actorId == 3 %}
+                            <tr class="field-color-blue">
+                        {% endif %}
+                        {% if medicalStaff.actorId == 4 %}
+                            <tr class="field-color-green">
+                        {% endif %}
                             <td>{{ medicalStaff.firstname }}</td>
                             <td>{{ medicalStaff.lastname }}</td>
                             <td>{{ medicalStaff.patronymic }}</td>

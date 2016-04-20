@@ -24,7 +24,8 @@ class RegInfo
     /**
      * @var int
      *
-     * @ORM\Column(name="actorId", type="integer", unique=true)
+     * @ORM\OneToOne(targetEntity="Actors")
+     * @ORM\JoinColumn(name="actorId", referencedColumnName="id")
      */
     private $actorId;
 
@@ -77,6 +78,21 @@ class RegInfo
      */
     private $city;
 
+    /**
+     * @var integer
+     *
+     * @ORM\OneToOne(targetEntity="Jobs")
+     * @ORM\JoinColumn(name="job", referencedColumnName="id")
+     */
+    private $job;
+
+    /**
+     * @var integer
+     *
+     * @ORM\OneToOne(targetEntity="Districs")
+     * @ORM\JoinColumn(name="district", referencedColumnName="id")
+     */
+    private $district;
 
     /**
      * Get id
@@ -278,6 +294,54 @@ class RegInfo
     public function getCity()
     {
         return $this->city;
+    }
+
+    /**
+     * Set job
+     *
+     * @param integer $job
+     *
+     * @return RegInfo
+     */
+    public function setJob($job)
+    {
+        $this->job = $job;
+
+        return $this;
+    }
+
+    /**
+     * Get job
+     *
+     * @return integer
+     */
+    public function getJob()
+    {
+        return $this->job;
+    }
+
+    /**
+     * Set district
+     *
+     * @param integer $district
+     *
+     * @return RegInfo
+     */
+    public function setDistrict($district)
+    {
+        $this->district = $district;
+
+        return $this;
+    }
+
+    /**
+     * Get district
+     *
+     * @return integer
+     */
+    public function getDistrict()
+    {
+        return $this->district;
     }
 }
 
