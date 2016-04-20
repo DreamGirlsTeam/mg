@@ -22,13 +22,13 @@ class MedicalStaffType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('first_name', TextType::class, array('label' => 'Ім\'я'))
-            ->add('last_name', TextType::class, array('label' => 'Прізвище'))
-            ->add('patronymic', TextType::class, array('label' => 'По-батькові'))
+            ->add('first_name', TextType::class, array('label' => 'Ім\'я',  'attr' => array('class'=>'validate[required, custom[onlyLetterSp]]')))
+            ->add('last_name', TextType::class, array('label' => 'Прізвище',  'attr' => array('class'=>'validate[required, custom[onlyLetterSp]')))
+            ->add('patronymic', TextType::class, array('label' => 'По-батькові',  'attr' => array('class'=>'validate[custom[onlyLetterSp]]')))
             ->add('date_of_birth', BirthdayType::class, array('label' => 'Дата народження'))
-            ->add('specialization', TextType::class, array('label' => 'Посада'))
-            ->add('phone_number', TextType::class, array('label' => 'Номер телефону'))
-            ->add('email', EmailType::class, array('label' => 'Електронна пошта'));
+            ->add('specialization', TextType::class, array('label' => 'Посада',  'attr' => array('class'=>'validate[required]')))
+            ->add('phone_number', TextType::class, array('label' => 'Номер телефону',  'attr' => array('class'=>'validate[required, custom[phone]]')))
+            ->add('email', EmailType::class, array('label' => 'Електронна пошта',  'attr' => array('class'=>'validate[required, custom[email]]')));
     }
 
     /**

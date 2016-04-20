@@ -17,9 +17,9 @@ class AuthType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class)
-            ->add('password', TextType::class)
-            ->add('Log in', SubmitType::class)
+            ->add('username', TextType::class, array('label' => 'Ім\'я користувача', 'attr' => array('class'=>'validate[required, custom[onlyLetterSp]]')))
+            ->add('password', TextType::class, array('label' => 'Пароль'))
+            ->add('Log in', SubmitType::class, array('label' => 'Увійти'))
             ->getForm()
         ;
 
