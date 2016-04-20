@@ -4,6 +4,12 @@
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/validationEngine.jquery.css') }}"/>
 {% endblock %}
 {% block body %}
+    <div class="page-header">
+        <div class="logo-position">
+            <img src="{{ asset('images/logo.png') }}"/>
+        </div>
+        <h1 class="text-header">Авторизація</h1>
+    </div>
     <div class="auth_form">
         {{ form_start(form) }}
         {{ form_widget(form) }}

@@ -293,6 +293,11 @@
     z-index:30;
 }
 
+.text-header
+{
+    margin-left: 42%;
+}
+
 .top-buffer
 {
     margin-top:20px;
