@@ -19,7 +19,7 @@ class RegInfoType extends AbstractType
             ->add('firstName')
             ->add('lastName')
             ->add('patronymic')
-            ->add('birthday', 'date')
+            ->add('birthday')
             ->add('phone')
             ->add('passport')
             ->add('city')
