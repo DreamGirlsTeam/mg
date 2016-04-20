@@ -22,6 +22,22 @@ class Illnesses
     private $id;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Symptoms", mappedBy="illnesses")
+     * @ORM\JoinTable(name="sym_to_ill",
+     *       joinColumns={@ORM\JoinColumn(name="sym_id", referencedColumnName="id")},
+     *       inverseJoinColumns={@ORM\JoinColumn(name="ill_id", referencedColumnName="id")})
+     */
+    private $symptoms;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Medicines", inversedBy="illnesses")
+     * @ORM\JoinTable(name="ill_to_medicine",
+     *       joinColumns={@ORM\JoinColumn(name="ill_id", referencedColumnName="id")},
+     *       inverseJoinColumns={@ORM\JoinColumn(name="medic_id", referencedColumnName="id")})
+     */
+    private $medicines;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=30, unique=true)

@@ -281,3 +281,50 @@ body {
     height: 273px;
     z-index:29;
 }
+<<<<<<< HEAD
+=======
+
+#connect
+{
+    left: 848px;
+    top: 72px;
+    position: absolute;
+    width: 266px;
+    height: 32px;
+    z-index:30;
+}
+
+.text-header
+{
+    margin-left: 42%;
+}
+
+.top-buffer
+{
+    margin-top:20px;
+}
+
+.field-color-blue
+{
+    background-color: #E6FEFF;
+}
+
+.field-color-green
+{
+    background-color: #DBFFD9;
+}
+
+.logout-button
+{
+    float: right;
+    margin-right: 5%;
+    margin-top: -60px;
+}
+
+.logo-position
+{
+    float: left;
+    margin-left: 1%;
+    margin-top: -35px;
+}
+>>>>>>> 36cb3be54a8076096f271e113ebb19d8d5a4740e

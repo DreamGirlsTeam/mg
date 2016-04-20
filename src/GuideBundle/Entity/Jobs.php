@@ -3,15 +3,14 @@
 namespace GuideBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-//use GuideBundle\Entity\Illnesses;
 
 /**
- * Symptoms
+ * Jobs
  *
- * @ORM\Table(name="symptoms")
- * @ORM\Entity(repositoryClass="GuideBundle\Repository\SymptomsRepository")
+ * @ORM\Table(name="jobs")
+ * @ORM\Entity(repositoryClass="GuideBundle\Repository\JobsRepository")
  */
-class Symptoms
+class Jobs
 {
     /**
      * @var int
@@ -23,14 +22,6 @@ class Symptoms
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Illnesses", inversedBy="symptoms")
-     * @ORM\JoinTable(name="sym_to_ill",
-     *       joinColumns={@ORM\JoinColumn(name="ill_id", referencedColumnName="id")},
-     *       inverseJoinColumns={@ORM\JoinColumn(name="sym_id", referencedColumnName="id")})
-     */
-   // private $illnesses;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=30, unique=true)
@@ -38,13 +29,10 @@ class Symptoms
     private $name;
 
 
-//    public function __construct() {
-//        $this->illnesses = new \Doctrine\Common\Collections\ArrayCollection();
-//    }
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -56,12 +44,12 @@ class Symptoms
      *
      * @param string $name
      *
-     * @return Symptoms
+     * @return Jobs
      */
     public function setName($name)
     {
         $this->name = $name;
-
+    
         return $this;
     }
 

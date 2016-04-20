@@ -1,29 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-
     {% include 'BraincraftedBootstrapBundle::flash.html.twig' %}
-
-<div class="col-md-6 col-md-offset-3">
-    <div class="alert alert-info">
-        <h2 class="text-center">Додавання медичного персоналу</h2>
+    <div class="page-header">
+        <div class="logo-position">
+            <img src="{{ asset('images/logo.png') }}"/>
+        </div>
+        <h1 class="text-header">Додавання медичного персоналу</h1>
+        <div class="logout-button">
+            <a href="{{ path('logout') }}" class="btn btn-default btn-lg">Вихід</a>
+        </div>
     </div>
-
-    <div class="container">
-        <div class="col-md-4">
-            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-            {{ form_widget(form, {'attr': {'novalidate': 'novalidate'}}) }}
-            <input type="submit" value="Створити" class="btn btn-success"/>
-            {{ form_end(form) }}
+    <div class="col-md-6 col-md-offset-3">
+        <div class="container">
             <div class="col-md-4">
-                <ul class="list-inline">
-                    <li class="row top-buffer">
-                        <a href="{{ path('admin_index') }}" class="btn btn-danger">Назад до списку</a>
-                    </li>
-                </ul>
+                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                {{ form_widget(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                <input type="submit" value="Створити" class="btn btn-success"/>
+                {{ form_end(form) }}
+                <div class="col-md-4">
+                    <ul class="list-inline">
+                        <li class="row top-buffer">
+                            <a href="{{ path('admin_index') }}" class="btn btn-danger">Назад до списку</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}

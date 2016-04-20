@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>RegInfo</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ regInfo.id }}</td>
+            </tr>
+            <tr>
+                <th>Actorid</th>
+                <td>{{ regInfo.actorId }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ regInfo.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ regInfo.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Patronymic</th>
+                <td>{{ regInfo.patronymic }}</td>
+            </tr>
+            <tr>
+                <th>Birthday</th>
+                <td>{% if regInfo.birthday %}{{ regInfo.birthday|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ regInfo.phone }}</td>
+            </tr>
+            <tr>
+                <th>Passport</th>
+                <td>{{ regInfo.passport }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ regInfo.city }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('reception_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('reception_edit', { 'id': regInfo.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

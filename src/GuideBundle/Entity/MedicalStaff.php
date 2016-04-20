@@ -24,7 +24,8 @@ class MedicalStaff
     /**
      * @var int
      *
-     * @ORM\Column(name="actorId", type="integer", unique=true)
+     * @ORM\OneToOne(targetEntity="Actors")
+     * @ORM\JoinColumn(name="actorId", referencedColumnName="id")
      */
     private $actorId;
 

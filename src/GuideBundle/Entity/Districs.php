@@ -5,12 +5,12 @@ namespace GuideBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ChronicIllness
+ * Districs
  *
- * @ORM\Table(name="chronic_illness")
- * @ORM\Entity(repositoryClass="GuideBundle\Repository\ChronicIllnessRepository")
+ * @ORM\Table(name="districs")
+ * @ORM\Entity(repositoryClass="GuideBundle\Repository\DistricsRepository")
  */
-class ChronicIllness
+class Districs
 {
     /**
      * @var int
@@ -24,23 +24,15 @@ class ChronicIllness
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=30, unique=true)
+     * @ORM\Column(name="name", type="string", length=14, unique=true)
      */
     private $name;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Medicines", inversedBy="ChronicIllness")
-     * @ORM\JoinTable(name="ChIll_to_medic",
-     *       joinColumns={@ORM\JoinColumn(name="ChIll_id", referencedColumnName="id")},
-     *       inverseJoinColumns={@ORM\JoinColumn(name="medic_id", referencedColumnName="id")})
-     */
-    private $medicines;
 
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -52,12 +44,12 @@ class ChronicIllness
      *
      * @param string $name
      *
-     * @return ChronicIllness
+     * @return Districs
      */
     public function setName($name)
     {
         $this->name = $name;
-
+    
         return $this;
     }
 
