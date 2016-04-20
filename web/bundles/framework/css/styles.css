@@ -1,294 +1,284 @@
-
-
-#header{
-    margin-top: 383px;
+body {
+    margin: 0;
+    padding: 0;
 }
 
 #footerbk
 {
-    left: -3px;
-    top: 1916px;
+    left: 0px;
+    top: 1531px;
     position: absolute;
-    width: 1301px;
-    height: 858px;
+    width: 869px;
+    height: 575px;
     z-index:2;
 }
 
 #Shape8
 {
-    left: 45px;
-    top: 3191px;
+    left: 29px;
+    top: 2050px;
     position: absolute;
-    width: 1203px;
+    width: 807px;
     height: 4px;
     z-index:3;
 }
 
 #copyright
 {
-    left: 493px;
-    top: 2674px;
+    left: 329px;
+    top: 2059px;
     position: absolute;
-    width: 308px;
-    height: 42px;
+    width: 207px;
+    height: 29px;
     z-index:4;
 }
 
 #up
 {
-    left: 582px;
-    top: 2245px;
+    left: 389px;
+    top: 1752px;
     position: absolute;
-    width: 159px;
-    height: 36px;
+    width: 106px;
+    height: 24px;
     z-index:5;
-}
-
-#aboutbk
-{
-    top: 397px;
-    position: absolute;
-    width: 1319px;
-    height: 1165px;
-    z-index:0;
-}
-
-#about
-{
-    left: 489px;
-    top: 600px;
-    position: absolute;
-    width: 307px;
-    height: 35px;
-    z-index:7;
-}
-
-#YourmadheartgoesCrus
-{
-    left: 684px;
-    top: 696px;
-    position: absolute;
-    width: 494px;
-    height: 406px;
-    z-index:8;
-}
-
-#Whenyouareseventeeny
-{
-    left: 168px;
-    top: 696px;
-    position: absolute;
-    width: 465px;
-    height: 406px;
-    z-index:9;
 }
 
 #teambk
 {
     left: 0px;
-    top: 1191px;
+    top: 1045px;
     position: absolute;
-    width: 1300px;
-    height: 1080px;
-    z-index:10;
+    width: 869px;
+    height: 724px;
+    z-index:6;
 }
 
 #e1
 {
-    left: 495px;
-    top: 1550px;
+    left: 330px;
+    top: 1258px;
     position: absolute;
-    width: 306px;
-    height: 344px;
-    z-index:11;
+    width: 206px;
+    height: 224px;
+    z-index:7;
 }
 
 #m2
 {
-    left: 112px;
-    top: 1540px;
+    left: 74px;
+    top: 1260px;
     position: absolute;
-    width: 310px;
-    height: 331px;
-    z-index:12;
+    width: 208px;
+    height: 223px;
+    z-index:8;
 }
 
 #l3
 {
-    left: 873px;
-    top: 1545px;
+    left: 583px;
+    top: 1258px;
     position: absolute;
-    width: 311px;
-    height: 331px;
-    z-index:13;
+    width: 210px;
+    height: 223px;
+    z-index:9;
 }
 
 #etwi
 {
-    left: 635px;
-    top: 1950px;
+    left: 424px;
+    top: 1527px;
     position: absolute;
-    width: 29px;
-    height: 22px;
-    z-index:14;
+    width: 20px;
+    height: 15px;
+    z-index:10;
 }
 
 #efb
 {
-    left: 593px;
-    top: 1950px;
+    left: 396px;
+    top: 1527px;
     position: absolute;
-    width: 26px;
-    height: 26px;
-    z-index:15;
+    width: 18px;
+    height: 18px;
+    z-index:11;
 }
 
 #evk
 {
-    left: 678px;
-    top: 1950px;
+    left: 453px;
+    top: 1527px;
     position: absolute;
-    width: 26px;
-    height: 26px;
-    z-index:16;
+    width: 18px;
+    height: 18px;
+    z-index:12;
 }
 
 #mtwi
 {
-    left: 250px;
-    top: 1959px;
+    left: 166px;
+    top: 1526px;
     position: absolute;
-    width: 29px;
-    height: 22px;
-    z-index:17;
+    width: 20px;
+    height: 16px;
+    z-index:13;
 }
 
 #mfb
 {
-    left: 208px;
-    top: 1959px;
+    left: 138px;
+    top: 1526px;
     position: absolute;
-    width: 26px;
-    height: 26px;
-    z-index:18;
+    width: 18px;
+    height: 18px;
+    z-index:14;
 }
 
 #mvk
 {
-    left: 293px;
-    top: 1959px;
+    left: 195px;
+    top: 1526px;
     position: absolute;
-    width: 26px;
-    height: 26px;
-    z-index:19;
+    width: 18px;
+    height: 18px;
+    z-index:15;
 }
 
 #ltwi
 {
-    left: 1013px;
-    top: 1959px;
+    left: 677px;
+    top: 1526px;
     position: absolute;
-    width: 29px;
-    height: 22px;
-    z-index:20;
+    width: 21px;
+    height: 16px;
+    z-index:16;
 }
 
 #lfb
 {
-    left: 971px;
-    top: 1959px;
+    left: 649px;
+    top: 1526px;
     position: absolute;
-    width: 26px;
-    height: 26px;
-    z-index:21;
+    width: 18px;
+    height: 18px;
+    z-index:17;
 }
 
 #lvk
 {
-    left: 1056px;
-    top: 1959px;
+    left: 706px;
+    top: 1526px;
     position: absolute;
-    width: 26px;
-    height: 26px;
-    z-index:22;
+    width: 18px;
+    height: 18px;
+    z-index:18;
 }
 
 #elya
 {
-    left: 603px;
-    top: 1900px;
+    left: 403px;
+    top: 1495px;
     position: absolute;
-    width: 95px;
-    height: 35px;
-    z-index:23;
+    width: 64px;
+    height: 23px;
+    z-index:19;
 }
 
 #mary
 {
-    left: 208px;
-    top: 1900px;
+    left: 138px;
+    top: 1495px;
     position: absolute;
-    width: 121px;
-    height: 38px;
-    z-index:24;
+    width: 81px;
+    height: 26px;
+    z-index:20;
 }
 
 #lesya
 {
-    left: 970px;
-    top: 1890px;
+    left: 649px;
+    top: 1495px;
     position: absolute;
-    width: 117px;
-    height: 35px;
-    z-index:25;
+    width: 78px;
+    height: 23px;
+    z-index:21;
 }
 
 #theteam
 {
-    left: 519px;
-    top: 1450px;
+    left: 346px;
+    top: 1200px;
     position: absolute;
-    width: 253px;
-    height: 45px;
-    z-index:26;
+    width: 170px;
+    height: 30px;
+    z-index:22;
 }
 
 #mainmenu
 {
-    left: -1px;
+    left: -3px;
     top: 0px;
     position: absolute;
-    width: 1300px;
-    height: 384px;
-    z-index:27;
-}
-
-#head
-{
-    left: -1px;
-    top: 357px;
-    position: absolute;
-    width: 1300px;
+    width: 872px;
     height: 694px;
-    z-index:28;
+    z-index:23;
 }
 
 #login
 {
-    left: 253px;
-    top: 63px;
+    left: 164px;
+    top: 41px;
     position: absolute;
-    width: 127px;
-    height: 39px;
-    z-index:29;
+    width: 86px;
+    height: 27px;
+    z-index:24;
 }
 
 #connect
 {
-    left: 848px;
-    top: 72px;
+    left: 563px;
+    top: 47px;
     position: absolute;
-    width: 266px;
-    height: 32px;
-    z-index:30;
+    width: 179px;
+    height: 22px;
+    z-index:25;
+}
+
+#aboutbk
+{
+    left: 0px;
+    top: 505px;
+    position: absolute;
+    width: 869px;
+    height: 780px;
+    z-index:26;
+}
+
+#about
+{
+    left: 326px;
+    top: 647px;
+    position: absolute;
+    width: 206px;
+    height: 25px;
+    z-index:27;
+}
+
+#YourmadheartgoesCrus
+{
+    left: 457px;
+    top: 713px;
+    position: absolute;
+    width: 331px;
+    height: 273px;
+    z-index:28;
+}
+
+#Whenyouareseventeeny
+{
+    left: 111px;
+    top: 713px;
+    position: absolute;
+    width: 312px;
+    height: 273px;
+    z-index:29;
 }
