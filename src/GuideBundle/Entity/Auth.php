@@ -26,9 +26,7 @@ class Auth
 
     /**
      * @var int
-     *
-     * @ORM\OneToOne(targetEntity="Actors")
-     * @ORM\JoinColumn(name="actorId", referencedColumnName="id")
+     * @ORM\Column(name="actorId", type="integer", unique=true)
      */
     private $actorId;
 

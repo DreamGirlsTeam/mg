@@ -45,14 +45,14 @@ class Visits
     private $medicines;
 
     /**
-     * @ORM\OneToOne(targetEntity="MedicalStaff")
-     * @ORM\JoinColumn(name="docId", referencedColumnName="actorId")
+     * @ORM\OneToOne(targetEntity="Actors")
+     * @ORM\JoinColumn(name="docId", referencedColumnName="id")
      */
     private $docId;
 
     /**
-     * @ORM\OneToOne(targetEntity="RegInfo")
-     * @ORM\JoinColumn(name="patId", referencedColumnName="actorId")
+     * @ORM\OneToOne(targetEntity="Actors")
+     * @ORM\JoinColumn(name="patId", referencedColumnName="id")
      */
     private $patId;
 

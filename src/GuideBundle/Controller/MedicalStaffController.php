@@ -137,25 +137,25 @@ class MedicalStaffController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
-        $message = \Swift_Message::newInstance()
-            ->setSubject('Hello Email')
-            ->setFrom('medicalguidesystem@gmail.com')
-            ->setTo($email)
-            ->setBody(
-                'You was registered in MedicalGuide system as doctor. Username: '.$user->getUsername().' Password: '. $user->getPassword()
-            )
-            /*
-             * If you also want to include a plaintext version of the message
-            ->addPart(
-                $this->renderView(
-                    'Emails/registration.txt.twig',
-                    array('name' => $name)
-                ),
-                'text/plain'
-            )
-            */
-        ;
-        $this->get('mailer')->send($message);
+//        $message = \Swift_Message::newInstance()
+//            ->setSubject('Hello Email')
+//            ->setFrom('medicalguidesystem@gmail.com')
+//            ->setTo($email)
+//            ->setBody(
+//                'You was registered in MedicalGuide system as doctor. Username: '.$user->getUsername().' Password: '. $user->getPassword()
+//            )
+//            /*
+//             * If you also want to include a plaintext version of the message
+//            ->addPart(
+//                $this->renderView(
+//                    'Emails/registration.txt.twig',
+//                    array('name' => $name)
+//                ),
+//                'text/plain'
+//            )
+//            */
+//        ;
+//        $this->get('mailer')->send($message);
         return $user;
     }
 
