@@ -4,3 +4,4 @@ $("form[name='form']").validationEngine();
 $('#form_username').addClass('validate[required]');
 $('#form_password').addClass('validate[required]');
 $(':button').html('Увійти');
+$("form[name='medical_staff']").validationEngine();
