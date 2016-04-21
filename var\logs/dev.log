@@ -3736,3 +3736,4 @@
 [2016-04-20 09:30:52] request.INFO: Matched route "guide_default_index". {"route_parameters":{"_controller":"GuideBundle\\Controller\\DefaultController::indexAction","_route":"guide_default_index"},"request_uri":"http://localhost:8000/"} []
 [2016-04-20 09:30:52] security.INFO: Populated the TokenStorage with an anonymous Token. [] []
 [2016-04-20 09:30:54] request.INFO: Matched route "_wdt". {"route_parameters":{"_controller":"web_profiler.controller.profiler:toolbarAction","token":"a03072","_route":"_wdt"},"request_uri":"http://localhost:8000/_wdt/a03072"} []
+[2016-04-21 07:46:24] php.DEBUG: fsockopen(): unable to connect to 127.0.0.1:8000 (Не можна здійснити підключення, оскільки кінцевий комп’ютер відхилив запит на підключення. ) {"type":2,"file":"D:\\project\\mg-t\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\FrameworkBundle\\Command\\ServerCommand.php","line":59,"level":28928} []
