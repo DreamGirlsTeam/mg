@@ -1,5 +1,6 @@
 <?php
 namespace GuideBundle\Controller;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -8,6 +9,7 @@ use GuideBundle\Entity\MedicalStaff;
 use GuideBundle\Form\MedicalStaffType;
 use GuideBundle\Entity\Actors;
 use GuideBundle\Entity\Auth;
+use GuideBundle\Entity\Jobs;
 
 /**
  *
@@ -29,6 +31,7 @@ class MedicalStaffController extends Controller
             'medicalStaffs' => $medicalStaffs,
         ));
     }
+
     /**
      * Creates a new MedicalStaff entity.
      *
@@ -37,6 +40,8 @@ class MedicalStaffController extends Controller
      */
     public function newAction(Request $request)
     {
+        // $job = new Jobs();
+
         $medicalStaff = new MedicalStaff();
         $actor = new Actors();
         $form = $this->createForm('GuideBundle\Form\MedicalStaffType', $medicalStaff);
@@ -49,7 +54,7 @@ class MedicalStaffController extends Controller
             $medicalStaff->setActorId($actor->getId());
             $em->persist($medicalStaff);
             $em->flush();
-            $this->generateLogin($medicalStaff->getActorId(),$medicalStaff->getEmail());
+            $this->generateLogin($medicalStaff->getActorId(), $medicalStaff->getEmail());
             $flash = $this->get('braincrafted_bootstrap.flash');
             $flash->success('Succesfully registered.');
         }
@@ -58,6 +63,7 @@ class MedicalStaffController extends Controller
             'form' => $form->createView(),
         ));
     }
+
     /**
      * Finds and displays a MedicalStaff entity.
      *
@@ -72,6 +78,7 @@ class MedicalStaffController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Displays a form to edit an existing MedicalStaff entity.
      *
@@ -95,13 +102,14 @@ class MedicalStaffController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a MedicalStaff entity.
      *
      * @Route("/{id}", name="admin_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, MedicalStaff $medicalStaff)
+    public function deleteAction(Request $request, MedicalStaff $medicalStaff, $id)
     {
         $form = $this->createDeleteForm($medicalStaff);
         $form->handleRequest($request);
@@ -109,9 +117,14 @@ class MedicalStaffController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($medicalStaff);
             $em->flush();
+            $user = $em->getReference('GuideBundle\Entity\Actors', $id);
+            $em->remove($user);
+            $em->flush();
+
         }
         return $this->redirectToRoute('admin_index');
     }
+
     /**
      * Creates a form to delete a MedicalStaff entity.
      *
@@ -124,10 +137,11 @@ class MedicalStaffController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('admin_delete', array('id' => $medicalStaff->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-            ;
+            ->getForm();
     }
-    private function generateLogin($id, $email) {
+
+    private function generateLogin($id, $email)
+    {
         $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
         $user = new Auth();
         $passwordLength = rand(8, 15);
@@ -160,9 +174,10 @@ class MedicalStaffController extends Controller
     }
 
 
-    private function random_password($length) {
+    private function random_password($length)
+    {
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@%^*()_-";
-        $password = substr( str_shuffle( $chars ), 0, $length );
+        $password = substr(str_shuffle($chars), 0, $length);
         return $password;
     }
 

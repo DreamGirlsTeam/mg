@@ -2,6 +2,7 @@
 
 {% block body %}
     {% include 'BraincraftedBootstrapBundle::flash.html.twig' %}
+    {% form_theme form 'bootstrap_3_layout.html.twig' %}
     <div class="page-header">
         <div class="logo-position">
             <img src="{{ asset('images/logo.png') }}"/>
@@ -11,13 +12,24 @@
             <a href="{{ path('logout') }}" class="btn btn-default btn-lg">Вихід</a>
         </div>
     </div>
-    <div class="col-md-6 col-md-offset-3">
-        <div class="container">
-            <div class="col-md-4">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"> <i class="fa fa-stethoscope fa-3x"></i></div>
+                        <div class="panel-body">
                 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                 {{ form_widget(form, {'attr': {'novalidate': 'novalidate'}}) }}
                 <input type="submit" value="Створити" class="btn btn-success"/>
                 {{ form_end(form) }}
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
                 <div class="col-md-4">
                     <ul class="list-inline">
                         <li class="row top-buffer">
