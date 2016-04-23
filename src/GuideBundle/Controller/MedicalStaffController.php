@@ -40,8 +40,6 @@ class MedicalStaffController extends Controller
      */
     public function newAction(Request $request)
     {
-        // $job = new Jobs();
-
         $medicalStaff = new MedicalStaff();
         $actor = new Actors();
         $form = $this->createForm('GuideBundle\Form\MedicalStaffType', $medicalStaff);
@@ -51,10 +49,10 @@ class MedicalStaffController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($actor);
             $em->flush();
-            $medicalStaff->setActorId($actor->getId());
+            $medicalStaff->setActorId($actor);
             $em->persist($medicalStaff);
             $em->flush();
-            $this->generateLogin($medicalStaff->getActorId(), $medicalStaff->getEmail());
+            $this->generateLogin($actor, $medicalStaff->getEmail());
             $flash = $this->get('braincrafted_bootstrap.flash');
             $flash->success('Succesfully registered.');
         }
@@ -67,7 +65,7 @@ class MedicalStaffController extends Controller
     /**
      * Finds and displays a MedicalStaff entity.
      *
-     * @Route("/{id}/show", name="admin_show")
+     * @Route("/{actorId}/show", name="admin_show")
      * @Method("GET")
      */
     public function showAction(MedicalStaff $medicalStaff) //MedicalStaff $medicalStaff
@@ -82,7 +80,7 @@ class MedicalStaffController extends Controller
     /**
      * Displays a form to edit an existing MedicalStaff entity.
      *
-     * @Route("/{id}/edit", name="admin_edit")
+     * @Route("/{actorId}/edit", name="admin_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, MedicalStaff $medicalStaff)
@@ -94,7 +92,7 @@ class MedicalStaffController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($medicalStaff);
             $em->flush();
-            return $this->redirectToRoute('admin_edit', array('id' => $medicalStaff->getId()));
+            return $this->redirectToRoute('admin_edit', array('actorId' => $medicalStaff->getActorId()));
         }
         return $this->render('medicalstaff/edit.html.twig', array(
             'medicalStaff' => $medicalStaff,
@@ -106,19 +104,26 @@ class MedicalStaffController extends Controller
     /**
      * Deletes a MedicalStaff entity.
      *
-     * @Route("/{id}", name="admin_delete")
-     * @Method("DELETE")
+     * @Route("/{actorId}/delete", name="admin_delete")
+     * @Method({"DELETE", "GET"})
      */
-    public function deleteAction(Request $request, MedicalStaff $medicalStaff, $id)
+    public function deleteAction(Request $request, MedicalStaff $medicalStaff)
     {
         $form = $this->createDeleteForm($medicalStaff);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+//            $actor = $this
+//                ->getDoctrine()
+//                ->getRepository("GuideBundle:Actors")
+//                ->findOneBy(
+//                    array(
+//                        "id" => $medicalStaff->getActorId()->getId()
+//                    )
+//                );
             $em->remove($medicalStaff);
             $em->flush();
-            $user = $em->getReference('GuideBundle\Entity\Actors', $id);
-            $em->remove($user);
+            //$em->remove($actor);
             $em->flush();
 
         }
@@ -135,19 +140,19 @@ class MedicalStaffController extends Controller
     private function createDeleteForm(MedicalStaff $medicalStaff)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_delete', array('id' => $medicalStaff->getId())))
+            ->setAction($this->generateUrl('admin_delete', array('actorId' => $medicalStaff->getActorId()->getId())))
             ->setMethod('DELETE')
             ->getForm();
     }
 
-    private function generateLogin($id, $email)
+    private function generateLogin(Actors $actor, $email)
     {
         $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
         $user = new Auth();
         $passwordLength = rand(8, 15);
         $user->setUsername(explode('@', $email)[0]);
         $user->setPassword(md5($this->random_password($passwordLength)));
-        $user->setActorId($id);
+        $user->setActorId($actor);
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();

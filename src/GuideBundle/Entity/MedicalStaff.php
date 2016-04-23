@@ -3,6 +3,7 @@
 namespace GuideBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use GuideBundle\Entity\Actors;
 
 /**
  * MedicalStaff
@@ -22,8 +23,8 @@ class MedicalStaff
     private $id;
 
     /**
-     * @var int
-     * @ORM\Column(name="actorId", type="integer")
+     * @ORM\OneToOne(targetEntity="Actors")
+     * @ORM\JoinColumn(name="actorId", referencedColumnName="id", onDelete="cascade")
      */
     private $actorId;
 
@@ -108,7 +109,7 @@ class MedicalStaff
     /**
      * Set actorId
      *
-     * @param integer $actorId
+     * @param $actorId
      *
      * @return MedicalStaff
      */

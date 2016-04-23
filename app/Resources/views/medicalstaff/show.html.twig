@@ -46,7 +46,7 @@
             <a href="{{ path('admin_index') }}" class="btn btn-warning">Назад до списку</a>
         </li>
         <li>
-            <a href="{{ path('admin_edit', { 'id': medicalStaff.id }) }}" class="btn btn-warning">Редагувати</a>
+            <a href="{{ path('admin_edit', { 'actorId': medicalStaff.actorId.id }) }}" class="btn btn-warning">Редагувати</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
