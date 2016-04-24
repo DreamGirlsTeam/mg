@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
+
 {% block body %}
+    {{ dump(regInfos) }}
 
         <div class="container-fluid">
             <div class="row">
@@ -27,6 +29,7 @@
                     </thead>
                     <tbody>
                     {% for regInfo in regInfos %}
+
                         <tr>
                             <td><a href="{{ path('reception_show', { 'actorId': regInfo.actorId.id }) }}">{{ regInfo.actorId.id }}</a></td>
                             <td>{{ regInfo.actorId.id }}</td>
@@ -42,10 +45,10 @@
                             <td>
                                 <ul>
                                     <li>
-                                        {#<a href="{{ path('reception_show', { 'id': regInfo.id }) }}">show</a>#}
+                                        <a href="{{ path('reception_show', { 'actorId': regInfo.actorId.id }) }}">show</a>
                                     </li>
                                     <li>
-                                        {#<a href="{{ path('reception_edit', { 'id': regInfo.id }) }}">edit</a>#}
+                                        <a href="{{ path('reception_edit', { 'actorId': regInfo.actorId.id }) }}">edit</a>
                                     </li>
                                 </ul>
                             </td>

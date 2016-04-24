@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use GuideBundle\Entity\RegInfo;
 use GuideBundle\Form\RegInfoType;
+use GuideBundle\Entity\ConfPerson;
 
 /**
  * RegInfo controller.
@@ -26,8 +27,13 @@ class RegInfoController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $regInfos = $em->getRepository('GuideBundle:RegInfo')->findAll();
+        $query = $em->createQueryBuilder('r')
+            ->select('r')
+            ->from('GuideBundle:RegInfo', 'r')
+            ->leftJoin('GuideBundle:ConfPerson', 'cp', 'WITH', 'cp.actorId = r.actorId');
+        //$regInfos = $em->getRepository('GuideBundle:RegInfo')->findAll();
+        $regInfos = $em->createQuery($query)->getResult();
+        //$regInfos = $em->getRepository('GuideBundle:ConfPerson')->findAll();
 
         return $this->render('reginfo/index.html.twig', array(
             'regInfos' => $regInfos,
@@ -56,7 +62,8 @@ class RegInfoController extends Controller
             $em->persist($regInfo);
             $em->flush();
            // var_dump($regInfo->getJob()->getName());
-           // return $this->redirectToRoute('reception_index');
+            return $this->redirect($this->generateUrl('reception_confidant_new', array('actorId' => $actor->getId())));
+           // return $this->redirectToRoute('reception_confidant_new', array('actorId' => $actor->getId()));
         }
 
         return $this->render('reginfo/new.html.twig', array(
@@ -111,7 +118,7 @@ class RegInfoController extends Controller
     /**
      * Deletes a RegInfo entity.
      *
-     * @Route("/{id}/delete", name="reception_delete")
+     * @Route("/{actorId}/delete", name="reception_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, RegInfo $regInfo)
