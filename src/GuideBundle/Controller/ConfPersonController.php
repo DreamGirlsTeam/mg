@@ -63,7 +63,7 @@ class ConfPersonController extends Controller
     /**
      * Finds and displays a ConfPerson entity.
      *
-     * @Route("/{id}", name="reception_confidant_show")
+     * @Route("/{actorId}/show", name="reception_confidant_show")
      * @Method("GET")
      */
     public function showAction(ConfPerson $confPerson)
@@ -79,7 +79,7 @@ class ConfPersonController extends Controller
     /**
      * Displays a form to edit an existing ConfPerson entity.
      *
-     * @Route("/{id}/edit", name="reception_confidant_edit")
+     * @Route("/{actorId}/edit", name="reception_confidant_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, ConfPerson $confPerson)
@@ -93,7 +93,7 @@ class ConfPersonController extends Controller
             $em->persist($confPerson);
             $em->flush();
 
-            return $this->redirectToRoute('reception_confidant_edit', array('id' => $confPerson->getId()));
+            return $this->redirectToRoute('reception_index');
         }
 
         return $this->render('confperson/edit.html.twig', array(
@@ -106,7 +106,7 @@ class ConfPersonController extends Controller
     /**
      * Deletes a ConfPerson entity.
      *
-     * @Route("/{id}", name="reception_confidant_delete")
+     * @Route("/{actorId/delete}", name="reception_confidant_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, ConfPerson $confPerson)

@@ -5,6 +5,9 @@ namespace GuideBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ConfPersonType extends AbstractType
 {
@@ -15,10 +18,10 @@ class ConfPersonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('first_name')
-            ->add('last_name')
-            ->add('patronymic')
-            ->add('phone_number')
+            ->add('first_name', TextType::class, array('label' => 'Ім\'я',  'attr' => array('class'=>'validate[required, custom[onlyLetterSp, minSize[2], maxSize[25]]]')))
+            ->add('last_name', TextType::class, array('label' => 'Прізвище',  'attr' => array('class'=>'validate[required, custom[onlyLetterSp, minSize[2], maxSize[30]]')))
+            ->add('patronymic', TextType::class, array('label' => 'По-батькові',  'attr' => array('class'=>'validate[custom[onlyLetterSp, minSize[2], maxSize[35]]]')))
+            ->add('phone_number', TextType::class, array('label' => 'Номер телефону',  'attr' => array('class'=>'validate[required, custom[phone]]')))
         ;
     }
     

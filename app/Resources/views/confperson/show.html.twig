@@ -6,10 +6,6 @@
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ confPerson.id }}</td>
-            </tr>
-            <tr>
                 <th>First_name</th>
                 <td>{{ confPerson.firstname }}</td>
             </tr>
@@ -30,10 +26,10 @@
 
     <ul>
         <li>
-            <a href="{{ path('reception_confidant_index') }}">Back to the list</a>
+            <a href="{{ path('reception_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('reception_confidant_edit', { 'actorId': confPerson.actorId.id }) }}">Edit</a>
+            <a href="{{ path('reception_confidant_edit', { 'actorId': confPerson.actorId }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

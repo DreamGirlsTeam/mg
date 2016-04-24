@@ -2,7 +2,6 @@
 
 
 {% block body %}
-    {{ dump(regInfos) }}
 
         <div class="container-fluid">
             <div class="row">
@@ -24,6 +23,7 @@
                         <th>Job</th>
                         <th>City</th>
                         <th>District</th>
+                        <th>Confidant</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -42,6 +42,7 @@
                             <td>{{ regInfo.job.name }}</td>
                             <td>{{ regInfo.city }}</td>
                             <td>{{ regInfo.district.name }}</td>
+                            <td> <a href="{{ path('reception_confidant_show', { 'actorId': regInfo.actorId.id }) }}">confidant</a></td>
                             <td>
                                 <ul>
                                     <li>

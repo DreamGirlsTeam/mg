@@ -27,12 +27,12 @@ class RegInfoController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $query = $em->createQueryBuilder('r')
-            ->select('r')
-            ->from('GuideBundle:RegInfo', 'r')
-            ->leftJoin('GuideBundle:ConfPerson', 'cp', 'WITH', 'cp.actorId = r.actorId');
-        //$regInfos = $em->getRepository('GuideBundle:RegInfo')->findAll();
-        $regInfos = $em->createQuery($query)->getResult();
+//        $query = $em->createQueryBuilder('r')
+//            ->select('r')
+//            ->from('GuideBundle:RegInfo', 'r')
+//            ->leftJoin('GuideBundle:ConfPerson', 'cp', 'WITH', 'cp.first_name = r.first_name');
+        $regInfos = $em->getRepository('GuideBundle:RegInfo')->findAll();
+       // $regInfos = $em->createQuery($query)->getResult();
         //$regInfos = $em->getRepository('GuideBundle:ConfPerson')->findAll();
 
         return $this->render('reginfo/index.html.twig', array(
