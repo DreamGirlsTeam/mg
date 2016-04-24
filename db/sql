@@ -13,3 +13,6 @@ INSERT INTO districs (name) VALUES ("Голосіївський"), ("Оболонський"), ("Печерсь
 
 #Inserting personal data
 INSERT INTO reg_info VALUES (null, 1, 2, "Олена", "Стрілецька", "Степанівна", '1994-01-02', '+380981726692', 'AA123456', 'Київ', 5);
+
+#Primary Keys!!!! ACHTUNG!
+ALTER TABLE jobs DROP PRIMARY KEY, ADD PRIMARY KEY(id, name);

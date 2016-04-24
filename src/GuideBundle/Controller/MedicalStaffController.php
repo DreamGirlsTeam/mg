@@ -92,7 +92,7 @@ class MedicalStaffController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($medicalStaff);
             $em->flush();
-            return $this->redirectToRoute('admin_edit', array('actorId' => $medicalStaff->getActorId()));
+            return $this->redirectToRoute('admin_edit', array('actorId' => $medicalStaff->getActorId()->getId()));
         }
         return $this->render('medicalstaff/edit.html.twig', array(
             'medicalStaff' => $medicalStaff,
