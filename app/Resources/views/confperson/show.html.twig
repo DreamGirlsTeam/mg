@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>ConfPerson</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>First_name</th>
+                <td>{{ confPerson.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Last_name</th>
+                <td>{{ confPerson.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Patronymic</th>
+                <td>{{ confPerson.patronymic }}</td>
+            </tr>
+            <tr>
+                <th>Phone_number</th>
+                <td>{{ confPerson.phonenumber }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('reception_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('reception_confidant_edit', { 'actorId': confPerson.actorId }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -3,6 +3,7 @@
 namespace GuideBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Visits
@@ -45,20 +46,24 @@ class Visits
     private $medicines;
 
     /**
-     * @ORM\OneToOne(targetEntity="MedicalStaff")
-     * @ORM\JoinColumn(name="docId", referencedColumnName="actorId")
+     * @ORM\OneToOne(targetEntity="Actors")
+     * @ORM\JoinColumn(name="docId", referencedColumnName="id")
      */
     private $docId;
 
     /**
-     * @ORM\OneToOne(targetEntity="RegInfo")
-     * @ORM\JoinColumn(name="patId", referencedColumnName="actorId")
+     * @ORM\OneToOne(targetEntity="Actors")
+     * @ORM\JoinColumn(name="patId", referencedColumnName="id")
      */
     private $patId;
 
+//    /**
+//     * @ORM\OneToOne(targetEntity="VisitTypes")
+//     * @ORM\JoinColumn(name="type", referencedColumnName="name")
+//     */
     /**
-     * @ORM\OneToOne(targetEntity="VisitTypes")
-     * @ORM\JoinColumn(name="type", referencedColumnName="name")
+     * @Assert\Type(type="GuideBundle\Entity\VisitTypes")
+     * @Assert\Valid()
      */
     private $type;
 
@@ -155,11 +160,11 @@ class Visits
     /**
      * Set type
      *
-     * @param integer $type
+     * @param $type
      *
      * @return Visits
      */
-    public function setType($type)
+    public function setType(VisitTypes $type)
     {
         $this->type = $type;
 
@@ -169,7 +174,7 @@ class Visits
     /**
      * Get type
      *
-     * @return int
+     * @return VisitTypes
      */
     public function getType()
     {
@@ -198,6 +203,38 @@ class Visits
     public function getComment()
     {
         return $this->comment;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIllnesses()
+    {
+        return $this->illnesses;
+    }
+
+    /**
+     * @param mixed $illnesses
+     */
+    public function setIllnesses($illnesses)
+    {
+        $this->illnesses = $illnesses;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMedicines()
+    {
+        return $this->medicines;
+    }
+
+    /**
+     * @param mixed $medicines
+     */
+    public function setMedicines($medicines)
+    {
+        $this->medicines = $medicines;
     }
 }
 

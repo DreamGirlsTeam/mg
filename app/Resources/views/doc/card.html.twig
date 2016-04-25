@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ asset('/bundles/framework/css/doctor.css') }}" rel="stylesheet"/>
+{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <img src="{{ asset('images/logo.png') }}"/>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid tbl">
+        <div class="row voffset2">
+            <div class="col-md-5 col-md-offset-4">
+                <div class="alert alert-success">
+                    <h4><a href="{{ path('doctor_visit', { 'actorId': actorId }) }}"><p class="bg-success text-center">Новий візит</p>
+                        </a></h4>
+                </div>
+                <table class="table table-condensed table-hover doc_reg_info">
+                    <thead>
+                    <tr class="info">
+                        <th>Дата</th>
+                        <th>Тип</th>
+                        <th>Діагноз</th>
+                        <th>Лікування</th>
+                        <th>Коментарі</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for regInfo in regInfos %}
+                        <tr>
+                            <td>{{ regInfo.firstName }}</td>
+                            <td>{{ regInfo.lastName }}</td>
+                            <td>{{ regInfo.patronymic }}</td>
+                            <td>{{ regInfo.phone }}</td>
+                            <td>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

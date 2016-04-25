@@ -21,11 +21,14 @@ class ConfPerson
      */
     private $id;
 
+//    /**
+//     * @ORM\ManyToOne(targetEntity="Actors")
+//     * @ORM\JoinColumn(name="actorId", referencedColumnName="id")
+//     */
     /**
      * @var int
      *
-     * @ORM\OneToOne(targetEntity="Actors")
-     * @ORM\JoinColumn(name="actorId", referencedColumnName="id")
+     * @ORM\Column(name="actorId", type="integer")
      */
     private $actorId;
 
@@ -71,7 +74,7 @@ class ConfPerson
     /**
      * Set actorId
      *
-     * @param integer $actorId
+     * @param $actorId
      *
      * @return ConfPerson
      */
@@ -85,7 +88,6 @@ class ConfPerson
     /**
      * Get actorId
      *
-     * @return int
      */
     public function getActorId()
     {

@@ -1,5 +1,6 @@
 <?php
 namespace GuideBundle\Controller;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -8,17 +9,19 @@ use GuideBundle\Entity\MedicalStaff;
 use GuideBundle\Form\MedicalStaffType;
 use GuideBundle\Entity\Actors;
 use GuideBundle\Entity\Auth;
+use GuideBundle\Entity\Jobs;
 
 /**
+ * MedicalStaffController controller.
  *
- *
+ * @Route("/admin")
  */
 class MedicalStaffController extends Controller
 {
     /**
      * Lists all MedicalStaff entities.
      *
-     * @Route("admin", name="admin_index")
+     * @Route("/", name="admin_index")
      * @Method("GET")
      */
     public function indexAction(Request $request)
@@ -29,6 +32,7 @@ class MedicalStaffController extends Controller
             'medicalStaffs' => $medicalStaffs,
         ));
     }
+
     /**
      * Creates a new MedicalStaff entity.
      *
@@ -46,10 +50,10 @@ class MedicalStaffController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($actor);
             $em->flush();
-            $medicalStaff->setActorId($actor->getId());
+            $medicalStaff->setActorId($actor);
             $em->persist($medicalStaff);
             $em->flush();
-            $this->generateLogin($medicalStaff->getActorId(),$medicalStaff->getEmail());
+            $this->generateLogin($actor, $medicalStaff->getEmail());
             $flash = $this->get('braincrafted_bootstrap.flash');
             $flash->success('Succesfully registered.');
         }
@@ -58,10 +62,11 @@ class MedicalStaffController extends Controller
             'form' => $form->createView(),
         ));
     }
+
     /**
      * Finds and displays a MedicalStaff entity.
      *
-     * @Route("/{id}/show", name="admin_show")
+     * @Route("/{actorId}/show", name="admin_show")
      * @Method("GET")
      */
     public function showAction(MedicalStaff $medicalStaff) //MedicalStaff $medicalStaff
@@ -72,10 +77,11 @@ class MedicalStaffController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Displays a form to edit an existing MedicalStaff entity.
      *
-     * @Route("/{id}/edit", name="admin_edit")
+     * @Route("/{actorId}/edit", name="admin_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, MedicalStaff $medicalStaff)
@@ -87,7 +93,7 @@ class MedicalStaffController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($medicalStaff);
             $em->flush();
-            return $this->redirectToRoute('admin_edit', array('id' => $medicalStaff->getId()));
+            return $this->redirectToRoute('admin_edit', array('actorId' => $medicalStaff->getActorId()->getId()));
         }
         return $this->render('medicalstaff/edit.html.twig', array(
             'medicalStaff' => $medicalStaff,
@@ -95,11 +101,12 @@ class MedicalStaffController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a MedicalStaff entity.
      *
-     * @Route("/{id}", name="admin_delete")
-     * @Method("DELETE")
+     * @Route("/{actorId}/delete", name="admin_delete")
+     * @Method({"DELETE", "GET"})
      */
     public function deleteAction(Request $request, MedicalStaff $medicalStaff)
     {
@@ -107,11 +114,23 @@ class MedicalStaffController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+//            $actor = $this
+//                ->getDoctrine()
+//                ->getRepository("GuideBundle:Actors")
+//                ->findOneBy(
+//                    array(
+//                        "id" => $medicalStaff->getActorId()->getId()
+//                    )
+//                );
             $em->remove($medicalStaff);
             $em->flush();
+            //$em->remove($actor);
+            $em->flush();
+
         }
         return $this->redirectToRoute('admin_index');
     }
+
     /**
      * Creates a form to delete a MedicalStaff entity.
      *
@@ -122,47 +141,49 @@ class MedicalStaffController extends Controller
     private function createDeleteForm(MedicalStaff $medicalStaff)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_delete', array('id' => $medicalStaff->getId())))
+            ->setAction($this->generateUrl('admin_delete', array('actorId' => $medicalStaff->getActorId()->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-            ;
+            ->getForm();
     }
-    private function generateLogin($id, $email) {
+
+    private function generateLogin(Actors $actor, $email)
+    {
         $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
         $user = new Auth();
         $passwordLength = rand(8, 15);
         $user->setUsername(explode('@', $email)[0]);
         $user->setPassword(md5($this->random_password($passwordLength)));
-        $user->setActorId($id);
+        $user->setActorId($actor);
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
-        $message = \Swift_Message::newInstance()
-            ->setSubject('Hello Email')
-            ->setFrom('medicalguidesystem@gmail.com')
-            ->setTo($email)
-            ->setBody(
-                'You was registered in MedicalGuide system as doctor. Username: '.$user->getUsername().' Password: '. $user->getPassword()
-            )
-            /*
-             * If you also want to include a plaintext version of the message
-            ->addPart(
-                $this->renderView(
-                    'Emails/registration.txt.twig',
-                    array('name' => $name)
-                ),
-                'text/plain'
-            )
-            */
-        ;
-        $this->get('mailer')->send($message);
+//        $message = \Swift_Message::newInstance()
+//            ->setSubject('Hello Email')
+//            ->setFrom('medicalguidesystem@gmail.com')
+//            ->setTo($email)
+//            ->setBody(
+//                'You was registered in MedicalGuide system as doctor. Username: '.$user->getUsername().' Password: '. $user->getPassword()
+//            )
+//            /*
+//             * If you also want to include a plaintext version of the message
+//            ->addPart(
+//                $this->renderView(
+//                    'Emails/registration.txt.twig',
+//                    array('name' => $name)
+//                ),
+//                'text/plain'
+//            )
+//            */
+//        ;
+//        $this->get('mailer')->send($message);
         return $user;
     }
 
 
-    private function random_password($length) {
+    private function random_password($length)
+    {
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@%^*()_-";
-        $password = substr( str_shuffle( $chars ), 0, $length );
+        $password = substr(str_shuffle($chars), 0, $length);
         return $password;
     }
 

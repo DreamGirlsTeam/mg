@@ -3,6 +3,7 @@
 namespace GuideBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use GuideBundle\Entity\Jobs;
 
 /**
  * RegInfo
@@ -22,10 +23,8 @@ class RegInfo
     private $id;
 
     /**
-     * @var int
-     *
      * @ORM\OneToOne(targetEntity="Actors")
-     * @ORM\JoinColumn(name="actorId", referencedColumnName="id")
+     * @ORM\JoinColumn(name="actorId", referencedColumnName="id", onDelete="cascade")
      */
     private $actorId;
 
@@ -79,20 +78,39 @@ class RegInfo
     private $city;
 
     /**
-     * @var integer
-     *
-     * @ORM\OneToOne(targetEntity="Jobs")
+     * @ORM\ManyToOne(targetEntity="Jobs")
      * @ORM\JoinColumn(name="job", referencedColumnName="id")
      */
     private $job;
 
     /**
-     * @var integer
-     *
-     * @ORM\OneToOne(targetEntity="Districs")
+     * @ORM\ManyToOne(targetEntity="Districs")
      * @ORM\JoinColumn(name="district", referencedColumnName="id")
      */
     private $district;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=30)
+     */
+    private $email;
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
 
     /**
      * Get id
@@ -107,7 +125,7 @@ class RegInfo
     /**
      * Set actorId
      *
-     * @param integer $actorId
+     * @param $actorId
      *
      * @return RegInfo
      */
@@ -299,7 +317,7 @@ class RegInfo
     /**
      * Set job
      *
-     * @param integer $job
+     * @param $job
      *
      * @return RegInfo
      */
@@ -313,7 +331,7 @@ class RegInfo
     /**
      * Get job
      *
-     * @return integer
+     * @return string
      */
     public function getJob()
     {
@@ -323,7 +341,7 @@ class RegInfo
     /**
      * Set district
      *
-     * @param integer $district
+     * @param $district
      *
      * @return RegInfo
      */
@@ -337,7 +355,7 @@ class RegInfo
     /**
      * Get district
      *
-     * @return integer
+     * @return string
      */
     public function getDistrict()
     {

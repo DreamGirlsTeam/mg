@@ -4,5 +4,21 @@ INSERT INTO actors (role) VALUES (1), (2), (3), (4), (5);
 #Inserting authorization data
 INSERT INTO auth (actorId, username, password) VALUES (1, "admin", "admin"), (2, "doc_1", "doc_1"), (3, "lab_1", "lab_1"), (4, "rec_1", "rec_1"), (5, "pat_1", "pat_1");
 
+#Jobs
+INSERT INTO jobs (name) VALUES ('ІТ сфера'), ("Металургія"), ("Управління"), ("Бізнес"), ("Робочий");
+
+#Districs
+INSERT INTO districs (name) VALUES ("Голосіївський"), ("Оболонський"), ("Печерський"), ("Подільский"), ("Святошинський"), ("Солом'янський"), ("Шевченківський"), ("Дарницький"), ("Деснянський"), ("Дніпровський");
+
+
 #Inserting personal data
-INSERT INTO reg_info VALUES (null, 5, "Олена", "Стрілецька", "Степанівна", '1994-01-02', '+380981726692', 'AA123456', 'Київ');
+INSERT INTO reg_info VALUES (null, 1, 2, "Олена", "Стрілецька", "Степанівна", '1994-01-02', '+380981726692', 'AA123456', 'Київ', 5);
+
+#VisitTypes
+INSERT INTO visit_types VALUES (null, 'Плановий'), (null, 'За скаргою'), (null, 'Довідка');
+
+#Illnesses
+INSERT INTO illnesses VALUES (null, 'Запалення легень');
+
+#Medicaments
+INSERT INTO medicines VALUES (null, 'Спазмалгон', 'Від усього, що болить');

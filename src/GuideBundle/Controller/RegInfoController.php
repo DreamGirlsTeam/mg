@@ -2,12 +2,14 @@
 
 namespace GuideBundle\Controller;
 
+use Proxies\__CG__\GuideBundle\Entity\Actors;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use GuideBundle\Entity\RegInfo;
 use GuideBundle\Form\RegInfoType;
+use GuideBundle\Entity\ConfPerson;
 
 /**
  * RegInfo controller.
@@ -25,8 +27,13 @@ class RegInfoController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
+//        $query = $em->createQueryBuilder('r')
+//            ->select('r')
+//            ->from('GuideBundle:RegInfo', 'r')
+//            ->leftJoin('GuideBundle:ConfPerson', 'cp', 'WITH', 'cp.first_name = r.first_name');
         $regInfos = $em->getRepository('GuideBundle:RegInfo')->findAll();
+       // $regInfos = $em->createQuery($query)->getResult();
+        //$regInfos = $em->getRepository('GuideBundle:ConfPerson')->findAll();
 
         return $this->render('reginfo/index.html.twig', array(
             'regInfos' => $regInfos,
@@ -42,15 +49,21 @@ class RegInfoController extends Controller
     public function newAction(Request $request)
     {
         $regInfo = new RegInfo();
+        $actor = new Actors();
         $form = $this->createForm('GuideBundle\Form\RegInfoType', $regInfo);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $actor->setRole(5);
             $em = $this->getDoctrine()->getManager();
+            $em->persist($actor);
+            $em->flush();
+            $regInfo->setActorId($actor);
             $em->persist($regInfo);
             $em->flush();
-
-            return $this->redirectToRoute('reception_show', array('id' => $regInfo->getId()));
+           // var_dump($regInfo->getJob()->getName());
+            return $this->redirect($this->generateUrl('reception_confidant_new', array('actorId' => $actor->getId())));
+           // return $this->redirectToRoute('reception_confidant_new', array('actorId' => $actor->getId()));
         }
 
         return $this->render('reginfo/new.html.twig', array(
@@ -62,7 +75,7 @@ class RegInfoController extends Controller
     /**
      * Finds and displays a RegInfo entity.
      *
-     * @Route("/{id}", name="reception_show")
+     * @Route("/{actorId}/show", name="reception_show")
      * @Method("GET")
      */
     public function showAction(RegInfo $regInfo)
@@ -78,7 +91,7 @@ class RegInfoController extends Controller
     /**
      * Displays a form to edit an existing RegInfo entity.
      *
-     * @Route("/{id}/edit", name="reception_edit")
+     * @Route("/{actorId}/edit", name="reception_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, RegInfo $regInfo)
@@ -92,7 +105,7 @@ class RegInfoController extends Controller
             $em->persist($regInfo);
             $em->flush();
 
-            return $this->redirectToRoute('reception_edit', array('id' => $regInfo->getId()));
+            return $this->redirectToRoute('reception_edit', array('actorId' => $regInfo->getActorId()->getId()));
         }
 
         return $this->render('reginfo/edit.html.twig', array(
@@ -105,7 +118,7 @@ class RegInfoController extends Controller
     /**
      * Deletes a RegInfo entity.
      *
-     * @Route("/{id}", name="reception_delete")
+     * @Route("/{actorId}/delete", name="reception_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, RegInfo $regInfo)
@@ -132,7 +145,7 @@ class RegInfoController extends Controller
     private function createDeleteForm(RegInfo $regInfo)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('reception_delete', array('id' => $regInfo->getId())))
+            ->setAction($this->generateUrl('reception_delete', array('actorId' => $regInfo->getActorId()->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

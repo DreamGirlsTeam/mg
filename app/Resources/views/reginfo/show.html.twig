@@ -11,7 +11,7 @@
             </tr>
             <tr>
                 <th>Actorid</th>
-                <td>{{ regInfo.actorId }}</td>
+                <td>{{ regInfo.actorId.id }}</td>
             </tr>
             <tr>
                 <th>Firstname</th>
@@ -49,7 +49,7 @@
             <a href="{{ path('reception_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('reception_edit', { 'id': regInfo.id }) }}">Edit</a>
+            <a href="{{ path('reception_edit', { 'actorId': regInfo.actorId.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

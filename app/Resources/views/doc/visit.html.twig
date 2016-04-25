@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
-
-{% block body %}
-    {% include 'BraincraftedBootstrapBundle::flash.html.twig' %}
-    {% form_theme form 'bootstrap_3_layout.html.twig' %}
-    <div class="page-header">
-        <div class="logo-position">
+{% block stylesheets %}
+    <link href="{{ asset('/bundles/framework/css/doctor.css') }}" rel="stylesheet"/>
+{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
             <img src="{{ asset('images/logo.png') }}"/>
         </div>
-        <h1 class="text-header">Додавання медичного персоналу</h1>
+    </nav>
+{% endblock %}
 
-        <div class="logout-button">
-            <a href="{{ path('logout') }}" class="btn btn-default btn-lg">Вихід</a>
-        </div>
-    </div>
+{% block body %}
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
@@ -22,7 +22,7 @@
                             <div class="panel-heading"><i class="fa fa-stethoscope fa-3x"></i></div>
                             <div class="panel-body">
                                 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-                                {{ form_widget(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                                {{ form_widget(form) }}
                                 <input type="submit" value="Створити" class="btn btn-success"/>
                                 {{ form_end(form) }}
                             </div>
@@ -30,13 +30,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <ul class="list-inline">
-                <li class="row top-buffer">
-                    <a href="{{ path('admin_index') }}" class="btn btn-danger">Назад до списку</a>
-                </li>
-            </ul>
         </div>
     </div>
 {% endblock %}
