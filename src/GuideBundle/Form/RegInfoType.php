@@ -18,7 +18,6 @@ class RegInfoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-
             ->add('firstName', TextType::class, array('label' => 'Name',  'attr' => array('class'=>'validate[required, custom[onlyLetterSp, minSize[2], maxSize[25]]]')))
             ->add('lastName', TextType::class, array('label' => 'last name',  'attr' => array('class'=>'validate[required, custom[onlyLetterSp, minSize[2], maxSize[30]]')))
             ->add('patronymic', TextType::class, array('label' => 'patr',  'attr' => array('class'=>'validate[custom[onlyLetterSp, minSize[2], maxSize[35]]]')))

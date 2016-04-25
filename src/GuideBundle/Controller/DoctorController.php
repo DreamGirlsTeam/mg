@@ -2,9 +2,11 @@
 
 namespace GuideBundle\Controller;
 
+use GuideBundle\Entity\Visits;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use GuideBundle\Form\VisitsType;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -33,6 +35,25 @@ class DoctorController extends Controller
     public function cardAction(Request $request, $actorId)
     {
         return $this->render('doc/card.html.twig', array(
+            'actorId' => $actorId
+        ));
+    }
+
+    /**
+     * @Route("/visit/{actorId}", name="doctor_visit")
+     */
+    public function visitAction(Request $request, $actorId)
+    {
+        $visit = new Visits();
+        $form = $this->createForm('GuideBundle\Form\VisitsType', $visit);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+           var_dump($visit);
+        }
+        return $this->render('doc/visit.html.twig', array(
+            'actorId' => $actorId,
+            'form' => $form->createView(),
         ));
     }
 }
