@@ -1,47 +1,63 @@
 {% extends 'base.html.twig' %}
 
+{% block head %}
+	<div class="container">
+		<div class="row" id="mainmenu">
+			<div class="span12">
+				<a name="top"><img src="{{ asset('images/mainmenu.png') }}"></a>
+				<div class="row">
+					<div class="span6" id="login"><a href="/auth"><img src="{{ asset('images/login.png') }}"></a></div>
+					<div class="span6" id="connect1"><a href="/connect"><img src="{{asset('images/connect.png') }}"></a></div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+{% endblock %}
+
 {% block body %}
-	<head>
-	
-
-		<div id="mainmenu"><a name="top"></a> <img src="{{ asset('images/mainmenu.png') }}"> </a>
-			<ul>
-				<div id="login"><a href="/auth"><img src="{{ asset('images/login.png') }}"></a></div>
-				<div id="connect"><img src="{{asset('images/connect.png') }}"></div>
-			</ul>
+	<div class="container">
+		<div class="row" id="aboutbk">
+			<div class="span12">
+			<img src="{{ asset('images/aboutbk.png') }}">
+				<div class="span12" id="about"><img src="{{ asset('images/about.png') }}"></div>
+				<div class="row">
+					<div class="span6" id="YourmadheartgoesCrus"><img src="{{ asset('images/YourmadheartgoesCrus.png') }}"></div>
+					<div class="span6" id="Whenyouareseventeeny"><img src="{{ asset('images/Whenyouareseventeeny.png') }}"></div>
+				</div>
+			</div>
 		</div>
-	</head>
-	<body>
-
-		<div id="aboutbk"><img src="{{ asset('images/aboutbk.png') }}">
-			<div id="about"><img src="{{ asset('images/about.png') }}"></div>
-			<div id="YourmadheartgoesCrus"><img src="{{ asset('images/YourmadheartgoesCrus.png') }}"></div>
-			<div id="Whenyouareseventeeny"><img src="{{ asset('images/Whenyouareseventeeny.png') }}"></div>
+	</div>
+	<div class="container">
+		<div class="row" id="teambk">
+			<div class="span12">
+				<img src="{{ asset('images/teambk.png') }}">
+					<div class="span12" id="theteam"><img src="{{ asset('images/theteam.png') }}"></div>
+					<div class="row">
+					<div class="span4" id="m2"><img src="{{ asset('images/m2.png') }}"></div>
+						<div id="mary"><img src="{{ asset('images/mary.png') }}"></div>
+						<div id="mtwi"><img src="{{ asset('images/mtwi.png') }}"></div>
+						<div id="mfb"><a href="https://www.facebook.com/marina.oblovatska"> <img src="{{ asset('images/mfb.png') }}"></a> </div>
+						<div id="mvk"><a href="http://vk.com/id16073030"><img src="{{ asset('images/mvk.png') }}"></a></div>
+					<div class="span4" id="e1"><img src="{{ asset('images/e1.png') }}"></div>
+						<div id="elya"><img src="{{ asset('images/elya.png') }}"></div>
+						<div id="etwi"><img src="{{ asset('images/etwi.png') }}"></div>
+						<div id="efb"><a href="https://www.facebook.com/elya.korobova"><img src="{{ asset('images/efb.png') }}"></a></div>
+						<div id="evk"><a href="http://vk.com/korobovaelya"><img src="{{ asset('images/evk.png') }}"></a></div>
+					<div class="span4" id="l3"><img src="{{ asset('images/l3.png') }}"></div>
+						<div id="lesya"><img src="{{ asset('images/lesya.png') }}"></div>
+						<div id="ltwi"><img src="{{ asset('images/ltwi.png') }}"></div>
+						<div id="lfb"><a href="https://www.facebook.com/oleksandra.tkalich"><img src="{{ asset('images/lfb.png') }}"></a></div>
+						<div id="lvk"><a href="http://vk.com/id13411849"><img src="{{ asset('images/lvk.png') }}"></a></div>
+					</div>
+			</div>
 		</div>
+	</div>
+{% endblock %}
 
-	        <div id="teambk"><img src="{{ asset('images/teambk.png') }}"></div>
-	        <div id="theteam"><img src="{{ asset('images/theteam.png') }}"></div>
-        	<div id="m2"><img src="{{ asset('images/m2.png') }}"></div>
-		        <div id="mary"><img src="{{ asset('images/mary.png') }}"></div>
-		        <div id="mtwi"><img src="{{ asset('images/mtwi.png') }}"></div>
-        		<div id="mfb"><a href="https://www.facebook.com/marina.oblovatska"> <img src="{{ asset('images/mfb.png') }}"></a> </div>
-        		<div id="mvk"><a href="http://vk.com/id16073030"><img src="{{ asset('images/mvk.png') }}"></a></div>
-		<div id="e1"><img src="{{ asset('images/e1.png') }}"></div>
-		        <div id="elya"><img src="{{ asset('images/elya.png') }}"></div>	
-        		<div id="etwi"><img src="{{ asset('images/etwi.png') }}"></div>
-        		<div id="efb"><a href="https://www.facebook.com/elya.korobova"><img src="{{ asset('images/efb.png') }}"></a></div>
-        		<div id="evk"><a href="http://vk.com/korobovaelya"><img src="{{ asset('images/evk.png') }}"></a></div>
-        	<div id="l3"><img src="{{ asset('images/l3.png') }}"></div>
-		        <div id="lesya"><img src="{{ asset('images/lesya.png') }}"></div>
-        		<div id="ltwi"><img src="{{ asset('images/ltwi.png') }}"></div>
-        		<div id="lfb"><a href="https://www.facebook.com/oleksandra.tkalich"><img src="{{ asset('images/lfb.png') }}"></a></div>
-        		<div id="lvk"><a href="http://vk.com/id13411849"><img src="{{ asset('images/lvk.png') }}"></a></div>
-	</body>
-	<footer>
-        <div id="footerbk"><img src="{{ asset('images/footerbk.png') }}"></div>
-	<div id="up"><a href="#top"> <img src="{{ asset('images/up.png') }}"></a></div>
-	</footer>
-    </div> 
-	
-</div>
+{% block footer %}
+    <div class="container">
+		<div class="row" id="footerbk"><img src="{{ asset('images/footerbk.png') }}"></div>
+		<div class="span12" id="up"><a href="#top"> <img src="{{ asset('images/up.png') }}"></a></div>
+	</div>
 {% endblock %}

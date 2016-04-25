@@ -1,203 +1,17 @@
+head{
+    margin:0 auto;
+    float:none;
+}
+
 body {
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
-}
-
-#footerbk
-{
-    top: 238.7%;
-    left: 19.3%;
-    position: absolute;
-    width: 869px;
-    height: 575px;
-    z-index:2;
-}
-
-
-#up
-{
-    top: 275.7%;
-    left: 47%;
-    position: absolute;
-    width: 106px;
-    height: 24px;
-    z-index:5;
-}
-
-#teambk
-{
-    top: 163.7%;
-    left: 19.3%;
-    position: absolute;
-    width: 869px;
-    height: 724px;
-    z-index:6;
-}
-
-#e1
-{
-    top: 199.7%;
-    left: 45%;
-    position: absolute;
-    width: 206px;
-    height: 224px;
-    z-index:7;
-}
-
-#m2
-{
-    top: 199.7%;
-    left: 25%;
-    position: absolute;
-    width: 208px;
-    height: 223px;
-    z-index:8;
-}
-
-#l3
-{
-    top: 199.7%;
-    left: 65%;
-    position: absolute;
-    width: 210px;
-    height: 223px;
-    z-index:9;
-}
-
-#etwi
-{
-    left: 52%;
-    top: 240%;
-    position: absolute;
-    width: 20px;
-    height: 15px;
-    z-index:10;
-}
-
-#efb
-{
-    left: 50%;
-    top: 240%;
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    z-index:11;
-}
-
-#evk
-{
-    left: 54%;
-    top: 240%;
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    z-index:12;
-}
-
-#mtwi
-{
-    left: 32%;
-    top: 240%;
-    position: absolute;
-    width: 20px;
-    height: 16px;
-    z-index:13;
-}
-
-#mfb
-{
-    left: 30%;
-    top: 240%;
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    z-index:14;
-}
-
-#mvk
-{
-    left: 34%;
-    top: 240%;
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    z-index:15;
-}
-
-#ltwi
-{
-    left: 72%;
-    top: 240%;
-    position: absolute;
-    width: 21px;
-    height: 16px;
-    z-index:16;
-}
-
-#lfb
-{
-    left: 70%;
-    top: 240%;
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    z-index:17;
-}
-
-#lvk
-{
-    left: 74%;
-    top: 240%;
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    z-index:18;
-}
-
-#elya
-{
-    top: 235.7%;
-    left: 50%;
-    position: absolute;
-    width: 64px;
-    height: 23px;
-    z-index:19;
-}
-
-#mary
-{
-    left: 30%;
-    top: 235.7%;
-    position: absolute;
-    width: 81px;
-    height: 26px;
-    z-index:20;
-}
-
-#lesya
-{
-    left: 70%;
-    top: 235.7%;
-    position: absolute;
-    width: 78px;
-    height: 23px;
-    z-index:21;
-}
-
-#theteam
-{
-    top: 188.7%;
-    left: 46%;
-    position: absolute;
-    width: 170px;
-    height: 30px;
-    z-index:22;
 }
 
 #mainmenu
 {
-    left: 19%;
-    position: absolute;
+    margin:0 auto;
+    float:none;
     width: 872px;
     height: 694px;
     z-index:23;
@@ -205,38 +19,39 @@ body {
 
 #login
 {
-    left: 20%;
-    top: 41px;
-    position: absolute;
+    margin-top: -655px;
+    margin-left: 200px;
     width: 86px;
     height: 27px;
     z-index:24;
 }
 
-#connect
+#connect1
 {
-    left: 65%;
-    top: 47px;
-    position: absolute;
+    margin-top: -20px;
+    margin-left: 600px;
     width: 179px;
     height: 22px;
-    z-index:25;
+    z-index:24;
 }
 
 #aboutbk
 {
-
-    top: 78.5%;
-    left: 19.3%;
-    position: absolute;
+    margin:0 auto;
+    float:none;
+    margin-top: -190px;
+    width: 869px;
+    height: 780px;
     z-index:26;
 }
 
 #about
 {
-    top: 18%;
-    left: 37%;
+    margin:0 auto;
+    float: none;
     position: absolute;
+    margin-left: 330px;
+    margin-top: -628px;
     width: 206px;
     height: 25px;
     z-index:27;
@@ -244,8 +59,8 @@ body {
 
 #YourmadheartgoesCrus
 {
-    top: 25%;
-    left: 52%;
+    margin-top: -550px;
+    margin-left: 440px;
     position: absolute;
     width: 331px;
     height: 273px;
@@ -254,24 +69,203 @@ body {
 
 #Whenyouareseventeeny
 {
-    left: 15%;
-    top: 25%;
+    margin-top: -550px;
+    margin-left: 90px;
     position: absolute;
     width: 312px;
     height: 273px;
     z-index:29;
 }
-<<<<<<< HEAD
-=======
 
-#connect
+#teambk
 {
-    left: 548px;
-    top: 72px;
+    margin:0 auto;
+    float:none;
+    margin-top: -246px;
+    width: 869px;
+    height: 724px;
+    z-index:6;
+}
+
+#e1
+{
+    margin:0 auto;
+    float: none;
+    margin-top: -500px;
+    width: 206px;
+    height: 224px;
+    z-index:7;
+}
+
+#m2
+{
+    margin-top: -496px;
+    margin-left: 65px;
     position: absolute;
-    width: 266px;
-    height: 32px;
-    z-index:30;
+    width: 208px;
+    height: 223px;
+    z-index:8;
+}
+
+#l3
+{
+    margin-top: -290px;
+    margin-left: 635px;
+    position: absolute;
+    width: 210px;
+    height: 223px;
+    z-index:9;
+}
+
+#etwi
+{
+    margin:0 auto;
+    float: none;
+    margin-top: 7px;
+    width: 20px;
+    height: 15px;
+    z-index:10;
+}
+
+#efb
+{
+    margin-top: -15px;
+    margin-left: 412px;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    z-index:11;
+}
+
+#evk
+{
+    margin-top: -15px;
+    margin-left: 466px;
+    width: 18px;
+    height: 18px;
+    z-index:12;
+}
+
+#mtwi
+{
+    margin-top: -230px;
+    margin-left: 162px;
+    position: absolute;
+    width: 20px;
+    height: 16px;
+    z-index:13;
+}
+
+#mfb
+{
+    margin-top: -230px;
+    margin-left: 135px;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    z-index:14;
+}
+
+#mvk
+{
+    margin-top: -230px;
+    margin-left: 189px;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    z-index:15;
+}
+
+#ltwi
+{
+    margin-top: -19px;
+    margin-left: 729px;
+    position: absolute;
+    width: 21px;
+    height: 16px;
+    z-index:16;
+}
+
+#lfb
+{
+    margin-top: -19px;
+    margin-left: 702px;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    z-index:17;
+}
+
+#lvk
+{
+    margin-top: -19px;
+    margin-left: 757px;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    z-index:18;
+}
+
+#elya
+{
+    margin:0 auto;
+    float: none;
+    margin-top: 15px;
+    width: 64px;
+    height: 23px;
+    z-index:19;
+}
+
+#mary
+{
+    margin-top: -259px;
+    margin-left: 130px;
+    position: absolute;
+    width: 81px;
+    height: 26px;
+    z-index:20;
+}
+
+#lesya
+{
+    margin-top: -48px;
+    margin-left: 700px;
+    position: absolute;
+    width: 78px;
+    height: 23px;
+    z-index:21;
+}
+
+#theteam
+{
+    margin-top: -560px;
+    margin-left: 360px;
+    position: absolute;
+    width: 170px;
+    height: 30px;
+    z-index:22;
+}
+
+
+#footerbk
+{
+    margin:0 auto;
+    float:none;
+    margin-top: -238px;
+    width: 869px;
+    height: 575px;
+    z-index:2;
+}
+
+
+#up
+{
+    margin:0 auto;
+    float: none;
+    margin-top: -350px;
+    width: 106px;
+    height: 24px;
+    z-index:5;
 }
 
 .text-header
@@ -307,4 +301,3 @@ body {
     margin-left: 1%;
     margin-top: -35px;
 }
->>>>>>> 36cb3be54a8076096f271e113ebb19d8d5a4740e

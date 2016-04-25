@@ -10,6 +10,8 @@
 
         {% block stylesheets %}{% endblock %}
 
+        {% block head %}{% endblock %}
+
     </head>
     <body>
         {% block body %}{% endblock %}
@@ -18,6 +20,10 @@
         <!-- Include all JavaScripts, compiled by Assetic -->
 
     </body>
+
+    <footer>
+        {% block footer %}{% endblock %}
+    </footer>
     {% block javascripts %}
         <script src="{{ asset('bundles/framework/js/jQuery/jquery-1.12.3.min.js') }}"></script>
         <script src="{{ asset('bundles/framework/js/bootstrap.js') }}"></script>
