@@ -28,10 +28,11 @@ class DoctorController extends Controller
     }
 
     /**
-     * @Route("/doctor", name="doctor")
+     * @Route("/card/{actorId}", name="doctor_card")
      */
-    public function cardAction()
+    public function cardAction(Request $request, $actorId)
     {
-
+        return $this->render('doc/card.html.twig', array(
+        ));
     }
 }
