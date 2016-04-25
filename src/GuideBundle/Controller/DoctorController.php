@@ -7,13 +7,31 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * ConfPerson controller.
+ *
+ * @Route("/doctor")
+ */
 class DoctorController extends Controller
 {
     /**
-     * @Route("doctor", name="doctor")
+     * @Route("/", name="doctor")
      */
     public function doctorAction(Request $request)
     {
-        return new Response('Hello doc!');
+        $em = $this->getDoctrine()->getManager();
+        $regInfos = $em->getRepository('GuideBundle:RegInfo')->findAll();
+
+        return $this->render('doc/index.html.twig', array(
+            'regInfos' => $regInfos,
+        ));
+    }
+
+    /**
+     * @Route("/doctor", name="doctor")
+     */
+    public function cardAction()
+    {
+
     }
 }

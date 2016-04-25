@@ -1,19 +1,20 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css"/>
+{% endblock %}
 
 
 {% block body %}
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-7 col-md-offset-2">
-                    <div class="alert alert-success">
-                        <a href="{{ path('reception_new') }}">Create a new entry</a>
-                    </div>
-                <table class="table table-hover">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-11">
+                <div class="alert alert-success">
+                    <a href="{{ path('reception_new') }}">Create a new entry</a>
+                </div>
+                <table class="table table-hover reg_info">
                     <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Actorid</th>
                         <th>Firstname</th>
                         <th>Lastname</th>
                         <th>Patronymic</th>
@@ -23,6 +24,7 @@
                         <th>Job</th>
                         <th>City</th>
                         <th>District</th>
+                        <th>Email</th>
                         <th>Confidant</th>
                         <th>Actions</th>
                     </tr>
@@ -31,8 +33,6 @@
                     {% for regInfo in regInfos %}
 
                         <tr>
-                            <td><a href="{{ path('reception_show', { 'actorId': regInfo.actorId.id }) }}">{{ regInfo.actorId.id }}</a></td>
-                            <td>{{ regInfo.actorId.id }}</td>
                             <td>{{ regInfo.firstName }}</td>
                             <td>{{ regInfo.lastName }}</td>
                             <td>{{ regInfo.patronymic }}</td>
@@ -42,7 +42,9 @@
                             <td>{{ regInfo.job.name }}</td>
                             <td>{{ regInfo.city }}</td>
                             <td>{{ regInfo.district.name }}</td>
-                            <td> <a href="{{ path('reception_confidant_show', { 'actorId': regInfo.actorId.id }) }}">confidant</a></td>
+                            <td>{{ regInfo.email }}</td>
+                            <td><a href="{{ path('reception_confidant_show', { 'actorId': regInfo.actorId.id }) }}">confidant</a>
+                            </td>
                             <td>
                                 <ul>
                                     <li>
@@ -61,4 +63,14 @@
         </div>
     </div>
 
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+    <script>
+        // $('.admin').DataTable();
+        $('.reg_info').DataTable({
+            responsive: true
+        });
+    </script>
 {% endblock %}

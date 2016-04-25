@@ -18,6 +18,14 @@ class RegInfoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+
+            ->add('firstName', TextType::class, array('label' => 'Name',  'attr' => array('class'=>'validate[required, custom[onlyLetterSp, minSize[2], maxSize[25]]]')))
+            ->add('lastName', TextType::class, array('label' => 'last name',  'attr' => array('class'=>'validate[required, custom[onlyLetterSp, minSize[2], maxSize[30]]')))
+            ->add('patronymic', TextType::class, array('label' => 'patr',  'attr' => array('class'=>'validate[custom[onlyLetterSp, minSize[2], maxSize[35]]]')))
+            ->add('birthday', BirthdayType::class, array('label' => 'birthday'))
+            ->add('phone', TextType::class, array('label' => 'phone',  'attr' => array('class'=>'validate[required, custom[phone]]')))
+            ->add('passport', TextType::class, array('label' => 'passport',  'attr' => array('class'=>'validate[custom[passport]')))
+            ->add('city', TextType::class, array('label' => 'city',  'attr' => array('class'=>'validate[required, custom[onlyLetterSp, minSize[2], maxSize[25]]]')))
             ->add('job', EntityType::class, array(
                 'class' => 'GuideBundle:Jobs',
                 'choices_as_values' => true,
@@ -28,13 +36,8 @@ class RegInfoType extends AbstractType
                 'choices_as_values' => true,
                 'choice_label' => 'name',
             ))
-            ->add('firstName', TextType::class, array('label' => 'Ім\'я',  'attr' => array('class'=>'validate[required, custom[onlyLetterSp, minSize[2], maxSize[25]]]')))
-            ->add('lastName', TextType::class, array('label' => 'Прізвище',  'attr' => array('class'=>'validate[required, custom[onlyLetterSp, minSize[2], maxSize[30]]')))
-            ->add('patronymic', TextType::class, array('label' => 'По-батькові',  'attr' => array('class'=>'validate[custom[onlyLetterSp, minSize[2], maxSize[35]]]')))
-            ->add('birthday', BirthdayType::class, array('label' => 'Дата народження'))
-            ->add('phone', TextType::class, array('label' => 'Номер телефону',  'attr' => array('class'=>'validate[required, custom[phone]]')))
-            ->add('passport', TextType::class, array('label' => 'Паспорт',  'attr' => array('class'=>'validate[custom[passport]')))
-            ->add('city', TextType::class, array('label' => 'Місто',  'attr' => array('class'=>'validate[required, custom[onlyLetterSp, minSize[2], maxSize[25]]]')))
+            ->add('email', TextType::class, array('label' => 'email',  'attr' => array('class'=>'validate[required, custom[email]')))
+
         ;
     }
     
