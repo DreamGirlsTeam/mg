@@ -1,60 +1,55 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>RegInfo</h1>
+    <h2 class="text-center">Інформація про пацієнта</h2>
 
-    <table>
+    <div class="col-md-6 col-md-offset-3">
+    <div class="row">
+        <table class="table table-bordered">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ regInfo.id }}</td>
-            </tr>
-            <tr>
-                <th>Actorid</th>
-                <td>{{ regInfo.actorId.id }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
+                <th>Ім'я</th>
                 <td>{{ regInfo.firstName }}</td>
             </tr>
             <tr>
-                <th>Lastname</th>
+                <th>Прізвище</th>
                 <td>{{ regInfo.lastName }}</td>
             </tr>
             <tr>
-                <th>Patronymic</th>
+                <th>По-батькові</th>
                 <td>{{ regInfo.patronymic }}</td>
             </tr>
             <tr>
-                <th>Birthday</th>
+                <th>День Народження</th>
                 <td>{% if regInfo.birthday %}{{ regInfo.birthday|date('Y-m-d') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Phone</th>
+                <th>Телефон</th>
                 <td>{{ regInfo.phone }}</td>
             </tr>
             <tr>
-                <th>Passport</th>
+                <th>Паспорт</th>
                 <td>{{ regInfo.passport }}</td>
             </tr>
             <tr>
-                <th>City</th>
+                <th>Місто</th>
                 <td>{{ regInfo.city }}</td>
             </tr>
         </tbody>
     </table>
 
-    <ul>
+    <ul class="list-inline">
         <li>
-            <a href="{{ path('reception_index') }}">Back to the list</a>
+            <a href="{{ path('reception_index') }}" class="btn btn-warning">Назад до списку</a>
         </li>
         <li>
-            <a href="{{ path('reception_edit', { 'actorId': regInfo.actorId.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
+            <a href="{{ path('reception_edit', { 'actorId': regInfo.actorId.id }) }}" class="btn btn-warning">Редагувати</a>
         </li>
     </ul>
+        {{ form_start(delete_form) }}
+        <div class="btn-right">
+            <input type="submit" class="btn btn-danger" value="Видалити">
+        </div>
+        {{ form_end(delete_form) }}
+
 {% endblock %}
