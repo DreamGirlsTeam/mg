@@ -1,40 +1,41 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>ConfPerson</h1>
-
-    <table>
+    <h2 class="text-center">Довірена особа</h2>
+    <div class="col-md-6 col-md-offset-3">
+    <div class="row">
+        <table class="table table-bordered">
         <tbody>
             <tr>
-                <th>First_name</th>
+                <th>Ім'я</th>
                 <td>{{ confPerson.firstname }}</td>
             </tr>
             <tr>
-                <th>Last_name</th>
+                <th>Прізвище</th>
                 <td>{{ confPerson.lastname }}</td>
             </tr>
             <tr>
-                <th>Patronymic</th>
+                <th>По-батькові</th>
                 <td>{{ confPerson.patronymic }}</td>
             </tr>
             <tr>
-                <th>Phone_number</th>
+                <th>Номер телефону</th>
                 <td>{{ confPerson.phonenumber }}</td>
             </tr>
         </tbody>
     </table>
 
-    <ul>
+    <ul class="list-inline">
         <li>
-            <a href="{{ path('reception_index') }}">Back to the list</a>
+            <a href="{{ path('reception_index') }}" class="btn btn-warning">Назад до списку</a>
         </li>
         <li>
-            <a href="{{ path('reception_confidant_edit', { 'actorId': confPerson.actorId }) }}">Edit</a>
+            <a href="{{ path('reception_confidant_edit', { 'actorId': confPerson.actorId }) }}" class="btn btn-warning">Редагувати</a>
         </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        </ul>
+        {{ form_start(delete_form) }}
+        <div class="btn-right">
+            <input type="submit" class="btn btn-danger" value="Видалити">
+        </div>
+        {{ form_end(delete_form) }}
 {% endblock %}

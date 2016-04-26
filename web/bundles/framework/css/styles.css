@@ -261,8 +261,6 @@ body {
     height: 273px;
     z-index:29;
 }
-<<<<<<< HEAD
-=======
 
 #connect
 {
@@ -276,22 +274,12 @@ body {
 
 .text-header
 {
-    margin-left: 42%;
+    margin-left: 38%;
 }
 
 .top-buffer
 {
     margin-top:20px;
-}
-
-.field-color-blue
-{
-    background-color: #E6FEFF;
-}
-
-.field-color-green
-{
-    background-color: #DBFFD9;
 }
 
 .logout-button
@@ -307,4 +295,9 @@ body {
     margin-left: 1%;
     margin-top: -35px;
 }
->>>>>>> 36cb3be54a8076096f271e113ebb19d8d5a4740e
+
+.btn-right
+{
+    float: right;
+    margin-top: -43px;
+}
