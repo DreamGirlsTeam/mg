@@ -105,7 +105,7 @@ class RegInfoController extends Controller
             $em->persist($regInfo);
             $em->flush();
 
-            return $this->redirectToRoute('reception_edit', array('actorId' => $regInfo->getActorId()->getId()));
+            return $this->redirectToRoute('reception_index', array('actorId' => $regInfo->getActorId()->getId()));
         }
 
         return $this->render('reginfo/edit.html.twig', array(

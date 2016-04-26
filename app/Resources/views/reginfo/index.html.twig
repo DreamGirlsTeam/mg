@@ -5,28 +5,29 @@
 
 
 {% block body %}
-
+<div class="col-md-12 col-md-offset-0">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-11">
                 <div class="alert alert-success">
-                    <a href="{{ path('reception_new') }}">Create a new entry</a>
+                    <div class="text-center">
+                        <a href="{{ path('reception_new') }}">Створити новий запис</a>
+                    </div>
                 </div>
                 <table class="table table-hover reg_info">
                     <thead>
                     <tr>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
-                        <th>Patronymic</th>
-                        <th>Birthday</th>
-                        <th>Phone</th>
-                        <th>Passport</th>
-                        <th>Job</th>
-                        <th>City</th>
-                        <th>District</th>
-                        <th>Email</th>
-                        <th>Confidant</th>
-                        <th>Actions</th>
+                        <th>Ім'я</th>
+                        <th>Прізвище</th>
+                        <th>По-батькові</th>
+                        <th>День Народження</th>
+                        <th>Телефон</th>
+                        <th>Паспорт</th>
+                        <th>Спеціальність</th>
+                        <th>Місто</th>
+                        <th>Район</th>
+                        <th>Пошта</th>
+                        <th>Довірена особа</th>
+                        <th>Дії</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -43,15 +44,15 @@
                             <td>{{ regInfo.city }}</td>
                             <td>{{ regInfo.district.name }}</td>
                             <td>{{ regInfo.email }}</td>
-                            <td><a href="{{ path('reception_confidant_show', { 'actorId': regInfo.actorId.id }) }}">confidant</a>
+                            <td><a href="{{ path('reception_confidant_show', { 'actorId': regInfo.actorId.id }) }}">Особа</a>
                             </td>
                             <td>
-                                <ul>
+                                <ul class="list-group">
                                     <li>
-                                        <a href="{{ path('reception_show', { 'actorId': regInfo.actorId.id }) }}">show</a>
+                                        <a href="{{ path('reception_show', { 'actorId': regInfo.actorId.id }) }}">Показати</a>
                                     </li>
                                     <li>
-                                        <a href="{{ path('reception_edit', { 'actorId': regInfo.actorId.id }) }}">edit</a>
+                                        <a href="{{ path('reception_edit', { 'actorId': regInfo.actorId.id }) }}">Редагувати</a>
                                     </li>
                                 </ul>
                             </td>
@@ -62,7 +63,6 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
