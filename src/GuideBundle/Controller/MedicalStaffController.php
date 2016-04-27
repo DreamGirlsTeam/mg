@@ -54,8 +54,7 @@ class MedicalStaffController extends Controller
             $em->persist($medicalStaff);
             $em->flush();
             $this->generateLogin($actor, $medicalStaff->getEmail());
-            $flash = $this->get('braincrafted_bootstrap.flash');
-            $flash->success('Succesfully registered.');
+            return $this->redirect($this->generateUrl('admin_index', array('actorId' => $actor->getId())));
         }
         return $this->render('medicalstaff/new.html.twig', array(
             'medicalStaff' => $medicalStaff,
