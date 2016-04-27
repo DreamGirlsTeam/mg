@@ -274,7 +274,8 @@ body {
 
 .text-header
 {
-    margin-left: 38%;
+    position: relative;
+    left: 25%;
 }
 
 .top-buffer
@@ -291,6 +292,7 @@ body {
 
 .logo-position
 {
+    position: absolute;
     float: left;
     margin-left: 1%;
     margin-top: -35px;
@@ -300,4 +302,11 @@ body {
 {
     float: right;
     margin-top: -43px;
+}
+
+.watermark
+{
+    position: fixed;
+    float: right;
+    margin-right: 5%;
 }

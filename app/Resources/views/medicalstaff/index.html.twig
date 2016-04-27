@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css"/>
 {% endblock %}
 
 {% block body %}
+    {% include 'medicalstaff/header.html.twig' %}
     <div class="col-md-8 col-md-offset-2">
         <div class="container-fluid">
             <div class="row">
@@ -53,7 +55,7 @@
             </div>
         </div>
     </div>
-    <div class="background"><img src="{{ asset('images/back.png') }}"/></div>
+    <div class="background"><img class="watermark" src="{{ asset('images/back.png') }}"/></div>
 
 {% endblock %}
 {% block javascripts %}
