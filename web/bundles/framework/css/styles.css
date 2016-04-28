@@ -278,16 +278,6 @@ body {
     margin-top:20px;
 }
 
-.field-color-blue
-{
-    background-color: #E6FEFF;
-}
-
-.field-color-green
-{
-    background-color: #DBFFD9;
-}
-
 .logout-button
 {
     float: right;
@@ -297,7 +287,22 @@ body {
 
 .logo-position
 {
+    position: absolute;
     float: left;
     margin-left: 1%;
     margin-top: -35px;
 }
+
+.btn-right
+{
+    float: right;
+    margin-top: -43px;
+}
+
+.watermark
+{
+    position: fixed;
+    float: right;
+    margin-right: 5%;
+}
+

@@ -62,7 +62,7 @@ class RegInfoController extends Controller
             $em->persist($regInfo);
             $em->flush();
            // var_dump($regInfo->getJob()->getName());
-            return $this->redirect($this->generateUrl('reception_confidant_new', array('actorId' => $actor->getId())));
+            return $this->redirect($this->generateUrl('reception_index', array('actorId' => $actor->getId())));
            // return $this->redirectToRoute('reception_confidant_new', array('actorId' => $actor->getId()));
         }
 
