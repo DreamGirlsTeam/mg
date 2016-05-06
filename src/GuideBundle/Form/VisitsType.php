@@ -21,6 +21,7 @@ class VisitsType extends AbstractType
         $builder
             ->add('type', EntityType::class, array(
                 'class' => 'GuideBundle:VisitTypes',
+                'label' => 'Тип візиту',
                 'choices_as_values' => true,
                 'choice_label' => 'name',
                 'expanded' => true,

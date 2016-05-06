@@ -56,4 +56,31 @@ class DoctorController extends Controller
             'form' => $form->createView(),
         ));
     }
+
+    public function formPlanedVisitAction()
+    {
+        echo "HELLO";
+        return 0;
+    }
+
+    public function formConsultVisitAction()
+    {
+
+    }
+
+    public function formObserveVisitAction()
+    {
+
+    }
+
+    public function formInquiryVisitAction()
+    {
+
+    }
+
+    public function formClaimVisitAction()
+    {
+
+    }
+
 }
