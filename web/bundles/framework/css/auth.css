@@ -1,0 +1,41 @@
+
+form {
+    min-width: 100%;
+    font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+label {
+    display:block;
+    font-weight: bold;
+}
+input {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    border:1px solid #BEBEBE;
+    padding: 7px;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+}
+
+input:focus {
+    -moz-box-shadow: 0 0 8px #88D5E9;
+    -webkit-box-shadow: 0 0 8px #88D5E9;
+    box-shadow: 0 0 8px #88D5E9;
+    border: 1px solid #88D5E9;
+}
+
+button:hover, .form-style-1 input[type=button]:hover{
+    background: #4691A4;
+    box-shadow:none;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+}
+
+.icons {
+   margin-left: 83%;
+    position: inherit;
+}
