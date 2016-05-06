@@ -28,9 +28,11 @@ class AnalysRes
      */
     private $date;
 
+
+/** ORM\OneToOne(targetEntity="Actors")
+* ORM\JoinColumn(name="patId", referencedColumnName="id")*/
     /**
-     * @ORM\OneToOne(targetEntity="Actors")
-     * @ORM\JoinColumn(name="patId", referencedColumnName="id")
+     * @ORM\Column(name="patId", type="integer", length=11)
      */
     private $patId;
 
@@ -41,9 +43,10 @@ class AnalysRes
      */
     private $filename;
 
+//ORM\OneToOne(targetEntity="Analysis")
+//*ORM\JoinColumn(name="name", referencedColumnName="name")
     /**
-     * @ORM\OneToOne(targetEntity="Analysis")
-     * @ORM\JoinColumn(name="name", referencedColumnName="name")
+     *@ORM\Column(name="name", type="string", length=60)
      */
     private $name;
 
