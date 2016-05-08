@@ -108,12 +108,16 @@ class MedicalStaffController extends Controller
      * @Route("/{actorId}/delete", name="admin_delete")
      * @Method({"DELETE", "GET"})
      */
-    public function deleteAction(Request $request, MedicalStaff $medicalStaff)
+    public function deleteAction(Request $request, MedicalStaff $medicalStaff, $actorId)
     {
         $form = $this->createDeleteForm($medicalStaff);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $repo = $em->getRepository('GuideBundle:Auth');
+            $auth = $repo->findOneBy(array('actorId' => $actorId));
+            $em->remove($auth);
+            $em->flush();
 //            $actor = $this
 //                ->getDoctrine()
 //                ->getRepository("GuideBundle:Actors")
@@ -123,8 +127,6 @@ class MedicalStaffController extends Controller
 //                    )
 //                );
             $em->remove($medicalStaff);
-            $em->flush();
-            //$em->remove($actor);
             $em->flush();
 
         }

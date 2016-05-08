@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>AnalysRes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Filename</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for analysRe in analysRes %}
+            <tr>
+                <td><a href="{{ path('laborant_show', { 'id': analysRe.id }) }}">{{ analysRe.id }}</a></td>
+                <td>{% if analysRe.date %}{{ analysRe.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ analysRe.filename }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('laborant_show', { 'id': analysRe.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('laborant_edit', { 'id': analysRe.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('laborant_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -34,8 +34,14 @@ class DoctorController extends Controller
      */
     public function cardAction(Request $request, $actorId)
     {
+        $em = $this->getDoctrine()->getManager();
+        $analys = $em->getRepository('GuideBundle:AnalysRes')->findBy(
+            array('patId' => $actorId),
+            array('date' => 'ASC')
+        );
         return $this->render('doc/card.html.twig', array(
-            'actorId' => $actorId
+            'actorId' => $actorId,
+            'analysys' => $analys
         ));
     }
 
