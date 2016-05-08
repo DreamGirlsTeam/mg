@@ -6,42 +6,33 @@
 
 {% block body %}
     {% include 'medicalstaff/header.html.twig' %}
-    <div class="col-md-8 col-md-offset-2">
+
+    <div class="col-md-6 col-md-offset-3">
         <div class="container-fluid">
             <div class="row">
-                <div class="alert alert-success">
-                        <h4><a href="{{ path('admin_new') }}"><p class="bg-success text-center">Створити новий запис</p></a></h4>
+                <div class="well">
+                    <h5 class="text-danger col-md-offset-4"><a href="{{ path('admin_new') }}">Зареєструвати нового лікаря</a></h5>
                 </div>
-                <table class="table table-hover admin">
+                <table class="table-striped table-hover admin">
                     <thead>
                     <tr>
                         <th>Ім'я</th>
                         <th>Прізвище</th>
                         <th>По-батькові</th>
-                        <th>Дата народження</th>
                         <th>Посада</th>
-                        <th>Номер телефону</th>
                         <th>Дії</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for medicalStaff in medicalStaffs %}
-                        {% if medicalStaff.actorId == 3 %}
-                            <tr class="field-color-blue">
-                        {% endif %}
-                        {% if medicalStaff.actorId == 4 %}
-                            <tr class="field-color-green">
-                        {% endif %}
                             <td>{{ medicalStaff.firstname }}</td>
                             <td>{{ medicalStaff.lastname }}</td>
-                            <td>{{ medicalStaff.patronymic }}</td>
-                            <td>{% if medicalStaff.dateofbirth %}{{ medicalStaff.dateofbirth|date('Y-m-d') }}{% endif %}</td>
+                            <td>{% if  medicalStaff.patronymic %}{{ medicalStaff.patronymic }} {% else %} -  {% endif %}</td>
                             <td>{{ medicalStaff.specialization }}</td>
-                            <td>{{ medicalStaff.phonenumber }}</td>
                             <td>
                                 <ul class="list-group">
                                     <li>
-                                        <a href="{{ path('admin_show', { 'actorId': medicalStaff.actorId.id }) }}">відкрити</a>
+                                        <a href="{{ path('admin_show', { 'actorId': medicalStaff.actorId.id }) }}">переглянути</a>
                                     </li>
                                     <li>
                                         <a href="{{ path('admin_edit', { 'actorId': medicalStaff.actorId.id }) }}">редагувати</a>
