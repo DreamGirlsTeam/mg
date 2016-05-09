@@ -7,6 +7,10 @@ body {
     color: #45B39D;
     font-weight: bold;
 }
+.scheduling-link:hover {
+    color: #34495E;
+    text-decoration: none;
+}
 
 #footerbk
 {

@@ -196,7 +196,8 @@ class MedicalStaffController extends Controller
      */
     public function logoutAction(Request $request)
     {
-        $request->getSession()->invalidate();
+        $session = new Session();
+        $session->invalidate();
         return $this->redirect('/');
     }
 }
