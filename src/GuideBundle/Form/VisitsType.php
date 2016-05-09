@@ -6,8 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use GuideBundle\Entity\VisitTypes;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
 class VisitsType extends AbstractType
@@ -27,7 +26,9 @@ class VisitsType extends AbstractType
                 'expanded' => true,
                 'multiple' => false
             ))
-            ->add('comment')
+            ->add('save', SubmitType::class, array(
+                'label' => 'Далі'
+            ))
         ;
     }
     

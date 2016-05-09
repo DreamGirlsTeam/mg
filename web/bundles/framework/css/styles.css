@@ -7,6 +7,10 @@ body {
     color: #45B39D;
     font-weight: bold;
 }
+.scheduling-link:hover {
+    color: #34495E;
+    text-decoration: none;
+}
 
 #footerbk
 {
@@ -266,9 +270,6 @@ body {
     height: 273px;
     z-index:29;
 }
-<<<<<<< HEAD
-=======
-
 #connect
 {
     left: 548px;
@@ -312,4 +313,3 @@ body {
     margin-left: 1%;
     margin-top: -35px;
 }
->>>>>>> 36cb3be54a8076096f271e113ebb19d8d5a4740e

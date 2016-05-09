@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ asset('/bundles/framework/css/doctor.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block body %}
+    {% include 'doc/header.html.twig' %}
+    <div class="col-md-6 col-md-offset-3">
+        <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><div class="col-md-offset-5"><h3><small>Тип візиту: <b>{{ type }}</b></small></h3></div></div>
+                    <div class="panel-body">
+                        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                        {{ form_widget(form) }}
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/framework/js/jQuery/jquery-1.12.3.min.js') }}"></script>
+    <script src="{{ asset('bundles/framework/js/upload.js') }}"></script>
+{% endblock %}
