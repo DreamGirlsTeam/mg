@@ -1,41 +1,43 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/dataTables.bootstrap.min.css"/>
+{% endblock %}
 {% block body %}
-    <h1>AnalysRes list</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Date</th>
-                <th>Filename</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for analysRe in analysRes %}
-            <tr>
-                <td><a href="{{ path('laborant_show', { 'id': analysRe.id }) }}">{{ analysRe.id }}</a></td>
-                <td>{% if analysRe.date %}{{ analysRe.date|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ analysRe.filename }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('laborant_show', { 'id': analysRe.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('laborant_edit', { 'id': analysRe.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('laborant_new') }}">Create a new entry</a>
-        </li>
-    </ul>
+    <div class="col-md-6 col-md-offset-3">
+        <div class="well well-sm" style="border-color: #337ab7;">
+            <h5 class="text-center"><a href="{{ path('laborant_new') }}">Додати аналіз</a></h5>
+        </div>
+        <div class="well" style="border-color: #EBF5FB; background-color:#F8F9F9;">
+            <div class="row">
+                <table class="table table-condensed table-hover doc_reg_info">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Filename</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for analysRe in analysRes %}
+                        <tr>
+                            <td>{% if analysRe.date %}{{ analysRe.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                            <td>{{ analysRe.filename }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        // $('.admin').DataTable();
+        $('.doc_reg_info').DataTable({
+            responsive: true
+        });
+    </script>
 {% endblock %}

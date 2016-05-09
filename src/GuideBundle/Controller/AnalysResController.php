@@ -58,7 +58,8 @@ class AnalysResController extends Controller
             $analysRe->setName($analysRe->getName()->getName());
             $em->persist($analysRe);
             $em->flush();
-           $this->sendResults();
+            return $this->redirectToRoute("laborant_index");
+           //$this->sendResults();
         }
 
         return $this->render('analysres/new.html.twig', array(

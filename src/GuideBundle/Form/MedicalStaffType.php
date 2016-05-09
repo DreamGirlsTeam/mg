@@ -26,7 +26,7 @@ class MedicalStaffType extends AbstractType
         $builder
             ->add('first_name', TextType::class, array('label' => 'Ім\'я',  'attr' => array('class'=>'validate[required, custom[onlyLetterSp, minSize[2], maxSize[25]]]')))
             ->add('last_name', TextType::class, array('label' => 'Прізвище',  'attr' => array('class'=>'validate[required, custom[onlyLetterSp, minSize[2], maxSize[30]]')))
-            ->add('patronymic', TextType::class, array('label' => 'По-батькові',  'attr' => array('class'=>'validate[custom[onlyLetterSp, minSize[2], maxSize[35]]]')))
+            ->add('patronymic', TextType::class, array('label' => 'По-батькові',  'attr' => array('class'=>'validate[custom[onlyLetterSp, minSize[6], maxSize[35]]]')))
             ->add('date_of_birth', BirthdayType::class, array('label' => 'Дата народження'))
             ->add('specialization', TextType::class, array('label' => 'Посада',  'attr' => array('class'=>'validate[required, custom[onlyLetterSp, minSize[5], maxSize[40]]')))
             ->add('phone_number', TextType::class, array('label' => 'Номер телефону',  'attr' => array('class'=>'validate[required, custom[phone]]')))
