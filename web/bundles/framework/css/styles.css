@@ -3,6 +3,11 @@ body {
     padding: 0;
 }
 
+.scheduling-link {
+    color: #45B39D;
+    font-weight: bold;
+}
+
 #footerbk
 {
     top: 238.7%;

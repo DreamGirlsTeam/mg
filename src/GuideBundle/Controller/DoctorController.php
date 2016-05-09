@@ -55,7 +55,7 @@ class DoctorController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-           var_dump($visit);
+           //var_dump($visit);
         }
         return $this->render('doc/visit.html.twig', array(
             'actorId' => $actorId,
@@ -63,30 +63,12 @@ class DoctorController extends Controller
         ));
     }
 
-    public function formPlanedVisitAction()
+    /**
+     * @Route("/visit/{actorId}", name="planed_visit")
+     */
+    public function formPlanedVisitAction(Request $request)
     {
-        echo "HELLO";
-        return 0;
+        $data = $request->request->get('request');
+        var_dump($data);
     }
-
-    public function formConsultVisitAction()
-    {
-
-    }
-
-    public function formObserveVisitAction()
-    {
-
-    }
-
-    public function formInquiryVisitAction()
-    {
-
-    }
-
-    public function formClaimVisitAction()
-    {
-
-    }
-
 }

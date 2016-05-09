@@ -1,3 +1,7 @@
+schedule:
+    resource: "@ScheduleBundle/Controller/"
+    type:     annotation
+
 app:
     resource: "@GuideBundle/Controller/"
     type:     annotation

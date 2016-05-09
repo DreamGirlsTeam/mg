@@ -56,16 +56,28 @@ class AnalysResController extends Controller
             $analysRe->setDate(new \DateTime(date('Y-m-d H:i:s')));
             $analysRe->setPatId($analysRe->getPatId()->getActorId()->getId());
             $analysRe->setName($analysRe->getName()->getName());
-            //var_dump($analysRe->getName());
-            //$analysRe->setName($analysRe->getName()->getName());
             $em->persist($analysRe);
             $em->flush();
+           $this->sendResults();
         }
 
         return $this->render('analysres/new.html.twig', array(
             'analysRe' => $analysRe,
             'form' => $form->createView(),
         ));
+    }
+
+    private function sendResults()
+    {
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Hello Email')
+            ->setFrom('medicalguidesystem@gmail.com')
+            ->setTo('eleonoria96@gmail.com')
+            ->setBody('HELLO!'
+            )
+        ;
+        var_dump($this->get('mailer'));
+        $this->get('mailer')->send($message);
     }
 
     /**
