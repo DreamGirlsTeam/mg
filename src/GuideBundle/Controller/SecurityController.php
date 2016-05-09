@@ -105,5 +105,15 @@ class SecurityController extends Controller
         ));
     }
 
-
+    /**
+     * Security logout.
+     *
+     * @Route("/logout", name="logout")
+     */
+    public function logoutAction(Request $request)
+    {
+        $session = new Session();
+        $session->invalidate();
+        return $this->redirect('/');
+    }
 }

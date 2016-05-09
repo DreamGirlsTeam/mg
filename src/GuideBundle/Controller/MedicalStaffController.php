@@ -188,16 +188,4 @@ class MedicalStaffController extends Controller
         $password = substr(str_shuffle($chars), 0, $length);
         return $password;
     }
-
-    /**
-     * MedicalStaff logout.
-     *
-     * @Route("logout", name="logout")
-     */
-    public function logoutAction(Request $request)
-    {
-        $session = new Session();
-        $session->invalidate();
-        return $this->redirect('/');
-    }
 }

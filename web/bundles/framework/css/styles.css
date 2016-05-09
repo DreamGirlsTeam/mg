@@ -310,7 +310,8 @@ body {
 
 .logo-position
 {
+    position: absolute;
     float: left;
     margin-left: 1%;
-    margin-top: -35px;
+    margin-top: -43px;
 }
