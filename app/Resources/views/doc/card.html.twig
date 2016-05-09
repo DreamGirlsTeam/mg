@@ -1,58 +1,77 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
     <link href="{{ asset('/bundles/framework/css/doctor.css') }}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/dataTables.bootstrap.min.css"/>
 {% endblock %}
 
 {% block body %}
-    {% include 'doc/header.html.twig' %}
-    <div class="alert alert-success">
-        <h4><a href="{{ path('doctor_visit', { 'actorId': actorId }) }}"><p class="bg-success text-center">Новий
-                    візит</p>
-            </a></h4>
+    {% include 'patient/header.html.twig' %}
+    <div class="col-md-4 col-md-offset-4">
+        <div class="well well-sm" style="border-color: #337ab7;">
+            <h5 class="text-center"><a href="{{ path('doctor_visit', { 'actorId': actorId }) }}">Новий візит</a></h5>
+        </div>
     </div>
     <div class="col-md-6 col-md-offset-1">
-        <table class="table table-condensed table-hover doc_reg_info">
-            <thead>
-            <tr class="active">
-                <th>Дата</th>
-                <th>Тип</th>
-                <th>Діагноз</th>
-                <th>Лікування</th>
-                <th>Коментарі</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for regInfo in regInfos %}
-                <tr>
-                    <td>{{ regInfo.firstName }}</td>
-                    <td>{{ regInfo.lastName }}</td>
-                    <td>{{ regInfo.patronymic }}</td>
-                    <td>{{ regInfo.phone }}</td>
-                    <td>
-                    </td>
+        <div class="well" style="border-color: #EBF5FB; background-color:#F8F9F9;">
+            <table class="table table-condensed table-hover visit">
+                <thead>
+                <tr class="active">
+                    <th>Дата</th>
+                    <th>Тип</th>
+                    <th>Діагноз</th>
+                    <th>Лікування</th>
+                    <th>Коментарі</th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                {% for visit in visits %}
+                    <tr>
+                        <td>{{ visit.date | date }}</td>
+                        <td>{{ visit.type }}</td>
+                        <td>{% if visit.illness %}{{ visit.illness }}{% else %} - {% endif %}</td>
+                        <td>{% if visit.medicine %}{{ visit.medicine }}{% else %} - {% endif %}</td>
+                        <td>{{ visit.comment }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="col-md-3">
-        <table class="table table-condensed table-hover doc_reg_info">
-            <thead>
-            <tr class="active">
-                <th>Дата</th>
-                <th>Аналіз</th>
-                <th>Файл</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for analys in analysys %}
-                <tr>
-                    <td>{{ analys.date | date("Y-m-d") }}</td>
-                    <td>{{ analys.name }}</td>
-                    <td><a href="{{ asset('uploads/' ~ analys.patId ~ '/' ~ analys.filename) }}">PDF</a></td>
+    <div class="col-md-4">
+        <div class="well" style="border-color: #EBF5FB; background-color:#F8F9F9;">
+            <table class="table table-condensed table-hover doc_reg_info">
+                <thead>
+                <tr class="active">
+                    <th>Дата</th>
+                    <th>Аналіз</th>
+                    <th>Файл</th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                {% for analys in analysys %}
+                    <tr>
+                        <td>{{ analys.date | date("Y-m-d") }}</td>
+                        <td>{{ analys.name }}</td>
+                        <td><a href="{{ asset('uploads/' ~ analys.patId ~ '/' ~ analys.filename) }}">PDF</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('bundles/framework/js/jQuery/jquery-1.12.3.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        // $('.admin').DataTable();
+        $('.visit').DataTable({
+            responsive: true
+        });
+        $('.doc_reg_info').DataTable({
+            responsive: true
+        });
+    </script>
 {% endblock %}
