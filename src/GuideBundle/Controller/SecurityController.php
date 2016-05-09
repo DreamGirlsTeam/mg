@@ -15,6 +15,7 @@ use GuideBundle\Entity\MedicalStaff;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use GuideBundle\Controller\AdminController;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class SecurityController extends Controller
 {
@@ -60,12 +61,8 @@ class SecurityController extends Controller
                                 "actorId" => $user->getActorId()
                             )
                         );
-
-
-
-                $session = $request->getSession();
-                $session->remove('user');
-                $session->clear();
+                $session = new Session();
+                $session->start();
 
                 if ($role->getRole() == 1) {
                     $session->set('user', array(
@@ -73,6 +70,7 @@ class SecurityController extends Controller
                     ));
                 } else {
                     $session->set('user', array(
+                        'id' => $role->getId(),
                         'role' => $role->getRole(),
                         'username' => $user->getUsername(),
                         'first_name' => $userInfo->getFirstName(),

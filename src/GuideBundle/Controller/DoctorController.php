@@ -5,8 +5,11 @@ namespace GuideBundle\Controller;
 use GuideBundle\Entity\Visits;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use GuideBundle\Form\VisitsType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -50,12 +53,12 @@ class DoctorController extends Controller
      */
     public function visitAction(Request $request, $actorId)
     {
-        $visit = new Visits();
-        $form = $this->createForm('GuideBundle\Form\VisitsType', $visit);
+        $form = $this->createForm('GuideBundle\Form\VisitsType');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-           //var_dump($visit);
+            $type = $form->getData()->getType()->getId();
+            return $this->redirectToRoute("visit_form", array('actorId' => $actorId, 'type' => $type));
         }
         return $this->render('doc/visit.html.twig', array(
             'actorId' => $actorId,
@@ -64,11 +67,32 @@ class DoctorController extends Controller
     }
 
     /**
-     * @Route("/visit/{actorId}", name="planed_visit")
+     * @Route("/form/{actorId}/{type}", name="visit_form")
      */
-    public function formPlanedVisitAction(Request $request)
+    public function VisitFormAction($actorId, $type)
     {
-        $data = $request->request->get('request');
-        var_dump($data);
+        $em = $this->getDoctrine()->getManager();
+
+        $typeName = $em->getRepository('GuideBundle:VisitTypes')->find($type);
+        $form = $this->createFormBuilder()
+            ->add('conclusion', TextareaType::class, array('label' => 'Висновок', 'attr' => array('placeholder'=>'Введіть висновок щодо стану пацієнта, або рекомендації щодо здоров\'я')))
+            ->add('save', SubmitType::class, array('label' => 'Зберегти візит'))
+            ->getForm();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $visit = $this->setVisitByType($typeName, $actorId);
+        }
+        return $this->render('doc/consult.html.twig', array(
+            'form' => $form->createView(),
+            'type' => $typeName->getName()
+        ));
+    }
+
+    private function setVisitByType($actorId, $type)
+    {
+        $visit = new Visits();
+        $visit->setDate(new \DateTime(date('Y-m-d H:i:s')));
+        $visit->setType($type);
+        $visit->setPatId($actorId);
+        var_dump($request->getSession());
     }
 }
