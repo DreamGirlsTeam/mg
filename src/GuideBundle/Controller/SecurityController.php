@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
 use GuideBundle\Entity\MedicalStaff;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use GuideBundle\Controller\AdminController;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class SecurityController extends Controller

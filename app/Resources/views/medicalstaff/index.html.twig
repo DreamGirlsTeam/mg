@@ -2,6 +2,7 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/dataTables.bootstrap.min.css"/>
 {% endblock %}
 
 {% block body %}
@@ -10,39 +11,42 @@
     <div class="col-md-6 col-md-offset-3">
         <div class="container-fluid">
             <div class="row">
-                <div class="well">
-                    <h5 class="text-danger col-md-offset-4"><a href="{{ path('admin_new') }}">Зареєструвати нового лікаря</a></h5>
+                <div class="well well-sm" style="border-color: #337ab7;">
+                    <h5 class="text-center"><a href="{{ path('admin_new') }}">Зареєструвати нового лікаря</a></h5>
                 </div>
-                <table class="table-striped table-hover admin">
-                    <thead>
-                    <tr>
-                        <th>Ім'я</th>
-                        <th>Прізвище</th>
-                        <th>По-батькові</th>
-                        <th>Посада</th>
-                        <th>Дії</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for medicalStaff in medicalStaffs %}
-                            <td>{{ medicalStaff.firstname }}</td>
-                            <td>{{ medicalStaff.lastname }}</td>
-                            <td>{% if  medicalStaff.patronymic %}{{ medicalStaff.patronymic }} {% else %} -  {% endif %}</td>
-                            <td>{{ medicalStaff.specialization }}</td>
-                            <td>
-                                <ul class="list-group">
-                                    <li>
-                                        <a href="{{ path('admin_show', { 'actorId': medicalStaff.actorId.id }) }}">переглянути</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ path('admin_edit', { 'actorId': medicalStaff.actorId.id }) }}">редагувати</a>
-                                    </li>
-                                </ul>
-                            </td>
+                <div class="well" style="border-color: #EBF5FB; background-color:#F8F9F9;">
+                    <table class="table-striped table-hover admin">
+                        <thead>
+                        <tr>
+                            <th>Ім'я</th>
+                            <th>Прізвище</th>
+                            <th>По-батькові</th>
+                            <th>Посада</th>
+                            <th>Дії</th>
                         </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        {% for medicalStaff in medicalStaffs %}
+                        <tr>
+                                <td>{{ medicalStaff.firstname }}</td>
+                                <td>{{ medicalStaff.lastname }}</td>
+                                <td>{% if  medicalStaff.patronymic %}{{ medicalStaff.patronymic }} {% else %} -  {% endif %}</td>
+                                <td>{{ medicalStaff.specialization }}</td>
+                                <td>
+                                    <ul class="list-group">
+                                        <li>
+                                            <a href="{{ path('admin_show', { 'actorId': medicalStaff.actorId.id }) }}">переглянути</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('admin_edit', { 'actorId': medicalStaff.actorId.id }) }}">редагувати</a>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -52,10 +56,11 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js"></script>
     <script>
-       // $('.admin').DataTable();
-        $('.admin').DataTable( {
+        // $('.admin').DataTable();
+        $('.admin').DataTable({
             responsive: true
-        } );
+        });
     </script>
 {% endblock %}

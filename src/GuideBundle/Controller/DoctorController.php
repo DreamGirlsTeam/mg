@@ -2,15 +2,15 @@
 
 namespace GuideBundle\Controller;
 
+use FOS\UserBundle\Controller\SecurityController;
 use GuideBundle\Entity\Visits;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * ConfPerson controller.
@@ -42,9 +42,13 @@ class DoctorController extends Controller
             array('patId' => $actorId),
             array('date' => 'ASC')
         );
+        $visits = $em->getRepository('GuideBundle:Visits')->findBy(
+            array('patId' => $actorId)
+        );
         return $this->render('doc/card.html.twig', array(
             'actorId' => $actorId,
-            'analysys' => $analys
+            'analysys' => $analys,
+            "visits" => $visits
         ));
     }
 
@@ -69,17 +73,23 @@ class DoctorController extends Controller
     /**
      * @Route("/form/{actorId}/{type}", name="visit_form")
      */
-    public function VisitFormAction($actorId, $type)
+    public function VisitFormAction($actorId, $type, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
+        $session = new Session();
         $typeName = $em->getRepository('GuideBundle:VisitTypes')->find($type);
+        $actor = $em->getRepository('GuideBundle:Actors')->find($actorId);
+        $doc = $em->getRepository('GuideBundle:Actors')->find($session->get('user')["id"]);
         $form = $this->createFormBuilder()
             ->add('conclusion', TextareaType::class, array('label' => 'Висновок', 'attr' => array('placeholder'=>'Введіть висновок щодо стану пацієнта, або рекомендації щодо здоров\'я')))
             ->add('save', SubmitType::class, array('label' => 'Зберегти візит'))
             ->getForm();
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $visit = $this->setVisitByType($typeName, $actorId);
+            $visit = $this->setVisitByType($typeName->getName(), $actor, $form->getData()["conclusion"], $doc);
+            $em->persist($visit);
+            $em->flush();
+            return $this->redirectToRoute("doctor_card", array("actorId" => $actorId));
         }
         return $this->render('doc/consult.html.twig', array(
             'form' => $form->createView(),
@@ -87,12 +97,14 @@ class DoctorController extends Controller
         ));
     }
 
-    private function setVisitByType($actorId, $type)
+    private function setVisitByType($type, $actor, $comment, $doc)
     {
         $visit = new Visits();
         $visit->setDate(new \DateTime(date('Y-m-d H:i:s')));
         $visit->setType($type);
-        $visit->setPatId($actorId);
-        var_dump($request->getSession());
+        $visit->setPatId($actor);
+        $visit->setDocId($doc);
+        $visit->setComment($comment);
+        return $visit;
     }
 }
