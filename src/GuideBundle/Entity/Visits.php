@@ -25,7 +25,7 @@ class Visits
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="date", type="datetime", unique=false)
      */
     private $date;
 
@@ -46,31 +46,26 @@ class Visits
     private $medicines;
 
     /**
-     * @ORM\OneToOne(targetEntity="Actors")
-     * @ORM\JoinColumn(name="docId", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Actors")
+     * @ORM\JoinColumn(name="docId", referencedColumnName="id", unique=false)
      */
     private $docId;
 
     /**
-     * @ORM\OneToOne(targetEntity="Actors")
-     * @ORM\JoinColumn(name="patId", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Actors")
+     * @ORM\JoinColumn(name="patId", referencedColumnName="id", unique=false)
      */
     private $patId;
 
-//    /**
-//     * @ORM\OneToOne(targetEntity="VisitTypes")
-//     * @ORM\JoinColumn(name="type", referencedColumnName="name")
-//     */
     /**
-     * @Assert\Type(type="GuideBundle\Entity\VisitTypes")
-     * @Assert\Valid()
+     * @ORM\Column(name="type", type="text", unique=false)
      */
     private $type;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="comment", type="text")
+     * @ORM\Column(name="comment", type="text", unique=false)
      */
     private $comment;
 
@@ -162,9 +157,8 @@ class Visits
      *
      * @param $type
      *
-     * @return Visits
      */
-    public function setType(VisitTypes $type)
+    public function setType($type)
     {
         $this->type = $type;
 
@@ -174,7 +168,7 @@ class Visits
     /**
      * Get type
      *
-     * @return VisitTypes
+     * @return string
      */
     public function getType()
     {
