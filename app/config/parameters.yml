@@ -2,11 +2,12 @@
 parameters:
     database_host: 127.0.0.1
     database_port: 3306
-    database_name: heroku_f41f22ffc9fd421
-    database_user: bf568aada5aebb
-    database_password: c4849758
-    mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: null
-    mailer_password: null
+    database_name: medicine
+    database_user: mg
+    database_password: meangirls
+    mailer_transport: gmail
+    mailer_host:    smtp.gmail.com
+    mailer_user:     medicalguidesystem@gmail.com
+    port:       465
+    mailer_password: meangirls
     secret: ThisTokenIsNotSoSecretChangeIt
