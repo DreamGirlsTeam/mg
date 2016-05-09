@@ -2,12 +2,13 @@
 {% block stylesheets %}
     <link href="{{ asset('/bundles/framework/css/doctor.css') }}" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/dataTables.bootstrap.min.css"/>
 {% endblock %}
 
 {% block body %}
-    {% include 'doc/header.html.twig' %}
+    {% include 'patient/header.html.twig' %}
     <div class="col-md-4 col-md-offset-4">
-        <div class="well well-sm" style="border-color: #D4E6F1;">
+        <div class="well well-sm" style="border-color: #337ab7;">
             <h5 class="text-center"><a href="{{ path('doctor_visit', { 'actorId': actorId }) }}">Новий візит</a></h5>
         </div>
     </div>
@@ -63,6 +64,7 @@
 {% block javascripts %}
     <script src="{{ asset('bundles/framework/js/jQuery/jquery-1.12.3.min.js') }}"></script>
     <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js"></script>
     <script>
         // $('.admin').DataTable();
         $('.visit').DataTable({
