@@ -60,7 +60,7 @@ class SecurityController extends Controller
                                 "actorId" => $user->getActorId()
                             )
                         );
-                $session = new Session();
+                $session = $request->getSession();
                 $session->start();
 
                 if ($role->getRole() == 1) {
@@ -107,12 +107,13 @@ class SecurityController extends Controller
     /**
      * Security logout.
      *
-     * @Route("/logout", name="logout")
+     * @Route("/logout", name="auth_logout")
      */
     public function logoutAction(Request $request)
     {
-        $session = new Session();
-        $session->invalidate();
+        $session = $request->getSession();
+        $session->remove('user');
+        $session->clear();
         return $this->redirect('/');
     }
 }
