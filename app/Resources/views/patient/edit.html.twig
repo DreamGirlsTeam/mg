@@ -1,21 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Patient edit</h1>
+    {% include 'header.html.twig' %}
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+        <input type="submit" class="btn btn-default" value="Редагувати" />
     {{ form_end(edit_form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('reception_schedule_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <div class="text-center">
+        <ul class="list-group">
+            <li>
+                <a href="{{ path('reception_schedule_index') }}" class="btn btn-default">Назад до списку</a>
+            </li>
+            <li>
+                {{ form_start(delete_form) }}
+                    <input type="submit" class="btn btn-danger" value="Видалити">
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+    </div>
 {% endblock %}

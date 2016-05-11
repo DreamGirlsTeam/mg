@@ -6,11 +6,12 @@ use FOS\UserBundle\Controller\SecurityController;
 use GuideBundle\Entity\Visits;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * ConfPerson controller.
@@ -62,11 +63,53 @@ class DoctorController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $type = $form->getData()->getType()->getId();
-            return $this->redirectToRoute("visit_form", array('actorId' => $actorId, 'type' => $type));
+            if ($type !=2 ) {
+                return $this->redirectToRoute("visit_form", array('actorId' => $actorId, 'type' => $type));
+            } else {
+                return $this->redirectToRoute("visit_treatment", array('actorId' => $actorId));
+            }
         }
         return $this->render('doc/visit.html.twig', array(
             'actorId' => $actorId,
             'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/search/sympt", name="search_sympt")
+     */
+    public function SearchSymptAction(Request $request)
+    {
+        $isAjax = $request->isXMLHttpRequest();
+        if ($isAjax) {
+            $em = $this->getDoctrine()->getManager();
+            $search = $request->request->get('search');
+            $repository = $em->getRepository('GuideBundle:Symptoms');
+            $query = $repository->createQueryBuilder('s')
+                ->where('s.name LIKE :search')
+                ->setParameter('search', $search.'%')
+                ->getQuery();
+            $symptoms = $query->getResult();
+            foreach ($symptoms as $symptom) {
+                $sympt[] = $symptom->getName();
+            }
+            return new JsonResponse(array('symptoms' => $sympt));
+        }
+        return new Response('Permission denied', 400);
+
+    }
+
+    /**
+     * @Route("/treat/{actorId}/", name="visit_treatment")
+     */
+    public function VisitTreatmentAction(Request $request, $actorId)
+    {
+        $form = $this->createFormBuilder()
+            ->add('symptoms', TextType::class, array('label' => 'Введіть симптоми <a class="sympt_info" href="#"><span class="ui-icon ui-icon-info">ddfd</span></a>', 'attr' => array('class'=>'sympt')))
+            ->add('save', SubmitType::class, array('label' => 'Зберегти візит'))
+            ->getForm();
+        return $this->render('doc/treatment.html.twig', array(
+            'form' => $form->createView()
         ));
     }
 
