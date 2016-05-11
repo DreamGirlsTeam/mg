@@ -1,35 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Patient</h1>
+    {% include 'header.html.twig' %}
 
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ patient.id }}</td>
-            </tr>
-            <tr>
-                <th>Number</th>
+                <th>Номер</th>
                 <td>{{ patient.number }}</td>
             </tr>
             <tr>
-                <th>Work</th>
+                <th>Місце роботи</th>
                 <td>{{ patient.work }}</td>
             </tr>
         </tbody>
     </table>
 
-    <ul>
+    <div class="text-center">
+    <ul class="list-group">
         <li>
-            <a href="{{ path('reception_schedule_index') }}">Back to the list</a>
+            <a href="{{ path('reception_schedule_index') }}" class="btn btn-default">Назад до списку</a>
         </li>
         <li>
-            <a href="{{ path('reception_schedule_edit', { 'id': patient.id }) }}">Edit</a>
+            <a href="{{ path('reception_schedule_edit', { 'id': patient.id }) }}" class="btn btn-default">Редагувати</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" class="btn btn-danger" value="Видалити">
             {{ form_end(delete_form) }}
         </li>
     </ul>

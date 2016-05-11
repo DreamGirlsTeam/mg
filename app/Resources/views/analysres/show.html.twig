@@ -1,36 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>AnalysRes</h1>
-
+    {% include 'header.html.twig' %}
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ analysRe.id }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
+                <th>Дата</th>
                 <td>{% if analysRe.date %}{{ analysRe.date|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Filename</th>
+                <th>Ім'я файлу</th>
                 <td>{{ analysRe.filename }}</td>
             </tr>
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('laborant_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('laborant_edit', { 'id': analysRe.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <div class="text-center">
+        <ul class="list-group">
+            <li>
+                <a href="{{ path('laborant_index') }}" class="btn btn-default">Назад до списку</a>
+            </li>
+            <li>
+                <a href="{{ path('laborant_edit', { 'id': analysRe.id }) }}"  class="btn btn-default">Редагувати</a>
+            </li>
+            <li>
+                {{ form_start(delete_form) }}
+                    <input type="submit" value="Видалити" class="btn btn-danger">
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+    </div>
 {% endblock %}
