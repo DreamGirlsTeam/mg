@@ -1,3 +1,70 @@
+h1,h2,h3,a{
+    font-family: 'Comfortaa', cursive;
+}
+
+/*menu {*/
+/*display:inline-block;*/
+/*}*/
+
+.login{
+    float: left;
+    margin-left: 15%;
+    margin-top: 30px;
+}
+
+.connect{
+    margin-left: 75%;
+}
+
+.row .col-md-7 {
+    width: 56.5%;
+}
+
+/*.row .col-md-4 {*/
+/*width: 30.37%;*/
+/*}*/
+.row {
+    width: 100%;
+    max-width: 1110px;
+    min-width: 727px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header .col-md-4 {
+    border-right: 1px #B4B4B4 solid;
+}
+
+
+header nav {
+    border-right: 1px #B4B4B4 solid;
+    height: 100px;
+    padding-right: 45px;
+    min-height: 100%;
+    text-align: right;
+}
+
+header nav a {
+    color: #222;
+    position: relative;
+    top: -17px;
+    font-size: 1.6em;
+}
+
+header nav span {
+    color: #D3D3D3;
+    font-size: 5em;
+    font-weight: 100;
+    margin: 0 15px;
+}
+
+a{
+    color: #222;
+    text-decoration: none;
+    line-height: inherit;
+}
+
+
 body {
     margin: 0;
     padding: 0;
