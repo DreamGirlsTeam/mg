@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+    <header>
     {% block head %}
         <meta charset="KOI8-U" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,26 +9,24 @@
         <link rel="stylesheet" href="{{ asset('bundles/framework/css/validationEngine.jquery.css') }}"/>
         <link href="{{ asset('/bundles/framework/css/styles.css') }}" rel="stylesheet" />
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Comfortaa&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+        {% block header %}{% endblock %}
         {% block stylesheets %}{% endblock %}
     {% endblock %}
-    <head>
-        {% block header %}{% endblock %}
-    </head>
-
-    <body>
+    </header>
+    {#<body>#}
         {% block body %}{% endblock %}
         {#<!-- jQuery (necessary for Bootstraps JavaScript plugins) -->#}
         {#<script src="{{ asset('/bundles/framework/js/jQuery/jquery-1.12.3.min.js') }}"></script>#}
         <!-- Include all JavaScripts, compiled by Assetic -->
 
-    </body>
+    {#</body>#}
 
     <footer>
         {% block footer %}{% endblock %}
     </footer>
     {% block javascripts %}
         <script src="{{ asset('bundles/framework/js/jQuery/jquery-1.12.3.min.js') }}"></script>
-        <script src="{{ asset('bundles/framework/js/jquery-ui.min.js') }}" type="text/javascript" charset="utf-8"></script>
         <script src="{{ asset('bundles/framework/js/bootstrap.js') }}"></script>
         <script src="{{ asset('bundles/framework/js/jQuery/jquery.ValidationEngine.js') }}"></script>
         <script src="{{ asset('bundles/framework/js/jQuery/jquery.ValidationEngine-en.js') }}"></script>
