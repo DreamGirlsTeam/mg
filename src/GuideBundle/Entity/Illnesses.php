@@ -24,8 +24,8 @@ class Illnesses
     /**
      * @ORM\ManyToMany(targetEntity="Symptoms", mappedBy="illnesses")
      * @ORM\JoinTable(name="sym_to_ill",
-     *       joinColumns={@ORM\JoinColumn(name="sym_id", referencedColumnName="id")},
-     *       inverseJoinColumns={@ORM\JoinColumn(name="ill_id", referencedColumnName="id")})
+     *       joinColumns={@ORM\JoinColumn(name="ill_id", referencedColumnName="id")},
+     *       inverseJoinColumns={@ORM\JoinColumn(name="sym_id", referencedColumnName="id")})
      */
     private $symptoms;
 
@@ -44,6 +44,20 @@ class Illnesses
      */
     private $name;
 
+    /**
+     * Illnesses constructor.
+     */
+    public function __construct()
+    {
+        $this->symptoms = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function addSymptom(\GuideBundle\Entity\Symptoms $symptoms)
+    {
+        $this->symptoms[] = $symptoms;
+
+        return $this;
+    }
 
     /**
      * Get id

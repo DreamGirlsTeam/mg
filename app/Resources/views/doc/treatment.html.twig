@@ -8,12 +8,13 @@
     {{ parent() }}
 
     <script src="{{ asset('bundles/framework/js/tag-it.js') }}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{ asset('bundles/framework/js/treatment.js') }}" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $(".sympt").tagit({
                 allowSpaces: true,
-                singleFieldDelimiter: '\n',
-                    requireAutocomplete: true,
+                singleFieldDelimiter: ',',
+                requireAutocomplete: true,
                 removeConfirmation: true,
                 tagSource: function (search, showChoices) {
                     console.log(search);
