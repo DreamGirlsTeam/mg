@@ -315,3 +315,11 @@ body {
     margin-left: 1%;
     margin-top: -43px;
 }
+
+.logo-auth
+{
+    float: left;
+    margin-left: 1%;
+    position: absolute;
+    margin-top: -3%;
+}

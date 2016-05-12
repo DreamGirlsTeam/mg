@@ -6,10 +6,13 @@
 {% endblock %}
 
 {% block body %}
-    <div class="logo-position">
+
+    <div class="page-header">
+    <div class="logo-auth">
+        <img src="{{ asset('images/mg_small1.png') }}"/>
         <img src="{{ asset('images/title1.png') }}"/>
     </div>
-    <div class="page-header">
+
     </div>
     {% form_theme form 'bootstrap_3_layout.html.twig' %}
     <div class="container-fluid">
