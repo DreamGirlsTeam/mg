@@ -2,6 +2,7 @@
 
 namespace ScheduleBundle\Controller;
 
+use ScheduleBundle\Entity\Individ;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -31,7 +32,7 @@ class PatientController extends Controller
         if ($request->isXmlHttpRequest()) {
             $number = $request->request->get("number");
             if ($number < 1 || $number > 20) {
-                return new JsonResponse("error",500);
+                return new JsonResponse("error", 500);
             }
             $i = 0;
             $last = false;
@@ -58,7 +59,7 @@ class PatientController extends Controller
             return new JsonResponse(array("content" => $forms));
         } else {
             $form = $this->createFormBuilder()
-                ->add('number', IntegerType::class, array('label' => 'Кількість пацієнтів', 'attr' => array('class'=>'validate[required,max[20], min[1]]')))
+                ->add('number', IntegerType::class, array('label' => 'Кількість пацієнтів', 'attr' => array('class' => 'validate[required,max[20], min[1]]')))
                 ->add('save', SubmitType::class, array('label' => 'Підтвердити'))
                 ->getForm();
             return $this->render('patient/start.html.twig', array(
@@ -92,7 +93,7 @@ class PatientController extends Controller
             }
             return new JsonResponse(array("process" => true));
         } else {
-            return new JsonResponse("error",500);
+            return new JsonResponse("error", 500);
         }
     }
 
@@ -104,13 +105,84 @@ class PatientController extends Controller
      */
     public function resultAction()
     {
-        $population = $this->buildPopulation()
+        $population = $this->buildPopulation();
         return $this->render('patient/result.html.twig', array());
     }
 
     private function buildPopulation()
     {
+        $continue = true;
         $em = $this->getDoctrine()->getEntityManager();
-        $individs = $em->getRepository('ScheduleBundle:Patient')->findAll();
+        $scheduleBase = $em->getRepository('ScheduleBundle:Patient')->findAll();
+        $em = $this->getDoctrine()->getEntityManager();
+        $times = $em->getRepository("ScheduleBundle:works")->findAll();
+        $population = new Population();
+        $i = 0;
+        while ($continue) {
+            shuffle($scheduleBase);
+            $individ = $this->createIndivid($scheduleBase, $times);
+            if (!in_array($individ, $population->getIndivids())) {
+                // TODO push into the population
+            }
+            $continue = false;
+            $i++;
+            /*if (count($population->getIndivids()) === $population->getSize()) {
+                $continue = false;
+            }*/
+        }
+    }
+
+    private function createIndivid($schedule, $times)
+    {
+        $individ = new Individ();
+        foreach ($times as $time) {
+            $durations[$time->getId()] = $time->getDuration();
+        }
+        foreach ($schedule as $sc) {
+            $individ->add($sc);
+            $pat[] = array(
+                "number" => $sc->getNumber(),
+                "duration" => $durations[$sc->getWork()]
+            );
+        }
+        $morning = $this->getQueueTime($pat, $individ, 'morning');
+        $individ->setMorTime($morning["time"]);
+        $individ->setMorNumOfPat($morning["PatNumber"]);
+        $evening = $this->getQueueTime($pat, $individ, 'evening');
+        $individ->setEvTime($evening["time"]);
+        $individ->setEvNumOfPat($evening["PatNumber"]);
+        return $individ;
+    }
+
+    private function getQueueTime($patients, $individ, $time = 'morning')
+    {
+        $totalTime = 0;
+        $numPat = 0;
+        switch($time) {
+            case 'morning':
+                for ($i= 0; $i < $individ->getLunchPos(); $i++) {
+                    if ($patients[$i]) {
+                        $totalTime += $patients[$i]["duration"];
+                    } else {
+                        $numPat = $i;
+                        break;
+                    }
+                }
+            break;
+            case 'evening':
+                for ($i= $individ->getLunchPos(); $i < count($patients); $i++) {
+                    if ($patients[$i]) {
+                        $totalTime += $patients[$i]["duration"];
+                    } else {
+                        $numPat = $i;
+                        break;
+                    }
+                }
+            break;
+        }
+        return array(
+            "time" => $totalTime,
+            "PatNumber" => $numPat
+            );
     }
 }
