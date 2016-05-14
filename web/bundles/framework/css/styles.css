@@ -16,14 +16,14 @@ h1,h2,h3,a{
     margin-left: 75%;
 }
 
-.row .col-md-7 {
+.r .col-md-7 {
     width: 56.5%;
 }
 
 /*.row .col-md-4 {*/
 /*width: 30.37%;*/
 /*}*/
-.row {
+.r {
     width: 100%;
     max-width: 1110px;
     min-width: 727px;
@@ -371,7 +371,8 @@ body {
 .logout-button
 {
     float: right;
-    margin-right: 5%;
+    margin-left: 90%;
+    position: absolute;
     margin-top: -35px;
 }
 
