@@ -1,11 +1,14 @@
+
 {% block head %}
-    <div class="page-header">
-        <div class="logo-position">
-            <img src="{{ asset('images/mg_small1.png') }}"/>
-            <img src="{{ asset('images/title1.png') }}"/>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <img src="{{ asset('images/mg_small1.png') }}"/>
+                <img src="{{ asset('images/title1.png') }}"/>
+                    <div class="logout-button">
+                         <a href="{{ path('auth_logout') }}" class="navbar-link"><h4><small><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>Вихід</pre></small></h4></a>
+                    </div>
+            </div>
         </div>
-        <div class="logout-button">
-            <a href="{{ path('logout') }}" class="btn btn-default btn-bg">Вихід</a>
-        </div>
-    </div>
+    </nav>
 {% endblock %}

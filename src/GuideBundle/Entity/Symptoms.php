@@ -25,10 +25,41 @@ class Symptoms
     /**
      * @ORM\ManyToMany(targetEntity="Illnesses", inversedBy="symptoms")
      * @ORM\JoinTable(name="sym_to_ill",
-     *       joinColumns={@ORM\JoinColumn(name="ill_id", referencedColumnName="id")},
-     *       inverseJoinColumns={@ORM\JoinColumn(name="sym_id", referencedColumnName="id")})
+     *       joinColumns={@ORM\JoinColumn(name="sym_id", referencedColumnName="id")},
+     *       inverseJoinColumns={@ORM\JoinColumn(name="ill_id", referencedColumnName="id")})
      */
-   // private $illnesses;
+    private $illnesses;
+
+    /**
+     * Symptoms constructor.
+     */
+    public function __construct()
+    {
+        $this->illnesses = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function addIllness(\GuideBundle\Entity\Illnesses $illnesses)
+    {
+        $this->illnesses[] = $illnesses;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIllnesses()
+    {
+        return $this->illnesses;
+    }
+
+    /**
+     * @param mixed $illnesses
+     */
+    public function setIllnesses($illnesses)
+    {
+        $this->illnesses = $illnesses;
+    }
 
     /**
      * @var string

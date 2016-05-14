@@ -1,0 +1,9 @@
+{% set number = num + 1 %}
+    {{ form_start(form, {'attr': {'class': 'form_patients'}}) }}
+    {{ form_label(form, "Пацієнт " ~ number) }}
+    {{ form_widget(form) }}
+    {% if last %}
+        <input type="button" value="Скласти розклад" class="btn btn-success" id="schedule" onclick="sendWorks(event)">
+    {% endif %}
+    {{ form_end(form) }}
+<hr>

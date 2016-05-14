@@ -24,7 +24,7 @@ class Patient
     /**
      * @var int
      *
-     * @ORM\Column(name="number", type="integer")
+     * @ORM\Column(name="number", type="integer", unique=true)
      */
     private $number;
 
@@ -34,6 +34,17 @@ class Patient
      * @ORM\Column(name="work", type="integer")
      */
     private $work;
+
+    /**
+     * Patient constructor.
+     * @param int $number
+     * @param int $work
+     */
+    public function __construct($number, $work)
+    {
+        $this->number = $number;
+        $this->work = $work;
+    }
 
 
     /**

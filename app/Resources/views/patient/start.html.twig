@@ -1,8 +1,9 @@
-{% include 'patient/header.html.twig' %}
-
+{% extends 'base.html.twig' %}
 {% block stylesheets %}
+{{ parent() }}
     <link href="{{ asset('/bundles/framework/css/bootstrap.css') }}" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="{{ asset('bundles/framework/css/validationEngine.jquery.css') }}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css"/>
     <link href="{{ asset('/bundles/framework/css/styles.css') }}" rel="stylesheet" />
 {% endblock %}
 {% block body %}
@@ -18,16 +19,20 @@
                             {{ form_start(form) }}
                             {{ form_widget(form) }}
                             {{ form_end(form) }}
+                            <div class="works"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+    <div class="modal"></div>
 {% endblock %}
 {% block javascripts %}
-    <script src="{{ asset('bundles/framework/js/jQuery/jquery-1.12.3.min.js') }}"></script>
+    {{ parent() }}
+    {#<script src="{{ asset('bundles/framework/js/jQuery/jquery-1.12.3.min.js') }}"></script>
     <script src="{{ asset('bundles/framework/js/jQuery/jquery.ValidationEngine.js') }}"></script>
-    <script src="{{ asset('bundles/framework/js/jQuery/jquery.ValidationEngine-en.js') }}"></script>
+    <script src="{{ asset('bundles/framework/js/jQuery/jquery.ValidationEngine-en.js') }}"></script>#}
     <script src="{{ asset('bundles/framework/js/schedule.js') }}"></script>
 {% endblock %}
