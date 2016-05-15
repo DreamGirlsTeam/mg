@@ -34,7 +34,7 @@ class PatientController extends Controller
     {
         if ($request->isXmlHttpRequest()) {
             $number = $request->request->get("number");
-            if ($number < 4 || $number > 20) {
+            if ($number < 4 || $number > 18) {
                 return new JsonResponse("error", 500);
             }
             $i = 0;
@@ -62,7 +62,7 @@ class PatientController extends Controller
             return new JsonResponse(array("content" => $forms));
         } else {
             $form = $this->createFormBuilder()
-                ->add('number', IntegerType::class, array('label' => 'Кількість пацієнтів', 'attr' => array('class' => 'validate[required,max[20], min[4]]')))
+                ->add('number', IntegerType::class, array('label' => 'Кількість пацієнтів', 'attr' => array('class' => 'validate[required,max[18], min[4]]')))
                 ->add('save', SubmitType::class, array('label' => 'Підтвердити'))
                 ->getForm();
             return $this->render('patient/start.html.twig', array(
@@ -110,8 +110,14 @@ class PatientController extends Controller
     {
         $population = $this->buildPopulation();
         return $this->render('patient/result.html.twig', array(
-            "population" => $population->getIndivids()
+            "population" => $population->getIndivids(),
+            "maxLength" => $population->maxLength
         ));
+    }
+
+    private function getMaxIndividLength()
+    {
+
     }
 
     private function buildPopulation()
@@ -135,9 +141,10 @@ class PatientController extends Controller
             }
             $i++;
         }
-        echo "<pre>";
+        $population->getMaxLength();
+        /*echo "<pre>";
         var_dump($population);
-        echo "</pre>";
+        echo "</pre>";*/
         return $population;
     }
 

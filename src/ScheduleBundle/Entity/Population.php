@@ -23,6 +23,8 @@ class Population
 
     public $size;
 
+    public $maxLength;
+
     /**
      * Population constructor.
      * @param $size
@@ -33,6 +35,16 @@ class Population
     }
 
 
+    public function getMaxLength()
+    {
+        $max = 0;
+        foreach ($this->getIndivids() as $individ) {
+            if ($individ->getNumOfPat() > $max) {
+                $max = $individ->getNumOfPat();
+            }
+        }
+        $this->maxLength = $max;
+    }
     /**
      * @return mixed
      */

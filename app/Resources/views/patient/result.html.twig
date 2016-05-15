@@ -1,1 +1,47 @@
-OK
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('/bundles/framework/css/bootstrap.css') }}" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="{{ asset('bundles/framework/css/validationEngine.jquery.css') }}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css"/>
+    <link href="{{ asset('/bundles/framework/css/styles.css') }}" rel="stylesheet"/>
+{% endblock %}
+{% block body %}
+    {% include 'header.html.twig' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-body text-center">Початкова популяція<span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
+                </div>
+                <table class="table table-bordered table-hover text-center">
+                    <thead>
+                    <tr class="active">
+                        <th class="text-center" colspan="{{ maxLength + 1 }}" >Розклад</th>
+                        <th>Час до обіду</th>
+                        <th>Час після обіду</th>
+                        <th>Середній час</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for individ in population %}
+                    <tr>
+                        {% for i in 0..8 %} <td>{{ individ.patients[i].number }}</td> {% endfor %}
+                        <td class="danger">Обід</td>
+                        {% for i in 9..maxLength-1 %} <td>{{ individ.patients[i].number }}</td> {% endfor %}
+                        <td> {{ individ.morTime }}</td>
+                        <td> {{ individ.evTime }}</td>
+                        <td class="func"> {{ individ.averQueueTime | number_format(2) }}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal"></div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/framework/js/schedule.js') }}"></script>
+{% endblock %}
