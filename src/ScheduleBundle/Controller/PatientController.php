@@ -117,19 +117,22 @@ class PatientController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $times = $em->getRepository("ScheduleBundle:works")->findAll();
         $population = new Population();
-        $i = 0;
         while ($continue) {
             shuffle($scheduleBase);
             $individ = $this->createIndivid($scheduleBase, $times);
             if (!in_array($individ, $population->getIndivids())) {
-                // TODO push into the population
+                $population->addIndivid($individ);
             }
-            $continue = false;
-            $i++;
-            /*if (count($population->getIndivids()) === $population->getSize()) {
+            if (count($scheduleBase) > 4 && count($population->getIndivids()) === $population->getSize()) {
                 $continue = false;
-            }*/
+            } elseif (count($scheduleBase) <= 3 && count($population->getIndivids()) === gmp_fact(count($scheduleBase))) {
+                $continue = false;
+            }
         }
+        echo "<pre>";
+        var_dump($population);
+        echo "_______________________________________________________________________";
+        echo "</pre>";
     }
 
     private function createIndivid($schedule, $times)
@@ -151,7 +154,20 @@ class PatientController extends Controller
         $evening = $this->getQueueTime($pat, $individ, 'evening');
         $individ->setEvTime($evening["time"]);
         $individ->setEvNumOfPat($evening["PatNumber"]);
+        $individ->setNumOfPat($individ->getMorNumOfPat() + $individ->getEvNumOfPat());
+        $individ->setAverQueueTime($this->getSumQueueTime($individ, $pat));
         return $individ;
+    }
+
+    private function getSumQueueTime(Individ $individ, $patients)
+    {
+        $time = 0;
+        for ($i = 1; $i < $individ->getNumOfPat() + 1; $i++) {
+           // var_dump($time);
+            //echo "duration for ".$i." is ".$patients[$i - 1]["duration"];
+            $time += $patients[$i - 1]["duration"] * ($individ->getNumOfPat() - $i);
+        }
+        return $time / $individ->getNumOfPat();
     }
 
     private function getQueueTime($patients, $individ, $time = 'morning')
