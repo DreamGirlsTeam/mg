@@ -23,6 +23,8 @@ class Individ
      */
     private $morTime;
 
+    private $suitable;
+
     /**
      * @var int
      */
@@ -59,6 +61,22 @@ class Individ
     public function getLunchPos()
     {
         return $this->lunchPos;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSuitable()
+    {
+        return $this->suitable;
+    }
+
+    /**
+     * @param bool $suitable
+     */
+    public function setSuitable($suitable)
+    {
+        $this->suitable = $suitable;
     }
 
     /**
