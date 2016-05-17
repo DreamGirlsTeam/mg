@@ -432,3 +432,7 @@ body.loading .modal {
 {
     background-color: #EAFAF1;
 }
+
+.heading {
+    background-color: rgba(235,245,251,0.5);
+}

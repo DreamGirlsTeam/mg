@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ asset('bundles/framework/css/jquery.tagit.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/framework/css/jquery.datetimepicker.css') }}" rel="stylesheet" type="text/css">
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+    {% include 'header.html.twig' %}
+    <div class="col-md-8 col-md-offset-2">
+
+        <div class="col-md-8 col-md-offset-2">
+            <div class="row">
+                <ul class="nav nav-tabs">
+                    <li role="presentation"><a href="/reception/timetable">Години роботи лікарів</a></li>
+                    <li role="presentation"><a href="/reception/visits">Додати зустріч</a></li>
+                </ul>
+                <div class="panel panel-default">
+                    <div class="panel-heading panel-info"><a class="sympt_info" href="#"><span
+                                    class="ui-icon ui-icon-info">ddfd</span></a></div>
+                    <div class="panel-body">
+                        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                        {{ form_row(form.datetime) }}
+                        {{ form_widget(form) }}
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/framework/js/tag-it.js') }}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{ asset('bundles/framework/js/jquery.datetimepicker.min.js') }}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{ asset('bundles/framework/js/treatment.js') }}" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(function () {
+            jQuery.datetimepicker.setLocale('uk');
+            $('.datetime').datetimepicker({
+                formatDate:'Y/m/d',
+                minDate:'-1970/01/01',//yesterday is minimum date(for today use 0 or -1970/01/01)
+                maxDate:'+1970/01/31',//tomorrow is maximum date calendar
+                minTime: '07:00'
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".doc").tagit({
+                allowSpaces: true,
+                singleFieldDelimiter: ',',
+                requireAutocomplete: true,
+                removeConfirmation: true,
+                tagSource: function (search, showChoices) {
+                    $.ajax({
+                        url: "/reception/search/doctor",
+                        data: {"search": search.term},
+                        type: "POST",
+                        dataType: "json",
+                        success: function (choices) {
+                            showChoices(choices.doctors);
+                        }
+                    })
+                }
+            });
+            $(".pat").tagit({
+                allowSpaces: true,
+                singleFieldDelimiter: ',',
+                requireAutocomplete: true,
+                removeConfirmation: true,
+                tagSource: function (search, showChoices) {
+                    $.ajax({
+                        url: "/reception/search/patient",
+                        data: {"search": search.term},
+                        type: "POST",
+                        dataType: "json",
+                        success: function (choices) {
+                            showChoices(choices.patients);
+                        }
+                    })
+                }
+            });
+            $(".ui-icon-info").tooltip({
+                title: '1. Почніть вводити ім\'я. <br>2. Оберіть ім\'я зі списку. <br>3. Натисність <b>Enter</b>.<br> ',
+                placement: "right",
+                html: true,
+                delay: {show: 300, hide: 500}
+            });
+            $(".sympt_info").click(function () {
+                $(".ui-icon-info").tooltip('show');
+            });
+        });
+    </script>
+{% endblock %}

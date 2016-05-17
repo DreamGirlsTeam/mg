@@ -3,12 +3,15 @@
 namespace GuideBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Timetable
  *
  * @ORM\Table(name="timetable")
  * @ORM\Entity(repositoryClass="GuideBundle\Repository\TimetableRepository")
+ * @UniqueEntity("actorId", message="Години роботи лікаря вже зареєстровані")
  */
 class Timetable
 {
@@ -22,12 +25,9 @@ class Timetable
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\OneToOne(targetEntity="Actors")
-     * @ORM\JoinColumn(name="actorId", referencedColumnName="id")
+     * @ORM\Column(name="actorId", type="integer")
      */
-    private $actorID;
+    private $actorId;
 
     /**
      * @var \DateTime
@@ -61,21 +61,19 @@ class Timetable
      *
      * @return Timetable
      */
-    public function setActorID($actorID)
+    public function setActorId($actorID)
     {
-        $this->actorID = $actorID;
+        $this->actorId = $actorID;
     
         return $this;
     }
 
     /**
      * Get actorID
-     *
-     * @return integer
      */
-    public function getActorID()
+    public function getActorId()
     {
-        return $this->actorID;
+        return $this->actorId;
     }
 
     /**

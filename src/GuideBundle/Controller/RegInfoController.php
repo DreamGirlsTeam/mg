@@ -8,8 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use GuideBundle\Entity\RegInfo;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use GuideBundle\Form\RegInfoType;
 use GuideBundle\Entity\ConfPerson;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * RegInfo controller.
@@ -150,4 +152,84 @@ class RegInfoController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * @Route("/visits", name="reception_visits")
+     * @Method("GET")
+     */
+    public function visitsAction()
+    {
+        $form = $this->createFormBuilder()
+            ->add('doctor', TextType::class, array('label' => 'Ім\'я лікаря', 'attr' => array('class'=>'doc')))
+            ->add('patient', TextType::class, array('label' => 'Ім\'я пацієнта', 'attr' => array('class'=>'pat')))
+            ->add("datetime", TextType::class, array('attr' => array('class' => 'datetime')))
+            ->getForm();
+        return $this->render('reginfo/visits.html.twig', array(
+            "form" => $form->createView()
+        ));
+
+    }
+
+
+    /**
+     * @Route("/search/doctor", name="reception_search_doctor")
+     * @Method("POST")
+     */
+    public function searchDoctorAction(Request $request)
+    {
+        $isAjax = $request->isXMLHttpRequest();
+        if ($isAjax) {
+            $em = $this->getDoctrine()->getManager();
+            $search = $request->request->get('search');
+           // $repository = $em->getRepository('GuideBundle:MedicalStaff');
+            $doctors = $em->createQuery('select s
+                            from GuideBundle:MedicalStaff s
+                            left join GuideBundle:Actors a
+                            where s.actorId = a.id
+                            where s.last_name like :search
+                            and a.role = 2
+                            '
+            )
+                ->setParameter('search', $search.'%')
+                ->getResult();
+           /* $query = $em->createQueryBuilder()
+                ->select('s')
+                ->from('GuideBundle:MedicalStaff', 's')
+                ->leftJoin('GuideBundle:Actors', 'a','\Doctrine\ORM\Query\Expr\Join::ON, �s.actorId = a.id')
+                ->where('a.role = 2')
+                //->setParameter('search', $search.'%')
+                ->getQuery();
+            $doctors = $query->getResult();*/
+            foreach ($doctors as $doctor) {
+                $doc[] = $doctor->getLastName()." ".$doctor->getFirstName()." (".$doctor->getSpecialization().")";
+            }
+            return new JsonResponse(array('doctors' => $doc));
+        }
+        return new Response('Permission denied', 400);
+    }
+
+    /**
+     * @Route("/search/patient", name="reception_search_patient")
+     * @Method("POST")
+     */
+    public function searchPatientAction(Request $request)
+    {
+        $isAjax = $request->isXMLHttpRequest();
+        if ($isAjax) {
+            $em = $this->getDoctrine()->getManager();
+            $search = $request->request->get('search');
+            $repository = $em->getRepository('GuideBundle:RegInfo');
+            $query = $repository->createQueryBuilder('r')
+                ->where('r.lastName LIKE :search')
+                ->setParameter('search', $search.'%')
+                ->getQuery();
+            $patients = $query->getResult();
+            foreach ($patients as $patient) {
+                $pat[] = $patient->getLastName()." ".$patient->getFirstName()." ".$patient->getPatronymic();
+            }
+            return new JsonResponse(array('patients' => $pat));
+        }
+        return new Response('Permission denied', 400);
+    }
+
 }
