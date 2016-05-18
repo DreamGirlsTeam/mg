@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'header.html.twig' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <ul class="nav nav-tabs nav-stacked">
+                    <li role="presentation"><a href="{{ path('reception_timetable_index') }}">Back to the list</a></li>
+                </ul>
+                <div class="panel panel-default">
+                    <div class="panel-heading"><img src="{{ asset('images/doc_reg.png') }}"></div>
+                    <div class="panel-body">
+                        {{ form_start(edit_form) }}
+                        <div class="form-inline">
+                            {{ form_row(edit_form.beginTime) }}
+                        </div>
+                        <div class="form-inline">
+                            {{ form_row(edit_form.endTime) }}
+                        </div>
+                        {{ form_widget(edit_form) }}
+                        <div class="col-md-2 col-md-offset-5">
+                        <input class="btn btn-success" type="submit" value="Ok"/>
+                        </div>
+                        {{ form_end(edit_form) }}
+                    </div>
+                </div>
+
+                <li>{{ form_start(delete_form) }}
+                    <input class="btn btn-warning" type="submit" value="Delete">
+                    {{ form_end(delete_form) }}
+                </li>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

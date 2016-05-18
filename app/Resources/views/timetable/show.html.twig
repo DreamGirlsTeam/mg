@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ timetable.id }}</td>
+            </tr>
+            <tr>
+                <th>Begintime</th>
+                <td>{% if timetable.beginTime %}{{ timetable.beginTime|date('H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Endtime</th>
+                <td>{% if timetable.endTime %}{{ timetable.endTime|date('H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('reception_timetable_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('reception_timetable_edit', { 'id': timetable.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
