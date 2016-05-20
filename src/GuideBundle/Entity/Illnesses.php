@@ -30,6 +30,38 @@ class Illnesses
     private $symptoms;
 
     /**
+     * @return mixed
+     */
+    public function getSymptoms()
+    {
+        return $this->symptoms;
+    }
+
+    /**
+     * @param mixed $symptoms
+     */
+    public function setSymptoms($symptoms)
+    {
+        $this->symptoms = $symptoms;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMedicines()
+    {
+        return $this->medicines;
+    }
+
+    /**
+     * @param mixed $medicines
+     */
+    public function setMedicines($medicines)
+    {
+        $this->medicines = $medicines;
+    }
+
+    /**
      * @ORM\ManyToMany(targetEntity="Medicines", inversedBy="illnesses")
      * @ORM\JoinTable(name="ill_to_medicine",
      *       joinColumns={@ORM\JoinColumn(name="ill_id", referencedColumnName="id")},

@@ -28,7 +28,7 @@
                         {% for timetable in timetables %}
                             <tr>
                                 <td>
-                                    <a href="{{ path('reception_timetable_show', { 'id': timetable.id }) }}">{{ timetable.id }}</a>
+                                    Doctor
                                 </td>
                                 <td>{% if timetable.beginTime %}{{ timetable.beginTime|date('H:i:s') }}{% endif %}</td>
                                 <td>{% if timetable.endTime %}{{ timetable.endTime|date('H:i:s') }}{% endif %}</td>

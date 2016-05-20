@@ -8,6 +8,11 @@
 
 {% block body %}
     {% include 'header.html.twig' %}
+    <ul class="nav nav-pills">
+        <li role="presentation"><a href="{{ path('reception_new') }}">Зареєструвати нового пацієнта</a></li>
+        <li role="presentation"><a class="scheduling-link" href="/reception/schedule">Генетичний алгоритм</a></li>
+        <li role="presentation"><a href="/reception/visits">Розклад</a></li>
+    </ul>
     <div class="col-md-6 col-md-offset-3">
         <div class="well" style="border-color: #EBF5FB; background-color:#F8F9F9;">
         <div class="row">

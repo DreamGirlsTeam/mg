@@ -14,13 +14,17 @@
                     {{ form_widget(form) }}{#
                             <input type="submit" value="Ñòâîðèòè" class="btn btn-success" onclick="radioChecked()"/>#}
                     {{ form_end(form) }}
+                    <div class="ill_heading"></div>
+                    <div class="illnesses"></div>
                 </div>
             </div>
     </div>
 </div>
+    <div class="mod"> </div>
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
+
     <script src="{{ asset('bundles/framework/js/tag-it.js') }}" type="text/javascript" charset="utf-8"></script>
     <script src="{{ asset('bundles/framework/js/treatment.js') }}" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
