@@ -146,6 +146,7 @@ class DoctorController extends Controller
     private function getIll($symptoms)
     {
         $em = $this->getDoctrine()->getManager();
+        $to_show = array();
         $repository = $em->getRepository('GuideBundle:Illnesses');
         foreach ($symptoms as $symptom) {
             $symp_ids[] = $symptom->getName();
@@ -173,10 +174,10 @@ class DoctorController extends Controller
             foreach ($illnesses as $ill => $symp) {
                 //var_dump(count(array_unique(array_intersect($symp, $symp_ids))) / count($symptoms));
                 $criteria = (count(array_unique(array_intersect($symp, $symp_ids)))) / (count($symptoms));
-                //var_dump(array_unique(array_intersect($symp, $symp_ids)));
-                if (count($symptoms) == 2 && $criteria === 2) {
+
+                if (count($symptoms) == 2 && $criteria ===  1 && !in_array(array('ill' => $ill, 'sym' => $symp, "procent" => $criteria * 100), array_values($to_show))) {
                     $to_show[] = array('ill' => $ill, 'sym' => $symp, "procent" => $criteria * 100);
-                } elseif ($criteria >= ((count($symptoms) % 2) + 1) / count($symptoms)) {
+                } elseif (count($symptoms) !=2 && $criteria >= ((count($symptoms) % 2) + 1) / count($symptoms) && !in_array(array('ill' => $ill, 'sym' => $symp, "procent" => $criteria * 100), array_values($to_show))) {
                     $to_show[] = array('ill' => $ill, 'sym' => $symp, "procent" => $criteria * 100);
                 }
             }

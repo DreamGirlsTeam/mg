@@ -20,4 +20,10 @@ $("#form_save").click(function (event) {
         }
     })
 });
+$body = $("body");
+$(document).on({
+    ajaxStart: function() { $body.addClass("loading");    },
+    ajaxStop: function() { $body.removeClass("loading"); }
+});
+
 
