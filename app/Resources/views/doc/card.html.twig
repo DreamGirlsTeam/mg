@@ -15,7 +15,7 @@
     </div>
     <div class="col-md-6 col-md-offset-1">
         <div class="well" style="border-color: #EBF5FB; background-color:#F8F9F9;">
-            <table class="table table-condensed table-hover visit">
+            <table class="table table-bordered table-condensed table-hover visit">
                 <thead>
                 <tr class="active">
                     <th>Дата</th>
@@ -30,8 +30,13 @@
                     <tr>
                         <td>{{ visit.date | date }}</td>
                         <td>{{ visit.type }}</td>
-                        <td>{% if visit.illness %}{{ visit.illness }}{% else %} - {% endif %}</td>
-                        <td>{% if visit.medicine %}{{ visit.medicine }}{% else %} - {% endif %}</td>
+                        <td>{% if visit.illnesses %}{{ visit.illnesses }}{% else %} - {% endif %}</td>
+                        <td>{{ dump(visit.medicines) }}
+                            {% if visit.medicines %}
+                            {% for medicine in visit.medicines %}
+                                {{ medicine.name }};
+                            {% endfor %}
+                            {% else %} - {% endif %}</td>
                         <td>{{ visit.comment }}</td>
                     </tr>
                 {% endfor %}

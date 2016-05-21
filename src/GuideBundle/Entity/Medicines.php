@@ -35,6 +35,35 @@ class Medicines
      */
     private $description;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Illnesses", inversedBy="illnesses", cascade={"persist"})
+     * @ORM\JoinTable(name="ill_to_medicine",
+     *       joinColumns={@ORM\JoinColumn(name="medic_id", referencedColumnName="id")},
+     *       inverseJoinColumns={@ORM\JoinColumn(name="ill_id", referencedColumnName="id")})
+     */
+    private $illnesses;
+
+    public function __construct()
+    {
+        $this->illnesses = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIllnesses()
+    {
+        return $this->illnesses;
+    }
+
+    /**
+     * @param mixed $illnesses
+     */
+    public function addIllness($illnesses)
+    {
+        $this->illnesses[] = $illnesses;
+    }
+
 
     /**
      * Get id

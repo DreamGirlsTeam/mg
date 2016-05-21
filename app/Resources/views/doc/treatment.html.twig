@@ -35,7 +35,6 @@
                 requireAutocomplete: true,
                 removeConfirmation: true,
                 tagSource: function (search, showChoices) {
-                    console.log(search);
                     $.ajax({
                         url: "/doctor/search/sympt",
                         data: {"search" : search.term},

@@ -3,8 +3,11 @@
 namespace GuideBundle\Controller;
 
 use FOS\UserBundle\Controller\SecurityController;
+use GuideBundle\Entity\Illnesses;
+use GuideBundle\Entity\Medicines;
 use GuideBundle\Entity\Visits;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -14,6 +17,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * ConfPerson controller.
@@ -55,9 +59,21 @@ class DoctorController extends Controller
             array('patId' => $actorId),
             array('date' => 'ASC')
         );
-        $visits = $em->getRepository('GuideBundle:Visits')->findBy(
+        $query = $em->createQueryBuilder();
+        $query->select('v');
+        $query->from('GuideBundle:Visits', 'v');
+        $query->leftJoin('v.medicines', 'm');
+        $query->where('v.patId = :patId');
+        $query->setParameter("patId", $actorId);
+        $visits = $query->getQuery()->execute();
+        foreach ($visits as $v) {
+            foreach($v->getMedicines() as $m) {
+               /* var_dump($m->getName());*/
+            }
+        }
+        /*$visits = $em->getRepository('GuideBundle:Visits')->findBy(
             array('patId' => $actorId)
-        );
+        );*/
         return $this->render('doc/card.html.twig', array(
             'actorId' => $actorId,
             'analysys' => $analys,
@@ -75,6 +91,9 @@ class DoctorController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $type = $form->getData()->getType()->getId();
+            $sess = $request->getSession()->set("patient", array(
+                "patId" => $actorId
+            ));
             if ($type != 2) {
                 return $this->redirectToRoute("visit_form", array('actorId' => $actorId, 'type' => $type));
             } else {
@@ -118,6 +137,9 @@ class DoctorController extends Controller
     {
         if ($request->isXMLHttpRequest()) {
             $symptoms = explode(",", $request->request->get('search'));
+            $request->getSession()->set("symptoms", array(
+                "symp" => $symptoms
+            ));
             $em = $this->getDoctrine()->getManager();
             foreach ($symptoms as $symp) {
                 $symp_id = $em->getRepository('GuideBundle:Symptoms')->findOneBy(array(
@@ -147,7 +169,6 @@ class DoctorController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $to_show = array();
-        $repository = $em->getRepository('GuideBundle:Illnesses');
         foreach ($symptoms as $symptom) {
             $symp_ids[] = $symptom->getName();
         }
@@ -175,9 +196,9 @@ class DoctorController extends Controller
                 //var_dump(count(array_unique(array_intersect($symp, $symp_ids))) / count($symptoms));
                 $criteria = (count(array_unique(array_intersect($symp, $symp_ids)))) / (count($symptoms));
 
-                if (count($symptoms) == 2 && $criteria ===  1 && !in_array(array('ill' => $ill, 'sym' => $symp, "procent" => $criteria * 100), array_values($to_show))) {
+                if (count($symptoms) == 2 && $criteria === 1 && !in_array(array('ill' => $ill, 'sym' => $symp, "procent" => $criteria * 100), array_values($to_show))) {
                     $to_show[] = array('ill' => $ill, 'sym' => $symp, "procent" => $criteria * 100);
-                } elseif (count($symptoms) !=2 && $criteria >= ((count($symptoms) % 2) + 1) / count($symptoms) && !in_array(array('ill' => $ill, 'sym' => $symp, "procent" => $criteria * 100), array_values($to_show))) {
+                } elseif (count($symptoms) != 2 && $criteria >= ((count($symptoms) % 2) + 1) / count($symptoms) && !in_array(array('ill' => $ill, 'sym' => $symp, "procent" => $criteria * 100), array_values($to_show))) {
                     $to_show[] = array('ill' => $ill, 'sym' => $symp, "procent" => $criteria * 100);
                 }
             }
@@ -186,6 +207,94 @@ class DoctorController extends Controller
             array('illnesses' => $to_show));
         return $view;
 
+    }
+
+    /**
+     * @Route("/search/medicines/", name="find_medicines")
+     * @Method("POST")
+     */
+    public function findMedicinesAction(Request $request)
+    {
+        $isAjax = $request->isXMLHttpRequest();
+        if ($isAjax) {
+            $em = $this->getDoctrine()->getManager();
+            $search = $request->request->get('search');
+            $repository = $em->getRepository('GuideBundle:Medicines');
+            $query = $repository->createQueryBuilder('m')
+                ->where('m.name LIKE :search')
+                ->setParameter('search', $search . '%')
+                ->getQuery();
+            $medicines = $query->getResult();
+            foreach ($medicines as $medicine) {
+                $med[] = $medicine->getName();
+            }
+            return new JsonResponse(array('symptoms' => $med));
+        }
+        return new Response('Permission denied', 400);
+    }
+
+    /**
+    * @Route("/save/visit/", name="visit_save")
+    * @Method("POST")
+    */
+    public function visitSaveAction(Request $request)
+    {
+        $illn = $request->request->get('diag');
+        $conc = $request->request->get('conclusion');
+        $medicines = $request->request->get('medicines');
+        $symptoms = $request->getSession()->get("symptoms")["symp"];
+        $illness = $this->addIllness($illn, $symptoms);
+        $medic = $this->addMedicines($medicines,$illness);
+        $doc = $request->getSession()->get("user")["id"];
+        $pat = $request->getSession()->get("patient")["patId"];
+        $visit = $this->setVisitByComplaint(array($doc, $pat), $illn, $medicines, $conc);
+        return $this->redirectToRoute("doctor");
+
+    }
+
+    private function addMedicines($medicines, Illnesses $illness)
+    {
+        $medicines = explode(",", $medicines);
+        $em = $this->getDoctrine()->getManager();
+        foreach ($medicines as $medicine) {
+            $med = $em->getRepository('GuideBundle:Medicines')->findOneBy(array(
+                "name" => $medicine
+            ));
+            if (!is_object($med)) {
+                $med = new Medicines();
+                $med->setName($medicine);
+                $med->addIllness($illness);
+                $med->setDescription($illness->getName());
+                $em->persist($med);
+                $illness->addMedicine($med);
+                $em->persist($illness);
+                $em->flush();
+            } else {
+                $med->addIllness($illness);
+                $em->persist($med);
+                $em->flush();
+            }
+        }
+        return $med;
+    }
+
+    private function addIllness($name, $symptoms)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $illness = new Illnesses();
+        $illness->setName($name);
+        foreach ($symptoms as $symptom) {
+            $sym = $em->getRepository('GuideBundle:Symptoms')->findOneBy(array(
+                "name" => $symptom
+            ));
+            $sym->addIllness($illness);
+            $illness->addSymptom($sym);
+            $em->persist($sym);
+          //  $em->flush();
+        }
+        $em->persist($illness);
+      //  $em->flush();
+        return $illness;
     }
 
     /**
@@ -245,4 +354,88 @@ class DoctorController extends Controller
         $visit->setComment($comment);
         return $visit;
     }
+
+    /**
+     * @Route("/medicines/", name="get_medicine")
+     * @Method("POST")
+     */
+    public function GetMedicineAction(Request $request)
+    {
+        if ($request->isXMLHttpRequest()) {
+            $to_show = array();
+            $ill = $request->request->get('search');
+            $em = $this->getDoctrine()->getManager();
+            $query = $em->createQueryBuilder();
+            $query->select('m');
+            $query->from('GuideBundle:Medicines', 'm');
+            $query->leftJoin('m.illnesses', 'i');
+            $query->where('i.name = :illName');
+            $query->setParameter("illName", $ill);
+            $medicinesObj = $query->getQuery()->execute();
+
+            foreach ($medicinesObj as $med) {
+                $to_show[] = array("name" => $med->getName(), "description" => $med->getDescription());
+            }
+            $view = $this->renderView('doc/medicines.html.twig',
+                array('medicines' => $to_show, 'diagnosys' => $ill));
+
+            return new JsonResponse(array('medicine' => $view));
+        } else {
+            return new Response('Permission denied', 400);
+        }
+
+    }
+
+    /**
+     * @Route("/save/", name="save")
+     * @Method("POST")
+     */
+    public function SaveAction(Request $request)
+    {
+        if ($request->isXMLHttpRequest()) {
+            $ill = $request->request->get('diagnosys');
+            $medicines = $request->request->get('medicines');
+            $comment = $request->request->get('conclusion');
+            $doc = $request->getSession()->get("user")["id"];
+            $pat = $request->getSession()->get("patient")["patId"];
+            if ($ill && $medicines && $doc && $pat) {
+                $this->setVisitByComplaint(array($doc, $pat), $ill, $medicines, $comment);
+                return new JsonResponse(array('success' => true));
+            } else {
+                return new JsonResponse(400);
+            }
+
+        } else {
+            return new Response('Permission denied', 400);
+        }
+
+    }
+
+    private function setVisitByComplaint($users, $ill, $medicines, $comment)
+    {
+        $visit = new Visits();
+        $em = $this->getDoctrine()->getEntityManager();
+        foreach ($users as $user) {
+            $actor[] = $em->getRepository('GuideBundle:Actors')->find($user);
+        }
+        foreach ($medicines as $medicine) {
+            $med = $em->getRepository('GuideBundle:Medicines')->findOneBy(
+                array(
+                    'name' => $medicine
+                )
+            );
+            $visit->addMedicine($med);
+        }
+        $type = $em->getRepository('GuideBundle:VisitTypes')->find(2)->getName();
+        $visit->setType($type);
+        $visit->setDate(new \DateTime(date('Y-m-d H:i:s')));
+        $visit->setDocId($actor[0]);
+        $visit->setPatId($actor[1]);
+        $visit->setComment($comment);
+        $visit->setIllnesses($ill);
+        $em->persist($visit);
+        $em->flush();
+        return $visit;
+    }
+
 }

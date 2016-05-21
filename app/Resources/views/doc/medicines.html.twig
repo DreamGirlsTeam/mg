@@ -1,0 +1,79 @@
+{% block stylesheets %}
+    <link href="{{ asset('/bundles/framework/css/doctor.css') }}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/dataTables.bootstrap.min.css"/>
+{% endblock %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="col-md-offset-5">
+            <h4>
+                <small>Діагноз:</small><div class="diagnosys">{{ diagnosys }}</div></h4>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table list-group medicine-table">
+            <thead>
+            <th></th>
+            </thead>
+            <tbody>
+            {#<ul class="list-group">#}
+            {% for medicine in medicines %}
+                <tr class="list-group-item">
+                    <td>
+                        <h4>
+                            <input class="check_medicine" type="checkbox" name="{{ medicine.name }}">
+                            {{ medicine.name }}
+                            <small><br><a class="togg" href="#">Опис</a>
+
+                                <p class="list-group-item-text"> {{ medicine.description }}</p></small>
+                        </h4>
+                    </td>
+                </tr>
+            {% endfor %}
+            {#</ul>#}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="panel panel-info">
+    <div class="panel-heading">Коментарі</div>
+    <div class="panel-body">
+        <div class="form-group">
+            <textarea placeholder="Введіть коментар до візиту" class="form-control comment" name="conclusion"/>
+        </div>
+    </div>
+</div>
+<div class="col-md-offset-5">
+    <input class="save btn btn-success" value="Зберегти візит" name="submit" type="submit">
+</div>
+{% block javascripts %}
+    <script>
+        $('.save').click(function(event){
+            event.preventDefault();
+            var checkedValues = $('.check_medicine:checked').map(function() {
+                return $(this).attr("name");
+            }).get();
+            console.log(checkedValues);
+            $.ajax({
+                url: "/doctor/save/",
+                data: {"medicines" : checkedValues,
+                       "conclusion" : $(".comment").val(),
+                       "diagnosys" : $(".diagnosys").html()},
+                type: "POST",
+                dataType: "json",
+                success: function(data) {
+                    if (data.success) {
+                        window.location = '/doctor';
+                    }
+                }
+            })
+        });
+        $('.medicine-table').DataTable({
+            responsive: true
+        });
+        $(".list-group-item-text").hide();
+        $(".togg").click(function () {
+            $(this).next().slideToggle();
+        });
+    </script>
+{% endblock %}

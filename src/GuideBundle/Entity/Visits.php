@@ -30,18 +30,15 @@ class Visits
     private $date;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Illnesses", inversedBy="visits")
-     * @ORM\JoinTable(name="visit_to_ill",
-     *       joinColumns={@ORM\JoinColumn(name="ill_id", referencedColumnName="id")},
-     *       inverseJoinColumns={@ORM\JoinColumn(name="visit_id", referencedColumnName="id")})
+     * @ORM\Column(name="illnesses", type="text", unique=false)
      */
      private $illnesses;
 
     /**
      * @ORM\ManyToMany(targetEntity="Medicines", inversedBy="visits")
      * @ORM\JoinTable(name="visit_to_medic",
-     *       joinColumns={@ORM\JoinColumn(name="medic_id", referencedColumnName="id")},
-     *       inverseJoinColumns={@ORM\JoinColumn(name="visit_id", referencedColumnName="id")})
+     *       joinColumns={@ORM\JoinColumn(name="visit_id", referencedColumnName="id")},
+     *       inverseJoinColumns={@ORM\JoinColumn(name="medic_id", referencedColumnName="id")})
      */
     private $medicines;
 
@@ -226,9 +223,17 @@ class Visits
     /**
      * @param mixed $medicines
      */
-    public function setMedicines($medicines)
+    public function addMedicine($medicines)
     {
-        $this->medicines = $medicines;
+        $this->medicines[] = $medicines;
+
+        return $this;
     }
+
+    public function __construct()
+    {
+        $this->medicines = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 }
 

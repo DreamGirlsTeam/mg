@@ -45,9 +45,7 @@ class Illnesses
         $this->symptoms = $symptoms;
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getMedicines()
     {
         return $this->medicines;
@@ -55,17 +53,14 @@ class Illnesses
 
     /**
      * @param mixed $medicines
-     */
-    public function setMedicines($medicines)
+    */
+    public function addMedicine($medicines)
     {
-        $this->medicines = $medicines;
+        $this->medicines[] = $medicines;
     }
 
     /**
-     * @ORM\ManyToMany(targetEntity="Medicines", inversedBy="illnesses")
-     * @ORM\JoinTable(name="ill_to_medicine",
-     *       joinColumns={@ORM\JoinColumn(name="ill_id", referencedColumnName="id")},
-     *       inverseJoinColumns={@ORM\JoinColumn(name="medic_id", referencedColumnName="id")})
+     * @ORM\ManyToMany(targetEntity="Medicines", mappedBy="medicines", cascade={"persist"})
      */
     private $medicines;
 
@@ -82,9 +77,10 @@ class Illnesses
     public function __construct()
     {
         $this->symptoms = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->medicines = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    public function addSymptom(\GuideBundle\Entity\Symptoms $symptoms)
+    public function addSymptom($symptoms)
     {
         $this->symptoms[] = $symptoms;
 

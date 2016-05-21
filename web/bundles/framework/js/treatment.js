@@ -18,12 +18,14 @@ $("#form_save").click(function (event) {
                 alert("Будь ласка, введіть від 2-х до 10 симптомів");
             }
         }
-    })
+    });
 });
 $body = $("body");
 $(document).on({
     ajaxStart: function() { $body.addClass("loading");    },
     ajaxStop: function() { $body.removeClass("loading"); }
 });
+
+
 
 
