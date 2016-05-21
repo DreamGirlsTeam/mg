@@ -31,11 +31,11 @@
                         <td>{{ visit.date | date }}</td>
                         <td>{{ visit.type }}</td>
                         <td>{% if visit.illnesses %}{{ visit.illnesses }}{% else %} - {% endif %}</td>
-                        <td>{{ dump(visit.medicines) }}
+                        <td>
                             {% if visit.medicines %}
-                            {% for medicine in visit.medicines %}
-                                {{ medicine.name }};
-                            {% endfor %}
+                                {% for medicine in visit.medicines %}
+                                    {{ medicine.name }};
+                                {% endfor %}
                             {% else %} - {% endif %}</td>
                         <td>{{ visit.comment }}</td>
                     </tr>

@@ -242,6 +242,7 @@ class DoctorController extends Controller
         $illn = $request->request->get('diag');
         $conc = $request->request->get('conclusion');
         $medicines = $request->request->get('medicines');
+        $medicines = explode(",", $medicines);
         $symptoms = $request->getSession()->get("symptoms")["symp"];
         $illness = $this->addIllness($illn, $symptoms);
         $medic = $this->addMedicines($medicines,$illness);
@@ -254,7 +255,6 @@ class DoctorController extends Controller
 
     private function addMedicines($medicines, Illnesses $illness)
     {
-        $medicines = explode(",", $medicines);
         $em = $this->getDoctrine()->getManager();
         foreach ($medicines as $medicine) {
             $med = $em->getRepository('GuideBundle:Medicines')->findOneBy(array(
