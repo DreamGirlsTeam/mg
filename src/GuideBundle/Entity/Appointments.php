@@ -65,8 +65,7 @@ class Appointments
     private $endTime;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Actors", inversedBy="Appointments")
-     * @ORM\JoinColumn(name="docId", referencedColumnName="id")
+     * @ORM\Column(name="docId", type="integer")
      */
     private $docId;
 
@@ -112,9 +111,6 @@ class Appointments
 
     /**
      * Set docId
-     *
-     * @param integer $docId
-     *
      * @return Appointments
      */
     public function setDocId($docId)

@@ -2,6 +2,7 @@
 
 namespace GuideBundle\Controller;
 
+use GuideBundle\Entity\Appointments;
 use Proxies\__CG__\GuideBundle\Entity\Actors;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -225,6 +226,35 @@ class RegInfoController extends Controller
     }
 
     /**
+     * @Route("/appointment/", name="reception_appointment")
+     * @Method("POST")
+     */
+    public function appointmentAction(Request $request)
+    {
+        $app = new Appointments();
+        $em = $this->getDoctrine()->getManager();
+       // $docPerson = $em->getRepository('GuideBundle:MedicalStaff')->find($request->getSession()->get("schedule")["doc"]);
+        //var_dump($request->getSession()->get("schedule")["doc"]);
+        $date =  new \DateTime($request->getSession()->get("schedule")["date"]);
+        $date->format("Y-m-d");
+        $app->setDate($date);
+        $beginTime = $request->request->get("beginTime");
+        $endTime = $pat = $request->request->get("endTime");
+        $beginTime =  new \DateTime($beginTime);
+        $beginTime->format("H:i:s");
+        $endTime =  new \DateTime($endTime);
+        $endTime->format("H:i:s");
+        $app->setBeginTime($beginTime);
+        $app->setDocId($request->getSession()->get("schedule")["doc"]);
+        $app->setPatName($request->getSession()->get("schedule")["pat"]);
+        $app->setEndTime($endTime);
+        $em->persist($app);
+        $em->flush();
+        return $this->redirectToRoute("reception_index");
+
+    }
+
+    /**
      * @Route("/load/schedule", name="reception_load_schedule")
      * @Method("POST")
      */
@@ -248,7 +278,7 @@ class RegInfoController extends Controller
 
             if (is_object($docPerson) && preg_match("/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/", $date) === 1) {
                 $request->getSession()->set("schedule", array(
-                    "doc" => $doc,
+                    "doc" => $docPerson->getActorId()->getId(),
                     "pat" => $pat,
                     "date" => $date
                 ));
