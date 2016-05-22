@@ -347,7 +347,7 @@ class DoctorController extends Controller
         } else {
             $form = $this->createFormBuilder()
                 ->add('symptoms', TextType::class, array('label' => 'Введіть симптоми <a class="sympt_info" href="#"><span class="ui-icon ui-icon-info">ddfd</span></a>', 'attr' => array('class' => 'sympt')))
-                ->add('save', SubmitType::class, array('label' => 'Підтвердити'))
+                ->add('save', SubmitType::class, array('label' => 'Підтвердити', 'attr' => array("class" => "sympt_save")))
                 ->getForm();
             return $this->render('doc/treatment.html.twig', array(
                 'form' => $form->createView()

@@ -1,0 +1,21 @@
+<table class="table list-group appointment-table">
+    <thead>
+    <tr class="info">
+        <th>Призначені візити на цей день</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for appointment in app %}
+        <tr class="list-group-item default">
+            <td>{{ appointment.beginTime | date('H:i:s') }} - {{ appointment.endTime | date('H:i:s') }} </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% block javascripts %}
+    <script>
+        $('.appointment-table').DataTable({
+            responsive: true
+        });
+    </script>
+{% endblock %}

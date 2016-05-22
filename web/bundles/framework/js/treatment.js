@@ -1,4 +1,4 @@
-$("#form_save").click(function (event) {
+$(".sympt_save").click(function (event) {
     event.preventDefault();
     $.ajax({
         url: "/doctor/treat",

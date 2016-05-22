@@ -7,7 +7,6 @@
 {% block body %}
     {% include 'header.html.twig' %}
     <div class="col-md-8 col-md-offset-2">
-
         <div class="col-md-8 col-md-offset-2">
             <div class="row">
                 <ul class="nav nav-tabs">
@@ -19,35 +18,66 @@
                                     class="ui-icon ui-icon-info">ddfd</span></a></div>
                     <div class="panel-body">
                         {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-                        {{ form_row(form.datetime) }}
                         {{ form_widget(form) }}
                         {{ form_end(form) }}
                     </div>
+                    <div class="appointment"></div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="modal"></div>
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('bundles/framework/js/tag-it.js') }}" type="text/javascript" charset="utf-8"></script>
     <script src="{{ asset('bundles/framework/js/jquery.datetimepicker.min.js') }}" type="text/javascript" charset="utf-8"></script>
     <script src="{{ asset('bundles/framework/js/treatment.js') }}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{ asset('bundles/framework/js/jQuery/datepicker-uk.js') }}" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
+        $body = $("body");
+        $(document).on({
+            ajaxStart: function() { $body.addClass("loading");    },
+            ajaxStop: function() { $body.removeClass("loading"); }
+        });
         $(function () {
-            jQuery.datetimepicker.setLocale('uk');
-            $('.datetime').datetimepicker({
-                formatDate:'Y/m/d',
-                minDate:'-1970/01/01',//yesterday is minimum date(for today use 0 or -1970/01/01)
-                maxDate:'+1970/01/31',
-                minTime: '07:00'
+            $(".getSchedule").click(function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url: "/reception/load/schedule",
+                    data: {"doc": $("#form_doctor").val(),
+                           "pat": $("#form_patient").val(),
+                           "date": $("#form_date").val()
+                    },
+                    type: "POST",
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                       $(".appointment").html(data.appointment);
+                    }
+                })
             });
+            jQuery.datetimepicker.setLocale('uk');
         });
     </script>
+    <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            $(name="form").validationEngine();
+            $.datepicker.setDefaults(
+                    $.extend(
+                            $.datepicker.regional['uk']
+                    )
+            );
+            $(".datepicker").datepicker({
+                maxDate: "+1m +1w",
+                dateFormat: "yy-mm-dd",
+                minDate: "+0d"
+            });
             $(".doc").tagit({
                 allowSpaces: true,
+                tagLimit: 1,
                 singleFieldDelimiter: ',',
                 requireAutocomplete: true,
                 removeConfirmation: true,
@@ -65,6 +95,7 @@
             });
             $(".pat").tagit({
                 allowSpaces: true,
+                tagLimit: 1,
                 singleFieldDelimiter: ',',
                 requireAutocomplete: true,
                 removeConfirmation: true,

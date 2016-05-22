@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use GuideBundle\Entity\RegInfo;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use GuideBundle\Form\RegInfoType;
 use GuideBundle\Entity\ConfPerson;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -34,7 +35,7 @@ class RegInfoController extends Controller
 //            ->from('GuideBundle:RegInfo', 'r')
 //            ->leftJoin('GuideBundle:ConfPerson', 'cp', 'WITH', 'cp.first_name = r.first_name');
         $regInfos = $em->getRepository('GuideBundle:RegInfo')->findAll();
-       // $regInfos = $em->createQuery($query)->getResult();
+        // $regInfos = $em->createQuery($query)->getResult();
         //$regInfos = $em->getRepository('GuideBundle:ConfPerson')->findAll();
 
         return $this->render('reginfo/index.html.twig', array(
@@ -63,7 +64,7 @@ class RegInfoController extends Controller
             $regInfo->setActorId($actor);
             $em->persist($regInfo);
             $em->flush();
-           // var_dump($regInfo->getJob()->getName());
+            // var_dump($regInfo->getJob()->getName());
             //return $this->redirect($this->generateUrl('reception_index', array('actorId' => $actor->getId())));
             return $this->redirectToRoute('reception_confidant_new', array('actorId' => $actor->getId()));
         }
@@ -149,8 +150,7 @@ class RegInfoController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('reception_delete', array('actorId' => $regInfo->getActorId()->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 
     /**
@@ -160,9 +160,10 @@ class RegInfoController extends Controller
     public function visitsAction()
     {
         $form = $this->createFormBuilder()
-            ->add('doctor', TextType::class, array('label' => 'Ім\'я лікаря', 'attr' => array('class'=>'doc')))
-            ->add('patient', TextType::class, array('label' => 'Ім\'я пацієнта', 'attr' => array('class'=>'pat')))
-            ->add("datetime", TextType::class, array('attr' => array('class' => 'datetime')))
+            ->add('doctor', TextType::class, array('label' => 'Спеціалізація лікаря', 'attr' => array('class' => 'doc')))
+            ->add('patient', TextType::class, array('label' => 'Ім\'я пацієнта', 'attr' => array('class' => 'pat')))
+            ->add("date", TextType::class, array('label' => 'Дата <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>', 'attr' => array('class' => 'datepicker validation[required, minSize[10], maxSize[10]]')))
+            ->add("save", SubmitType::class, array('label' => 'Знайти розклад', 'attr' => array('class' => 'getSchedule')))
             ->getForm();
         return $this->render('reginfo/visits.html.twig', array(
             "form" => $form->createView()
@@ -181,27 +182,18 @@ class RegInfoController extends Controller
         if ($isAjax) {
             $em = $this->getDoctrine()->getManager();
             $search = $request->request->get('search');
-           // $repository = $em->getRepository('GuideBundle:MedicalStaff');
             $doctors = $em->createQuery('select s
                             from GuideBundle:MedicalStaff s
                             left join GuideBundle:Actors a
                             where s.actorId = a.id
-                            where s.last_name like :search
+                            where s.specialization like :search
                             and a.role = 2
                             '
             )
-                ->setParameter('search', $search.'%')
+                ->setParameter('search', $search . '%')
                 ->getResult();
-           /* $query = $em->createQueryBuilder()
-                ->select('s')
-                ->from('GuideBundle:MedicalStaff', 's')
-                ->leftJoin('GuideBundle:Actors', 'a','\Doctrine\ORM\Query\Expr\Join::ON, �s.actorId = a.id')
-                ->where('a.role = 2')
-                //->setParameter('search', $search.'%')
-                ->getQuery();
-            $doctors = $query->getResult();*/
             foreach ($doctors as $doctor) {
-                $doc[] = $doctor->getLastName()." ".$doctor->getFirstName()." (".$doctor->getSpecialization().")";
+                $doc[] = $doctor->getLastName() . " " . $doctor->getFirstName() . " (" . $doctor->getSpecialization() . ")";
             }
             return new JsonResponse(array('doctors' => $doc));
         }
@@ -221,15 +213,64 @@ class RegInfoController extends Controller
             $repository = $em->getRepository('GuideBundle:RegInfo');
             $query = $repository->createQueryBuilder('r')
                 ->where('r.lastName LIKE :search')
-                ->setParameter('search', $search.'%')
+                ->setParameter('search', $search . '%')
                 ->getQuery();
             $patients = $query->getResult();
             foreach ($patients as $patient) {
-                $pat[] = $patient->getLastName()." ".$patient->getFirstName()." ".$patient->getPatronymic();
+                $pat[] = $patient->getLastName() . " " . $patient->getFirstName() . " " . $patient->getPatronymic();
             }
             return new JsonResponse(array('patients' => $pat));
         }
         return new Response('Permission denied', 400);
+    }
+
+    /**
+     * @Route("/load/schedule", name="reception_load_schedule")
+     * @Method("POST")
+     */
+    public function loadScheduleAction(Request $request)
+    {
+        $isAjax = $request->isXMLHttpRequest();
+        if ($isAjax) {
+            $em = $this->getDoctrine()->getManager();
+            $doc = $request->request->get("doc");
+            $docName = explode(" (", $doc)[0];
+            $docSpec = substr(explode(" (", $doc)[1], 0, -1);
+            $docLastName = explode(" ", $docName)[0];
+            $docFirstName = explode(" ", $docName)[1];
+            $pat = $request->request->get("pat");
+            $date = $request->request->get("date");
+            $docPerson = $em->getRepository('GuideBundle:MedicalStaff')->findOneBy(array(
+                "first_name" => $docFirstName,
+                "last_name" => $docLastName,
+                "specialization" => $docSpec
+            ));
+
+            if (is_object($docPerson) && preg_match("/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/", $date) === 1) {
+                $request->getSession()->set("schedule", array(
+                    "doc" => $doc,
+                    "pat" => $pat,
+                    "date" => $date
+                ));
+                $date =  new \DateTime($date);
+                $date->format("Y-m-d");
+                $appointments = $em->getRepository('GuideBundle:Appointments')->findBy(array(
+                    "docId" => $docPerson->getActorId()->getId(),
+                    "date" => $date
+                ));
+                foreach ($appointments as $appointment) {
+                    $app[] = array("beginTime" => $appointment->getBeginTime(),
+                        "endTime" => $appointment->getEndTime());
+                }
+                $view = $this->renderView("regInfo/appointments.html.twig", array("app" => $app));
+                return new JsonResponse(array("appointment" => $view));
+            } else {
+                return new JsonResponse(array("valid" => false));
+            }
+        } else {
+            return new Response('Permission denied', 400);
+        }
+
     }
 
 }

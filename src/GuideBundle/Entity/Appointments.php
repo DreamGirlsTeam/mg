@@ -22,18 +22,47 @@ class Appointments
     private $id;
 
     /**
-     * @var \DateTime
-     *
      * @ORM\Column(name="date", type="date")
      */
     private $date;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="time", type="time")
+     * @ORM\Column(name="beginTime", type="time")
      */
-    private $time;
+    private $beginTime;
+
+    /**
+     */
+    public function getBeginTime()
+    {
+        return $this->beginTime;
+    }
+
+    /**
+     */
+    public function setBeginTime($beginTime)
+    {
+        $this->beginTime = $beginTime;
+    }
+
+    /**
+     */
+    public function getEndTime()
+    {
+        return $this->endTime;
+    }
+
+    /**
+     */
+    public function setEndTime($endTime)
+    {
+        $this->endTime = $endTime;
+    }
+
+    /**
+     * @ORM\Column(name="endTime", type="time")
+     */
+    private $endTime;
 
     /**
      * @ORM\ManyToOne(targetEntity="Actors", inversedBy="Appointments")
@@ -42,21 +71,9 @@ class Appointments
     private $docId;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Actors", inversedBy="Appointments")
-     * @ORM\JoinColumn(name="patId", referencedColumnName="id")
-     */
-    private $patId;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="VisitTypes", inversedBy="Appointments")
-     * @ORM\JoinColumn(name="visitType", referencedColumnName="id")
-     */
-    private $visitType;
-
-    /**
      * @var string
      *
-     * @ORM\Column(name="patName", type="string", length=25, nullable=true)
+     * @ORM\Column(name="patName", type="string", length=60, nullable=true)
      */
     private $patName;
 
@@ -74,7 +91,6 @@ class Appointments
     /**
      * Set date
      *
-     * @param \DateTime $date
      *
      * @return Appointments
      */
@@ -88,35 +104,10 @@ class Appointments
     /**
      * Get date
      *
-     * @return \DateTime
      */
     public function getDate()
     {
         return $this->date;
-    }
-
-    /**
-     * Set time
-     *
-     * @param \DateTime $time
-     *
-     * @return Appointments
-     */
-    public function setTime($time)
-    {
-        $this->time = $time;
-
-        return $this;
-    }
-
-    /**
-     * Get time
-     *
-     * @return \DateTime
-     */
-    public function getTime()
-    {
-        return $this->time;
     }
 
     /**
@@ -139,52 +130,6 @@ class Appointments
     public function getDocId()
     {
         return $this->docId;
-    }
-
-    /**
-     * Set patId
-     *
-     * @param integer $patId
-     *
-     * @return Appointments
-     */
-    public function setPatId($patId)
-    {
-        $this->patId = $patId;
-
-        return $this;
-    }
-
-    /**
-     * Get patId
-     *
-     */
-    public function getPatId()
-    {
-        return $this->patId;
-    }
-
-    /**
-     * Set visitType
-     *
-     * @param integer $visitType
-     *
-     * @return Appointments
-     */
-    public function setVisitType($visitType)
-    {
-        $this->visitType = $visitType;
-
-        return $this;
-    }
-
-    /**
-     * Get visitType
-     *
-     */
-    public function getVisitType()
-    {
-        return $this->visitType;
     }
 
     /**
