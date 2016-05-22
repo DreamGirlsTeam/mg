@@ -1,3 +1,4 @@
+<div class="col-md-offset-9"><a class="self_input btn btn-sm btn-default" href="#">Ввести власноруч</a></div>
 {% if illnesses %}
     <table class="table table-hover table-bordered">
         <tbody>
@@ -25,47 +26,25 @@
     </table>
 {% else %}
     <h4>За такими симптомами не було знайдено жодного діагнозу</h4>
+    {% include 'doc/nodiag.html.twig' %}
 
-    <br/>
-    <hr>
-    <h4><label for="diag">Введіть діагноз</label></h4>
-    <form class="no_illness" method="post" action="/doctor/save/visit/">
-        <input type="text" id="diag" class="form-control validate[required, minSize[3], maxSize[20], custom[onlyLetterSp]]" name="diag">
-        <h4><label for="medicines">Введіть медичні препарати
-                <small> (або оберіть зі списку)</small>
-            </label></h4>
-        <input type="text" id="medicines" class='medicines' name="medicines">
-        <h4><label for="medicines">Введіть коментар
-            </label></h4>
-        <textarea placeholder="Введіть коментар до візиту" class="form-control comment validate[required, minSize[3], custom[onlyLetterSp]]" name="conclusion"/>
-        <hr>
-        <div class="col-md-offset-5">
-            <input type="submit" class="btn btn-success" value="Зберегти">
-        </div>
-    </form>
 {% endif %}
 
 {% block javascripts %}
     <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js"></script>
     <script>
-        $(".no_illness").validationEngine();
-        $(".medicines").tagit({
-            allowSpaces: true,
-            singleFieldDelimiter: ',',
-            requireAutocomplete: true,
-            removeConfirmation: true,
-            tagSource: function (search, showChoices) {
-                $.ajax({
-                    url: "/doctor/search/medicines/",
-                    data: {"search": search.term},
-                    type: "POST",
-                    dataType: "json",
-                    success: function (choices) {
-                        showChoices(choices.symptoms);
-                    }
-                })
-            }
+        $('.self_input').click(function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: "/doctor/input/ill/",
+                data: {"self": true},
+                type: "POST",
+                dataType: "json",
+                success: function (data) {
+                    $(".illnesses").html(data.form);
+                }
+            })
         });
         $('.confirm').click(function (event) {
             event.preventDefault();

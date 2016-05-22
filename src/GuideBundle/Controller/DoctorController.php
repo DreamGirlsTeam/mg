@@ -234,6 +234,30 @@ class DoctorController extends Controller
     }
 
     /**
+     * @Route("/search/diagnosys/", name="find_diag")
+     * @Method("POST")
+     */
+    public function findDiagAction(Request $request)
+    {
+        $isAjax = $request->isXMLHttpRequest();
+        if ($isAjax) {
+            $em = $this->getDoctrine()->getManager();
+            $search = $request->request->get('search');
+            $repository = $em->getRepository('GuideBundle:Illnesses');
+            $query = $repository->createQueryBuilder('i')
+                ->where('i.name LIKE :search')
+                ->setParameter('search', $search . '%')
+                ->getQuery();
+            $illnesses = $query->getResult();
+            foreach ($illnesses as $illness) {
+                $ill[] = $illness->getName();
+            }
+            return new JsonResponse(array('illnesses' => $ill));
+        }
+        return new Response('Permission denied', 400);
+    }
+
+    /**
     * @Route("/save/visit/", name="visit_save")
     * @Method("POST")
     */
@@ -281,20 +305,35 @@ class DoctorController extends Controller
     private function addIllness($name, $symptoms)
     {
         $em = $this->getDoctrine()->getManager();
-        $illness = new Illnesses();
-        $illness->setName($name);
+        $ill = $em->getRepository('GuideBundle:Illnesses')->findOneBy(array(
+            "name" => $name
+        ));
+
+        if (!is_object($ill)) {
+            $illness = new Illnesses();
+            $illness->setName($name);
+        }
         foreach ($symptoms as $symptom) {
             $sym = $em->getRepository('GuideBundle:Symptoms')->findOneBy(array(
                 "name" => $symptom
             ));
-            $sym->addIllness($illness);
-            $illness->addSymptom($sym);
-            $em->persist($sym);
-          //  $em->flush();
+            if (!is_object($ill)) {
+                $sym->addIllness($illness);
+                $illness->addSymptom($sym);
+                $em->persist($sym);
+            } else {
+                $sym->addIllness($ill);
+                $ill->addSymptom($sym);
+            }
         }
-        $em->persist($illness);
-      //  $em->flush();
-        return $illness;
+       /* if (!is_object($ill)) {
+            $em->persist($illness);
+        } else {
+            $em->persist($ill);
+        }
+        */
+        is_object($ill) ? $em->persist($ill) : $em->persist($illness);
+        return is_object($ill) ? $ill : $illness;
     }
 
     /**
@@ -316,6 +355,22 @@ class DoctorController extends Controller
         }
 
     }
+
+
+    /**
+     * @Route("/input/ill/", name="input_ill")
+     */
+    public function InputIllAction(Request $request)
+    {
+        if ($request->isXMLHttpRequest()) {
+            $form = $this->renderView("doc/nodiag.html.twig");
+            return new JsonResponse(array("form" => $form));
+        } else {
+            return new JsonResponse(400);
+        }
+
+    }
+
 
     /**
      * @Route("/form/{actorId}/{type}", name="visit_form")
