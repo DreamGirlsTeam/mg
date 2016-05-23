@@ -27,6 +27,15 @@ class PatientController extends Controller
     private $iterationNumber;
 
     /**
+     * PatientController constructor.
+     * @param $iterationNumber
+     */
+    public function __construct()
+    {
+        $this->iterationNumber = 5;
+    }
+
+    /**
      * @return mixed
      */
     public function getIterationNumber()
@@ -162,7 +171,32 @@ class PatientController extends Controller
         ));
     }
 
-    private function getMaxIndividLength()
+    private function getNewParents(Population $population)
+    {
+        $parents = array();
+        $bestScore = 10000;
+        foreach ($population->getIndivids() as $individ) {
+            if ($individ->getAverQueueTime() < $bestScore) {
+                $bestScore = $individ->getAverQueueTime();
+                $parents[0] = $individ;
+            }
+        }
+        $parentKey = array_rand($population->getIndivids(), 1);
+        $parents[1] = $population->getIndivids()[$parentKey];
+        while ($population->getIndivids()[$parentKey]->getPatients() === $parents[0]->getPatients()) {
+            $parentKey = array_rand($population->getIndivids(), 1);
+            $parents[1] = $population->getIndivids()[$parentKey];
+        }
+        //if ()$population->getIndivids()[$parentKey]
+        return $parents;
+    }
+
+    private function getNewChildren($parents)
+    {
+
+    }
+
+    private function getNewPopulation($population, $children)
     {
 
     }
