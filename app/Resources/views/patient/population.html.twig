@@ -9,10 +9,38 @@
     </thead>
     <tbody>
     {% for individ in population %}
+        {% if individ.reanimation %}
+            {{ dump(individ.reanimation) }}
+    {% endif %}
+        {% if individ.suitable %}
         <tr>
-            {% for i in 0..maxMorLength - 1 %} <td>{{ individ.patients[i].number }}</td> {% endfor %}
+            {% else %}
+                {{ dump(individ.patients) }}
+            <tr class="alert-danger">
+        {% endif %}
+            {% for i in 0..maxMorLength - 1 %}
+                {%  if mutated and individ.patients[i].mutated %}
+                        <td class="warning">
+                {% else %}
+                    <td>
+                {% endif %}
+                {{ individ.patients[i].number }}
+                </td>
+            {% endfor %}
             <td class="danger">Обід</td>
-            {% if maxEvLength > 0 %}{% for i in maxMorLength..maxLength - 1 %} <td>{{ individ.patients[i].number }}</td> {% endfor %}{% endif %}
+            {% if maxEvLength > 0 %}
+                {% for i in maxMorLength..maxLength - 1 %}
+                    {%  if mutated and individ.patients[i].mutated%}
+                            <td class="warning">
+                    {% else %}
+                        <td>
+
+                    {% endif %}
+
+                    {{ individ.patients[i].number }}
+                    </td>
+                {% endfor %}
+            {% endif %}
             <td> {{ individ.morTime }}</td>
             <td> {{ individ.evTime }}</td>
             <td class="func"> {{ individ.averQueueTime | number_format(2) }}</td>

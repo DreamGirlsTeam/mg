@@ -44,7 +44,62 @@ class Patient
     {
         $this->number = $number;
         $this->work = $work;
+       // $this->mutated = NULL;
     }
+
+    public $mutated;
+
+    /**
+     * @return mixed
+     */
+    public function getMutated()
+    {
+        return $this->mutated;
+    }
+
+    /**
+     * @param mixed $mutated
+     */
+    public function setMutated($mutated)
+    {
+        $this->mutated = $mutated;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSelection()
+    {
+        return $this->selection;
+    }
+
+    /**
+     * @param mixed $selection
+     */
+    public function setSelection($selection)
+    {
+        $this->selection = $selection;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReanimation()
+    {
+        return $this->reanimation;
+    }
+
+    /**
+     * @param mixed $reanimation
+     */
+    public function setReanimation($reanimation)
+    {
+        $this->reanimation = $reanimation;
+    }
+
+    public $selection;
+
+    public $reanimation;
 
 
     /**

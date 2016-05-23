@@ -5,4 +5,20 @@
         <div class="panel-body text-center">Батьки</div>
     </div>
     {% include "patient/population.html.twig" with {"population" : iteration.parents} %}
+    <div class="panel panel-default">
+        <div class="panel-body text-center">Потомки</div>
+    </div>
+    {% include "patient/population.html.twig" with {"population" : iteration.children} %}
+    {% if iteration.mutated %}
+        <div class="panel panel-default">
+            <div class="panel-body text-center">Мутація</div>
+        </div>
+        {% include "patient/population.html.twig" with {"population" : iteration.children, "mutated" : true} %}
+    {% endif %}
+    {% if iteration.reanimation %}
+        <div class="panel panel-default">
+            <div class="panel-body text-center">Реанімація</div>
+        </div>
+        {% include "patient/population.html.twig" with {"population" : iteration.reanimation} %}
+    {% endif %}
 {% endfor %}

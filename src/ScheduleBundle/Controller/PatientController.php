@@ -32,7 +32,7 @@ class PatientController extends Controller
      */
     public function __construct()
     {
-        $this->iterationNumber = 5;
+        $this->iterationNumber = 1;
     }
 
     /**
@@ -143,6 +143,25 @@ class PatientController extends Controller
         }
     }
 
+    private function reanimate($children)
+    {
+        $childs = array();
+        foreach ($children as $child) {
+            if (!$child->getSuitable()) {
+               /* echo "<pre>";
+                var_dump($child->getPatients()->toArray());
+                echo "</pre>";*/
+                $newPats = $this->changeGenes($child->getPatients()->toArray());
+                $child->getPatients()->clear();
+                foreach ($newPats as $np) {
+                    $child->add($np);
+                }
+                $childs[] = $child;
+            }
+        }
+        return $childs;
+    }
+
     /**
      * Lists all Patient entities.
      *
@@ -156,14 +175,19 @@ class PatientController extends Controller
         for ($i = 0; $i < $this->getIterationNumber(); $i++) {
             $parents = $this->getNewParents($population);
             $children = $this->getNewChildren($parents);
-            $newPopulation = $this->getNewPopulation($population, $children);
+            $childReanimate = $this->reanimate($children);
+
+            $mutation = $this->isMutated($children);
+            //$newPopulation = $this->getNewPopulation($population, $children);
             $iterations[] = array(
                 "parents" => $parents,
                 "children" => $children,
-                "newPopulation" => $newPopulation
+                "reanimation" => $childReanimate,
+                //"newPopulation" => $newPopulation,
+                "mutated" => $mutation
             );
         }
-       // $view = $this->renderView('patient/iterations.html.twig', $iterations);
+        // $view = $this->renderView('patient/iterations.html.twig', $iterations);
         return $this->render('patient/result.html.twig', array(
             "population" => $population->getIndivids(),
             "maxMorLength" => $population->maxMorLength,
@@ -171,6 +195,20 @@ class PatientController extends Controller
             "maxLength" => $population->maxEvLength + $population->maxMorLength,
             "iterations" => $iterations
         ));
+    }
+
+    private function isMutated($individs)
+    {
+        $mutation = false;
+        foreach ($individs as $individ) {
+            foreach ($individ->getPatients() as $pat) {
+                if ($pat->getMutated()) {
+                    $mutation = true;
+                    break;
+                }
+            }
+        }
+        return $mutation;
     }
 
     private function getNewParents(Population $population)
@@ -203,50 +241,55 @@ class PatientController extends Controller
 
     private function getChild($parentFirst, $parentSecond)
     {
+        $em = $this->getDoctrine()->getEntityManager();
         $child = new Individ();
         $childPat = array();
         $i = 0;
         $j = count($parentSecond) - 1;
-        echo "<pre>";
-        echo "FIRST PARENT:";
-        foreach ($parentFirst as $parFirsNum) {
-            var_dump($parFirsNum->getNumber());
-        }
-        echo "SECOND PARENT:";
-        foreach ($parentSecond as $parSecNum) {
-            var_dump($parSecNum->getNumber());
-        }
         while ($i != count($parentFirst) && $j != -1) {
             if (!in_array($parentFirst[$i], $childPat)) {
                 $childPat[] = $parentFirst[$i];
-                echo "<pre>";
-                echo "FIRST:";
-                var_dump($parentFirst[$i]);
-                echo "</pre>";
                 $i++;
             } else {
                 $i++;
             }
             if (!in_array($parentSecond[$j], $childPat)) {
                 $childPat[] = $parentSecond[$j];
-                echo "<pre>";
-                echo "SECOND:";
-                var_dump($parentSecond[$j]);
-                echo "</pre>";
                 $j--;
             } else {
                 $j--;
             }
         }
-        echo "ENDOF CHILD";
-
-
-       /* foreach ($childPat as $c) {
-            var_dump($c->getNumber());
+        foreach ($childPat as $patient) {
+            $child->add($patient);
         }
-        echo "CHILD";
-        echo "</pre>";
-        echo "endendend";*/
+        $times = $em->getRepository("ScheduleBundle:works")->findAll();
+        return $this->createIndivid($childPat, $times, true);
+    }
+
+    private function changeGenes($individ, $switch = 'selection')
+    {
+        $firstChange = array_rand($individ, 1);
+        $secondChange = array_rand($individ, 1);
+        while ($firstChange === $secondChange) {
+            $firstChange = array_rand($individ, 1);
+            $secondChange = array_rand($individ, 1);
+        }
+        $temp = $individ[$firstChange];
+        $individ[$firstChange] = $individ[$secondChange];
+        $individ[$secondChange] = $temp;
+/*
+        switch ($switch) {
+            case 'selection' :
+                $individ[$firstChange]->setSelection(true);
+                $individ[$secondChange]->setSelection(true);
+                break;
+            case 'mutation' :
+                $individ[$firstChange]->setMutated(true);
+                $individ[$secondChange]->setMutated(true);
+                break;
+        }*/
+        return $individ;
     }
 
     private function getNewPopulation($population, $children)
@@ -286,8 +329,8 @@ class PatientController extends Controller
     private function isSuitable(Individ $individ)
     {
         if ($individ->getMorTime() > $this->workTime || $individ->getEvTime() > $this->workTime) {
-           // var_dump($individ->getMorTime());
-           return false;
+            // var_dump($individ->getMorTime());
+            return false;
         } else {
             return true;
         }
@@ -302,11 +345,15 @@ class PatientController extends Controller
         }
     }
 
-    private function createIndivid($schedule, $times)
+    private function createIndivid($schedule, $times, $child = false)
     {
         $individ = new Individ();
         foreach ($times as $time) {
             $durations[$time->getId()] = $time->getDuration();
+        }
+
+        if (rand(1, 100) === 5 && $child) {
+            $newPatients = $this->changeGenes($schedule, 'mutation');
         }
         foreach ($schedule as $sc) {
             $individ->add($sc);
@@ -317,7 +364,6 @@ class PatientController extends Controller
         }
         $morning = $this->getQueueTime($pat, $individ, 'morning');
         $individ->setMorTime($morning["time"]);
-
         $individ->setMorNumOfPat($morning["PatNumber"]);
         $evening = $this->getQueueTime($pat, $individ, 'evening');
         $individ->setEvTime($evening["time"]);
@@ -333,7 +379,7 @@ class PatientController extends Controller
 
         $time = 0;
         for ($i = 1; $i < $individ->getNumOfPat() + 1; $i++) {
-           // var_dump($time);
+            // var_dump($time);
             //echo "duration for ".$i." is ".$patients[$i - 1]["duration"];
             $time += $patients[$i - 1]["duration"] * ($individ->getNumOfPat() - $i);
 
@@ -345,27 +391,27 @@ class PatientController extends Controller
     {
         $totalTime = 0;
         $numPat = 0;
-        switch($time) {
+        switch ($time) {
             case 'morning':
-                for ($i= 0; $i < $individ->getLunchPos(); $i++) {
+                for ($i = 0; $i < $individ->getLunchPos(); $i++) {
                     if ($patients[$i]) {
                         $numPat++;
                         $totalTime += $patients[$i]["duration"];
                     }
                 }
-            break;
+                break;
             case 'evening':
-                for ($i= $individ->getLunchPos(); $i < count($patients); $i++) {
+                for ($i = $individ->getLunchPos(); $i < count($patients); $i++) {
                     if ($patients[$i]) {
                         $numPat++;
                         $totalTime += $patients[$i]["duration"];
                     }
                 }
-            break;
+                break;
         }
         return array(
             "time" => $totalTime,
             "PatNumber" => $numPat
-            );
+        );
     }
 }
