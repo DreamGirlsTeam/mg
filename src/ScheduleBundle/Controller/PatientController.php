@@ -163,11 +163,13 @@ class PatientController extends Controller
                 "newPopulation" => $newPopulation
             );
         }
+       // $view = $this->renderView('patient/iterations.html.twig', $iterations);
         return $this->render('patient/result.html.twig', array(
             "population" => $population->getIndivids(),
             "maxMorLength" => $population->maxMorLength,
             "maxEvLength" => $population->maxEvLength,
-            "maxLength" => $population->maxEvLength + $population->maxMorLength
+            "maxLength" => $population->maxEvLength + $population->maxMorLength,
+            "iterations" => $iterations
         ));
     }
 
@@ -193,7 +195,58 @@ class PatientController extends Controller
 
     private function getNewChildren($parents)
     {
+        $children = array();
+        $children[0] = $this->getChild($parents[0]->getPatients(), $parents[1]->getPatients());
+        $children[1] = $this->getChild($parents[1]->getPatients(), $parents[0]->getPatients());
+        return $children;
+    }
 
+    private function getChild($parentFirst, $parentSecond)
+    {
+        $child = new Individ();
+        $childPat = array();
+        $i = 0;
+        $j = count($parentSecond) - 1;
+        echo "<pre>";
+        echo "FIRST PARENT:";
+        foreach ($parentFirst as $parFirsNum) {
+            var_dump($parFirsNum->getNumber());
+        }
+        echo "SECOND PARENT:";
+        foreach ($parentSecond as $parSecNum) {
+            var_dump($parSecNum->getNumber());
+        }
+        while ($i != count($parentFirst) && $j != -1) {
+            if (!in_array($parentFirst[$i], $childPat)) {
+                $childPat[] = $parentFirst[$i];
+                echo "<pre>";
+                echo "FIRST:";
+                var_dump($parentFirst[$i]);
+                echo "</pre>";
+                $i++;
+            } else {
+                $i++;
+            }
+            if (!in_array($parentSecond[$j], $childPat)) {
+                $childPat[] = $parentSecond[$j];
+                echo "<pre>";
+                echo "SECOND:";
+                var_dump($parentSecond[$j]);
+                echo "</pre>";
+                $j--;
+            } else {
+                $j--;
+            }
+        }
+        echo "ENDOF CHILD";
+
+
+       /* foreach ($childPat as $c) {
+            var_dump($c->getNumber());
+        }
+        echo "CHILD";
+        echo "</pre>";
+        echo "endendend";*/
     }
 
     private function getNewPopulation($population, $children)

@@ -14,31 +14,12 @@
                 <div class="panel panel-default">
                     <div class="panel-body text-center">Початкова популяція<span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
                 </div>
-                <table class="table table-bordered table-hover text-center">
-                    <thead>
-                    <tr class="active">
-                        <th class="text-center" colspan="{{ maxLength + 1 }}" >Розклад</th>
-                        <th>Час до обіду</th>
-                        <th>Час після обіду</th>
-                        <th>Середній час</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for individ in population %}
-                    <tr>
-                        {% for i in 0..maxMorLength - 1 %} <td>{{ individ.patients[i].number }}</td> {% endfor %}
-                        <td class="danger">Обід</td>
-                        {% if maxEvLength > 0 %}{% for i in maxMorLength..maxLength - 1 %} <td>{{ individ.patients[i].number }}</td> {% endfor %}{% endif %}
-                        <td> {{ individ.morTime }}</td>
-                        <td> {{ individ.evTime }}</td>
-                        <td class="func"> {{ individ.averQueueTime | number_format(2) }}</td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                {% include "patient/population.html.twig" with {"population" : population} %}
+                {% include "patient/iterations.html.twig" with {"iterations" : iterations} %}
             </div>
         </div>
     </div>
+
     <div class="modal"></div>
 {% endblock %}
 {% block javascripts %}

@@ -1,0 +1,22 @@
+<table class="table table-bordered table-hover text-center">
+    <thead>
+    <tr class="active">
+        <th class="text-center" colspan="{{ maxLength + 1 }}" >Розклад</th>
+        <th>Час до обіду</th>
+        <th>Час після обіду</th>
+        <th>Середній час</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for individ in population %}
+        <tr>
+            {% for i in 0..maxMorLength - 1 %} <td>{{ individ.patients[i].number }}</td> {% endfor %}
+            <td class="danger">Обід</td>
+            {% if maxEvLength > 0 %}{% for i in maxMorLength..maxLength - 1 %} <td>{{ individ.patients[i].number }}</td> {% endfor %}{% endif %}
+            <td> {{ individ.morTime }}</td>
+            <td> {{ individ.evTime }}</td>
+            <td class="func"> {{ individ.averQueueTime | number_format(2) }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

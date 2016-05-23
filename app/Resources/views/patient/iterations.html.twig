@@ -1,0 +1,8 @@
+{% for iteration in iterations %}
+    <hr>
+    <h3>Ітерація <span class="label label-primary"> {{ loop.index }} </span></h3>
+    <div class="panel panel-default">
+        <div class="panel-body text-center">Батьки</div>
+    </div>
+    {% include "patient/population.html.twig" with {"population" : iteration.parents} %}
+{% endfor %}
