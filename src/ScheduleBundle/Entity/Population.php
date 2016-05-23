@@ -23,7 +23,9 @@ class Population
 
     public $size;
 
-    public $maxLength;
+    public $maxMorLength;
+
+    public $maxEvLength;
 
     /**
      * Population constructor.
@@ -35,15 +37,26 @@ class Population
     }
 
 
-    public function getMaxLength()
+    public function getMaxMorLength()
     {
         $max = 0;
         foreach ($this->getIndivids() as $individ) {
-            if ($individ->getNumOfPat() > $max) {
-                $max = $individ->getNumOfPat();
+            if ($individ->getMorNumOfPat() > $max) {
+                $max = $individ->getMorNumOfPat();
             }
         }
-        $this->maxLength = $max;
+        $this->maxMorLength = $max;
+    }
+
+    public function getMaxEvLength()
+    {
+        $max = 0;
+        foreach ($this->getIndivids() as $individ) {
+            if ($individ->getEvNumOfPat() > $max) {
+                $max = $individ->getEvNumOfPat();
+            }
+        }
+        $this->maxEvLength = $max;
     }
     /**
      * @return mixed
