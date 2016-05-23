@@ -26,9 +26,9 @@
                     <tbody>
                     {% for individ in population %}
                     <tr>
-                        {% for i in 0..8 %} <td>{{ individ.patients[i].number }}</td> {% endfor %}
+                        {% for i in 0..maxMorLength - 1 %} <td>{{ individ.patients[i].number }}</td> {% endfor %}
                         <td class="danger">Обід</td>
-                        {% for i in 9..maxLength-1 %} <td>{{ individ.patients[i].number }}</td> {% endfor %}
+                        {% if maxEvLength > 0 %}{% for i in maxMorLength..maxLength - 1 %} <td>{{ individ.patients[i].number }}</td> {% endfor %}{% endif %}
                         <td> {{ individ.morTime }}</td>
                         <td> {{ individ.evTime }}</td>
                         <td class="func"> {{ individ.averQueueTime | number_format(2) }}</td>

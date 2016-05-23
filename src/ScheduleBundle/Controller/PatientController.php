@@ -24,6 +24,40 @@ class PatientController extends Controller
 
     private $workTime;
 
+    private $iterationNumber;
+
+    /**
+     * @return mixed
+     */
+    public function getIterationNumber()
+    {
+        return $this->iterationNumber;
+    }
+
+    /**
+     * @param mixed $iterationNumber
+     */
+    public function setIterationNumber($iterationNumber)
+    {
+        $this->iterationNumber = $iterationNumber;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWorkTime()
+    {
+        return $this->workTime;
+    }
+
+    /**
+     * @param mixed $workTime
+     */
+    public function setWorkTime($workTime)
+    {
+        $this->workTime = $workTime;
+    }
+
     /**
      * Lists all Patient entities.
      *
@@ -108,10 +142,23 @@ class PatientController extends Controller
      */
     public function resultAction()
     {
+        $iterations = array();
         $population = $this->buildPopulation();
+        for ($i = 0; $i < $this->getIterationNumber(); $i++) {
+            $parents = $this->getNewParents($population);
+            $children = $this->getNewChildren($parents);
+            $newPopulation = $this->getNewPopulation($population, $children);
+            $iterations[] = array(
+                "parents" => $parents,
+                "children" => $children,
+                "newPopulation" => $newPopulation
+            );
+        }
         return $this->render('patient/result.html.twig', array(
             "population" => $population->getIndivids(),
-            "maxLength" => $population->maxLength
+            "maxMorLength" => $population->maxMorLength,
+            "maxEvLength" => $population->maxEvLength,
+            "maxLength" => $population->maxEvLength + $population->maxMorLength
         ));
     }
 
@@ -141,7 +188,8 @@ class PatientController extends Controller
             }
             $i++;
         }
-        $population->getMaxLength();
+        $population->getMaxMorLength();
+        $population->getMaxEvLength();
         /*echo "<pre>";
         var_dump($population);
         echo "</pre>";*/
