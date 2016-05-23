@@ -1,0 +1,61 @@
+<br/>
+<hr>
+<form class="no_illness" method="post" action="/doctor/save/visit/">
+    <h4><label for="diag">Введіть діагноз</label></h4>
+    <input type="text" id="diag" class="form-control validate[required, minSize[3], maxSize[20], custom[onlyLetterSp]]" name="diag">
+    <h4><label for="medicines">Введіть медичні препарати
+            <small> (або оберіть зі списку)</small>
+        </label></h4>
+    <input type="text" id="medicines" class='medicines' name="medicines">
+    <h4><label for="conclusion">Введіть коментар
+        </label></h4>
+    <textarea placeholder="Введіть коментар до візиту" class="form-control comment validate[required, minSize[3], custom[onlyLetterSp]]" name="conclusion"/>
+    <hr>
+    <div class="col-md-offset-5">
+        <input type="submit" class="btn btn-success" value="Зберегти">
+    </div>
+</form>
+
+{% block javascripts %}
+    <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(".no_illness").validationEngine();
+        $("#diag").tagit({
+            allowSpaces: true,
+            singleFieldDelimiter: ',',
+            requireAutocomplete: true,
+            removeConfirmation: true,
+            tagLimit: 1,
+            tagSource: function (search, showChoices) {
+                $.ajax({
+                    url: "/doctor/search/diagnosys/",
+                    data: {"search": search.term},
+                    type: "POST",
+                    dataType: "json",
+                    success: function (choices) {
+                        showChoices(choices.illnesses);
+                    }
+                })
+            }
+        });
+        $(".medicines").tagit({
+            allowSpaces: true,
+            singleFieldDelimiter: ',',
+            requireAutocomplete: true,
+            removeConfirmation: true,
+            tagLimit: 7,
+            tagSource: function (search, showChoices) {
+                $.ajax({
+                    url: "/doctor/search/medicines/",
+                    data: {"search": search.term},
+                    type: "POST",
+                    dataType: "json",
+                    success: function (choices) {
+                        showChoices(choices.symptoms);
+                    }
+                })
+            }
+        });
+    </script>
+{% endblock %}

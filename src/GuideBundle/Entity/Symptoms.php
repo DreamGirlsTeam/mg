@@ -23,7 +23,7 @@ class Symptoms
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Illnesses", inversedBy="symptoms")
+     * @ORM\ManyToMany(targetEntity="Illnesses", inversedBy="symptoms", cascade={"persist"})
      * @ORM\JoinTable(name="sym_to_ill",
      *       joinColumns={@ORM\JoinColumn(name="sym_id", referencedColumnName="id")},
      *       inverseJoinColumns={@ORM\JoinColumn(name="ill_id", referencedColumnName="id")})

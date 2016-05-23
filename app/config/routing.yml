@@ -1,3 +1,7 @@
+guide_timetable:
+    resource: "@GuideBundle/Controller/TimetableController.php"
+    type:     annotation
+
 schedule:
     resource: "@ScheduleBundle/Controller/"
     type:     annotation

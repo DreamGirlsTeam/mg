@@ -1,0 +1,44 @@
+{% block stylesheets %}
+    <link href="{{ asset('bundles/framework/css/jquery.ui.timepicker.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+<table class="table list-group appointment-table">
+    <thead>
+    <tr class="info">
+        <th>Призначені візити на цей день</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for appointment in app %}
+        <tr class="list-group-item default">
+            <td>{{ appointment.beginTime | date('H:i:s') }} - {{ appointment.endTime | date('H:i:s') }} </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div class="panel panel-info">
+    <div class="panel-heading">Час візиту</div>
+    <div class="panel-body">
+        <div class="form-group">
+            <form action="/reception/appointment/" method="post">
+                <label>Початок</label>
+                <input name="beginTime" type="text" class="beginTime form-control"/>
+                <br/>
+                <label>Кінець</label>
+                <input name="endTime" type="text" class="endTime form-control"/>
+                <input value="Зберегти" type="submit" class="btn btn-sm btn-success save_appointment"/>
+            </form>
+        </div>
+    </div>
+    </div>
+</div>
+{% block javascripts %}
+    <script src="{{ asset('bundles/framework/js/jquery.ui.timepicker.js') }}" type="text/javascript"
+            charset="utf-8"></script>
+    <script>
+        $(".beginTime").timepicker();
+        $(".endTime").timepicker();
+        $('.appointment-table').DataTable({
+            responsive: true
+        });
+    </script>
+{% endblock %}

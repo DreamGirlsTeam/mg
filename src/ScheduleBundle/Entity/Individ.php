@@ -16,47 +16,44 @@ class Individ
     /**
      * @var array
      */
-    public $patients;
+    private $patients;
 
     /**
      * @var int
      */
-    public $morTime;
+    private $morTime;
+
+    private $suitable;
 
     /**
      * @var int
      */
-    public $evTime;
+    private $evTime;
 
     /**
      * @var int
      */
-    public $numOfPat;
+    private $numOfPat;
 
     /**
      * @var int
      */
-    public $morNumOfPat;
+    private $morNumOfPat;
 
     /**
      * @var int
      */
-    public $evNumOfPat;
+    private $evNumOfPat;
+
+    /**
+     * @var float
+     */
+    private $averQueueTime;
 
     /**
      * @var int
      */
-    public $queueTime;
-
-    /**
-     * @var int
-     */
-    public $averQueueTime;
-
-    /**
-     * @var int
-     */
-    public $lunchPos;
+    private $lunchPos;
 
     /**
      * @return int
@@ -64,6 +61,22 @@ class Individ
     public function getLunchPos()
     {
         return $this->lunchPos;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSuitable()
+    {
+        return $this->suitable;
+    }
+
+    /**
+     * @param bool $suitable
+     */
+    public function setSuitable($suitable)
+    {
+        $this->suitable = $suitable;
     }
 
     /**
@@ -177,24 +190,9 @@ class Individ
         $this->evNumOfPat = $evNumOfPat;
     }
 
-    /**
-     * @return int
-     */
-    public function getQueueTime()
-    {
-        return $this->queueTime;
-    }
 
     /**
-     * @param int $queueTime
-     */
-    public function setQueueTime($queueTime)
-    {
-        $this->queueTime = $queueTime;
-    }
-
-    /**
-     * @return int
+     * @return float
      */
     public function getAverQueueTime()
     {
@@ -202,7 +200,7 @@ class Individ
     }
 
     /**
-     * @param int $averQueueTime
+     * @param float $averQueueTime
      */
     public function setAverQueueTime($averQueueTime)
     {

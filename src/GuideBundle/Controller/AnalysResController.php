@@ -25,9 +25,7 @@ class AnalysResController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $analysRes = $em->getRepository('GuideBundle:AnalysRes')->findAll();
-
         return $this->render('analysres/index.html.twig', array(
             'analysRes' => $analysRes,
         ));
@@ -44,7 +42,6 @@ class AnalysResController extends Controller
         $analysRe = new AnalysRes();
         $form = $this->createForm('GuideBundle\Form\AnalysResType', $analysRe);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $file = $analysRe->getFilename();

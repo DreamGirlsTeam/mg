@@ -1,0 +1,65 @@
+<div class="col-md-offset-9"><a class="self_input btn btn-sm btn-default" href="#">Ввести власноруч</a></div>
+{% if illnesses %}
+    <table class="table table-hover table-bordered">
+        <tbody>
+        <th> Діагноз</th>
+        <th> Симптоми</th>
+        <th> Дії</th>
+        {% for ill in illnesses %}
+            <tr>
+                <td>
+                    <h4>{{ ill.ill }} <span class="label label-default">{{ ill.procent |number_format(2) }}%</span></h4>
+                </td>
+                <td>
+                    <ul class="list-group">
+                        {% for symp in ill.sym %}
+                            <li class="list-group-item">   {{ symp }} </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    <a class='confirm' name="{{ ill.ill }}" href="#">Підтвердити</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <h4>За такими симптомами не було знайдено жодного діагнозу</h4>
+    {% include 'doc/nodiag.html.twig' %}
+
+{% endif %}
+
+{% block javascripts %}
+    <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $('.self_input').click(function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: "/doctor/input/ill/",
+                data: {"self": true},
+                type: "POST",
+                dataType: "json",
+                success: function (data) {
+                    $(".illnesses").html(data.form);
+                }
+            })
+        });
+        $('.confirm').click(function (event) {
+            event.preventDefault();
+            var name = $(this).attr("name");
+            $.ajax({
+                url: "/doctor/medicines/",
+                data: {"search": name},
+                type: "POST",
+                dataType: "json",
+                success: function (data) {
+                    $(".ill_heading").html("");
+                    $(".illnesses").html(data.medicine);
+
+                }
+            })
+        });
+    </script>
+{% endblock %}

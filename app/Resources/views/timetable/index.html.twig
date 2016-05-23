@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/dataTables.bootstrap.min.css"/>
+{% endblock %}
+
+{% block body %}
+    {% include 'header.html.twig' %}
+
+    <div class="col-md-6 col-md-offset-3">
+        <div class="container-fluid">
+            <div class="row">
+                    <ul class="nav nav-tabs">
+                        <li role="presentation"><a href="{{ path('reception_timetable_new') }}">Додати години роботи</a></li>
+                    </ul>
+                <div class="well" style="border-color: #EBF5FB; background-color:#F8F9F9;">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Лікар</th>
+                            <th>Початок</th>
+                            <th>Кінець</th>
+                            <th>Дії</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for timetable in timetables %}
+                            <tr>
+                                <td>
+                                    Doctor
+                                </td>
+                                <td>{% if timetable.beginTime %}{{ timetable.beginTime|date('H:i:s') }}{% endif %}</td>
+                                <td>{% if timetable.endTime %}{{ timetable.endTime|date('H:i:s') }}{% endif %}</td>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            <a href="{{ path('reception_timetable_edit', { 'id': timetable.id }) }}">Редагувати</a>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
