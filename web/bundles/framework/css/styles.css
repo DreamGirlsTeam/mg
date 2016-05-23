@@ -11,6 +11,19 @@ h1,h2,h3,a{
     font-family: 'Comfortaa', cursive;
 }
 
+#block2 p{
+    text-align: center;
+}
+
+#cnn {
+    display: flex;
+    justify-content: center;
+}
+
+a > h3:hover{
+    color: #5ec6ca !important;
+}
+
 #team{
     text-align: center;
     margin-top: -10px;

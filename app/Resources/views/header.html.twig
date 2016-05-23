@@ -5,11 +5,21 @@
             <div class="navbar-header">
                 <img src="{{ asset('images/mg_small1.png') }}"/>
                 Medical Guide
+                <style>
+                   .navbar-header{
+                        font-family: 'Comfortaa', cursive;
+                    }
+                    .logout-button{
+                        position: absolute;
+                        right: 10px;
+                        bottom: 12px;
+                    }
+                </style>
                 {#<img src="{{ asset('images/title1.png') }}"/>#}
                     <div class="logout-button">
                          <a href="{{ path('auth_logout') }}" class="navbar-link"><h4><small><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>Вихід</pre></small></h4></a>
                     </div>
+                </div>
             </div>
-        </div>
     </nav>
 {% endblock %}
