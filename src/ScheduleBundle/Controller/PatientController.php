@@ -159,6 +159,36 @@ class PatientController extends Controller
         return $childs;
     }
 
+    private function mutate($children)
+    {
+        /*$childs = array();
+        foreach ($children as $child) {
+            if (true) {
+                $em = $this->getDoctrine()->getEntityManager();
+                $times = $em->getRepository("ScheduleBundle:works")->findAll();
+                $mutatedChild = $child;
+                $newPatients = $this->changeGenes($mutatedChild->getPatients()->toArray());
+                $ch = $this->createIndivid($newPatients, $times, true);
+                $childs[] = $ch;
+            }
+
+        }
+        return $childs;*/
+        $em = $this->getDoctrine()->getEntityManager();
+        $childs = array();
+        foreach ($children as $child) {
+            if (true) {
+                $pats = $child->getPatients()->toArray();
+                $newPats = $this->changeGenes($pats);
+                $times = $em->getRepository("ScheduleBundle:works")->findAll();
+                $ch = $this->createIndivid($newPats, $times, true);
+                $childs[] = $ch;
+            }
+        }
+        return $childs;
+
+    }
+
     /**
      * Lists all Patient entities.
      *
@@ -175,13 +205,15 @@ class PatientController extends Controller
             $children = $this->getNewChildren($parents);
             $iterations[$i][] = array ("children" => $children);
             $childReanimate = $this->reanimate($children);
-            $mutation = $this->isMutated($children);
+            $mutated = $this->mutate($children);
+            /*$mutation = $this->isMutated($children);*/
+           // var_dump($mutation);
             //$newPopulation = $this->getNewPopulation($population, $children);
             $iterations[$i][] = array(
                 "parents" => $parents,
                 "reanimation" => $childReanimate,
                 //"newPopulation" => $newPopulation,
-                "mutated" => $mutation
+                "mutated" => $mutated
             );
         }
         // $view = $this->renderView('patient/iterations.html.twig', $iterations);
@@ -268,7 +300,10 @@ class PatientController extends Controller
     private function changeGenes($individ, $switch = 'selection')
     {
         $firstChange = array_rand($individ, 1);
+        var_dump($firstChange);
+
         $secondChange = array_rand($individ, 1);
+        var_dump($secondChange);
         while ($firstChange === $secondChange) {
             $firstChange = array_rand($individ, 1);
             $secondChange = array_rand($individ, 1);
@@ -348,10 +383,6 @@ class PatientController extends Controller
         $individ = new Individ();
         foreach ($times as $time) {
             $durations[$time->getId()] = $time->getDuration();
-        }
-
-        if (rand(1, 100) === 5 && $child) {
-            $newPatients = $this->changeGenes($schedule, 'mutation');
         }
         foreach ($schedule as $sc) {
             $individ->add($sc);

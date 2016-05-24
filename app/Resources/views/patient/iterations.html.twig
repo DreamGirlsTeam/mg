@@ -13,7 +13,7 @@
         <div class="panel panel-default">
             <div class="panel-body text-center">Мутація</div>
         </div>
-        {% include "patient/population.html.twig" with {"population" : iteration[0].children, "mutated" : true} %}
+        {% include "patient/population.html.twig" with {"population" : iteration[1].mutated, "mutated" : true} %}
     {% endif %}
     {% if iteration[1].reanimation %}
         <div class="panel panel-default">
