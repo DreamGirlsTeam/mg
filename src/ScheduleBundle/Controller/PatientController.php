@@ -204,21 +204,15 @@ class PatientController extends Controller
         for ($i = 0; $i < $this->getIterationNumber(); $i++) {
             $parents = $this->getNewParents($population);
             $children = $this->getNewChildren($parents);
-            if (false) {
-                $mutated = $this->reanimate($children);
-                $newChildren = $this->getMutatedChildren($mutated, $children);
-                $childReanimate = $this->reanimate($newChildren);
+            if (rand(1, 100) === 5) {
+                $mutated = $this->reanimate($children, true);
+                $childSelection = $this->reanimate($mutated, true);
+                $childReanimate = $this->reanimate($childSelection, false);
             } else {
                 $childSelection = $this->reanimate($children, true);
                 $childReanimate = $this->reanimate($childSelection, false);
             }
             $iterations[$i][] = array("children" => $children);
-
-
-
-            /*$mutation = $this->isMutated($children);*/
-            // var_dump($mutation);
-            //$newPopulation = $this->getNewPopulation($population, $children);
             $iterations[$i][] = array(
                 "parents" => $parents,
                 "selection" => $childSelection,
