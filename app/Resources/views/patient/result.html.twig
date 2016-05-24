@@ -15,7 +15,7 @@
                     <div class="panel-body text-center">Початкова популяція<span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
                 </div>
                 {% include "patient/population.html.twig" with {"population" : population} %}
-                {% include "patient/iterations.html.twig" with {"iterations" : iterations} %}
+                {% include "patient/iterations.html.twig" with {"iterations" : iterations, "iterate" : iterate} %}
             </div>
         </div>
     </div>

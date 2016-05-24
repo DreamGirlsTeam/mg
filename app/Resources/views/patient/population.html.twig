@@ -9,13 +9,10 @@
     </thead>
     <tbody>
     {% for individ in population %}
-        {% if individ.reanimation %}
-            {{ dump(individ.reanimation) }}
-    {% endif %}
         {% if individ.suitable %}
         <tr>
             {% else %}
-                {{ dump(individ.patients) }}
+
             <tr class="alert-danger">
         {% endif %}
             {% for i in 0..maxMorLength - 1 %}
@@ -34,9 +31,7 @@
                             <td class="warning">
                     {% else %}
                         <td>
-
                     {% endif %}
-
                     {{ individ.patients[i].number }}
                     </td>
                 {% endfor %}

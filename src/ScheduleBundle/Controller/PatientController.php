@@ -32,7 +32,7 @@ class PatientController extends Controller
      */
     public function __construct()
     {
-        $this->iterationNumber = 1;
+        $this->iterationNumber = 4;
     }
 
     /**
@@ -145,18 +145,15 @@ class PatientController extends Controller
 
     private function reanimate($children)
     {
+        $em = $this->getDoctrine()->getEntityManager();
         $childs = array();
         foreach ($children as $child) {
             if (!$child->getSuitable()) {
-               /* echo "<pre>";
-                var_dump($child->getPatients()->toArray());
-                echo "</pre>";*/
-                $newPats = $this->changeGenes($child->getPatients()->toArray());
-                $child->getPatients()->clear();
-                foreach ($newPats as $np) {
-                    $child->add($np);
-                }
-                $childs[] = $child;
+                $pats = $child->getPatients()->toArray();
+                $newPats = $this->changeGenes($pats);
+                $times = $em->getRepository("ScheduleBundle:works")->findAll();
+                $ch = $this->createIndivid($newPats, $times, true);
+                $childs[] = $ch;
             }
         }
         return $childs;
@@ -171,17 +168,17 @@ class PatientController extends Controller
     public function resultAction()
     {
         $iterations = array();
+        $iterate = array();
         $population = $this->buildPopulation();
         for ($i = 0; $i < $this->getIterationNumber(); $i++) {
             $parents = $this->getNewParents($population);
             $children = $this->getNewChildren($parents);
+            $iterations[$i][] = array ("children" => $children);
             $childReanimate = $this->reanimate($children);
-
             $mutation = $this->isMutated($children);
             //$newPopulation = $this->getNewPopulation($population, $children);
-            $iterations[] = array(
+            $iterations[$i][] = array(
                 "parents" => $parents,
-                "children" => $children,
                 "reanimation" => $childReanimate,
                 //"newPopulation" => $newPopulation,
                 "mutated" => $mutation
@@ -193,7 +190,8 @@ class PatientController extends Controller
             "maxMorLength" => $population->maxMorLength,
             "maxEvLength" => $population->maxEvLength,
             "maxLength" => $population->maxEvLength + $population->maxMorLength,
-            "iterations" => $iterations
+            "iterations" => $iterations,
+            "iterate" => $iterate
         ));
     }
 
