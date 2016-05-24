@@ -56,6 +56,27 @@ class Individ
     private $lunchPos;
 
     /**
+     * @var bool
+     */
+    private $mutated;
+
+    /**
+     * @return boolean
+     */
+    public function isMutated()
+    {
+        return $this->mutated;
+    }
+
+    /**
+     * @param boolean $mutated
+     */
+    public function setMutated($mutated)
+    {
+        $this->mutated = $mutated;
+    }
+
+    /**
      * @return int
      */
     public function getLunchPos()

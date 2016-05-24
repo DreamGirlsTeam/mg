@@ -15,6 +15,12 @@
         </div>
         {% include "patient/population.html.twig" with {"population" : iteration[1].mutated, "mutated" : true} %}
     {% endif %}
+    {% if iteration[1].selection %}
+        <div class="panel panel-default">
+            <div class="panel-body text-center">Селекція</div>
+        </div>
+        {% include "patient/population.html.twig" with {"population" : iteration[1].selection} %}
+    {% endif %}
     {% if iteration[1].reanimation %}
         <div class="panel panel-default">
             <div class="panel-body text-center">Реанімація</div>
