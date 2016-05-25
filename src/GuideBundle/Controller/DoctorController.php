@@ -34,7 +34,6 @@ class DoctorController extends Controller
         $em = $this->getDoctrine()->getManager();
         $regInfos = $em->getRepository('GuideBundle:RegInfo')->findAll();
         $ill = $em->getRepository('GuideBundle:Illnesses')->findAll();
-        var_dump(array_intersect(array(5, 6, 7, 8), array(5, 7, 9, 2)));
         /* foreach ($ill as $i) {
              echo $i->getName();
              foreach ($i->getSymptoms() as $ii) {

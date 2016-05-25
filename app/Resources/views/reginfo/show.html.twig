@@ -1,55 +1,68 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{% include 'header.html.twig' %}
+    {% include 'header.html.twig' %}
 
-    <div class="col-md-6 col-md-offset-3">
-    <div class="row">
-        <table class="table table-bordered">
-        <tbody>
-            <tr>
-                <th>Ім'я</th>
-                <td>{{ regInfo.firstName }}</td>
-            </tr>
-            <tr>
-                <th>Прізвище</th>
-                <td>{{ regInfo.lastName }}</td>
-            </tr>
-            <tr>
-                <th>По-батькові</th>
-                <td>{{ regInfo.patronymic }}</td>
-            </tr>
-            <tr>
-                <th>День Народження</th>
-                <td>{% if regInfo.birthday %}{{ regInfo.birthday|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Телефон</th>
-                <td>{{ regInfo.phone }}</td>
-            </tr>
-            <tr>
-                <th>Паспорт</th>
-                <td>{{ regInfo.passport }}</td>
-            </tr>
-            <tr>
-                <th>Місто</th>
-                <td>{{ regInfo.city }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <ul class="list-inline">
-        <li>
-            <a href="{{ path('reception_index') }}" class="btn btn-warning">Назад до списку</a>
-        </li>
-        <li>
-            <a href="{{ path('reception_edit', { 'actorId': regInfo.actorId.id }) }}" class="btn btn-warning">Редагувати</a>
-        </li>
-    </ul>
-        {{ form_start(delete_form) }}
-        <div class="btn-right">
-            <input type="submit" class="btn btn-danger" value="Видалити">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="col-md-offset-5">Дії</div>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="{{ path('reception_index') }}">Назад до списку</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ path('reception_edit', { 'actorId': regInfo.actorId.id }) }}">Редагувати</a>
+                            </li>
+                            <li class="list-group-item">
+                                {{ form_start(delete_form) }}
+                                <div class="btn-right">
+                                    <input type="submit" class="alert-danger" value="Видалити">
+                                </div>
+                                {{ form_end(delete_form) }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-md-offset-1">
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr>
+                        <th>Ім'я</th>
+                        <td>{{ regInfo.firstName }}</td>
+                    </tr>
+                    <tr>
+                        <th>Прізвище</th>
+                        <td>{{ regInfo.lastName }}</td>
+                    </tr>
+                    <tr>
+                        <th>По-батькові</th>
+                        <td>{{ regInfo.patronymic }}</td>
+                    </tr>
+                    <tr>
+                        <th>День Народження</th>
+                        <td>{% if regInfo.birthday %}{{ regInfo.birthday|date('Y-m-d') }}{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>Телефон</th>
+                        <td>{{ regInfo.phone }}</td>
+                    </tr>
+                    <tr>
+                        <th>Паспорт</th>
+                        <td>{{ regInfo.passport }}</td>
+                    </tr>
+                    <tr>
+                        <th>Місто</th>
+                        <td>{{ regInfo.city }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        {{ form_end(delete_form) }}
-
+    </div>
 {% endblock %}

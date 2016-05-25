@@ -7,13 +7,21 @@
 
 {% block body %}
     {% include 'header.html.twig' %}
-
-    <div class="col-md-6 col-md-offset-3">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="well well-sm" style="border-color: #337ab7;">
-                    <h5 class="text-center"><a href="{{ path('admin_new') }}">Зареєструвати нового лікаря</a></h5>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="col-md-offset-5">Дії</div>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            <li class="list-group-item"><a href="{{ path('admin_new') }}">Зареєструвати нового лікаря</a></li>
+                        </ul>
+                    </div>
                 </div>
+            </div>
+            <div class="col-md-7">
                 <div class="well" style="border-color: #EBF5FB; background-color:#F8F9F9;">
                     <table class="table-striped table-hover admin">
                         <thead>
@@ -27,7 +35,7 @@
                         </thead>
                         <tbody>
                         {% for medicalStaff in medicalStaffs %}
-                        <tr>
+                            <tr>
                                 <td>{{ medicalStaff.firstname }}</td>
                                 <td>{{ medicalStaff.lastname }}</td>
                                 <td>{% if  medicalStaff.patronymic %}{{ medicalStaff.patronymic }} {% else %} -  {% endif %}</td>

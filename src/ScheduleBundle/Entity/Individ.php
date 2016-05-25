@@ -58,23 +58,24 @@ class Individ
     /**
      * @var bool
      */
-    private $mutated;
+    private $reanimation;
 
     /**
      * @return boolean
      */
-    public function isMutated()
+    public function isReanimation()
     {
-        return $this->mutated;
+        return $this->reanimation;
     }
 
     /**
-     * @param boolean $mutated
+     * @param boolean $reanimation
      */
-    public function setMutated($mutated)
+    public function setReanimation($reanimation)
     {
-        $this->mutated = $mutated;
+        $this->reanimation = $reanimation;
     }
+
 
     /**
      * @return int

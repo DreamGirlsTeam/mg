@@ -5,54 +5,76 @@
 {% endblock %}
 {% block body %}
     {% include 'header.html.twig' %}
-    <div class="col-md-8 col-md-offset-2">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="row">
-                <ul class="nav nav-tabs">
-                    <li role="presentation"><a href="/reception/timetable">Години роботи лікарів</a></li>
-                    <li role="presentation"><a href="/reception/visits">Додати зустріч</a></li>
-                </ul>
-                <div class="panel panel-default">
-                    <div class="panel-heading panel-info"><a class="sympt_info" href="#"><span
-                                    class="ui-icon ui-icon-info">ddfd</span></a></div>
-                    <div class="panel-body">
-                        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-                        {{ form_widget(form) }}
-                        {{ form_end(form) }}
+    <div class="container-fluid">
+        <div class="row">
+                <div class="col-md-3">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="col-md-offset-5">Дії</div>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <a href="/reception/timetable">Години роботи лікарів</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="/reception/visits">Додати зустріч</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="appointment"></div>
                 </div>
-            </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="panel panel-default">
+                            <div class="panel-heading panel-info"><a class="sympt_info" href="#"><span
+                                            class="ui-icon ui-icon-info">ddfd</span></a></div>
+                            <div class="panel-body">
+                                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                                {{ form_widget(form) }}
+                                {{ form_end(form) }}
+                            </div>
+                            <div class="appointment"></div>
+                        </div>
+                    </div>
+                </div>
+            <div class="modal"></div>
         </div>
     </div>
-    <div class="modal"></div>
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('bundles/framework/js/tag-it.js') }}" type="text/javascript" charset="utf-8"></script>
-    <script src="{{ asset('bundles/framework/js/jquery.datetimepicker.min.js') }}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{ asset('bundles/framework/js/jquery.datetimepicker.min.js') }}" type="text/javascript"
+            charset="utf-8"></script>
     <script src="{{ asset('bundles/framework/js/treatment.js') }}" type="text/javascript" charset="utf-8"></script>
-    <script src="{{ asset('bundles/framework/js/jQuery/datepicker-uk.js') }}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{ asset('bundles/framework/js/jQuery/datepicker-uk.js') }}" type="text/javascript"
+            charset="utf-8"></script>
     <script type="text/javascript">
         $body = $("body");
         $(document).on({
-            ajaxStart: function() { $body.addClass("loading");    },
-            ajaxStop: function() { $body.removeClass("loading"); }
+            ajaxStart: function () {
+                $body.addClass("loading");
+            },
+            ajaxStop: function () {
+                $body.removeClass("loading");
+            }
         });
         $(function () {
-            $(".getSchedule").click(function(event) {
+            $(".getSchedule").click(function (event) {
                 event.preventDefault();
                 $.ajax({
                     url: "/reception/load/schedule",
-                    data: {"doc": $("#form_doctor").val(),
-                           "pat": $("#form_patient").val(),
-                           "date": $("#form_date").val()
+                    data: {
+                        "doc": $("#form_doctor").val(),
+                        "pat": $("#form_patient").val(),
+                        "date": $("#form_date").val()
                     },
                     type: "POST",
                     dataType: "json",
                     success: function (data) {
                         console.log(data);
-                       $(".appointment").html(data.appointment);
+                        $(".appointment").html(data.appointment);
                     }
                 })
             });
@@ -63,7 +85,7 @@
     <script src="https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $(name="form").validationEngine();
+            $(name = "form").validationEngine();
             $.datepicker.setDefaults(
                     $.extend(
                             $.datepicker.regional['uk']

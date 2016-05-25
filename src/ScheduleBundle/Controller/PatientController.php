@@ -169,27 +169,6 @@ class PatientController extends Controller
         return $childs;
     }
 
-    private function getMutatedChildren($mutated, $children)
-    {
-        $childs = array();
-        foreach ($children as $child) {
-            var_dump($child);
-            echo "<br>";
-            echo "<br>";
-            var_dump($mutated);
-            echo "<br>";
-            echo "<br>";
-            foreach ($mutated as $mutate) {
-                if ($child->isMutated()) {
-                    $childs[] = $mutate;
-                } else {
-                    $childs[] = $child;
-                }
-            }
-        }
-        return $childs;
-    }
-
     /**
      * Lists all Patient entities.
      *

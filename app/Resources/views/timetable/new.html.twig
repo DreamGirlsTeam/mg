@@ -4,10 +4,24 @@
     {% include 'header.html.twig' %}
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <ul class="nav nav-tabs">
-                <li role="presentation"><a href="{{ path('reception_timetable_index') }}">Back to the list</a></li>
-            </ul>
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="col-md-offset-5">Дії</div>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a href="{{ path('reception_index') }}">Назад до списку</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/reception/visits">Додати зустріч</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading"><img src="{{ asset('images/doc_reg.png') }}"></div>
                 <div class="panel-body">
