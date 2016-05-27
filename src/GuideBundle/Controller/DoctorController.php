@@ -468,7 +468,13 @@ class DoctorController extends Controller
 
     private function generateAndSendVisit($visit)
     {
-
+        $pdf = $this->get('knp_snappy.pdf')->generateFromHtml(
+            $this->renderView(
+                'GuideBundle:doc:visit_pdf.html.twig'
+            ),
+            '/uploads/pdf/visits.pdf'
+        );
+        $this->get('knp_snappy.image')->getOutputFromHtml($pdf);
     }
 
     private function setVisitByComplaint($users, $ill, $medicines, $comment)
