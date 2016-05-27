@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table(name="timetable")
  * @ORM\Entity(repositoryClass="GuideBundle\Repository\TimetableRepository")
- * @UniqueEntity("actorId", message="Ãîäèíè ðîáîòè ë³êàðÿ âæå çàðåºñòðîâàí³")
+ * @UniqueEntity("actorId", message="Ð“Ð¾Ð´Ð¸Ð½Ð¸ Ñ€Ð¾Ð±Ð¾Ñ‚Ð¸ Ð»Ñ–ÐºÐ°Ñ€Ñ Ð²Ð¶Ðµ Ð·Ð°Ñ€ÐµÑ”ÑÑ‚Ñ€Ð¾Ð²Ð°Ð½Ñ–")
  */
 class Timetable
 {
@@ -25,9 +25,31 @@ class Timetable
     private $id;
 
     /**
-     * @ORM\Column(name="actorId", type="integer")
+     * @ORM\Column(name="actorId", type="integer", unique=true)
      */
     private $actorId;
+
+    /**
+     * @ORM\Column(name="averTime", type="integer")
+     */
+    private $averTime;
+
+    /**
+     * @return mixed
+     */
+    public function getAverTime()
+    {
+        return $this->averTime;
+    }
+
+    /**
+     * @param mixed $averTime
+     */
+    public function setAverTime($averTime)
+    {
+        $this->averTime = $averTime;
+    }
+
 
     /**
      * @var \DateTime

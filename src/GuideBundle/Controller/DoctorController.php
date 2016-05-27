@@ -453,7 +453,8 @@ class DoctorController extends Controller
             $doc = $request->getSession()->get("user")["id"];
             $pat = $request->getSession()->get("patient")["patId"];
             if ($ill && $medicines && $doc && $pat) {
-                $this->setVisitByComplaint(array($doc, $pat), $ill, $medicines, $comment);
+                $visit = $this->setVisitByComplaint(array($doc, $pat), $ill, $medicines, $comment);
+                $this->generateAndSendVisit($visit);
                 return new JsonResponse(array('success' => true));
             } else {
                 return new JsonResponse(400);
@@ -462,6 +463,11 @@ class DoctorController extends Controller
         } else {
             return new Response('Permission denied', 400);
         }
+
+    }
+
+    private function generateAndSendVisit($visit)
+    {
 
     }
 

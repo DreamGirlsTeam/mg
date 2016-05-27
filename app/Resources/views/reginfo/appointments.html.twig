@@ -1,20 +1,42 @@
 {% block stylesheets %}
     <link href="{{ asset('bundles/framework/css/jquery.ui.timepicker.css') }}" rel="stylesheet" type="text/css">
 {% endblock %}
-<table class="table list-group appointment-table">
-    <thead>
-    <tr class="info">
-        <th>Призначені візити на цей день</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for appointment in app %}
-        <tr class="list-group-item default">
-            <td>{{ appointment.beginTime | date('H:i:s') }} - {{ appointment.endTime | date('H:i:s') }} </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+<hr>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+        <h3>
+            <small>Вільні години:</small>
+        </h3>
+        <form action="/reception/appointment/" method="post" name="visit">
+            <ul class="list-group">
+                {% for time in times %}
+                    <li class="list-group-item list-group-item-success">
+                        <input type="radio" value="{{ time.begTime | date('H:i:s') }} {{ time.endTime | date('H:i:s') }}" name="visitTime">
+                        {{ time.begTime | date('H:i:s') }} - {{ time.endTime | date('H:i:s') }}
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="row">
+                <div class="col-md-2 col-md-offset-4">
+                    <input type="submit" name="saveVisit" value="Зберегти" class="btn btn-default">
+                </div>
+            </div>
+        </form>
+        {#<h3>
+            <small>Зайнятий час:</small>
+        </h3>
+        <ul class="list-group">
+            {% for appointment in app %}
+                <li class="list-group-item list-group-item-danger">
+                    {{ appointment.beginTime | date('H:i:s') }} - {{ appointment.endTime | date('H:i:s') }}
+                </li>
+            {% endfor %}
+        </ul>#}
+    </div>
+</div>
+<hr>
+{#
 <div class="panel panel-info">
     <div class="panel-heading">Час візиту</div>
     <div class="panel-body">
@@ -31,14 +53,12 @@
     </div>
     </div>
 </div>
+#}
 {% block javascripts %}
     <script src="{{ asset('bundles/framework/js/jquery.ui.timepicker.js') }}" type="text/javascript"
             charset="utf-8"></script>
     <script>
         $(".beginTime").timepicker();
         $(".endTime").timepicker();
-        $('.appointment-table').DataTable({
-            responsive: true
-        });
     </script>
 {% endblock %}

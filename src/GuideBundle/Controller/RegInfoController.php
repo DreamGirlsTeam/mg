@@ -172,7 +172,6 @@ class RegInfoController extends Controller
 
     }
 
-
     /**
      * @Route("/search/doctor", name="reception_search_doctor")
      * @Method("POST")
@@ -238,8 +237,10 @@ class RegInfoController extends Controller
         $date =  new \DateTime($request->getSession()->get("schedule")["date"]);
         $date->format("Y-m-d");
         $app->setDate($date);
-        $beginTime = $request->request->get("beginTime");
-        $endTime = $pat = $request->request->get("endTime");
+        $times = explode(" ", $request->request->get('visitTime'));
+        $beginTime = $times[0];
+        //$endTime = $pat = $request->request->get("endTime");
+        $endTime = $times[1];
         $beginTime =  new \DateTime($beginTime);
         $beginTime->format("H:i:s");
         $endTime =  new \DateTime($endTime);
@@ -277,23 +278,32 @@ class RegInfoController extends Controller
             ));
 
             if (is_object($docPerson) && preg_match("/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/", $date) === 1) {
-                $request->getSession()->set("schedule", array(
-                    "doc" => $docPerson->getActorId()->getId(),
-                    "pat" => $pat,
-                    "date" => $date
+                $docTimetable = $em->getRepository('GuideBundle:Timetable')->findOneBy(array(
+                    "actorId" => $docPerson->getActorId()->getId()
                 ));
-                $date =  new \DateTime($date);
-                $date->format("Y-m-d");
-                $appointments = $em->getRepository('GuideBundle:Appointments')->findBy(array(
-                    "docId" => $docPerson->getActorId()->getId(),
-                    "date" => $date
-                ));
-                foreach ($appointments as $appointment) {
-                    $app[] = array("beginTime" => $appointment->getBeginTime(),
-                        "endTime" => $appointment->getEndTime());
+                if (!is_object($docTimetable)) {
+                    return new JsonResponse(array("exists" => true));
+                } else {
+                    $request->getSession()->set("schedule", array(
+                        "doc" => $docPerson->getActorId()->getId(),
+                        "pat" => $pat,
+                        "date" => $date
+                    ));
+                    $date =  new \DateTime($date);
+                    $date->format("Y-m-d");
+                    $appointments = $em->getRepository('GuideBundle:Appointments')->findBy(array(
+                        "docId" => $docPerson->getActorId()->getId(),
+                        "date" => $date
+                    ));
+                    $times = $this->buildTimetable($docTimetable, $appointments);
+                    foreach ($appointments as $appointment) {
+                        $app[] = array("beginTime" => $appointment->getBeginTime(),
+                            "endTime" => $appointment->getEndTime());
+                    }
+                    $view = $this->renderView("regInfo/appointments.html.twig", array("app" => $app, "times" => $times));
+                    return new JsonResponse(array("appointment" => $view));
                 }
-                $view = $this->renderView("regInfo/appointments.html.twig", array("app" => $app));
-                return new JsonResponse(array("appointment" => $view));
+
             } else {
                 return new JsonResponse(array("valid" => false));
             }
@@ -301,6 +311,30 @@ class RegInfoController extends Controller
             return new Response('Permission denied', 400);
         }
 
+    }
+
+    private function buildTimetable($doctor, $appointments)
+    {
+        $appTimes = array();
+        $availableTimes = array();
+        foreach ($appointments as $app) {
+            $appTimes[] = $app->getBeginTime()->format('H:i:s');
+        }
+        $begTime=  $doctor->getBeginTime()->format('H:i:s');
+        $endTime = \DateTime::createFromFormat('H:i:s', $doctor->getEndTime()->format('H:i:s'));
+        $averTime = $doctor->getAverTime();
+        $appBegTime = \DateTime::createFromFormat('H:i:s', $begTime);
+        while ($appBegTime->format('H:i:s') < $endTime->format('H:i:s')) {
+            if (!in_array($appBegTime->format('H:i:s'), $appTimes)) {
+                $availableTimes[] = array(
+                    "begTime" => $appBegTime->format('H:i:s'),
+                    "endTime" => $appBegTime->modify('+'.$averTime.' minutes')->format('H:i:s')
+                );
+            } else {
+                $appBegTime->modify('+'.$averTime.' minutes')->format('H:i:s');
+            }
+        }
+        return $availableTimes;
     }
 
 }

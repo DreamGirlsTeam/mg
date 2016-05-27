@@ -7,37 +7,37 @@
     {% include 'header.html.twig' %}
     <div class="container-fluid">
         <div class="row">
-                <div class="col-md-3">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="col-md-offset-5">Дії</div>
-                        </div>
+            <div class="col-md-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="col-md-offset-5">Дії</div>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="/reception/timetable">Години роботи лікарів</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="/reception/visits">Додати зустріч</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading panel-info"><a class="sympt_info" href="#"><span
+                                        class="ui-icon ui-icon-info">ddfd</span></a></div>
                         <div class="panel-body">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <a href="/reception/timetable">Години роботи лікарів</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="/reception/visits">Додати зустріч</a>
-                                </li>
-                            </ul>
+                            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                            {{ form_widget(form) }}
+                            {{ form_end(form) }}
                         </div>
+                        <div class="appointment"></div>
                     </div>
                 </div>
-                <div class="col-md-8">
-                    <div class="row">
-                        <div class="panel panel-default">
-                            <div class="panel-heading panel-info"><a class="sympt_info" href="#"><span
-                                            class="ui-icon ui-icon-info">ddfd</span></a></div>
-                            <div class="panel-body">
-                                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-                                {{ form_widget(form) }}
-                                {{ form_end(form) }}
-                            </div>
-                            <div class="appointment"></div>
-                        </div>
-                    </div>
-                </div>
+            </div>
             <div class="modal"></div>
         </div>
     </div>
@@ -73,8 +73,11 @@
                     type: "POST",
                     dataType: "json",
                     success: function (data) {
-                        console.log(data);
-                        $(".appointment").html(data.appointment);
+                        if (data.exists) {
+                            $(".appointment").html("<div class='alert alert-danger' role='alert'>Додайте години роботи лікаря!</div>");
+                        } else {
+                            $(".appointment").html(data.appointment);
+                        }
                     }
                 })
             });

@@ -12,7 +12,7 @@
                 <div class="panel-body">
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <a href="{{ path('reception_index') }}">Назад до списку</a>
+                            <a href="{{ path('reception_timetable_index') }}">Назад до списку</a>
                         </li>
                         <li class="list-group-item">
                             <a href="/reception/visits">Додати зустріч</a>
@@ -32,6 +32,13 @@
                     <div class="form-inline">
                         {{ form_row(form.endTime) }}
                     </div>
+                    {{ form_row(form.averTime, {'attr': {'class' : 'validate[required, min[5], max[120]]'}}) }}
+                    {% if error %}
+                        <div class="form-group has-error">
+                        {{ form_row(form.actorId) }}
+                            <p>* Така особа вже зареєстрована</p>
+                        </div>
+                    {% endif %}
                     {{ form_widget(form) }}
                     <div class="col-md-2 col-md-offset-5">
                         <input class="btn btn-success" type="submit" value="Ok"/>
@@ -43,3 +50,11 @@
     </div>
 </div>
 {% endblock %}
+
+ {% block javascripts %}
+     {{ parent() }}
+     <script>
+         // $('.admin').DataTable();
+         $('form[name="timetable"]').validationEngine();
+     </script>
+ {% endblock %}

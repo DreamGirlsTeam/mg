@@ -2,8 +2,10 @@
 
 namespace GuideBundle\Controller;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use GuideBundle\Entity\Timetable;
@@ -25,11 +27,19 @@ class TimetableController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
+        $doctors = array();
         $timetables = $em->getRepository('GuideBundle:Timetable')->findAll();
+        foreach ($timetables as $timetable) {
+            $user = $em->getRepository('GuideBundle:MedicalStaff')->findOneBy(array(
+                    "actorId" => $timetable->getActorId()
+                )
+            );
+            $doctors[] = $user->getFirstName() . " " . $user->getLastName() . " " . $user->getPatronymic();
+        }
 
         return $this->render('timetable/index.html.twig', array(
-            'timetables' => $timetables,
+            'names' => $doctors,
+            'timetables' => $timetables
         ));
     }
 
@@ -42,21 +52,31 @@ class TimetableController extends Controller
     public function newAction(Request $request)
     {
         $timetable = new Timetable();
+        $continue = true;
         $form = $this->createForm('GuideBundle\Form\TimetableType', $timetable);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $timetable->setActorId($form->getData()->getActorId()->getId());
-            $em->persist($timetable);
-            $em->flush();
-
-            return $this->redirectToRoute('reception_timetable_index', array('id' => $timetable->getId()));
+            $timetable->setActorId($form->getData()->getActorId()->getActorId()->getId());
+            $timetables = $em->getRepository('GuideBundle:Timetable')->findAll();
+            foreach ($timetables as $time) {
+                if ($timetable->getActorId() === $time->getActorId()) {
+                    $error =  "Години роботи лікаря вже зареєстровані";
+                    $continue = false;
+                }
+            }
+            if ($continue) {
+                $em->persist($timetable);
+                $em->flush();
+                return $this->redirectToRoute('reception_timetable_index');
+            }
         }
 
         return $this->render('timetable/new.html.twig', array(
             'timetable' => $timetable,
             'form' => $form->createView(),
+            'error' => $error
         ));
     }
 
@@ -74,6 +94,7 @@ class TimetableController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $timetable->setActorId($editForm->getData()->getActorId()->getActorId()->getId());
             $em->persist($timetable);
             $em->flush();
 
@@ -119,7 +140,6 @@ class TimetableController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('reception_timetable_delete', array('id' => $timetable->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

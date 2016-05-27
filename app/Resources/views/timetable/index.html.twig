@@ -26,7 +26,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-md-offset-1">
+            <div class="col-md-6">
                 <div class="well" style="border-color: #EBF5FB; background-color:#F8F9F9;">
                     <table class="table table-bordered table-hover">
                         <thead>
@@ -34,6 +34,7 @@
                             <th>Лікар</th>
                             <th>Початок</th>
                             <th>Кінець</th>
+                            <th>Час прийому</th>
                             <th>Дії</th>
                         </tr>
                         </thead>
@@ -41,10 +42,11 @@
                         {% for timetable in timetables %}
                             <tr>
                                 <td>
-                                    Doctor
+                                    {{ names[loop.index - 1] }}
                                 </td>
                                 <td>{% if timetable.beginTime %}{{ timetable.beginTime|date('H:i:s') }}{% endif %}</td>
                                 <td>{% if timetable.endTime %}{{ timetable.endTime|date('H:i:s') }}{% endif %}</td>
+                                <td>{% if timetable.averTime %}{{ timetable.averTime }}{% endif %}</td>
                                 <td>
                                     <ul>
                                         <li>

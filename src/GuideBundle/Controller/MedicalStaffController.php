@@ -99,7 +99,6 @@ class MedicalStaffController extends Controller
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
-        //return $this->redirectToRoute("admin_index");
     }
 
     /**
@@ -118,14 +117,6 @@ class MedicalStaffController extends Controller
             $auth = $repo->findOneBy(array('actorId' => $actorId));
             $em->remove($auth);
             $em->flush();
-//            $actor = $this
-//                ->getDoctrine()
-//                ->getRepository("GuideBundle:Actors")
-//                ->findOneBy(
-//                    array(
-//                        "id" => $medicalStaff->getActorId()->getId()
-//                    )
-//                );
             $em->remove($medicalStaff);
             $em->flush();
 
@@ -159,25 +150,14 @@ class MedicalStaffController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
-//        $message = \Swift_Message::newInstance()
-//            ->setSubject('Hello Email')
-//            ->setFrom('medicalguidesystem@gmail.com')
-//            ->setTo($email)
-//            ->setBody(
-//                'You was registered in MedicalGuide system as doctor. Username: '.$user->getUsername().' Password: '. $user->getPassword()
-//            )
-//            /*
-//             * If you also want to include a plaintext version of the message
-//            ->addPart(
-//                $this->renderView(
-//                    'Emails/registration.txt.twig',
-//                    array('name' => $name)
-//                ),
-//                'text/plain'
-//            )
-//            */
-//        ;
-//        $this->get('mailer')->send($message);
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Ğåºñòğàö³ÿ â ñèñòåì³ MedicalGuide')
+            ->setFrom('medicalguidesystem@gmail.com')
+            ->setTo($email)
+            ->setBody(
+                'Â³òàºìî! Âè áóëè çàğåºñòğîâàí³ â ñèñòåì³ ÿê ë³êàğ.Âàø ëîã³í äëÿ âõîäó ó ñèñòåìó: ' . $user->getUsername() . ' Ïàğîëü: ' . $user->getPassword()
+            );
+        $result = $this->get('mailer')->send($message);
         return $user;
     }
 

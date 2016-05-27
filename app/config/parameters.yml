@@ -6,8 +6,7 @@ parameters:
     database_user: mg
     database_password: meangirls
     mailer_transport: gmail
-    mailer_host:    smtp.gmail.com
-    mailer_user:     medicalguidesystem@gmail.com
-    port:       465
+    mailer_host: smtp.gmail.com
+    mailer_user: medicalguidesystem@gmail.com
     mailer_password: meangirls
     secret: ThisTokenIsNotSoSecretChangeIt

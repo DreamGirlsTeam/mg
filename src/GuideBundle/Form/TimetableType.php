@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TimetableType extends AbstractType
@@ -22,6 +23,9 @@ class TimetableType extends AbstractType
             ))
             ->add('endTime', TimeType::class, array(
                 "label" => "Кінець"
+            ))
+            ->add('averTime', IntegerType::class, array(
+                "label" => "Середній час прийому (хвилин)"
             ))
             ->add('actorId', EntityType::class, array(
                 'label' => 'Особа',
