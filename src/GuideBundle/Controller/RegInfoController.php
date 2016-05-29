@@ -30,19 +30,30 @@ class RegInfoController extends Controller
      */
     public function indexAction()
     {
+        /*$em = $this->getDoctrine()->getManager();
+        $regInfos = $em->getRepository('GuideBundle:RegInfo')->findAll();*/
+
+        return $this->render('reginfo/start.html.twig', array(
+            //'regInfos' => $regInfos,
+        ));
+    }
+
+    /**
+     * Lists all RegInfo entities.
+     *
+     * @Route("/all", name="reception_all")
+     * @Method("GET")
+     */
+    public function allAction()
+    {
         $em = $this->getDoctrine()->getManager();
-//        $query = $em->createQueryBuilder('r')
-//            ->select('r')
-//            ->from('GuideBundle:RegInfo', 'r')
-//            ->leftJoin('GuideBundle:ConfPerson', 'cp', 'WITH', 'cp.first_name = r.first_name');
-        $regInfos = $em->getRepository('GuideBundle:RegInfo')->findAll();
-        // $regInfos = $em->createQuery($query)->getResult();
-        //$regInfos = $em->getRepository('GuideBundle:ConfPerson')->findAll();
+         $regInfos = $em->getRepository('GuideBundle:RegInfo')->findAll();
 
         return $this->render('reginfo/index.html.twig', array(
             'regInfos' => $regInfos,
         ));
     }
+
 
     /**
      * Creates a new RegInfo entity.

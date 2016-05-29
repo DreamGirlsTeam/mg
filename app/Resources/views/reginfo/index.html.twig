@@ -11,62 +11,59 @@
     {% include 'header.html.twig' %}
     <div class="container-fluid">
         <div class="row">
-        <div class="col-md-3">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <div class="col-md-offset-5">Дії</div>
-                </div>
-                <div class="panel-body">
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <a href="{{ path('reception_new') }}">Зареєструвати нового пацієнта</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="/reception/visits">Додати новий візит</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a class="scheduling-link" href="/reception/schedule">Генетичний алгоритм</a>
-                        </li>
-                    </ul>
+            <div class="col-md-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="col-md-offset-5">Дії</div>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="{{ path('reception_index') }}">На головну</a>
+                            </li>
+
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    <div class="col-md-8">
+            <div class="col-md-8">
                 <div class="well" style="border-color: #EBF5FB; background-color:#F8F9F9;">
-                <table class="table table-hover reg_info">
-                    <thead>
-                    <tr class="heading">
-                        <th>Ім'я</th>
-                        <th>Прізвище</th>
-                        <th>По-батькові</th>
-                        <th>Довірена особа</th>
-                        <th>Дії</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for regInfo in regInfos %}
-
+                    <table class="table table-hover reg_info">
+                        <thead>
                         <tr>
-                            <td>{{ regInfo.firstName }}</td>
-                            <td>{{ regInfo.lastName }}</td>
-                            <td>{{ regInfo.patronymic }}</td>
-                            <td><a href="{{ path('reception_confidant_show', { 'actorId': regInfo.actorId.id }) }}">Показати</a>
-                            </td>
-                            <td>
-                                <ul class="list-group">
-                                    <li>
-                                        <a href="{{ path('reception_show', { 'actorId': regInfo.actorId.id }) }}">Переглянути</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ path('reception_edit', { 'actorId': regInfo.actorId.id }) }}">Редагувати</a>
-                                    </li>
-                                </ul>
-                            </td>
+                            <th><div class="col-md-offset-5"> Пацієнти </div></th>
+                            <th>
+                                <div class="col-md-offset-5">  Дії </div>
+                            </th>
                         </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-                    </div>
+                        </thead>
+                        <tbody>
+                        {% for regInfo in regInfos %}
+                            <tr>
+                                <td>
+                                    <h4>{{ regInfo.lastName }} {{ regInfo.firstName }} {{ regInfo.patronymic }}
+                                        <small>({{ regInfo.phone }})</small>
+                                    </h4>
+
+                                </td>
+                                <td>
+                                    <ul class="list-group">
+                                        <li class="list-group-item"><a
+                                                    href="{{ path('reception_confidant_show', { 'actorId': regInfo.actorId.id }) }}">Довірена
+                                                особа</a></li>
+                                        <li class="list-group-item"><a
+                                                    href="{{ path('reception_show', { 'actorId': regInfo.actorId.id }) }}">Переглянути</a>
+                                        </li>
+                                        <li class="list-group-item"><a
+                                                    href="{{ path('reception_edit', { 'actorId': regInfo.actorId.id }) }}">Редагувати</a>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

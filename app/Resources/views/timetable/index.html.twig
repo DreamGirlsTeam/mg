@@ -31,28 +31,17 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                         <tr>
-                            <th>Лікар</th>
-                            <th>Початок</th>
-                            <th>Кінець</th>
-                            <th>Час прийому</th>
-                            <th>Дії</th>
+                            <th> <div class="col-md-offset-5">Лікарі</div></th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for timetable in timetables %}
                             <tr>
                                 <td>
-                                    {{ names[loop.index - 1] }}
-                                </td>
-                                <td>{% if timetable.beginTime %}{{ timetable.beginTime|date('H:i:s') }}{% endif %}</td>
-                                <td>{% if timetable.endTime %}{{ timetable.endTime|date('H:i:s') }}{% endif %}</td>
-                                <td>{% if timetable.averTime %}{{ timetable.averTime }}{% endif %}</td>
-                                <td>
-                                    <ul>
-                                        <li>
-                                            <a href="{{ path('reception_timetable_edit', { 'id': timetable.id }) }}">Редагувати</a>
-                                        </li>
-                                    </ul>
+                                    <h4>{{ names[loop.index - 1] }}</h4>
+                                    {{ timetable.beginTime|date('H:i:s') }} - {{ timetable.endTime|date('H:i:s') }}
+                                    <h4><small><b>Середній час візиту: {{ timetable.averTime }} хвилин</b></small></h4>
+                                    <a href="{{ path('reception_timetable_edit', { 'id': timetable.id }) }}">Редагувати</a>
                                 </td>
                             </tr>
                         {% endfor %}

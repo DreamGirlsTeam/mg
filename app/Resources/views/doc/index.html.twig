@@ -32,7 +32,7 @@
                             {% for visit in visits %}
                                 <tr class="list-group-item">
                                     <td>
-                                        <h4>{{ visit.bedinTime | date('H:i') }} - {{ visit.endTime | date("H:i") }}
+                                        <h4>{{ visit.beginTime | date('H:i') }} - {{ visit.endTime | date("H:i") }}
                                             <br />
                                             {{ visit.patName }}
                                             <small>({{ patients[loop.index - 1].phone }})</small>

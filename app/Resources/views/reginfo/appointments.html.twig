@@ -23,37 +23,9 @@
                 </div>
             </div>
         </form>
-        {#<h3>
-            <small>Зайнятий час:</small>
-        </h3>
-        <ul class="list-group">
-            {% for appointment in app %}
-                <li class="list-group-item list-group-item-danger">
-                    {{ appointment.beginTime | date('H:i:s') }} - {{ appointment.endTime | date('H:i:s') }}
-                </li>
-            {% endfor %}
-        </ul>#}
     </div>
 </div>
 <hr>
-{#
-<div class="panel panel-info">
-    <div class="panel-heading">Час візиту</div>
-    <div class="panel-body">
-        <div class="form-group">
-            <form action="/reception/appointment/" method="post">
-                <label>Початок</label>
-                <input name="beginTime" type="text" class="beginTime form-control"/>
-                <br/>
-                <label>Кінець</label>
-                <input name="endTime" type="text" class="endTime form-control"/>
-                <input value="Зберегти" type="submit" class="btn btn-sm btn-success save_appointment"/>
-            </form>
-        </div>
-    </div>
-    </div>
-</div>
-#}
 {% block javascripts %}
     <script src="{{ asset('bundles/framework/js/jquery.ui.timepicker.js') }}" type="text/javascript"
             charset="utf-8"></script>
