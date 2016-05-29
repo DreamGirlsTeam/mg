@@ -1,0 +1,254 @@
+h1,h2,h3,a{
+    font-family: 'Comfortaa', cursive;
+}
+
+#block1 {
+    font-family: 'Comfortaa', cursive;
+}
+
+#block2{
+    margin: 0 auto;
+    font-family: 'Comfortaa', cursive;
+}
+
+#block2 p{
+    text-align: center;
+}
+
+#cnn {
+    display: flex;
+    justify-content: center;
+}
+
+a > h3:hover{
+    color: #5ec6ca !important;
+}
+
+#team{
+    text-align: center;
+    margin-top: -10px;
+}
+
+footer {
+    text-align: center;
+    margin-top: -30px;
+}
+
+#cpr{
+    margin-top: 60px;
+}
+
+#foot a{
+    text-decoration: none;
+}
+/*menu {*/
+/*display:inline-block;*/
+/*}*/
+#menu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 69px;
+}
+
+#about{
+    margin-top: 20px;
+    width: 45%;
+}
+
+#title a{
+    text-decoration: none;
+}
+
+#menu a{
+    top: none !important;
+    text-decoration: none;
+}
+
+ a:hover{
+    color: #5ec6ca;
+}
+
+.login{
+    float: left;
+    margin-left: 15%;
+    margin-top: 30px;
+}
+
+.connect{
+    margin-left: 75%;
+}
+
+.r .col-md-7 {
+    width: 56.5%;
+}
+
+/*.row .col-md-4 {*/
+/*width: 30.37%;*/
+/*}*/
+.r {
+    width: 100%;
+    max-width: 1110px;
+    min-width: 727px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+body .col-md-5{
+    border-right: 1px #eeeeee solid;
+}
+
+header .col-md-4 {
+    border-right: 1px #eeeeee solid;
+}
+
+header .col-md-1{
+    border-left: 1px #eeeeee solid;
+}
+
+/*header .bordr{*/
+    /*border-bottom: 1px #B4B4B4 solid;*/
+/*}*/
+
+header nav {
+    /*border-right: 1px #B4B4B4 solid;*/
+    height: 100px;
+    padding-right: 45px;
+    min-height: 100%;
+    text-align: right;
+}
+
+header nav a {
+    color: #222;
+
+    font-size: 1.6em;
+}
+
+header nav span {
+    color: #D3D3D3;
+    font-size: 40px;
+    font-weight: 100;
+    margin: 5px 15px 0 15px;
+}
+
+
+a{
+    color: #222;
+    text-decoration: none;
+    line-height: inherit;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.scheduling-link {
+    color: #45B39D;
+    font-weight: bold;
+}
+.scheduling-link:hover {
+    color: #34495E;
+    text-decoration: none;
+}
+
+/*#connect*/
+/*{*/
+    /*left: 548px;*/
+    /*top: 72px;*/
+    /*position: absolute;*/
+    /*width: 266px;*/
+    /*height: 32px;*/
+    /*z-index:30;*/
+/*}*/
+
+.text-header
+{
+    margin-left: 42%;
+}
+
+.top-buffer
+{
+    margin-top:20px;
+}
+
+.field-color-blue
+{
+    background-color: #E6FEFF;
+}
+
+.field-color-green
+{
+    background-color: #DBFFD9;
+}
+
+.logout-button
+{
+    float: right;
+    margin-left: 90%;
+    position: absolute;
+    margin-top: -35px;
+}
+
+.logo-auth
+{
+    position: absolute;
+    float: left;
+    margin-top: -2.5%;
+}
+
+.logo-position
+{
+    position: absolute;
+    float: left;
+    margin-left: 1%;
+    margin-top: -3.3%;
+}
+
+.logo-auth
+{
+    float: left;
+    margin-left: 1%;
+    position: absolute;
+    margin-top: -3%;
+}
+
+.form_patients {
+    margin-top: 14%;
+}
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 )
+    url('../images/ajax-loader.gif')
+    50% 50%
+    no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .modal {
+    display: block;
+}
+
+.func
+{
+    background-color: #EAFAF1;
+    color: black;
+}
+
+.heading {
+    background-color: rgba(235,245,251,0.5);
+}

@@ -26,52 +26,78 @@
         </div>
     </div>
     <div class="col-md-5">
-        <div class="well" style="border-color: #EBF5FB; background-color:#F8F9F9;">
-            <table class="table table-bordered table-condensed table-hover visit">
-                <thead>
-                <tr class="active">
-                    <th>Дата</th>
-                    <th>Тип</th>
-                    <th>Діагноз</th>
-                    <th>Лікування</th>
-                    <th>Коментарі</th>
+        <table class="table visit">
+            <thead>
+            <tr>
+                <th><div class="col-md-offset-5">Історія візитів</div></th>
+                {#<th>Тип</th>
+                <th>Діагноз</th>
+                <th>Лікування</th>
+                <th>Коментарі</th>#}
+            </tr>
+            </thead>
+            <tbody>
+            {% for visit in visits %}
+                <tr>
+                    {# <td>{{ visit.date | date }} {{ visit.type }} {% if visit.illnesses %}{{ visit.illnesses }}</td>
+                     <td></td>
+                     <td>{% if visit.illnesses %}{{ visit.illnesses }}{% else %} - {% endif %}</td>#}
+                    <td>
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h5>{{ visit.date | date }}
+                                    <small>{{ visit.type }}</small>
+                                </h5>
+                            </div>
+                            <div class="panel-body">
+                                {% if visit.illnesses %}<h5><b> Діагноз:</b>{{ visit.illnesses }}</h5> {% endif %}
+                                {% if visit.medicines | length > 0 %}
+                                    <b> Лікування:</b>
+                                    <ul class="list-group">
+                                        {% for medicine in visit.medicines %}
+                                            <li class="list-group-item">{{ medicine.name }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                                <b> Коментар:</b>
+                                {{ visit.comment }}
+
+                            </div>
+                        </div>
+
+                    </td>
+                    {#<td>{{ visit.comment }}</td>#}
                 </tr>
-                </thead>
-                <tbody>
-                {% for visit in visits %}
-                    <tr>
-                        <td>{{ visit.date | date }}</td>
-                        <td>{{ visit.type }}</td>
-                        <td>{% if visit.illnesses %}{{ visit.illnesses }}{% else %} - {% endif %}</td>
-                        <td>
-                            {% if visit.medicines %}
-                                {% for medicine in visit.medicines %}
-                                    {{ medicine.name }};
-                                {% endfor %}
-                            {% else %} - {% endif %}</td>
-                        <td>{{ visit.comment }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
     <div class="col-md-4">
         <div class="well" style="border-color: #EBF5FB; background-color:#F8F9F9;">
             <table class="table table-condensed table-hover doc_reg_info">
                 <thead>
-                <tr class="active">
-                    <th>Дата</th>
-                    <th>Аналіз</th>
-                    <th>Файл</th>
+                <tr>
+                    <th>
+                        <div class="col-md-offset-4">Результати аналізів</div>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for analys in analysys %}
                     <tr>
-                        <td>{{ analys.date | date("Y-m-d") }}</td>
-                        <td>{{ analys.name }}</td>
-                        <td><a href="{{ asset('uploads/' ~ analys.patId ~ '/' ~ analys.filename) }}">PDF</a></td>
+                        <td>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    {{ analys.date | date }}
+                                </div>
+                                <div class="panel-body">
+                                    {{ analys.name }}
+                                    {#<div style="text-align: right;">#}
+                                    <a href="{{ asset('uploads/' ~ analys.patId ~ '/' ~ analys.filename) }}">PDF</a>
+                                    {# </div>#}
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>

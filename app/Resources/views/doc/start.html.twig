@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ asset('/bundles/framework/css/doctor.css') }}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/dataTables.bootstrap.min.css"/>
+    <style>
+        .btn {
+            width: 100%;
+            margin-top: 15px;
+        }
+    </style>
+
+{% endblock %}
+
+{% block body %}
+    {% include 'header.html.twig' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">
+                <div class="thumbnail">
+                    <img src="{{ asset('bundles/framework/images/list.png') }}" class="img-thumbnail img-responsive">
+
+                    <div class="caption">
+                        <h3>Розклад на день</h3>
+
+                        <p>Медичні картки пацієнтів для сьогоднішніх візитів</p>
+
+                            <p><a href="{{ path('doctor_today') }}" class="btn btn-success" role="button">Знайти</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="thumbnail">
+                    <img src="{{ asset('bundles/framework/images/all.png') }}" class="img-thumbnail img-responsive">
+
+                    <div class="caption">
+                        <h3>Пошук пацієнта</h3>
+
+                        <p>Пошук медичних карток пацієнтів у загальній базі</p>
+
+                            <p><a href="{{ path('doctor_all_patients') }}" class="btn btn-big btn-success" role="button">Знайти</a>
+                            </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+

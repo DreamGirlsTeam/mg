@@ -30,7 +30,7 @@ class Visits
     private $date;
 
     /**
-     * @ORM\Column(name="illnesses", type="text", unique=false)
+     * @ORM\Column(name="illnesses", type="text", unique=false, nullable=true)
      */
      private $illnesses;
 

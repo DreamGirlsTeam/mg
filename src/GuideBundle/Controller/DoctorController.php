@@ -31,17 +31,45 @@ class DoctorController extends Controller
      */
     public function doctorAction(Request $request)
     {
+        return $this->render('doc/start.html.twig', array(
+        ));
+    }
+
+    /**
+     * @Route("/today", name="doctor_today")
+     */
+    public function doctorTodayAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $visits = $em->getRepository('GuideBundle:Appointments')->findBy(array(
+                "docId" =>  $request->getSession()->get("user")["id"],
+                "date" => new \DateTime(date('Y-m-d'))
+            )
+        );
+        foreach ($visits as $visit) {
+            $name = explode(" ", $visit->getPatName());
+            $pat[] = $em->getRepository('GuideBundle:RegInfo')->findOneBy(array(
+                    "lastName" =>  $name[0],
+                    "firstName" =>  $name[1]
+                )
+            );
+        }
+        return $this->render('doc/index.html.twig', array(
+            "visits" => $visits,
+            "today" => true,
+            "patients" => $pat
+        ));
+    }
+
+    /**
+     * @Route("/patients", name="doctor_all_patients")
+     */
+    public function showAllPatients()
+    {
         $em = $this->getDoctrine()->getManager();
         $regInfos = $em->getRepository('GuideBundle:RegInfo')->findAll();
         $ill = $em->getRepository('GuideBundle:Illnesses')->findAll();
-        /* foreach ($ill as $i) {
-             echo $i->getName();
-             foreach ($i->getSymptoms() as $ii) {
-                 var_dump($ii->getName());
-             }
-             echo "<br>";
-         }*/
-
 
         return $this->render('doc/index.html.twig', array(
             'regInfos' => $regInfos,
@@ -453,8 +481,8 @@ class DoctorController extends Controller
             $doc = $request->getSession()->get("user")["id"];
             $pat = $request->getSession()->get("patient")["patId"];
             if ($ill && $medicines && $doc && $pat) {
-                $visit = $this->setVisitByComplaint(array($doc, $pat), $ill, $medicines, $comment);
-                $this->generateAndSendVisit($visit);
+                $this->setVisitByComplaint(array($doc, $pat), $ill, $medicines, $comment);
+               // $this->generateAndSendVisit($visit);
                 return new JsonResponse(array('success' => true));
             } else {
                 return new JsonResponse(400);

@@ -11,33 +11,49 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-            <div class="well" style="border-color: #EBF5FB; background-color:#F8F9F9;">
-                    <table class="table table-condensed table-hover doc_reg_info">
+                {% if today %}
+                    <div class="well">
+                        <div class="col-md-offset-4">
+                            <h4>Візитів сьогодні <span class="label label-danger">{{ visits | length }}</span></h4>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="well" style="border-color: #EBF5FB; background-color:#F8F9F9;">
+                    <table class="table table-hover doc_reg_info">
                         <thead>
-                        <tr class="active">
-                            <th>Ім'я</th>
-                            <th>Прізвище</th>
-                            <th>По-батькові</th>
-                            <th>Телефон</th>
-                            <th>Дії</th>
+                        <tr>
+                            <th>
+                                <div class="col-md-offset-5">Пацієнти</div>
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for regInfo in regInfos %}
-                            <tr>
-                                <td>{{ regInfo.firstName }}</td>
-                                <td>{{ regInfo.lastName }}</td>
-                                <td>{{ regInfo.patronymic }}</td>
-                                <td>{{ regInfo.phone }}</td>
-                                <td>
-                                    <ul class="list-group">
-                                        <li>
-                                            <a href="{{ path('doctor_card', { 'actorId': regInfo.actorId.id }) }}">Картка</a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        {% endfor %}
+                        {% if today %}
+                            {% for visit in visits %}
+                                <tr class="list-group-item">
+                                    <td>
+                                        <h4>{{ visit.bedinTime | date('H:i') }} - {{ visit.endTime | date("H:i") }}
+                                            <br />
+                                            {{ visit.patName }}
+                                            <small>({{ patients[loop.index - 1].phone }})</small>
+                                        </h4>
+                                        <a href="{{ path('doctor_card', { 'actorId': patients[loop.index - 1].actorId.id }) }}">Картка</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            {% for regInfo in regInfos %}
+                                <tr class="list-group-item">
+                                    <td>
+                                        <h4>{{ regInfo.lastName }} {{ regInfo.firstName }} {{ regInfo.patronymic }}
+                                            <small>({{ regInfo.phone }})</small>
+                                        </h4>
+                                        <a href="{{ path('doctor_card', { 'actorId': regInfo.actorId.id }) }}">Картка</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+
                         </tbody>
                     </table>
                 </div>
