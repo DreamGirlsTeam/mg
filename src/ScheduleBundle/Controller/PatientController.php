@@ -237,23 +237,34 @@ class PatientController extends Controller
         return $newPopulation;
     }
 
-    private function getNewParents(Population $population)
+    private function getNewParents(Population $population) //1 girls, 0 boys
     {
         $parents = array();
+        $girls = array();
+        $boys = array();
         $bestScore = 10000;
         foreach ($population->getIndivids() as $individ) {
-            if ($individ->getAverQueueTime() < $bestScore) {
+            /*if ($individ->getAverQueueTime() < $bestScore) {
                 $bestScore = $individ->getAverQueueTime();
                 $parents[0] = $individ;
+            }*/
+            if ($individ->getGender() === 1) {
+                $girls[] = $individ;
+            } else {
+                $boys[] = $individ;
             }
         }
-        $parentKey = array_rand($population->getIndivids(), 1);
+        $girlsKey = array_rand($girls, 1);
+        $boysKey = array_rand($boys, 1);
+        $parents[0] = $girls[$girlsKey];
+        $parents[1] = $boys[$boysKey];
+       /* $parentKey = array_rand($population->getIndivids(), 1);
         $parents[1] = $population->getIndivids()[$parentKey];
         while ($population->getIndivids()[$parentKey]->getPatients() === $parents[0]->getPatients()) {
             $parentKey = array_rand($population->getIndivids(), 1);
             $parents[1] = $population->getIndivids()[$parentKey];
         }
-        //if ()$population->getIndivids()[$parentKey]
+        //if ()$population->getIndivids()[$parentKey]*/
         return $parents;
     }
 
@@ -381,6 +392,7 @@ class PatientController extends Controller
         }
         $morning = $this->getQueueTime($pat, $individ, 'morning');
         $individ->setMorTime($morning["time"]);
+        $individ->setGender(rand(0,1000) % 2);
         $individ->setMorNumOfPat($morning["PatNumber"]);
         $evening = $this->getQueueTime($pat, $individ, 'evening');
         $individ->setEvTime($evening["time"]);

@@ -10,7 +10,12 @@
     <tbody>
     {% for individ in population %}
         {% if individ.suitable %}
-            <tr>
+            {% if individ.gender == 1 %}
+                <tr style="background-color: #F5EEF8">
+                {% else %}
+                    <tr style="background-color: #EAF2F8">
+            {% endif %}
+
         {% else %}
             <tr class="alert-danger">
         {% endif %}

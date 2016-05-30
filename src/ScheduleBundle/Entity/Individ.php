@@ -38,6 +38,27 @@ class Individ
     /**
      * @var int
      */
+    private $gender;
+
+    /**
+     * @return int
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param int $gender
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+    }
+
+    /**
+     * @var int
+     */
     private $morNumOfPat;
 
     /**
