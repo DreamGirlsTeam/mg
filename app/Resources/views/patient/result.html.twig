@@ -16,6 +16,10 @@
                 </div>
                 {% include "patient/population.html.twig" with {"population" : population} %}
                 {% include "patient/iterations.html.twig" with {"iterations" : iterations, "iterate" : iterate} %}
+                <div class="panel panel-success">
+                    <div class="panel-body text-center"><h4 style="color:green">Найкращий результат<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></h4></div>
+                </div>
+                {% include "patient/population.html.twig" with {"population" : winner} %}
             </div>
         </div>
     </div>

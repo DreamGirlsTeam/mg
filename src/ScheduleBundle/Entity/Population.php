@@ -49,6 +49,23 @@ class Population
         return $weak;
     }
 
+    public function warNeed()
+    {
+        $girls = 0;
+        $boys = 0;
+        foreach ($this->getIndivids() as $individ) {
+            if ($individ->getGender() === 1) {
+                $girls++;
+            } else {
+                $boys++;
+            }
+        }
+        if ($boys / count($this->getIndivids()) > 0.7) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public function getMaxMorLength()
     {
@@ -59,6 +76,17 @@ class Population
             }
         }
         $this->maxMorLength = $max;
+    }
+
+    public function getSumBoysTime()
+    {
+        $sum = 0;
+        foreach ($this->getIndivids() as $individ) {
+            if ($individ->getGender() === 0) {
+                $sum += $individ->getAverQueueTIme();
+            }
+        }
+        return $sum;
     }
 
     public function getMaxEvLength()

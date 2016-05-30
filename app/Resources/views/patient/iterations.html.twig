@@ -1,4 +1,16 @@
 {% for iteration in iterations %}
+    {% if iteration[1].enemyPopulation %}
+        <div class="panel panel-danger">
+            <div class="panel-body text-center"><h4 style="color:red">Війна<span class="glyphicon glyphicon-fire" aria-hidden="true"></span></h4></div>
+        </div>
+        {% include "patient/population.html.twig" with {"population" : iteration[1].enemyPopulation} %}
+            <h4 style="color:#b92c28"><small>Функція популяції: </small>{{ iteration[1].popSum | number_format(2)}}</h4>
+            <h4 style="color:#b92c28"><small>Функція суперника: </small>{{ iteration[1].enemySum | number_format(2)}}</h4>
+        <div class="panel panel-success">
+            <div class="panel-body text-center"><h4 style="color:green">Результат війни<span class="glyphicon glyphicon-leaf" aria-hidden="true"></span></h4></div>
+        </div>
+        {% include "patient/population.html.twig" with {"population" : iteration[1].result} %}
+    {% endif %}
     <hr>
     <h3>Ітерація <span class="label label-primary"> {{ loop.index }} </span></h3>
     <div class="panel panel-default">

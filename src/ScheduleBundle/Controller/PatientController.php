@@ -171,9 +171,47 @@ class PatientController extends Controller
         return $childs;
     }
 
+    private function startWar($population)
+    {
+        $result = new Population();
+        if ($population->warNeed()) {
+            $enemyPopulation = $this->buildPopulation();
+            if ($population->getSumBoysTime() <= $enemyPopulation->getSumBoysTime()) {
+                foreach ($population->getIndivids() as $individ) {
+                    $result->addIndivid($individ);
+                }
+                foreach ($enemyPopulation->getIndivids() as $enemy) {
+                    if ($enemy->getGender() === 1) {
+                        $result->addIndivid($enemy);
+                    }
+                }
+            } else {
+                foreach ($enemyPopulation->getIndivids() as $enemy) {
+                    $result->addIndivid($enemy);
+                }
+                foreach ($population->getIndivids() as $individ) {
+                    if ($individ->getGender() === 1) {
+                        $result->addIndivid($individ);
+                    }
+                }
+            }
+            $result->getMaxEvLength();
+            $result->getMaxMorLength();
+            return array(
+                "enemy" => $enemyPopulation,
+                "popSum" => $population->getSumBoysTime(),
+                "enemySum" => $enemyPopulation->getSumBoysTime(),
+                "resultPop" => $result
+            );
+        } else {
+            return false;
+        }
+
+
+    }
+
+
     /**
-     * Lists all Patient entities.
-     *
      * @Route("/result", name="reception_schedule_result")
      * @Method({"GET", "POST"})
      */
@@ -184,6 +222,10 @@ class PatientController extends Controller
         $population = $this->buildPopulation();
         $iterPopulation = $population;
         for ($i = 0; $i < $this->getIterationNumber(); $i++) {
+            $result = $this->startWar($iterPopulation);
+            if ($result) {
+                $iterPopulation = $result["resultPop"];
+            }
             $parents = $this->getNewParents($iterPopulation);
             $children = $this->getNewChildren($parents);
             if (rand(1, 100) === 5) {
@@ -197,15 +239,30 @@ class PatientController extends Controller
             $newPopulation = $this->getNewPopulation($iterPopulation, $childReanimate);
             $iterPopulation = $newPopulation;
             $iterations[$i][] = array("children" => $children);
-            $iterations[$i][] = array(
-                "newPopulation" => $newPopulation->getIndivids(),
-                "parents" => $parents,
-                "selection" => $childSelection,
-                "reanimation" => $childReanimate,
-                //"newPopulation" => $newPopulation,
-                "mutated" => $mutated
-            );
+            if ($result) {
+                $iterations[$i][] = array(
+                    "newPopulation" => $newPopulation->getIndivids(),
+                    "parents" => $parents,
+                    "selection" => $childSelection,
+                    "reanimation" => $childReanimate,
+                    "mutated" => $mutated,
+                    "enemyPopulation" => $result["enemy"]->getIndivids(),
+                    "popSum" => $result["popSum"],
+                    "enemySum" => $result["enemySum"],
+                    "result" => $result["resultPop"]->getIndivids()
+                );
+            } else {
+                $iterations[$i][] = array(
+                    "newPopulation" => $newPopulation->getIndivids(),
+                    "parents" => $parents,
+                    "selection" => $childSelection,
+                    "reanimation" => $childReanimate,
+                    "mutated" => $mutated
+                );
+            }
+
         }
+        $winner = $this->getWinner($iterPopulation);
         // $view = $this->renderView('patient/iterations.html.twig', $iterations);
         return $this->render('patient/result.html.twig', array(
             "population" => $population->getIndivids(),
@@ -213,7 +270,8 @@ class PatientController extends Controller
             "maxEvLength" => $population->maxEvLength,
             "maxLength" => $population->maxEvLength + $population->maxMorLength,
             "iterations" => $iterations,
-            "iterate" => $iterate
+            "iterate" => $iterate,
+            "winner" => array($winner)
         ));
     }
 
@@ -221,8 +279,7 @@ class PatientController extends Controller
     {
         $newPopulation = new Population();
         foreach ($population->getIndivids() as $ind) {
-            if ($ind->getPatients() !== $population->getMostWeak()->getPatients())
-            {
+            if ($ind->getPatients() !== $population->getMostWeak()->getPatients()) {
                 $newPopulation->addIndivid($ind);
             }
 
@@ -232,9 +289,24 @@ class PatientController extends Controller
                 $newPopulation->addIndivid($child);
             }
         }
+        $newPopulation->getMaxMorLength();
+        $newPopulation->getMaxEvLength();
 
 
         return $newPopulation;
+    }
+
+    private function getWinner($population)
+    {
+        $min = 1000000;
+        $winner = new Individ();
+        foreach ($population->getIndivids() as $individ) {
+            if ($individ->getAverQueueTime() < $min) {
+                $min = $individ->getAverQueueTime();
+                $winner = $individ;
+            }
+        }
+        return $winner;
     }
 
     private function getNewParents(Population $population) //1 girls, 0 boys
@@ -244,10 +316,6 @@ class PatientController extends Controller
         $boys = array();
         $bestScore = 10000;
         foreach ($population->getIndivids() as $individ) {
-            /*if ($individ->getAverQueueTime() < $bestScore) {
-                $bestScore = $individ->getAverQueueTime();
-                $parents[0] = $individ;
-            }*/
             if ($individ->getGender() === 1) {
                 $girls[] = $individ;
             } else {
@@ -258,13 +326,6 @@ class PatientController extends Controller
         $boysKey = array_rand($boys, 1);
         $parents[0] = $girls[$girlsKey];
         $parents[1] = $boys[$boysKey];
-       /* $parentKey = array_rand($population->getIndivids(), 1);
-        $parents[1] = $population->getIndivids()[$parentKey];
-        while ($population->getIndivids()[$parentKey]->getPatients() === $parents[0]->getPatients()) {
-            $parentKey = array_rand($population->getIndivids(), 1);
-            $parents[1] = $population->getIndivids()[$parentKey];
-        }
-        //if ()$population->getIndivids()[$parentKey]*/
         return $parents;
     }
 
@@ -392,7 +453,7 @@ class PatientController extends Controller
         }
         $morning = $this->getQueueTime($pat, $individ, 'morning');
         $individ->setMorTime($morning["time"]);
-        $individ->setGender(rand(0,1000) % 2);
+        $individ->setGender(rand(0, 1000) % 2);
         $individ->setMorNumOfPat($morning["PatNumber"]);
         $evening = $this->getQueueTime($pat, $individ, 'evening');
         $individ->setEvTime($evening["time"]);
