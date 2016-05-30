@@ -36,6 +36,19 @@ class Population
         $this->size = 10;
     }
 
+    public function getMostWeak()
+    {
+        $max = 0;
+        $weak = new Individ();
+        foreach ($this->getIndivids() as $key => $individ) {
+            if ($individ->getAverQueueTime() > $max) {
+                $max = $individ->getAverQueueTime();
+                $weak = $individ;
+            }
+        }
+        return $weak;
+    }
+
 
     public function getMaxMorLength()
     {

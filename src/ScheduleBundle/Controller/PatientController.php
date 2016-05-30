@@ -162,6 +162,8 @@ class PatientController extends Controller
                     $times = $em->getRepository("ScheduleBundle:works")->findAll();
                     $ch = $this->createIndivid($newPats, $times, true);
                     $childs[] = $ch;
+                } else {
+                    $childs[] = $child;
                 }
             }
 
@@ -191,8 +193,10 @@ class PatientController extends Controller
                 $childSelection = $this->reanimate($children, true);
                 $childReanimate = $this->reanimate($childSelection, false);
             }
+            $newPopulation = $this->getNewPopulation($population, $childReanimate);
             $iterations[$i][] = array("children" => $children);
             $iterations[$i][] = array(
+                "newPopulation" => $newPopulation->getIndivids(),
                 "parents" => $parents,
                 "selection" => $childSelection,
                 "reanimation" => $childReanimate,
@@ -211,18 +215,24 @@ class PatientController extends Controller
         ));
     }
 
-    private function isMutated($individs)
+    private function getNewPopulation($population, $children)
     {
-        $mutation = false;
-        foreach ($individs as $individ) {
-            foreach ($individ->getPatients() as $pat) {
-                if ($pat->getMutated()) {
-                    $mutation = true;
-                    break;
-                }
+        $newPopulation = new Population();
+        foreach ($population->getIndivids() as $ind) {
+            if ($ind->getPatients() !== $population->getMostWeak()->getPatients())
+            {
+                $newPopulation->addIndivid($ind);
+            }
+
+        }
+        foreach ($children as $child) {
+            if ($child->getSuitable() && !in_array($child, $newPopulation->getIndivids())) {
+                $newPopulation->addIndivid($child);
             }
         }
-        return $mutation;
+
+
+        return $newPopulation;
     }
 
     private function getNewParents(Population $population)
@@ -304,11 +314,6 @@ class PatientController extends Controller
                         break;
                 }*/
         return $individ;
-    }
-
-    private function getNewPopulation($population, $children)
-    {
-
     }
 
     private function buildPopulation()

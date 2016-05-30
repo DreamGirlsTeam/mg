@@ -27,4 +27,8 @@
         </div>
         {% include "patient/population.html.twig" with {"population" : iteration[1].reanimation, "reanimation" : true} %}
     {% endif %}
+    <div class="panel panel-default">
+        <div class="panel-body text-center">Нова популяція</div>
+    </div>
+    {% include "patient/population.html.twig" with {"population" : iteration[1].newPopulation} %}
 {% endfor %}
