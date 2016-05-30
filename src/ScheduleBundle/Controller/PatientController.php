@@ -182,8 +182,9 @@ class PatientController extends Controller
         $iterations = array();
         $iterate = array();
         $population = $this->buildPopulation();
+        $iterPopulation = $population;
         for ($i = 0; $i < $this->getIterationNumber(); $i++) {
-            $parents = $this->getNewParents($population);
+            $parents = $this->getNewParents($iterPopulation);
             $children = $this->getNewChildren($parents);
             if (rand(1, 100) === 5) {
                 $mutated = $this->reanimate($children, true);
@@ -193,7 +194,8 @@ class PatientController extends Controller
                 $childSelection = $this->reanimate($children, true);
                 $childReanimate = $this->reanimate($childSelection, false);
             }
-            $newPopulation = $this->getNewPopulation($population, $childReanimate);
+            $newPopulation = $this->getNewPopulation($iterPopulation, $childReanimate);
+            $iterPopulation = $newPopulation;
             $iterations[$i][] = array("children" => $children);
             $iterations[$i][] = array(
                 "newPopulation" => $newPopulation->getIndivids(),
