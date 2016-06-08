@@ -22,8 +22,11 @@ class AnalysResController extends Controller
      * @Route("/", name="laborant_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $em = $this->getDoctrine()->getManager();
         $analysRes = $em->getRepository('GuideBundle:AnalysRes')->findAll();
         return $this->render('analysres/index.html.twig', array(
@@ -31,6 +34,12 @@ class AnalysResController extends Controller
         ));
     }
 
+    private function checkRole(Request $request)
+    {
+        if ($request->getSession()->get("user")["role"] != 3) {
+            return true;
+        }
+    }
     /**
      * Creates a new AnalysRes entity.
      *
@@ -39,6 +48,9 @@ class AnalysResController extends Controller
      */
     public function newAction(Request $request)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $analysRe = new AnalysRes();
         $form = $this->createForm('GuideBundle\Form\AnalysResType', $analysRe);
         $form->handleRequest($request);
@@ -74,7 +86,6 @@ class AnalysResController extends Controller
             ->setBody('HELLO!'
             )
         ;
-        var_dump($this->get('mailer'));
         $this->get('mailer')->send($message);
     }
 
@@ -84,8 +95,11 @@ class AnalysResController extends Controller
      * @Route("/{id}", name="laborant_show")
      * @Method("GET")
      */
-    public function showAction(AnalysRes $analysRe)
+    public function showAction(AnalysRes $analysRe, Request $request)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $deleteForm = $this->createDeleteForm($analysRe);
 
         return $this->render('analysres/show.html.twig', array(
@@ -102,6 +116,9 @@ class AnalysResController extends Controller
      */
     public function editAction(Request $request, AnalysRes $analysRe)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $deleteForm = $this->createDeleteForm($analysRe);
         $editForm = $this->createForm('GuideBundle\Form\AnalysResType', $analysRe);
         $editForm->handleRequest($request);
@@ -129,6 +146,9 @@ class AnalysResController extends Controller
      */
     public function deleteAction(Request $request, AnalysRes $analysRe)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $form = $this->createDeleteForm($analysRe);
         $form->handleRequest($request);
 

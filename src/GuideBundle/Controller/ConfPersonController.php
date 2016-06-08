@@ -22,8 +22,11 @@ class ConfPersonController extends Controller
      * @Route("/", name="reception_confidant_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $em = $this->getDoctrine()->getManager();
 
         $confPeople = $em->getRepository('GuideBundle:ConfPerson')->findAll();
@@ -31,6 +34,13 @@ class ConfPersonController extends Controller
         return $this->render('confperson/index.html.twig', array(
             'confPeople' => $confPeople,
         ));
+    }
+
+    private function checkRole(Request $request)
+    {
+        if ($request->getSession()->get("user")["role"] != 4) {
+            return true;
+        }
     }
 
     /**
@@ -41,6 +51,9 @@ class ConfPersonController extends Controller
      */
     public function newAction(Request $request, $actorId)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $confPerson = new ConfPerson();
         $form = $this->createForm('GuideBundle\Form\ConfPersonType', $confPerson);
         $form->handleRequest($request);
@@ -66,8 +79,11 @@ class ConfPersonController extends Controller
      * @Route("/{actorId}/show", name="reception_confidant_show")
      * @Method("GET")
      */
-    public function showAction(ConfPerson $confPerson)
+    public function showAction(ConfPerson $confPerson, Request $request)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $deleteForm = $this->createDeleteForm($confPerson);
 
         return $this->render('confperson/show.html.twig', array(
@@ -84,6 +100,9 @@ class ConfPersonController extends Controller
      */
     public function editAction(Request $request, ConfPerson $confPerson)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $deleteForm = $this->createDeleteForm($confPerson);
         $editForm = $this->createForm('GuideBundle\Form\ConfPersonType', $confPerson);
         $editForm->handleRequest($request);
@@ -111,6 +130,9 @@ class ConfPersonController extends Controller
      */
     public function deleteAction(Request $request, ConfPerson $confPerson)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $form = $this->createDeleteForm($confPerson);
         $form->handleRequest($request);
 

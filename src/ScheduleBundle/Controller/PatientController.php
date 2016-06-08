@@ -32,7 +32,7 @@ class PatientController extends Controller
      */
     public function __construct()
     {
-        $this->iterationNumber = 4;
+        $this->iterationNumber = 5;
     }
 
     /**
@@ -217,6 +217,7 @@ class PatientController extends Controller
      */
     public function resultAction()
     {
+        $start = microtime(true);
         $iterations = array();
         $iterate = array();
         $population = $this->buildPopulation();
@@ -263,6 +264,9 @@ class PatientController extends Controller
 
         }
         $winner = $this->getWinner($iterPopulation);
+        $time = microtime(true) - $start;
+        //printf('Скрипт выполнялся %.4F сек.', $time);
+
         // $view = $this->renderView('patient/iterations.html.twig', $iterations);
         return $this->render('patient/result.html.twig', array(
             "population" => $population->getIndivids(),
@@ -282,7 +286,6 @@ class PatientController extends Controller
             if ($ind->getPatients() !== $population->getMostWeak()->getPatients()) {
                 $newPopulation->addIndivid($ind);
             }
-
         }
         foreach ($children as $child) {
             if ($child->getSuitable() && !in_array($child, $newPopulation->getIndivids())) {

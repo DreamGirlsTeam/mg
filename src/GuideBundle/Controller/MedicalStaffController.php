@@ -26,11 +26,21 @@ class MedicalStaffController extends Controller
      */
     public function indexAction(Request $request)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $em = $this->getDoctrine()->getManager();
         $medicalStaffs = $em->getRepository('GuideBundle:MedicalStaff')->findAll();
         return $this->render('medicalstaff/index.html.twig', array(
             'medicalStaffs' => $medicalStaffs,
         ));
+    }
+
+    private function checkRole(Request $request)
+    {
+        if ($request->getSession()->get("user")["role"] != 1) {
+            return true;
+        }
     }
 
     /**
@@ -41,6 +51,9 @@ class MedicalStaffController extends Controller
      */
     public function newAction(Request $request)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $medicalStaff = new MedicalStaff();
         $actor = new Actors();
         $form = $this->createForm('GuideBundle\Form\MedicalStaffType', $medicalStaff);
@@ -70,6 +83,9 @@ class MedicalStaffController extends Controller
      */
     public function showAction(MedicalStaff $medicalStaff) //MedicalStaff $medicalStaff
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $deleteForm = $this->createDeleteForm($medicalStaff);
         return $this->render('medicalstaff/show.html.twig', array(
             'medicalStaff' => $medicalStaff,
@@ -85,6 +101,9 @@ class MedicalStaffController extends Controller
      */
     public function editAction(Request $request, MedicalStaff $medicalStaff)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $deleteForm = $this->createDeleteForm($medicalStaff);
         $editForm = $this->createForm('GuideBundle\Form\MedicalStaffType', $medicalStaff);
         $editForm->handleRequest($request);
@@ -109,6 +128,9 @@ class MedicalStaffController extends Controller
      */
     public function deleteAction(Request $request, MedicalStaff $medicalStaff, $actorId)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $form = $this->createDeleteForm($medicalStaff);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -145,22 +167,21 @@ class MedicalStaffController extends Controller
         $user = new Auth();
         $passwordLength = rand(8, 15);
         $user->setUsername(explode('@', $email)[0]);
-        $user->setPassword(md5($this->random_password($passwordLength)));
+        $user->setPassword($this->random_password($passwordLength));
         $user->setActorId($actor);
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
         $message = \Swift_Message::newInstance()
-            ->setSubject('Реєстрація в системі MedicalGuide')
+            ->setSubject('MedicalGuide')
             ->setFrom('medicalguidesystem@gmail.com')
             ->setTo($email)
             ->setBody(
-                'Вітаємо! Ви були зареєстровані в системі як лікар.Ваш логін для входу у систему: ' . $user->getUsername() . ' Пароль: ' . $user->getPassword()
+                'Вітаємо! Ви були зареєстровані в системі як лікар. Ваш логін для входу у систему: ' . $user->getUsername() . ' Пароль: ' . $user->getPassword()
             );
         $result = $this->get('mailer')->send($message);
         return $user;
     }
-
 
     private function random_password($length)
     {

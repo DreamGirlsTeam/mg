@@ -28,8 +28,11 @@ class RegInfoController extends Controller
      * @Route("/", name="reception_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         /*$em = $this->getDoctrine()->getManager();
         $regInfos = $em->getRepository('GuideBundle:RegInfo')->findAll();*/
 
@@ -44,8 +47,11 @@ class RegInfoController extends Controller
      * @Route("/all", name="reception_all")
      * @Method("GET")
      */
-    public function allAction()
+    public function allAction(Request $request)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $em = $this->getDoctrine()->getManager();
          $regInfos = $em->getRepository('GuideBundle:RegInfo')->findAll();
 
@@ -55,6 +61,12 @@ class RegInfoController extends Controller
     }
 
 
+    private function checkRole(Request $request)
+    {
+        if ($request->getSession()->get("user")["role"] != 4) {
+            return true;
+        }
+    }
     /**
      * Creates a new RegInfo entity.
      *
@@ -63,6 +75,9 @@ class RegInfoController extends Controller
      */
     public function newAction(Request $request)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $regInfo = new RegInfo();
         $actor = new Actors();
         $form = $this->createForm('GuideBundle\Form\RegInfoType', $regInfo);
@@ -93,8 +108,11 @@ class RegInfoController extends Controller
      * @Route("/{actorId}/show", name="reception_show")
      * @Method("GET")
      */
-    public function showAction(RegInfo $regInfo)
+    public function showAction(RegInfo $regInfo, Request $request)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $deleteForm = $this->createDeleteForm($regInfo);
 
         return $this->render('reginfo/show.html.twig', array(
@@ -111,6 +129,9 @@ class RegInfoController extends Controller
      */
     public function editAction(Request $request, RegInfo $regInfo)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $deleteForm = $this->createDeleteForm($regInfo);
         $editForm = $this->createForm('GuideBundle\Form\RegInfoType', $regInfo);
         $editForm->handleRequest($request);
@@ -138,6 +159,9 @@ class RegInfoController extends Controller
      */
     public function deleteAction(Request $request, RegInfo $regInfo)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $form = $this->createDeleteForm($regInfo);
         $form->handleRequest($request);
 
@@ -169,7 +193,7 @@ class RegInfoController extends Controller
      * @Route("/visits", name="reception_visits")
      * @Method("GET")
      */
-    public function visitsAction()
+    public function visitsAction(Request $request)
     {
         $form = $this->createFormBuilder()
             ->add('doctor', TextType::class, array('label' => 'Спеціалізація лікаря', 'attr' => array('class' => 'doc')))
@@ -189,6 +213,9 @@ class RegInfoController extends Controller
      */
     public function searchDoctorAction(Request $request)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $isAjax = $request->isXMLHttpRequest();
         if ($isAjax) {
             $em = $this->getDoctrine()->getManager();
@@ -217,6 +244,9 @@ class RegInfoController extends Controller
      */
     public function searchPatientAction(Request $request)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $isAjax = $request->isXMLHttpRequest();
         if ($isAjax) {
             $em = $this->getDoctrine()->getManager();
@@ -241,6 +271,9 @@ class RegInfoController extends Controller
      */
     public function appointmentAction(Request $request)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $app = new Appointments();
         $em = $this->getDoctrine()->getManager();
        // $docPerson = $em->getRepository('GuideBundle:MedicalStaff')->find($request->getSession()->get("schedule")["doc"]);
@@ -272,6 +305,9 @@ class RegInfoController extends Controller
      */
     public function loadScheduleAction(Request $request)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $isAjax = $request->isXMLHttpRequest();
         if ($isAjax) {
             $em = $this->getDoctrine()->getManager();

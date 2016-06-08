@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * ConfPerson controller.
@@ -31,15 +32,29 @@ class DoctorController extends Controller
      */
     public function doctorAction(Request $request)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         return $this->render('doc/start.html.twig', array(
         ));
     }
+
+    private function checkRole(Request $request)
+    {
+        if ($request->getSession()->get("user")["role"] != 2) {
+            return true;
+        }
+    }
+
 
     /**
      * @Route("/today", name="doctor_today")
      */
     public function doctorTodayAction(Request $request)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $em = $this->getDoctrine()->getManager();
 
         $visits = $em->getRepository('GuideBundle:Appointments')->findBy(array(
@@ -65,8 +80,11 @@ class DoctorController extends Controller
     /**
      * @Route("/patients", name="doctor_all_patients")
      */
-    public function showAllPatients()
+    public function showAllPatients(Request $request)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $em = $this->getDoctrine()->getManager();
         $regInfos = $em->getRepository('GuideBundle:RegInfo')->findAll();
         $ill = $em->getRepository('GuideBundle:Illnesses')->findAll();
@@ -81,6 +99,9 @@ class DoctorController extends Controller
      */
     public function cardAction(Request $request, $actorId)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $em = $this->getDoctrine()->getManager();
         $analys = $em->getRepository('GuideBundle:AnalysRes')->findBy(
             array('patId' => $actorId),
@@ -113,6 +134,9 @@ class DoctorController extends Controller
      */
     public function visitAction(Request $request, $actorId)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $form = $this->createForm('GuideBundle\Form\VisitsType');
         $form->handleRequest($request);
 
@@ -138,6 +162,9 @@ class DoctorController extends Controller
      */
     public function SearchSymptAction(Request $request)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $isAjax = $request->isXMLHttpRequest();
         if ($isAjax) {
             $em = $this->getDoctrine()->getManager();
@@ -162,6 +189,9 @@ class DoctorController extends Controller
      */
     public function GetTreatmentAction(Request $request)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         if ($request->isXMLHttpRequest()) {
             $symptoms = explode(",", $request->request->get('search'));
             $request->getSession()->set("symptoms", array(
@@ -266,6 +296,9 @@ class DoctorController extends Controller
      */
     public function findDiagAction(Request $request)
     {
+        if($this->checkRole($request)) {
+            throw $this->createNotFoundException('');
+        }
         $isAjax = $request->isXMLHttpRequest();
         if ($isAjax) {
             $em = $this->getDoctrine()->getManager();
@@ -290,6 +323,9 @@ class DoctorController extends Controller
     */
     public function visitSaveAction(Request $request)
     {
+        if ($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $illn = $request->request->get('diag');
         $conc = $request->request->get('conclusion');
         $medicines = $request->request->get('medicines');
@@ -353,12 +389,6 @@ class DoctorController extends Controller
                 $ill->addSymptom($sym);
             }
         }
-       /* if (!is_object($ill)) {
-            $em->persist($illness);
-        } else {
-            $em->persist($ill);
-        }
-        */
         is_object($ill) ? $em->persist($ill) : $em->persist($illness);
         return is_object($ill) ? $ill : $illness;
     }
@@ -368,6 +398,9 @@ class DoctorController extends Controller
      */
     public function VisitTreatmentAction(Request $request, $actorId)
     {
+        if ($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         //$form->handleRequest($request);
         if ($request->isXMLHttpRequest()) {
             return new JsonResponse(array($request->request->get('search')));
@@ -389,6 +422,9 @@ class DoctorController extends Controller
      */
     public function InputIllAction(Request $request)
     {
+        if ($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         if ($request->isXMLHttpRequest()) {
             $form = $this->renderView("doc/nodiag.html.twig");
             return new JsonResponse(array("form" => $form));
@@ -404,6 +440,9 @@ class DoctorController extends Controller
      */
     public function VisitFormAction($actorId, $type, Request $request)
     {
+        if ($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         $em = $this->getDoctrine()->getManager();
         $session = new Session();
         $typeName = $em->getRepository('GuideBundle:VisitTypes')->find($type);
@@ -443,6 +482,9 @@ class DoctorController extends Controller
      */
     public function GetMedicineAction(Request $request)
     {
+        if ($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         if ($request->isXMLHttpRequest()) {
             $to_show = array();
             $ill = $request->request->get('search');
@@ -474,6 +516,9 @@ class DoctorController extends Controller
      */
     public function SaveAction(Request $request)
     {
+        if ($this->checkRole($request)) {
+            throw $this->createNotFoundException('The page you are looking for is not found');
+        }
         if ($request->isXMLHttpRequest()) {
             $ill = $request->request->get('diagnosys');
             $medicines = $request->request->get('medicines');
@@ -492,17 +537,6 @@ class DoctorController extends Controller
             return new Response('Permission denied', 400);
         }
 
-    }
-
-    private function generateAndSendVisit($visit)
-    {
-        $pdf = $this->get('knp_snappy.pdf')->generateFromHtml(
-            $this->renderView(
-                'GuideBundle:doc:visit_pdf.html.twig'
-            ),
-            '/uploads/pdf/visits.pdf'
-        );
-        $this->get('knp_snappy.image')->getOutputFromHtml($pdf);
     }
 
     private function setVisitByComplaint($users, $ill, $medicines, $comment)

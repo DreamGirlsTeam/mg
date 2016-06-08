@@ -35,9 +35,14 @@
                                         <h4>{{ visit.beginTime | date('H:i') }} - {{ visit.endTime | date("H:i") }}
                                             <br />
                                             {{ visit.patName }}
+                                            {% if patients[loop.index - 1].actorId.id %}
                                             <small>({{ patients[loop.index - 1].phone }})</small>
                                         </h4>
+
                                         <a href="{{ path('doctor_card', { 'actorId': patients[loop.index - 1].actorId.id }) }}">Картка</a>
+                                        {% else %}
+                                            <small>Пацієнт ще не зареєстрований</small>
+                                        {% endif %}
                                     </td>
                                 </tr>
                             {% endfor %}
